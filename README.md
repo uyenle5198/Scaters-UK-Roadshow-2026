@@ -135,8 +135,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Scaters Worldwide** - Engineering British supremacy since 1998. From street rats to tycoons, we define excellence through physics, not flags.
 
 ### Contact
-- Website: [scaters.com](https://scaters.com)
-- Email: info@scaters.com
+- Website: [scatersroadshow2026.com](https://scatersroadshow2026.com)
+- Email: info@scatersroadshow2026.com
 - Social: [@scaters](https://instagram.com/scaters)
 
 ---

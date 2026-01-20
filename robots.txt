@@ -12,4 +12,4 @@ Allow: /mission
 Allow: /registration
 
 # Sitemap
-Sitemap: https://scaters.com/sitemap.xml
+Sitemap: https://scatersroadshow2026.com/sitemap.xml
