@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block access to sensitive areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Allow access to main content
+Allow: /collection
+Allow: /mission
+Allow: /registration
+
+# Sitemap
+Sitemap: https://scaters.com/sitemap.xml
