@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS Setup Guide - scatersroadshow2026.com</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background: #050505; color: white; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: center; padding: 30px 0; border-bottom: 2px solid #D4AF37; }
+        .error-box { background: #DC2626; border: 2px solid #EF4444; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .solution-box { background: #10B981; border: 2px solid #34D399; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .step { background: #1F2937; border: 1px solid #374151; padding: 20px; margin: 15px 0; border-radius: 8px; }
+        .step h3 { color: #D4AF37; margin-top: 0; }
+        .code { background: #111827; padding: 15px; border-radius: 5px; font-family: monospace; margin: 10px 0; overflow-x: auto; }
+        .important { background: #F59E0B; color: black; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .dns-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .dns-table th, .dns-table td { border: 1px solid #374151; padding: 12px; text-align: left; }
+        .dns-table th { background: #1F2937; color: #D4AF37; }
+        .provider { background: #3B82F6; border: 2px solid #60A5FA; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .timeline { position: relative; padding-left: 30px; }
+        .timeline::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: #D4AF37; }
+        .timeline-item { position: relative; margin-bottom: 20px; }
+        .timeline-item::before { content: ''; position: absolute; left: -22px; top: 5px; width: 10px; height: 10px; background: #D4AF37; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 DNS ERROR: scatersroadshow2026.com</h1>
+            <h2>DNS_PROBE_FINISHED_NXDOMAIN</h2>
+            <p>Domain chưa được đăng ký hoặc cấu hình DNS</p>
+        </div>
+
+        <div class="error-box">
+            <h3>❌ Vấn đề gặp phải:</h3>
+            <ul>
+                <li><strong>DNS_PROBE_FINISHED_NXDOMAIN</strong>: Domain không tồn tại</li>
+                <li>Domain <code>scatersroadshow2026.com</code> chưa được đăng ký</li>
+                <li>DNS records chưa được cấu hình</li>
+                <li>Website chưa được deploy lên hosting</li>
+            </ul>
+        </div>
+
+        <div class="solution-box">
+            <h3>✅ Giải pháp khắc phục:</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>1. Đăng ký Domain</h4>
+                    <p>Đăng ký domain <strong>scatersroadshow2026.com</strong> tại một trong các nhà cung cấp:</p>
+                    <ul>
+                        <li><strong>Namecheap</strong>: ~$10/năm</li>
+                        <li><strong>GoDaddy</strong>: ~$15/năm</li>
+                        <li><strong>Hostinger</strong>: ~$8/năm</li>
+                        <li><strong>Porkbun</strong>: ~$7/năm</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>2. Chọn Hosting Service</h4>
+                    <p>Deploy website lên một trong các dịch vụ sau:</p>
+                    <div class="provider">
+                        <h5>🎯 Vercel (Khuyên dùng)</h5>
+                        <ul>
+                            <li>Free tier tốt</li>
+                            <li>Deploy từ GitHub tự động</li>
+                            <li>SSL tự động</li>
+                            <li>Performance cao</li>
+                        </ul>
+                    </div>
+                    <div class="provider">
+                        <h5>🌐 Netlify</h5>
+                        <ul>
+                            <li>Free tier với custom domain</li>
+                            <li>Form handling built-in</li>
+                            <li>CDN global</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>3. Cấu hình DNS Records</h4>
+                    <p>Sau khi deploy, cấu hình DNS theo bảng sau:</p>
+
+                    <h5>📋 Vercel DNS Configuration:</h5>
+                    <table class="dns-table">
+                        <tr><th>Type</th><th>Name</th><th>Value</th><th>TTL</th></tr>
+                        <tr><td>CNAME</td><td>@</td><td>cname.vercel-dns.com</td><td>300</td></tr>
+                        <tr><td>CNAME</td><td>www</td><td>cname.vercel-dns.com</td><td>300</td></tr>
+                    </table>
+
+                    <h5>📋 Netlify DNS Configuration:</h5>
+                    <table class="dns-table">
+                        <tr><th>Type</th><th>Name</th><th>Value</th><th>TTL</th></tr>
+                        <tr><td>CNAME</td><td>@</td><td>[your-netlify-site].netlify.app</td><td>300</td></tr>
+                        <tr><td>CNAME</td><td>www</td><td>[your-netlify-site].netlify.app</td><td>300</td></tr>
+                    </table>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>4. Deploy Website</h4>
+                    <p>Upload code lên hosting service:</p>
+                    <div class="code">
+# Vercel deployment
+npm install -g vercel
+vercel --prod
+
+# Hoặc connect GitHub repo trực tiếp trên Vercel dashboard
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>5. Test & Verify</h4>
+                    <p>Kiểm tra domain hoạt động:</p>
+                    <div class="code">
+# Test DNS propagation
+dig scatersroadshow2026.com
+
+# Test website
+curl -I https://scatersroadshow2026.com
+
+# Test sitemap
+curl https://scatersroadshow2026.com/sitemap.xml
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="important">
+            <h3>⚠️ Lưu ý quan trọng:</h3>
+            <ul>
+                <li><strong>DNS propagation</strong> có thể mất 24-48h</li>
+                <li><strong>SSL certificate</strong> sẽ tự động được cấp bởi hosting service</li>
+                <li><strong>Backup domain</strong> trong trường hợp cần thay đổi</li>
+                <li><strong>Monitor uptime</strong> sau khi deploy</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>🔧 Hướng dẫn Deploy Vercel (Dễ nhất)</h3>
+            <ol>
+                <li>Truy cập <a href="https://vercel.com" target="_blank">vercel.com</a> và đăng ký tài khoản</li>
+                <li>Import project từ GitHub: <code>https://github.com/uyenle5198/Scaters-UK-Roadshow-2026</code></li>
+                <li>Trong Settings > Domains, thêm: <code>scatersroadshow2026.com</code></li>
+                <li>Vercel sẽ cung cấp DNS records để cấu hình</li>
+                <li>Đăng nhập domain registrar và thêm DNS records</li>
+                <li>Chờ DNS propagation (thường 24h)</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>💰 Chi phí ước tính:</h3>
+            <ul>
+                <li><strong>Domain</strong>: $8-15/năm</li>
+                <li><strong>Vercel</strong>: FREE (hobby plan)</li>
+                <li><strong>SSL</strong>: FREE (tự động)</li>
+                <li><strong>CDN</strong>: FREE (global)</li>
+            </ul>
+            <p><strong>Tổng chi phí năm đầu tiên: ~$10-20</strong></p>
+        </div>
+
+        <div class="solution-box">
+            <h3>🎯 Sau khi hoàn thành:</h3>
+            <p>Website sẽ accessible tại: <strong>https://scatersroadshow2026.com</strong></p>
+            <ul>
+                <li>✅ HTTPS tự động</li>
+                <li>✅ CDN global</li>
+                <li>✅ Performance tối ưu</li>
+                <li>✅ SEO ready</li>
+                <li>✅ Mobile responsive</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
