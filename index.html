@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    class="selection:bg-scater-gold selection:text-white">
+
+   <!-- Navigation -->
+   <nav class="fixed w-full z-[9999] bg-white/95 backdrop-blur-lg border-b border-slate-100 h-20">
+       <div class="container mx-auto px-6 h-full flex justify-between items-center">
+           <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.reload()">
+               <div class="w-10 h-10 rounded-full bg-scater-bgDark flex items-center justify-center text-white font-display text-lg">S</div>
+               <div class="flex flex-col">
+                   <span class="text-xl font-display text-scater-bgDark leading-none">Scaters</span>
+                   <span class="text-[9px] font-serif uppercase tracking-[0.2em] text-scater-gold">British Heritage</span>
+               </div>
+           </div>
+           <div class="hidden md:flex items-center space-x-8">
+               <button onclick="switchView('home')" class="text-[11px] font-bold uppercase tracking-[0.1em] hover:text-scater-gold transition-colors" data-i18n="nav_home">THE TOUR</button>
+               <a href="#collection" onclick="switchView('home')" class="text-[11px] font-bold uppercase tracking-[0.1em] hover:text-scater-gold transition-colors" data-i18n="nav_raptor">THE COLLECTION</a>
+               <a href="#fiesta" onclick="switchView('home')" class="text-[11px] font-bold uppercase tracking-[0.1em] hover:text-scater-gold transition-colors" data-i18n="nav_fiesta">THE CHALLENGE</a>
+               <a href="#playbook" onclick="switchView('home')" class="text-[11px] font-bold uppercase tracking-[0.1em] hover:text-scater-gold transition-colors" data-i18n="nav_playbook">PLAYBOOK</a>
+               <a href="#riders" onclick="switchView('home')" class="text-[11px] font-bold uppercase tracking-[0.1em] hover:text-scater-gold transition-colors" data-i18n="nav_riders">PRO ROSTER</a>
+               <a href="#accessories" class="text-[11px] font-bold uppercase tracking-[0.1em] hover:text-scater-gold transition-colors" data-i18n="nav_gear">TOUR GEAR</a>
+               <a href="#registration" onclick="switchView('home')" class="px-5 py-2 bg-scater-bgDark text-white text-[10px] font-bold uppercase tracking-widest rounded hover:bg-scater-gold transition-colors">JOIN NOW</a>
+               <div class="flex items-center gap-3 pl-8 border-l border-slate-200 ml-4">
+                   <button onclick="changeLanguage('en')" class="lang-btn text-[11px] font-bold text-scater-gold transition-colors">EN</button>
+                   <span class="text-slate-300 text-[10px]">|</span>
+                   <button onclick="changeLanguage('es')" class="lang-btn text-[11px] font-bold text-slate-400 transition-colors">ES</button>
+               </div>
+           </div>
+           <button id="mobile-menu-btn" class="lg:hidden text-2xl text-scater-bgDark p-2"><i class="fa-solid fa-bars-staggered"></i></button>
+       </div>
+   </nav>
+
+   <main class="pt-20">
+       <div id="home-view" class="fade-in">
+           <!-- Hero -->
+           <section class="min-h-[85vh] flex items-center bg-white relative overflow-hidden">
+               <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                   <div class="text-left">
+                       <span class="subtitle text-scater-gold text-2xl mb-4 block font-bold" data-i18n="hero_badge">Raptor Roadshow 2026: The Premier British Skate Heritage Tour Arriving in Spain</span>
+                       <h1 class="text-6xl md:text-8xl font-display mb-8 leading-[0.9] hero-title-spark" data-i18n="hero_title_main">The Raptor Roadshow</h1>
+                       <div id="countdown" class="flex gap-4 mb-10">
+                           <div class="bg-white border p-3 rounded text-center min-w-[75px]"><span id="timer-days" class="text-3xl font-display">64</span><p class="text-[9px] uppercase font-bold text-slate-400" data-i18n="unit_days">Days</p></div>
+                           <div class="bg-white border p-3 rounded text-center min-w-[75px]"><span id="timer-hours" class="text-3xl font-display">12</span><p class="text-[9px] uppercase font-bold text-slate-400" data-i18n="unit_hours">Hrs</p></div>
+                           <div class="bg-white border p-3 rounded text-center min-w-[75px]"><span id="timer-mins" class="text-3xl font-display">30</span><p class="text-[9px] uppercase font-bold text-slate-400" data-i18n="unit_mins">Mins</p></div>
+                           <div class="bg-white border p-3 rounded text-center min-w-[75px] text-scater-gold"><span id="timer-secs" class="text-3xl font-display">00</span><p class="text-[9px] uppercase font-bold" data-i18n="unit_secs">Secs</p></div>
+                       </div>
+                       <a href="#collection" class="inline-block px-10 py-5 bg-scater-bgDark text-white font-bold text-xs tracking-[0.2em] uppercase hover:bg-scater-gold transition-all shadow-xl rounded-sm">View The Collection</a>
+                   </div>
+                   <div class="rounded-xl overflow-hidden shadow-2xl bg-black aspect-video relative">
+                       <video class="w-full h-full object-cover opacity-90" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1547447134-cd3f5c716030?q=80&w=1200">
+                           <source src="gemini_generated_video_DBAD0D9C.mp4" type="video/mp4">
+                       </video>
+                   </div>
+               </div>
+           </section>
+
+           <div class="marquee-wrapper">
+               <div class="marquee-content">
+                   JOIN THE CHALLENGE • RAPTOR ROADSHOW 2026 • HERITAGE EDITION • UK PRECISION • SPAIN SOUL • JOIN THE CHALLENGE • RAPTOR ROADSHOW 2026 • 
+               </div>
+           </div>
+
+           <!-- Collection -->
+           <section id="collection" class="py-24 bg-scater-bgDark text-white text-center border-t border-white/5 relative overflow-hidden">
+               <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-scater-gold to-transparent opacity-50"></div>
+               <div class="container mx-auto px-6 relative z-10">
+                   <div class="mb-20">
+                       <span class="text-scater-gold text-[10px] font-bold uppercase tracking-[0.5em] mb-6 block" data-i18n="coll_pre">World Premiere Exclusive</span>
+                       <!-- Chữ The Raptor Collection giờ có class raptor-title-luxury sử dụng màu Silver Chrome -->
+                       <h2 class="text-6xl md:text-8xl font-display uppercase mb-4 raptor-title-luxury" data-i18n="raptor_title_main">The Raptor Collection</h2>
+                       <p class="text-slate-400 max-w-xl mx-auto italic text-xl" data-i18n="raptor_hero_text">Old School Zoo Mascots – A unique, retro-themed brand identity for the Raptor Roadshow skate event, uniting five animal mascots to represent core styles.</p>
+                   </div>
+                   <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8"></div>
+               </div>
+           </section>
+
+           <!-- Roadshow (MEGA POSTER) -->
+           <section id="fiesta" class="py-24 bg-white">
+               <div class="container mx-auto px-6">
+                   <div class="mega-poster-frame reveal-up relative z-20">
+                       <div class="poster-corner tl"></div><div class="poster-corner tr"></div>
+                       <div class="poster-corner bl"></div><div class="poster-corner br"></div>
+
+                       <div class="text-center mb-16 relative z-10">
+                           <span class="text-scater-gold font-bold uppercase tracking-widest text-xs border-b border-scater-gold pb-1 inline-block mb-4">Official Event Manifesto</span>
+                           <h2 class="text-5xl md:text-8xl mt-2 mb-6 text-white font-display uppercase leading-none">Pro Skate Challenge</h2>
+                           <p class="text-slate-400 text-xl max-w-2xl mx-auto italic font-serif" data-i18n="challenge_desc">Conquering 3 Iconic Stages Across Spain. British Precision x Spanish Soul.</p>
+                       </div>
+                       
+                       <!-- Map -->
+                       <div class="relative w-full max-w-5xl mx-auto mb-24 reveal-up">
+                           <div class="map-container group">
+                               <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200" alt="Spain Tour Map" class="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-1000 mix-blend-luminosity">
+                               <div class="absolute inset-0 bg-gradient-to-r from-scater-bgDark/80 via-transparent to-scater-bgDark/80"></div>
+                               <div class="absolute inset-0 z-10">
+                                   <svg class="w-full h-full" style="filter: drop-shadow(0 0 5px #D4AF37);">
+                                       <path d="M 25% 40% Q 50% 60% 75% 40%" fill="none" stroke="#D4AF37" stroke-width="2" stroke-dasharray="8,4" class="opacity-60">
+                                           <animate attributeName="stroke-dashoffset" from="100" to="0" dur="30s" repeatCount="indefinite" />
+                                       </path>
+                                   </svg>
+                                   <div class="absolute top-[40%] left-[25%] transform -translate-x-1/2 -translate-y-1/2 text-center group/pin">
+                                       <div class="w-4 h-4 bg-scater-gold rounded-full animate-ping absolute opacity-75"></div><div class="w-4 h-4 bg-white rounded-full border-4 border-scater-gold relative z-10 cursor-pointer hover:scale-125 transition-transform"></div><div class="mt-2 bg-black/90 text-white text-[10px] uppercase font-bold px-3 py-2 rounded border border-scater-gold/50 backdrop-blur-sm opacity-0 group-hover/pin:opacity-100 transition-opacity">Madrid<br><span class="text-scater-gold">Stage 02</span></div>
+                                   </div>
+                                   <div class="absolute top-[60%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-center group/pin">
+                                       <div class="w-4 h-4 bg-scater-gold rounded-full animate-ping absolute opacity-75" style="animation-delay: 0.5s"></div><div class="w-4 h-4 bg-white rounded-full border-4 border-scater-gold relative z-10 cursor-pointer hover:scale-125 transition-transform"></div><div class="mt-2 bg-black/90 text-white text-[10px] uppercase font-bold px-3 py-2 rounded border border-scater-gold/50 backdrop-blur-sm opacity-0 group-hover/pin:opacity-100 transition-opacity">Valencia<br><span class="text-scater-gold">Stage 03</span></div>
+                                   </div>
+                                   <div class="absolute top-[40%] left-[75%] transform -translate-x-1/2 -translate-y-1/2 text-center group/pin">
+                                       <div class="w-4 h-4 bg-scater-gold rounded-full animate-ping absolute opacity-75" style="animation-delay: 1s"></div><div class="w-4 h-4 bg-white rounded-full border-4 border-scater-gold relative z-10 cursor-pointer hover:scale-125 transition-transform"></div><div class="mt-2 bg-black/90 text-white text-[10px] uppercase font-bold px-3 py-2 rounded border border-scater-gold/50 backdrop-blur-sm opacity-0 group-hover/pin:opacity-100 transition-opacity">Barcelona<br><span class="text-scater-gold">Stage 01</span></div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       
+                       <div class="timeline-wrapper relative z-10 mb-12">
+                           <div id="city-cards-grid" class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 relative z-10"></div>
+                       </div>
+                       
+                       <div class="prize-banner relative z-10 text-center">
+                           <div class="mb-10 flex justify-center items-center gap-4">
+                               <i class="fa-solid fa-crown text-scater-gold text-2xl"></i>
+                               <h3 class="text-3xl lg:text-4xl font-display uppercase text-white tracking-widest">The Champion's Purse</h3>
+                               <i class="fa-solid fa-crown text-scater-gold text-2xl"></i>
+                           </div>
+                           <div id="prize-pool-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 items-end"></div>
+                       </div>
+                   </div>
+               </div>
+           </section>
+
+           <!-- Playbook -->
+           <section id="playbook" class="py-24 bg-scater-bgDark text-white border-y border-white/5">
+               <div class="container mx-auto px-6">
+                   <div class="text-center mb-20">
+                       <span class="text-scater-gold text-xs font-bold uppercase tracking-[0.5em] mb-6 block">Visual Blueprint</span>
+                       <h2 class="text-6xl md:text-8xl font-display uppercase" data-i18n="playbook_title">Pro Challenge Playbook</h2>
+                       <p class="text-slate-400 font-serif italic text-xl mt-6" data-i18n="playbook_subtitle">Rules of the street dominance.</p>
+                   </div>
+                   <div class="grid lg:grid-cols-12 gap-16 items-start">
+                       <div class="lg:col-span-4 space-y-12">
+                           <h3 class="text-3xl font-display uppercase text-scater-gold mb-8" data-i18n="fmt_header">Competition Format</h3>
+                           <div class="relative space-y-12 pl-4 border-l border-white/10">
+                               <div class="pl-8 relative"><div class="absolute -left-[27px] top-0 flow-step-circle">1</div><h4 class="text-xl font-display uppercase mb-2" data-i18n="fmt_step1">3 Dynamic Runs</h4><p class="text-slate-500 text-sm" data-i18n="fmt_step1_desc">Each rider gets 3 individual runs to showcase potential.</p></div>
+                               <div class="pl-8 relative"><div class="absolute -left-[27px] top-0 flow-step-circle">2</div><h4 class="text-xl font-display uppercase mb-2" data-i18n="fmt_step2">45 Sec Clock</h4><p class="text-slate-500 text-sm" data-i18n="fmt_step2_desc">Pure adrenaline. Every second counts for the score.</p></div>
+                               <div class="pl-8 relative"><div class="absolute -left-[27px] top-0 flow-step-circle">3</div><h4 class="text-xl font-display uppercase mb-2" data-i18n="fmt_step3">Best Run Counts</h4><p class="text-slate-500 text-sm" data-i18n="fmt_step3_desc">Only the highest-scoring single run is used for ranking.</p></div>
+                           </div>
+                       </div>
+                       <div class="lg:col-span-8">
+                           <h3 class="text-3xl font-display uppercase text-white mb-8" data-i18n="anatomy_header">Key Trick Categories</h3>
+                           <div class="grid md:grid-cols-2 gap-6" id="tricks-grid"></div>
+                       </div>
+                   </div>
+               </div>
+           </section>
+
+           <!-- Riders -->
+           <section id="riders" class="py-24 bg-white text-center">
+               <div class="container mx-auto px-6">
+                   <h2 class="text-5xl md:text-7xl uppercase mb-16 text-black" data-i18n="riders_title">Elite Pro Roster</h2>
+                   <div class="grid md:grid-cols-3 gap-10">
+                       <div class="p-8 border rounded-xl hover:shadow-xl transition-shadow"><img src="" class="w-full h-64 object-cover rounded-lg mb-6 grayscale hover:grayscale-0 transition-all"><h4 class="text-3xl font-display text-scater-bgDark">Danny Leon</h4><p class="text-scater-gold font-bold uppercase text-sm">Bowl Master</p></div>
+                       <div class="p-8 border rounded-xl hover:shadow-xl transition-shadow"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" class="w-full h-64 object-cover rounded-lg mb-6 grayscale hover:grayscale-0 transition-all"><h4 class="text-3xl font-display text-scater-bgDark">Jaime Mateu</h4><p class="text-scater-gold font-bold uppercase text-sm">Street Tech</p></div>
+                       <div class="p-8 border rounded-xl hover:shadow-xl transition-shadow"><img src="" class="w-full h-64 object-cover rounded-lg mb-6 grayscale hover:grayscale-0 transition-all"><h4 class="text-3xl font-display text-scater-bgDark">Adria Da Silva</h4><p class="text-scater-gold font-bold uppercase text-sm">Neon Style</p></div>
+                   </div>
+               </div>
+           </section>
+
+           <!-- Gear -->
+           <section id="accessories" class="py-24 bg-scater-bgGray border-t border-slate-200">
+               <div class="container mx-auto px-6 text-center">
+                   <h2 class="text-4xl font-display uppercase mb-16 text-scater-bgDark" data-i18n="acc_title">Tour Gear</h2>
+                   <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                       <div class="bg-white p-6 rounded text-center shadow-sm"><img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400" class="h-32 mx-auto object-contain mb-4"><h4 class="uppercase font-bold text-sm">Tour T-Shirt</h4></div>
+                       <div class="bg-white p-6 rounded text-center shadow-sm"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400" class="h-32 mx-auto object-contain mb-4"><h4 class="uppercase font-bold text-sm">Pro Headphones</h4></div>
+                       <div class="bg-white p-6 rounded text-center shadow-sm"><img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=400" class="h-32 mx-auto object-contain mb-4"><h4 class="uppercase font-bold text-sm">Heritage Cap</h4></div>
+                       <div class="bg-white p-6 rounded text-center shadow-sm"><img src="https://images.unsplash.com/photo-1553062407-98eeb94c6a62?q=80&w=400" class="h-32 mx-auto object-contain mb-4"><h4 class="uppercase font-bold text-sm">Urban Backpack</h4></div>
+                   </div>
+               </div>
+           </section>
+
+           <!-- FAQ -->
+           <section id="faq" class="py-24 bg-white">
+               <div class="container mx-auto px-6 max-w-4xl">
+                    <h2 class="text-4xl font-display uppercase mb-12 text-center text-scater-bgDark">Safety & FAQ</h2>
+                    <div class="grid md:grid-cols-2 gap-16">
+                        <div class="space-y-8">
+                            <h3 class="text-2xl font-bold uppercase text-scater-gold mb-6 border-b border-slate-100 pb-2" data-i18n="safety_title">Safety Protocols</h3>
+                            <div id="safety-list" class="space-y-6"></div>
+                        </div>
+                        <div class="space-y-8">
+                            <h3 class="text-2xl font-bold uppercase text-scater-gold mb-6 border-b border-slate-100 pb-2" data-i18n="faq_title">Common Questions</h3>
+                            <div id="faq-accordion" class="space-y-6"></div>
+                        </div>
+                    </div>
+               </div>
+           </section>
+
+           <!-- Registration Form -->
+           <section id="registration" class="py-32 bg-scater-bgGray border-t border-slate-200">
+               <div class="container mx-auto px-6 max-w-4xl text-center">
+                   <div class="bg-white p-12 md:p-20 rounded-xl shadow-2xl border border-slate-100">
+                       <h2 class="text-5xl font-display uppercase mb-12 raptor-title-luxury">JOIN THE ROADSHOW</h2>
+                       <form class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 text-left" onsubmit="return handleRegistration(event)">
+                           <div class="floating-group"><input type="text" id="fn" placeholder=" " class="form-input" required><label for="fn" class="floating-label">Full Name</label></div>
+                           <div class="floating-group"><input type="email" id="em" placeholder=" " class="form-input" required><label for="em" class="floating-label">Email Address</label></div>
+                           <div class="floating-group"><input type="tel" id="ph" placeholder=" " class="form-input" required><label for="ph" class="floating-label">Phone Number</label></div>
+                           <div class="floating-group"><select id="ci" class="form-input" required><option value="" disabled selected hidden></option><option>Barcelona</option><option>Madrid</option><option>Valencia</option></select><label for="ci" class="floating-label">Select City Stop</label></div>
+                           <div class="floating-group"><select id="lv" class="form-input" required><option value="" disabled selected hidden></option><option>Beginner (Novice)</option><option>Intermediate (Regular)</option><option>Professional (Expert)</option></select><label for="lv" class="floating-label">Skating Level</label></div>
+                           <div class="floating-group"><select id="pa" class="form-input font-bold text-scater-gold" required><option value="" disabled selected hidden></option><option value="yes">YES - Count me in!</option><option value="no">NO - Just visiting</option></select><label for="pa" class="floating-label">Join Pro Challenge?</label></div>
+                           <div class="md:col-span-2 mt-4"><button type="submit" class="w-full py-6 bg-scater-bgDark text-white font-bold uppercase tracking-[0.3em] hover:bg-scater-gold transition-all text-sm">CONFIRM REGISTRATION</button></div>
+                       </form>
+                   </div>
+               </div>
+           </section>
+       </div>
+
+       <!-- === PRODUCT DETAIL VIEW === -->
+       <div id="detail-view" class="view-hidden pt-24 pb-40 min-h-screen bg-white">
+           <div class="container mx-auto px-6 text-left">
+                <button onclick="switchView('home')" class="mb-10 flex items-center text-scater-muted hover:text-scater-gold font-bold text-xs uppercase group"><i class="fa-solid fa-arrow-left mr-4 group-hover:-translate-x-1 transition-transform"></i> <span>Back to Home</span></button>
+                <div id="detail-content" class="fade-in"></div>
+           </div>
+       </div>
+
+       <!-- === EVENT DETAIL VIEW === -->
+       <div id="events-view" class="view-hidden pt-24 pb-40 min-h-screen bg-white">
+           <div class="container mx-auto px-6 text-left">
+                <button onclick="switchView('home')" class="mb-10 flex items-center text-scater-muted hover:text-scater-gold font-bold text-xs uppercase group"><i class="fa-solid fa-arrow-left mr-4 group-hover:-translate-x-1 transition-transform"></i> <span>Back to Home</span></button>
+                <div id="city-detail-content" class="fade-in"></div>
+           </div>
+       </div>
+   </main>
+
+   <footer class="py-16 bg-white border-t border-slate-100 text-center">
+       <span class="font-display text-3xl text-slate-300 uppercase">Scaters UK</span>
+       <p class="text-[10px] uppercase tracking-[0.4em] text-slate-400 mt-4">© 2026 Spain Heritage Tour</p>
+   </footer>
+
+   <!-- SCRIPT -->
+   <script>
+       let currentLang = 'en';
+       const appData = {
+           products: [
+               { id: 0, serial: "UK-26-001", name: "The Eagle", story: "Sky Dominator", img: "https://images.unsplash.com/photo-1547447134-cd3f5c716030?q=80&w=400", specs: { deck: "8.25\"", trucks: "Titanium" }, seo: "Dominate the skies with The Eagle. This deck is precision-engineered for vertical mastery." },
+               { id: 1, serial: "UK-26-002", name: "The Panther", story: "Shadow Hunter", img: "https://images.unsplash.com/photo-1533561362701-090c2830f0f3?q=80&w=400", specs: { deck: "8.0\"", trucks: "Low" }, seo: "Stalk the streets with The Panther. Built for the technical street skater." },
+               { id: 2, serial: "UK-26-003", name: "The Bull", story: "Ground Breaker", img: "https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=400", specs: { deck: "8.5\"", trucks: "Forged" }, seo: "Unleash raw power with The Bull. Designed for high-impact skating." },
+               { id: 3, serial: "UK-26-004", name: "The Shark", story: "Flow Machine", img: "https://images.unsplash.com/photo-1541673504494-8cc1a84c0429?q=80&w=400", specs: { deck: "8.38\"", trucks: "Responsive" }, seo: "Carve your own path with The Shark. Inspired by the fluidity of the ocean's apex predator." },
+               { id: 4, serial: "UK-26-005", name: "The Snake", story: "Flex Assassin", img: "https://images.unsplash.com/photo-1520092921596-98eb46f23b72?q=80&w=400", specs: { deck: "7.75\"", trucks: "Micro" }, seo: "Strike with speed and agility using The Snake. This ultra-lightweight setup is the assassin of the skate park." }
+           ],
+           cities: [
+               { id: 'bcn', name: "Barcelona", challenge: "Beach Flow", date: "15/03/26", venue: "Mar Bella Beach", img: "", full_desc: "The tour kicks off in the heart of global skating—Barcelona. Set against the Mediterranean backdrop of Mar Bella Beach, the 'Beach Flow' event is all about style, speed, and seamless transitions.", host_rider: { name: "Danny Leon", title: "Bowl Master", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400" }, plan: [{time: "10:00", task: "COASTAL ROADSHOW", desc: "A vibrant street parade showcasing the team's skills along the coastline."}, {time: "15:00", task: "BOWL CHALLENGE", desc: "The main competitive event where elite riders battle for the Barcelona title."}] },
+               { id: 'mad', name: "Madrid", challenge: "Urban Wall", date: "22/03/26", venue: "Madrid Río Skatepark", img: "", full_desc: "Moving to the capital, 'Urban Wall' at Madrid Río focuses on technical mastery and architectural creativity. This stage honors the grit and geometry of Madrid’s urban landscape.", host_rider: { name: "Jaime Mateu", title: "Street Tech", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" }, plan: [{time: "11:00", task: "STREET ROADSHOW", desc: "Navigating the city's architecture in a synchronized team performance."}, {time: "16:00", task: "TECH CHALLENGE", desc: "Technical mastery contest on the rails and ledges of Madrid Río."}] },
+               { id: 'val', name: "Valencia", challenge: "Neon Pulse", date: "29/03/26", venue: "Gulliver Skate Area", img: "https://images.unsplash.com/photo-1566438480900-0609be27a4be?q=80&w=1200", full_desc: "The grand finale takes place in Valencia at the futuristic Gulliver Skate Area. 'Neon Pulse' is more than a competition; it is a sensory explosion where technology meets the asphalt.", host_rider: { name: "Adria Da Silva", title: "Neon Style", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400" }, plan: [{time: "19:00", task: "NEON ROADSHOW", desc: "A pre-show warm up featuring light suits and synchronized riding."}, {time: "21:00", task: "NIGHT CHALLENGE", desc: "High-stakes competition under the futuristic lights of the Gulliver park."}] }
+           ],
+           tricks: [
+                { icon: "fa-wind", title: {en: "Air & Launch", es: "Aire y Vuelo"}, desc: {en: "High-flying maneuvers.", es: "Maniobras de alto vuelo."} },
+                { icon: "fa-rotate", title: {en: "Technical Flips", es: "Flips Técnicos"}, desc: {en: "Precision board rotations.", es: "Rotaciones precisas."} },
+                { icon: "fa-grip-lines", title: {en: "Grind & Slides", es: "Grinds y Slides"}, desc: {en: "Dominating rails.", es: "Dominando barandillas."} },
+                { icon: "fa-balance-scale", title: {en: "Balance Manuals", es: "Manuales"}, desc: {en: "Extreme control.", es: "Control extremo."} }
+           ]
+       };
+
+       const translations = {
+           en: { nav_home: "THE TOUR", nav_fiesta: "THE CHALLENGE", nav_raptor: "THE COLLECTION", nav_playbook: "PLAYBOOK", nav_riders: "PRO ROSTER", nav_gear: "TOUR GEAR", nav_join: "JOIN NOW", hero_title_main: "The Raptor Roadshow", hero_badge: "Raptor Roadshow 2026: The Premier British Skate Heritage Tour Arriving in Spain", unit_days: "Days", unit_hours: "Hrs", unit_mins: "Mins", unit_secs: "Secs", playbook_title: "Pro Challenge Playbook", playbook_subtitle: "Rules of the street dominance.", coll_pre: "World Premiere Exclusive", raptor_title_main: "The Raptor Collection" },
+           es: { nav_home: "EL TOUR", nav_fiesta: "EL DESAFÍO", nav_raptor: "LA COLECCIÓN", nav_playbook: "MANUAL", nav_riders: "ROSTER PRO", nav_gear: "EQUIPO TOUR", nav_join: "ÚNETE AHORA", hero_title_main: "El Raptor Roadshow", hero_badge: "Raptor Roadshow 2026: La Gira Principal del Patrimonio Británico de Skate en España", unit_days: "Días", unit_hours: "Hrs", unit_mins: "Min", unit_secs: "Seg", playbook_title: "Manual del Desafío", playbook_subtitle: "Reglas de las calles.", coll_pre: "Exclusiva Mundial", raptor_title_main: "COLECCIÓN RAPTOR" }
+       };
+
+       function renderGrid() {
+           const grid = document.getElementById('product-grid');
+           if (!grid) return;
+           grid.innerHTML = appData.products.map((p, i) => `<div class="heritage-card rounded-xl flex flex-col items-center group relative h-[500px] overflow-hidden bg-[#0D162D]"><div class="absolute inset-0 flex items-center justify-center"><div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-scater-gold/20 via-transparent to-transparent opacity-40 group-hover:opacity-80 transition-opacity duration-700"></div><img src="${p.img}" class="deck-shadow h-[110%] w-auto max-w-none object-contain transition-transform duration-700 ease-out group-hover:scale-105 group-hover:rotate-1 z-10"></div><div class="absolute top-4 left-4 z-20"><span class="text-[8px] text-scater-gold/80 uppercase font-bold tracking-widest block mb-1">Series No.</span><span class="text-[11px] text-white font-display tracking-widest bg-black/40 backdrop-blur-md px-2 py-1 rounded border border-white/10">${p.serial}</span></div><div class="absolute bottom-0 left-0 w-full px-6 pb-6 pt-24 bg-gradient-to-t from-[#0A1128] via-[#0A1128]/90 to-transparent z-20 translate-y-16 group-hover:translate-y-0 transition-transform duration-500 ease-out"><span class="number-font text-[10px] text-scater-gold block mb-1 uppercase tracking-[0.2em] font-bold group-hover:text-white transition-colors">${p.story}</span><h3 class="text-4xl font-display text-white uppercase leading-none mb-4 drop-shadow-xl">${p.name}</h3><button onclick="showProductDetail(${i})" class="w-full py-3 bg-white/10 border border-white/20 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-scater-gold hover:text-scater-bgDark hover:border-scater-gold transition-all rounded-sm backdrop-blur-sm opacity-0 group-hover:opacity-100 duration-500 delay-100">View Blueprint</button></div></div>`).join('');
+       }
+       function renderCityCards() {
+           const grid = document.getElementById('city-cards-grid');
+           if (!grid) return;
+           grid.innerHTML = appData.cities.map((c, i) => `<div class="relative card-wrapper mt-8 cursor-pointer group" onclick="showEventDetail('${c.id}')"><div class="stage-badge">STAGE 0${i + 1}</div><div class="event-card-premium" style="background-image: url('${c.img}')"><div class="relative z-10 w-full text-center"><span class="number-font text-scater-gold text-xs block mb-2 uppercase tracking-[0.2em]">${c.date}</span><h4 class="text-4xl font-display text-white mb-2 uppercase leading-none">${c.challenge}</h4><div class="mb-8"><p class="text-white font-bold text-[14px] uppercase tracking-wider">${c.name}</p><p class="text-slate-300 text-[10px] mt-1 italic opacity-80">${c.venue}</p></div><button onclick="showEventDetail('${c.id}')" class="w-full py-4 bg-scater-gold text-scater-bgDark font-bold text-[10px] uppercase rounded hover:bg-white transition-colors tracking-widest">VIEW STAGE</button></div></div></div>`).join('');
+       }
+       function renderPrizes() {
+           const el = document.getElementById('prize-pool-grid');
+           if(!el) return;
+           const items = [{ rank: "02", label: "Runner Up", val: "Pro Deck Setup + €500" }, { rank: "01", label: "Grand Champion", val: "Full Raptor Collection + €2000", class: "main-winner" }, { rank: "03", label: "Third Place", val: "Exclusive Tour Gear" }];
+           el.innerHTML = items.map(p => `<div class="glory-prize ${p.class || ''} text-center relative group cursor-default"><div class="prize-rank-number">${p.rank}</div><div class="text-[12px] font-bold uppercase text-scater-gold mb-3 tracking-[0.2em]">${p.label}</div><h3 class="text-xl md:text-3xl font-display text-white uppercase leading-none">${p.val}</h3></div>`).join('');
+       }
+       function renderTricks() {
+           const grid = document.getElementById('tricks-grid');
+           if(!grid) return;
+           grid.innerHTML = appData.tricks.map(t => `<div class="trick-anatomy-box p-6 rounded-lg flex items-center gap-4"><div class="w-12 h-12 bg-scater-gold/10 rounded flex items-center justify-center text-scater-gold text-xl"><i class="fa-solid ${t.icon}"></i></div><div><h4 class="font-display uppercase text-lg">${t.title[currentLang] || t.title.en}</h4><p class="text-slate-500 text-xs">${t.desc[currentLang] || t.desc.en}</p></div></div>`).join('');
+       }
+       function renderSafety() {
+           const el = document.getElementById('safety-list');
+           if (!el) return;
+           el.innerHTML = `<div class="bg-scater-bgGray p-6 rounded border-l-4 border-scater-gold shadow-sm"><h4 class="font-bold uppercase text-sm mb-2"><i class="fa-solid fa-helmet-safety mr-2"></i>Mandatory Pads</h4><p class="text-slate-500 text-sm">Helmets required for all active riders.</p></div>`;
+       }
+       function renderFAQ() {
+           const el = document.getElementById('faq-accordion');
+           if (!el) return;
+           el.innerHTML = `<div class="bg-white p-6 rounded border border-slate-200 shadow-sm hover:border-scater-gold transition-colors"><h4 class="font-bold uppercase text-sm mb-2 text-scater-bgDark">Is the event free?</h4><p class="text-slate-500 text-sm">Spectator entry is 100% free for all stages.</p></div>`;
+       }
+
+       function switchView(viewName) {
+           ['home-view', 'detail-view', 'events-view'].forEach(id => document.getElementById(id).classList.add('view-hidden'));
+           document.getElementById(viewName + '-view').classList.remove('view-hidden');
+           window.scrollTo(0,0);
+       }
+       function showProductDetail(idx) {
+           const p = appData.products[idx];
+           document.getElementById('detail-content').innerHTML = `<div class="grid lg:grid-cols-2 gap-20 items-center"><div><h1 class="text-7xl font-display uppercase">${p.name}</h1><p class="text-2xl subtitle text-scater-gold">${p.story}</p></div><img src="${p.img}" class="h-96 object-contain"></div>`;
+           switchView('detail');
+       }
+       function showEventDetail(id) {
+           const city = appData.cities.find(c => c.id === id);
+           document.getElementById('city-detail-content').innerHTML = `<h2 class="text-7xl font-display uppercase">${city.name}</h2>`;
+           switchView('events');
+       }
+
+       function handleRegistration(e) {
+           e.preventDefault();
+           alert('Registration Received!');
+           return false;
+       }
+
+       function changeLanguage(lang) {
+           currentLang = lang;
+           document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if(translations[lang][key]) el.textContent = translations[lang][key]; });
+           renderTricks(); renderPrizes();
+       }
+
+       setInterval(() => {
+           const target = new Date("March 15, 2026 09:00:00").getTime();
+           const now = new Date().getTime();
+           const dist = target - now;
+           if (dist < 0) return;
+           document.getElementById('timer-days').innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+           document.getElementById('timer-hours').innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+           document.getElementById('timer-mins').innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+           document.getElementById('timer-secs').innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
+       }, 1000);
+
+       window.onload = () => { renderGrid(); renderCityCards(); renderTricks(); renderSafety(); renderFAQ(); renderPrizes(); };
+   </script>
+</body>
+</html>
