@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Render Deployment Guide - Scaters Roadshow 2026</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background: #050505; color: white; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: center; padding: 30px 0; border-bottom: 2px solid #D4AF37; }
+        .success-box { background: #10B981; border: 2px solid #34D399; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .step { background: #1F2937; border: 1px solid #374151; padding: 20px; margin: 15px 0; border-radius: 8px; }
+        .step h3 { color: #D4AF37; margin-top: 0; }
+        .code { background: #111827; padding: 15px; border-radius: 5px; font-family: monospace; margin: 10px 0; overflow-x: auto; }
+        .important { background: #F59E0B; color: black; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .timeline { position: relative; padding-left: 30px; }
+        .timeline::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: #D4AF37; }
+        .timeline-item { position: relative; margin-bottom: 20px; }
+        .timeline-item::before { content: ''; position: absolute; left: -22px; top: 5px; width: 10px; height: 10px; background: #D4AF37; border-radius: 50%; }
+        .provider { background: #3B82F6; border: 2px solid #60A5FA; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .screenshot { background: #374151; padding: 15px; border-radius: 5px; margin: 10px 0; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Deploy lên Render</h1>
+            <h2>Scaters Raptor Roadshow 2026</h2>
+            <p>Hướng dẫn deploy website lên Render với custom domain</p>
+        </div>
+
+        <div class="success-box">
+            <h3>✅ Tại sao chọn Render?</h3>
+            <ul>
+                <li><strong>Free tier</strong>: 750h/tháng miễn phí</li>
+                <li><strong>Auto-deploy</strong>: Từ GitHub tự động</li>
+                <li><strong>Custom domain</strong>: Hỗ trợ đầy đủ</li>
+                <li><strong>SSL tự động</strong>: HTTPS miễn phí</li>
+                <li><strong>Node.js support</strong>: Chạy Express server</li>
+            </ul>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>1. Tạo tài khoản Render</h4>
+                <p>Đăng ký tài khoản miễn phí tại <a href="https://render.com" target="_blank">render.com</a></p>
+                <div class="code">
+Sign up with GitHub (khuyên dùng)<br>
+hoặc email/password
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <h4>2. Connect GitHub Repository</h4>
+                <p>Trong Render Dashboard, click "New" > "Web Service"</p>
+                <div class="screenshot">
+📸 Chọn "Connect GitHub" và authorize Render
+                </div>
+                <div class="code">
+Repository: uyenle5198/Scaters-UK-Roadshow-2026<br>
+Branch: master
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <h4>3. Cấu hình Build Settings</h4>
+                <div class="code">
+Name: scaters-roadshow-2026<br>
+Environment: Node<br>
+Build Command: npm install<br>
+Start Command: npm start
+                </div>
+                <div class="important">
+                    ⚠️ <strong>Quan trọng:</strong> Đảm bảo <code>package.json</code> có script "start": "node server.js"
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <h4>4. Environment Variables (Optional)</h4>
+                <div class="code">
+NODE_ENV=production<br>
+PORT=10000 (Render tự động set)
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <h4>5. Deploy Service</h4>
+                <p>Click "Create Web Service" và chờ deploy hoàn thành</p>
+                <div class="screenshot">
+📸 Render sẽ build và deploy tự động từ GitHub
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <h4>6. Add Custom Domain</h4>
+                <p>Sau khi deploy thành công, vào Settings > Custom Domains</p>
+                <div class="code">
+Domain: scatersroadshow2026.com<br>
+Redirect: www.scatersroadshow2026.com → scatersroadshow2026.com
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <h4>7. Cấu hình DNS</h4>
+                <p>Render sẽ cung cấp DNS records. Đăng nhập domain registrar và thêm:</p>
+                <div class="code">
+Type: CNAME<br>
+Name: @<br>
+Value: [your-render-app].onrender.com<br>
+TTL: 300<br>
+<br>
+Type: CNAME<br>
+Name: www<br>
+Value: [your-render-app].onrender.com<br>
+TTL: 300
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <h4>8. Test & Verify</h4>
+                <p>Sau 24-48h, kiểm tra website:</p>
+                <div class="code">
+# Test domain
+curl -I https://scatersroadshow2026.com
+
+# Test sitemap
+curl https://scatersroadshow2026.com/sitemap.xml
+
+# Test registration
+curl https://scatersroadshow2026.com/#registration
+                </div>
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>🔧 Chi tiết cấu hình Render</h3>
+            <h4>Build Settings:</h4>
+            <ul>
+                <li><strong>Runtime</strong>: Node.js</li>
+                <li><strong>Build Command</strong>: <code>npm install</code></li>
+                <li><strong>Start Command</strong>: <code>npm start</code></li>
+                <li><strong>Node Version</strong>: 18.x.x (latest)</li>
+            </ul>
+
+            <h4>Advanced Settings:</h4>
+            <ul>
+                <li><strong>Region</strong>: Singapore (hoặc gần Việt Nam nhất)</li>
+                <li><strong>Instance Type</strong>: Free (750h/tháng)</li>
+                <li><strong>Auto-Deploy</strong>: Enable (từ GitHub)</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>💰 Chi phí Render:</h3>
+            <ul>
+                <li><strong>Free Tier</strong>: 750h/tháng (~31 ngày)</li>
+                <li><strong>Web Service</strong>: $7/tháng (nếu vượt free tier)</li>
+                <li><strong>Custom Domain</strong>: FREE</li>
+                <li><strong>SSL Certificate</strong>: FREE</li>
+            </ul>
+            <p><strong>Domain riêng</strong>: $8-15/năm (từ Namecheap/GoDaddy)</p>
+        </div>
+
+        <div class="important">
+            <h3>⚠️ Lưu ý quan trọng:</h3>
+            <ul>
+                <li><strong>Free tier timeout</strong>: App sleep sau 15 phút không hoạt động</li>
+                <li><strong>Cold start</strong>: Load chậm lần đầu sau sleep</li>
+                <li><strong>Build time</strong>: ~2-3 phút cho lần đầu</li>
+                <li><strong>Auto-deploy</strong>: Push code lên GitHub sẽ tự động redeploy</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>🔍 Troubleshooting</h3>
+            <h4>Nếu build fail:</h4>
+            <ul>
+                <li>Check logs trong Render dashboard</li>
+                <li>Đảm bảo <code>server.js</code> export app đúng cách</li>
+                <li>Verify <code>package.json</code> scripts</li>
+            </ul>
+
+            <h4>Nếu domain không work:</h4>
+            <ul>
+                <li>Chờ DNS propagation (24-48h)</li>
+                <li>Check DNS records với <code>dig scatersroadshow2026.com</code></li>
+                <li>Verify domain settings trong Render</li>
+            </ul>
+        </div>
+
+        <div class="success-box">
+            <h3>🎯 Kết quả sau khi deploy:</h3>
+            <p>Website sẽ accessible tại: <strong>https://scatersroadshow2026.com</strong></p>
+            <ul>
+                <li>✅ HTTPS tự động</li>
+                <li>✅ Custom domain</li>
+                <li>✅ Auto-deploy từ GitHub</li>
+                <li>✅ SEO optimized</li>
+                <li>✅ Mobile responsive</li>
+                <li>✅ Google Forms integration</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>📞 Support</h3>
+            <p>Nếu gặp vấn đề, check:</p>
+            <ul>
+                <li><a href="https://docs.render.com/" target="_blank">Render Documentation</a></li>
+                <li><a href="http://localhost:8080/dns-setup.html" target="_blank">DNS Setup Guide</a></li>
+                <li><a href="http://localhost:8080/test.html" target="_blank">Local Test Page</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

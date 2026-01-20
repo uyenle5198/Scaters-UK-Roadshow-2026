@@ -47,9 +47,21 @@ Scaters Raptor Roadshow 2026 transforms the UK's iconic streets into tactical hu
    ```
 
 ### Production Deployment
+
+#### Option 1: Render (Recommended)
+```bash
+# 1. Push to GitHub (already done)
+# 2. Connect to Render dashboard
+# 3. Add custom domain: scatersroadshow2026.com
+```
+
+#### Option 2: Local Node.js Server
 ```bash
 npm start
 ```
+
+#### Option 3: Static Hosting (Vercel/Netlify)
+Upload `index.html` and static assets to any static host.
 
 ## 📁 Project Structure
 
