@@ -59,6 +59,7 @@ Scaters-UK-Roadshow-2026/
 ├── server.js           # Express server
 ├── package.json        # Dependencies & scripts
 ├── robots.txt          # SEO/Crawler instructions
+├── sitemap.xml         # SEO sitemap for search engines
 └── README.md           # This file
 ```
 
