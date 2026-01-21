@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Analytics & Search Console Setup - Scaters Roadshow 2026</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background: #050505; color: white; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: center; padding: 30px 0; border-bottom: 2px solid #D4AF37; }
+        .section { background: #1F2937; border: 1px solid #374151; padding: 20px; margin: 15px 0; border-radius: 8px; }
+        .section h3 { color: #D4AF37; margin-top: 0; }
+        .step { background: #111827; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #10B981; }
+        .step h4 { margin: 0 0 8px 0; color: #D4AF37; }
+        .step p { margin: 0; font-size: 14px; color: #9CA3AF; }
+        .code { background: #111827; padding: 15px; border-radius: 5px; font-family: monospace; margin: 10px 0; overflow-x: auto; }
+        .important { background: #F59E0B; color: black; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .warning { background: #EF4444; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .success { background: #10B981; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .timeline { position: relative; padding-left: 30px; }
+        .timeline::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: #D4AF37; }
+        .timeline-item { position: relative; margin-bottom: 20px; }
+        .timeline-item::before { content: ''; position: absolute; left: -22px; top: 5px; width: 10px; height: 10px; background: #D4AF37; border-radius: 50%; }
+        .metric { background: #111827; padding: 15px; border-radius: 5px; text-align: center; margin: 10px; }
+        .metric .number { font-size: 2em; font-weight: bold; color: #D4AF37; }
+        .metric .label { font-size: 14px; color: #9CA3AF; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Google Analytics & Search Console Setup</h1>
+            <h2>Scaters Raptor Roadshow 2026</h2>
+            <p>Hướng dẫn kích hoạt Google Analytics 4 và Google Search Console</p>
+        </div>
+
+        <div class="important">
+            <h3>⚠️ Quan trọng: Thay thế PLACEHOLDER codes</h3>
+            <p>Sau khi setup xong, bạn cần thay thế các codes sau trong <code>index.html</code>:</p>
+            <ul>
+                <li><code>GA_MEASUREMENT_ID</code> → Thay bằng Google Analytics Measurement ID</li>
+                <li><code>GOOGLE_SITE_VERIFICATION_CODE</code> → Thay bằng Google Search Console verification code</li>
+                <li><code>BING_SITE_VERIFICATION_CODE</code> → Thay bằng Bing Webmaster verification code</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>1️⃣ Google Analytics 4 Setup</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Tạo Google Analytics 4 Property</h4>
+                    <p>Truy cập <a href="https://analytics.google.com" target="_blank">analytics.google.com</a> và tạo tài khoản mới</p>
+                    <div class="code">
+1. Click "Start measuring"<br>
+2. Chọn "Web" platform<br>
+3. Website URL: https://scatersroadshow2026.com<br>
+4. Account name: Scaters Roadshow 2026<br>
+5. Property name: Scaters Roadshow 2026
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Lấy Measurement ID</h4>
+                    <p>Sau khi tạo property, vào Admin > Data Streams > Web > [Your Stream]</p>
+                    <div class="code">
+Measurement ID: G-XXXXXXXXXX<br>
+(Copy ID này để thay thế GA_MEASUREMENT_ID)
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Cập nhật index.html</h4>
+                    <p>Thay thế <code>GA_MEASUREMENT_ID</code> trong file index.html</p>
+                    <div class="code">
+Tìm: gtag('config', 'GA_MEASUREMENT_ID')<br>
+Thay: gtag('config', 'G-XXXXXXXXXX')
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>2️⃣ Google Search Console Setup</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Thêm Property</h4>
+                    <p>Truy cập <a href="https://search.google.com/search-console" target="_blank">search.google.com/search-console</a></p>
+                    <div class="code">
+1. Click "Add Property"<br>
+2. Chọn "URL prefix" method<br>
+3. URL: https://scatersroadshow2026.com<br>
+4. Click "Continue"
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Verify Ownership (HTML tag method)</h4>
+                    <p>Chọn "HTML tag" verification method và copy meta tag</p>
+                    <div class="code">
+<meta name="google-site-verification" content="ABC123..." />
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Cập nhật index.html</h4>
+                    <p>Thay thế <code>GOOGLE_SITE_VERIFICATION_CODE</code> trong file index.html</p>
+                    <div class="code">
+Tìm: content="GOOGLE_SITE_VERIFICATION_CODE"<br>
+Thay: content="ABC123..."
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Submit Sitemap</h4>
+                    <p>Sau khi verify thành công, submit sitemap</p>
+                    <div class="code">
+1. Vào Sitemaps section<br>
+2. Add sitemap: https://scatersroadshow2026.com/sitemap.xml<br>
+3. Click "Submit"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>3️⃣ Bing Webmaster Tools Setup (Optional)</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Thêm Website</h4>
+                    <p>Truy cập <a href="https://www.bing.com/webmasters" target="_blank">bing.com/webmasters</a></p>
+                    <div class="code">
+1. Click "Add a site"<br>
+2. URL: https://scatersroadshow2026.com<br>
+3. Click "Add"
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Verify Ownership</h4>
+                    <p>Copy meta tag và thêm vào index.html</p>
+                    <div class="code">
+<meta name="msvalidate.01" content="XYZ789..." />
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Submit Sitemap</h4>
+                    <p>Submit sitemap lên Bing</p>
+                    <div class="code">
+Sitemaps > Add sitemap > https://scatersroadshow2026.com/sitemap.xml
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>4️⃣ Deploy & Test</h3>
+            <div class="step">
+                <h4>Deploy Changes</h4>
+                <p>Sau khi cập nhật codes, deploy lại website</p>
+                <div class="code">
+# Git commands
+git add index.html
+git commit -m "Add Google Analytics & Search Console verification"
+git push origin master
+
+# Redeploy trên hosting platform
+                </div>
+            </div>
+
+            <div class="step">
+                <h4>Verify Setup</h4>
+                <p>Test các tools hoạt động</p>
+                <div class="code">
+# Test Google Analytics
+# 1. Truy cập website
+# 2. Mở Developer Tools > Network
+# 3. Tìm requests tới google-analytics.com
+
+# Test Search Console
+# 1. Vào GSC dashboard
+# 2. Check "Verification successful"
+# 3. Submit sitemap
+
+# Test Bing
+# 1. Vào Bing Webmaster
+# 2. Check verification status
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>📊 Expected Analytics Data</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div class="metric">
+                    <div class="number">24h</div>
+                    <div class="label">First Data</div>
+                </div>
+                <div class="metric">
+                    <div class="number">7d</div>
+                    <div class="label">Full Reports</div>
+                </div>
+                <div class="metric">
+                    <div class="number">Top 50</div>
+                    <div class="label">Landing Pages</div>
+                </div>
+                <div class="metric">
+                    <div class="number">Real-time</div>
+                    <div class="label">User Tracking</div>
+                </div>
+            </div>
+
+            <h4>🎯 Analytics Goals:</h4>
+            <ul>
+                <li>Track user behavior across all pages</li>
+                <li>Monitor conversion from registration form</li>
+                <li>Analyze traffic sources and campaigns</li>
+                <li>Measure Core Web Vitals performance</li>
+                <li>Track search rankings and impressions</li>
+            </ul>
+        </div>
+
+        <div class="success">
+            <h3>✅ Checklist hoàn thành:</h3>
+            <ul>
+                <li>☐ Tạo Google Analytics 4 property</li>
+                <li>☐ Lấy Measurement ID và cập nhật index.html</li>
+                <li>☐ Thêm website vào Google Search Console</li>
+                <li>☐ Verify ownership với HTML meta tag</li>
+                <li>☐ Submit sitemap.xml lên GSC</li>
+                <li>☐ Cài đặt Bing Webmaster Tools (optional)</li>
+                <li>☐ Deploy changes và test verification</li>
+                <li>☐ Monitor analytics data trong 7 ngày đầu</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <h3>🚨 Lưu ý quan trọng:</h3>
+            <ul>
+                <li><strong>Privacy Policy:</strong> Đảm bảo có privacy policy cho GDPR compliance</li>
+                <li><strong>Cookie Consent:</strong> Thêm cookie banner cho EU users</li>
+                <li><strong>Data Retention:</strong> Cấu hình data retention trong GA4</li>
+                <li><strong>Goals Setup:</strong> Tạo conversion goals cho registration form</li>
+                <li><strong>Regular Monitoring:</strong> Check analytics data hàng tuần</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>🔧 Troubleshooting</h3>
+            <h4>Nếu GA4 không track:</h4>
+            <ul>
+                <li>Check Measurement ID có đúng không</li>
+                <li>Verify gtag script load trong Network tab</li>
+                <li>Check ad blockers không block GA</li>
+                <li>Wait 24-48h cho data xuất hiện</li>
+            </ul>
+
+            <h4>Nếu GSC verification fail:</h4>
+            <ul>
+                <li>Đảm bảo meta tag ở trong <head></li>
+                <li>Check HTML syntax đúng</li>
+                <li>Deploy changes và test lại</li>
+                <li>Try different verification method</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

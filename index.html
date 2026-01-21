@@ -470,6 +470,8 @@
       ]
     }
     </script>
+
+    <style>.reveal{opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.16,1,.3,1)}.reveal.revealed{opacity:1;transform:translateY(0)}.reveal-fade-left{transform:translateX(-50px)}.reveal-fade-left.revealed{transform:translateX(0)}.reveal-fade-right{transform:translateX(50px)}.reveal-fade-right.revealed{transform:translateX(0)}.reveal-scale{transform:scale(.8)}.reveal-scale.revealed{transform:scale(1)}.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}.reveal-delay-5{transition-delay:.5s}@media(prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}}</style>
 </head>
 <body>
     class="selection:bg-scater-gold selection:text-white">
@@ -508,15 +510,15 @@
            <section class="min-h-[85vh] flex items-center bg-white relative overflow-hidden">
                <div class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
                    <div class="text-left">
-                       <span class="subtitle text-scater-gold text-2xl mb-4 block font-bold" data-i18n="hero_badge">Raptor Roadshow 2026: The Premier British Skate Heritage Tour Arriving in Spain</span>
-                       <h1 class="text-6xl md:text-8xl font-display mb-8 leading-[0.9] hero-title-spark" data-i18n="hero_title_main">The Raptor Roadshow</h1>
-                       <div id="countdown" class="flex gap-4 mb-10">
+                       <span class="subtitle text-scater-gold text-2xl mb-4 block font-bold reveal reveal-fade-left" data-i18n="hero_badge">Raptor Roadshow 2026: The Premier British Skate Heritage Tour Arriving in Spain</span>
+                       <h1 class="text-6xl md:text-8xl font-display mb-8 leading-[0.9] hero-title-spark reveal reveal-fade-left reveal-delay-1" data-i18n="hero_title_main">The Raptor Roadshow</h1>
+                       <div id="countdown" class="flex gap-4 mb-10 reveal reveal-scale reveal-delay-2">
                            <div class="bg-white border p-3 rounded text-center min-w-[75px]"><span id="timer-days" class="text-3xl font-display">64</span><p class="text-[9px] uppercase font-bold text-slate-400" data-i18n="unit_days">Days</p></div>
                            <div class="bg-white border p-3 rounded text-center min-w-[75px]"><span id="timer-hours" class="text-3xl font-display">12</span><p class="text-[9px] uppercase font-bold text-slate-400" data-i18n="unit_hours">Hrs</p></div>
                            <div class="bg-white border p-3 rounded text-center min-w-[75px]"><span id="timer-mins" class="text-3xl font-display">30</span><p class="text-[9px] uppercase font-bold text-slate-400" data-i18n="unit_mins">Mins</p></div>
                            <div class="bg-white border p-3 rounded text-center min-w-[75px] text-scater-gold"><span id="timer-secs" class="text-3xl font-display">00</span><p class="text-[9px] uppercase font-bold" data-i18n="unit_secs">Secs</p></div>
                        </div>
-                       <a href="#collection" class="inline-block px-10 py-5 bg-scater-bgDark text-white font-bold text-xs tracking-[0.2em] uppercase hover:bg-scater-gold transition-all shadow-xl rounded-sm">View The Collection</a>
+                       <a href="#collection" class="inline-block px-10 py-5 bg-scater-bgDark text-white font-bold text-xs tracking-[0.2em] uppercase hover:bg-scater-gold transition-all shadow-xl rounded-sm reveal reveal-fade-right reveal-delay-3">View The Collection</a>
                    </div>
                    <div class="rounded-xl overflow-hidden shadow-2xl bg-black aspect-video relative">
                        <video class="w-full h-full object-cover opacity-90" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1547447134-cd3f5c716030?q=80&w=1200">
@@ -536,13 +538,13 @@
            <section id="collection" class="py-24 bg-scater-bgDark text-white text-center border-t border-white/5 relative overflow-hidden">
                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-scater-gold to-transparent opacity-50"></div>
                <div class="container mx-auto px-6 relative z-10">
-                   <div class="mb-20">
-                       <span class="text-scater-gold text-[10px] font-bold uppercase tracking-[0.5em] mb-6 block" data-i18n="coll_pre">World Premiere Exclusive</span>
+                   <div class="mb-20 reveal reveal-fade-up">
+                       <span class="text-scater-gold text-[10px] font-bold uppercase tracking-[0.5em] mb-6 block reveal reveal-fade-left" data-i18n="coll_pre">World Premiere Exclusive</span>
                        <!-- Chữ The Raptor Collection giờ có class raptor-title-luxury sử dụng màu Silver Chrome -->
-                       <h2 class="text-6xl md:text-8xl font-display uppercase mb-4 raptor-title-luxury" data-i18n="raptor_title_main">The Raptor Collection</h2>
-                       <p class="text-slate-400 max-w-xl mx-auto italic text-xl" data-i18n="raptor_hero_text">Old School Zoo Mascots – A unique, retro-themed brand identity for the Raptor Roadshow skate event, uniting five animal mascots to represent core styles.</p>
+                       <h2 class="text-6xl md:text-8xl font-display uppercase mb-4 raptor-title-luxury reveal reveal-scale reveal-delay-1" data-i18n="raptor_title_main">The Raptor Collection</h2>
+                       <p class="text-slate-400 max-w-xl mx-auto italic text-xl reveal reveal-fade-right reveal-delay-2" data-i18n="raptor_hero_text">Old School Zoo Mascots – A unique, retro-themed brand identity for the Raptor Roadshow skate event, uniting five animal mascots to represent core styles.</p>
                    </div>
-                   <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8"></div>
+                   <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 reveal reveal-fade-up reveal-delay-3"></div>
                </div>
            </section>
 
@@ -627,11 +629,11 @@
            <!-- Riders -->
            <section id="riders" class="py-24 bg-white text-center">
                <div class="container mx-auto px-6">
-                   <h2 class="text-5xl md:text-7xl uppercase mb-16 text-black" data-i18n="riders_title">Elite Pro Roster</h2>
+                   <h2 class="text-5xl md:text-7xl uppercase mb-16 text-black reveal reveal-fade-up" data-i18n="riders_title">Elite Pro Roster</h2>
                        <div class="grid md:grid-cols-3 gap-10">
-                       <div class="p-8 border rounded-xl hover:shadow-xl transition-all duration-300"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400" alt="Danny Leon - Professional skateboarder and Bowl Master from Scaters Raptor Roadshow 2026" class="w-full h-64 object-cover rounded-lg mb-6 grayscale hover:grayscale-0 transition-all duration-500" loading="lazy"><h4 class="text-3xl font-display text-scater-bgDark">Danny Leon</h4><p class="text-scater-gold font-bold uppercase text-sm">Bowl Master</p></div>
-                       <div class="p-8 border rounded-xl hover:shadow-xl transition-all duration-300"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" alt="Jaime Mateu - Professional skateboarder and Street Tech specialist from Scaters Raptor Roadshow 2026" class="w-full h-64 object-cover rounded-lg mb-6 grayscale hover:grayscale-0 transition-all duration-500" loading="lazy"><h4 class="text-3xl font-display text-scater-bgDark">Jaime Mateu</h4><p class="text-scater-gold font-bold uppercase text-sm">Street Tech</p></div>
-                       <div class="p-8 border rounded-xl hover:shadow-xl transition-all duration-300"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400" alt="Adria Da Silva - Professional skateboarder and Neon Style expert from Scaters Raptor Roadshow 2026" class="w-full h-64 object-cover rounded-lg mb-6 grayscale hover:grayscale-0 transition-all duration-500" loading="lazy"><h4 class="text-3xl font-display text-scater-bgDark">Adria Da Silva</h4><p class="text-scater-gold font-bold uppercase text-sm">Neon Style</p></div>
+                       <div class="p-8 border rounded-xl hover:shadow-xl transition-all duration-300 reveal reveal-fade-left reveal-delay-1"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400" alt="Danny Leon - Professional skateboarder and Bowl Master from Scaters Raptor Roadshow 2026" class="w-full h-64 object-cover rounded-lg mb-6 grayscale hover:grayscale-0 transition-all duration-500" loading="lazy"><h4 class="text-3xl font-display text-scater-bgDark">Danny Leon</h4><p class="text-scater-gold font-bold uppercase text-sm">Bowl Master</p></div>
+                       <div class="p-8 border rounded-xl hover:shadow-xl transition-all duration-300 reveal reveal-scale reveal-delay-2"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" alt="Jaime Mateu - Professional skateboarder and Street Tech specialist from Scaters Raptor Roadshow 2026" class="w-full h-64 object-cover rounded-lg mb-6 grayscale hover:grayscale-0 transition-all duration-500" loading="lazy"><h4 class="text-3xl font-display text-scater-bgDark">Jaime Mateu</h4><p class="text-scater-gold font-bold uppercase text-sm">Street Tech</p></div>
+                       <div class="p-8 border rounded-xl hover:shadow-xl transition-all duration-300 reveal reveal-fade-right reveal-delay-3"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400" alt="Adria Da Silva - Professional skateboarder and Neon Style expert from Scaters Raptor Roadshow 2026" class="w-full h-64 object-cover rounded-lg mb-6 grayscale hover:grayscale-0 transition-all duration-500" loading="lazy"><h4 class="text-3xl font-display text-scater-bgDark">Adria Da Silva</h4><p class="text-scater-gold font-bold uppercase text-sm">Neon Style</p></div>
                    </div>
                </div>
            </section>
@@ -865,7 +867,36 @@
            document.getElementById('timer-secs').innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
        }, 1000);
 
-       window.onload = () => { renderGrid(); renderCityCards(); renderTricks(); renderSafety(); renderFAQ(); renderPrizes(); };
+       // Reveal Animation Observer
+       function initRevealAnimations() {
+           const observerOptions = {
+               threshold: 0.1,
+               rootMargin: '0px 0px -50px 0px'
+           };
+
+           const observer = new IntersectionObserver((entries) => {
+               entries.forEach(entry => {
+                   if (entry.isIntersecting) {
+                       entry.target.classList.add('revealed');
+                   }
+               });
+           }, observerOptions);
+
+           // Observe all elements with reveal class
+           document.querySelectorAll('.reveal').forEach(el => {
+               observer.observe(el);
+           });
+       }
+
+       window.onload = () => {
+           renderGrid();
+           renderCityCards();
+           renderTricks();
+           renderSafety();
+           renderFAQ();
+           renderPrizes();
+           initRevealAnimations();
+       };
    </script>
 </body>
 </html>

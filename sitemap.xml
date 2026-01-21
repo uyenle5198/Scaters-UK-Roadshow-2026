@@ -71,9 +71,25 @@
     <!-- Registration Section -->
     <url>
         <loc>https://scatersroadshow2026.com/#registration</loc>
-        <lastmod>2026-01-20</lastmod>
-        <changefreq>monthly</changefreq>
+        <lastmod>2026-01-21</lastmod>
+        <changefreq>weekly</changefreq>
         <priority>0.9</priority>
+    </url>
+
+    <!-- Riders Section -->
+    <url>
+        <loc>https://scatersroadshow2026.com/#riders</loc>
+        <lastmod>2026-01-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Playbook Section -->
+    <url>
+        <loc>https://scatersroadshow2026.com/#playbook</loc>
+        <lastmod>2026-01-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
 
     <!-- Footer Links -->
