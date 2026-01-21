@@ -680,6 +680,16 @@
                            <div class="floating-group"><select id="ci" class="form-input" required><option value="" disabled selected hidden></option><option>Barcelona</option><option>Madrid</option><option>Valencia</option></select><label for="ci" class="floating-label">Select City Stop</label></div>
                            <div class="floating-group"><select id="lv" class="form-input" required><option value="" disabled selected hidden></option><option>Beginner (Novice)</option><option>Intermediate (Regular)</option><option>Professional (Expert)</option></select><label for="lv" class="floating-label">Skating Level</label></div>
                            <div class="floating-group"><select id="pa" class="form-input font-bold text-scater-gold" required><option value="" disabled selected hidden></option><option value="yes">YES - Count me in!</option><option value="no">NO - Just visiting</option></select><label for="pa" class="floating-label">Join Pro Challenge?</label></div>
+
+                           <!-- Section 6: Guests (Optional) -->
+                           <div class="md:col-span-2 mt-8 mb-4">
+                               <h3 class="text-scater-gold font-display uppercase tracking-widest text-sm border-b border-white/20 pb-2">Section 6: Guests (Optional)</h3>
+                               <p class="text-slate-400 text-xs mt-2">Add up to 2 guests to join you at the event</p>
+                           </div>
+
+                           <div class="floating-group"><input type="text" id="guest1" placeholder=" " class="form-input"><label for="guest1" class="floating-label">Guest 1 Full Name</label></div>
+                           <div class="floating-group"><input type="text" id="guest2" placeholder=" " class="form-input"><label for="guest2" class="floating-label">Guest 2 Full Name</label></div>
+
                            <div class="md:col-span-2 mt-4"><button type="submit" class="w-full py-6 bg-scater-bgDark text-white font-bold uppercase tracking-[0.3em] hover:bg-scater-gold transition-all text-sm">CONFIRM REGISTRATION</button></div>
                        </form>
                    </div>
@@ -708,6 +718,50 @@
        <span class="font-display text-3xl text-slate-300 uppercase">Scaters UK</span>
        <p class="text-[10px] uppercase tracking-[0.4em] text-slate-400 mt-4">© 2026 Spain Heritage Tour</p>
    </footer>
+
+   <!-- AI CHATBOX -->
+   <div id="scaters-chatbox" class="fixed bottom-6 right-6 z-[9999] opacity-0 transform translate-y-4 transition-all duration-500">
+       <div class="bg-scater-bgDark border border-scater-gold/30 rounded-xl shadow-2xl w-80 h-96 overflow-hidden backdrop-blur-md">
+           <!-- Chat Header -->
+           <div class="bg-scater-gold text-scater-bgDark p-4 flex items-center justify-between">
+               <div class="flex items-center gap-3">
+                   <div class="w-8 h-8 rounded-full bg-scater-bgDark flex items-center justify-center">
+                       <i class="fa-solid fa-brain text-scater-gold"></i>
+                   </div>
+                   <div>
+                       <h4 class="font-display text-sm uppercase tracking-wider">AI Assistant</h4>
+                       <p class="text-xs opacity-80">Scaters Intelligence</p>
+                   </div>
+               </div>
+               <button id="chat-close" class="text-scater-bgDark hover:text-white transition-colors">
+                   <i class="fa-solid fa-xmark"></i>
+               </button>
+           </div>
+
+           <!-- Chat Messages -->
+           <div id="chat-messages" class="flex-1 p-4 space-y-3 overflow-y-auto h-64 bg-scater-bgDark/50">
+               <div class="message-ai bg-scater-gold/10 border border-scater-gold/20 rounded-lg p-3">
+                   <p class="text-sm text-white">Hello! I'm your Scaters AI assistant. I can tell you about the Predatory Hunt event, product specifications, upcoming locations, and more. What would you like to know?</p>
+               </div>
+           </div>
+
+           <!-- Chat Input -->
+           <div class="p-4 border-t border-scater-gold/20 bg-scater-bgDark">
+               <div class="flex gap-2">
+                   <input type="text" id="chat-input" placeholder="Ask me anything about Scaters..."
+                          class="flex-1 bg-white/10 border border-scater-gold/30 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-scater-gold transition-colors">
+                   <button id="chat-send" class="bg-scater-gold text-scater-bgDark px-4 py-2 rounded-lg hover:bg-scater-gold/80 transition-colors">
+                       <i class="fa-solid fa-paper-plane"></i>
+                   </button>
+               </div>
+           </div>
+       </div>
+
+       <!-- Chat Trigger Button -->
+       <button id="chat-trigger" class="fixed bottom-6 right-6 bg-scater-gold text-scater-bgDark w-14 h-14 rounded-full shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center">
+           <i class="fa-solid fa-comments text-xl"></i>
+       </button>
+   </div>
 
    <!-- SCRIPT -->
    <script>
@@ -888,6 +942,180 @@
            });
        }
 
+       // Enhanced AI Chatbox Intelligence
+       let chatHistory = [];
+       let marqueeContent = [
+           "JOIN THE CHALLENGE • RAPTOR ROADSHOW 2026 • HERITAGE EDITION • UK PRECISION • SPAIN SOUL",
+           "ENGINEERING BRITISH SUPREMACY • STREET DOMINANCE • SKATEBOARDING LEGENDS",
+           "£310,000 BOUNTY • PROFESSIONAL SKATE CHALLENGE • THREE CITIES • ONE CHAMPION"
+       ];
+       let marqueeIndex = 0;
+
+       function initChatbox() {
+           const chatbox = document.getElementById('scaters-chatbox');
+           const chatTrigger = document.getElementById('chat-trigger');
+           const chatClose = document.getElementById('chat-close');
+           const chatInput = document.getElementById('chat-input');
+           const chatSend = document.getElementById('chat-send');
+
+           // Show chatbox
+           chatTrigger.addEventListener('click', () => {
+               chatbox.classList.remove('opacity-0', 'transform', 'translate-y-4');
+               chatbox.classList.add('opacity-100', 'transform', 'translate-y-0');
+               chatTrigger.style.display = 'none';
+               chatInput.focus();
+           });
+
+           // Close chatbox
+           chatClose.addEventListener('click', () => {
+               chatbox.classList.remove('opacity-100', 'transform', 'translate-y-0');
+               chatbox.classList.add('opacity-0', 'transform', 'translate-y-4');
+               setTimeout(() => chatTrigger.style.display = 'flex', 500);
+           });
+
+           // Send message
+           function sendMessage() {
+               const message = chatInput.value.trim();
+               if (!message) return;
+
+               addMessage(message, 'user');
+               chatInput.value = '';
+
+               // Simulate typing
+               setTimeout(() => {
+                   const response = generateIntelligentResponse(message);
+                   addMessage(response, 'ai');
+               }, 1000 + Math.random() * 1000);
+           }
+
+           chatSend.addEventListener('click', sendMessage);
+           chatInput.addEventListener('keypress', (e) => {
+               if (e.key === 'Enter') sendMessage();
+           });
+       }
+
+       function addMessage(text, type) {
+           const messagesContainer = document.getElementById('chat-messages');
+           const messageDiv = document.createElement('div');
+           messageDiv.className = `message-${type} ${type === 'ai' ? 'bg-scater-gold/10 border border-scater-gold/20' : 'bg-white/10 border border-white/20'} rounded-lg p-3`;
+
+           if (type === 'ai') {
+               // Add AI icon
+               messageDiv.innerHTML = `
+                   <div class="flex items-start gap-2">
+                       <div class="w-6 h-6 rounded-full bg-scater-gold flex items-center justify-center flex-shrink-0 mt-0.5">
+                           <i class="fa-solid fa-brain text-scater-bgDark text-xs"></i>
+                       </div>
+                       <p class="text-sm text-white leading-relaxed">${text}</p>
+                   </div>
+               `;
+           } else {
+               messageDiv.innerHTML = `<p class="text-sm text-white leading-relaxed">${text}</p>`;
+           }
+
+           messagesContainer.appendChild(messageDiv);
+           messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+           // Store in history
+           chatHistory.push({ text, type, timestamp: Date.now() });
+       }
+
+       function generateIntelligentResponse(userMessage) {
+           const message = userMessage.toLowerCase().trim();
+
+           // Event Information Queries
+           if (message.includes('predatory hunt') || message.includes('event') || message.includes('about the')) {
+               return "The Predatory Hunt is Scaters Raptor Roadshow 2026's flagship event! It transforms urban streets into hunting grounds where skaters 'hunt' for the perfect line. Features £310,000 bounty across Barcelona, Madrid, and Valencia with professional skate challenges. Each stage has unique challenges: Barcelona's 'Beach Flow' (Mar 15), Madrid's 'Urban Wall' (Mar 22), and Valencia's 'Neon Pulse' (Mar 29).";
+           }
+
+           // Location Queries
+           if (message.includes('location') || message.includes('where') || message.includes('cities') || message.includes('upcoming')) {
+               return "The Raptor Roadshow visits three iconic Spanish cities:\n\n🏄‍♂️ **Barcelona (Mar 15)** - Beach Flow at Mar Bella Beach\n🎨 **Madrid (Mar 22)** - Urban Wall at Madrid Río Skatepark\n🌟 **Valencia (Mar 29)** - Neon Pulse at Gulliver Skate Area\n\nEach city offers unique challenges and hosted by world-class pro riders!";
+           }
+
+           // Product Specifications
+           if (message.includes('eagle') || message.includes('specifications') || message.includes('specs')) {
+               const product = message.includes('eagle') ? appData.products[0] :
+                             message.includes('panther') ? appData.products[1] :
+                             message.includes('bull') ? appData.products[2] :
+                             message.includes('shark') ? appData.products[3] :
+                             message.includes('snake') ? appData.products[4] : null;
+
+               if (product) {
+                   return `🛹 **${product.name} - ${product.story}**\n\n📋 **Specifications:**\n• Deck Size: ${product.specs.deck}\n• Trucks: ${product.specs.trucks}\n• Serial: ${product.serial}\n\n🎯 **Performance:** ${product.seo}\n\n💰 **Price:** €89.99 (Launch exclusive)\n\nThis deck is engineered for ${product.name.toLowerCase().includes('eagle') ? 'vertical mastery' : product.name.toLowerCase().includes('panther') ? 'technical precision' : product.name.toLowerCase().includes('bull') ? 'raw power' : product.name.toLowerCase().includes('shark') ? 'flow and speed' : 'adaptability and reflexes'}.`;
+               }
+               return "I can provide detailed specifications for all 5 Raptor series decks: The Eagle, The Panther, The Bull, The Shark, and The Snake. Which one interests you?";
+           }
+
+           // Schedule & Timeline Queries
+           if (message.includes('schedule') || message.includes('timeline') || message.includes('when') || message.includes('date')) {
+               return "📅 **Raptor Roadshow 2026 Schedule:**\n\n🏄‍♂️ **Barcelona - March 15, 2026**\n• 10:00 - Coastal Roadshow\n• 15:00 - Bowl Challenge\n\n🎨 **Madrid - March 22, 2026**\n• 11:00 - Street Roadshow\n• 16:00 - Tech Challenge\n\n🌟 **Valencia - March 29, 2026**\n• 19:00 - Neon Roadshow\n• 21:00 - Night Challenge\n\n🎫 **Registration Deadline:** March 10, 2026\n🎯 **Prize Pool:** £310,000";
+           }
+
+           // Marquee Content API Queries
+           if (message.includes('marquee') || message.includes('content') || message.includes('update') || message.includes('next')) {
+               marqueeIndex = (marqueeIndex + 1) % marqueeContent.length;
+               return `📺 **Current Marquee Update:**\n"${marqueeContent[marqueeIndex]}"\n\n🔄 **Next Rotation:** "${marqueeContent[(marqueeIndex + 1) % marqueeContent.length]}"\n\n📊 **API Status:** Live content updates every 25 seconds. The marquee dynamically showcases event highlights, city challenges, and prize information to keep visitors engaged!`;
+           }
+
+           // Registration Queries
+           if (message.includes('register') || message.includes('join') || message.includes('sign up') || message.includes('how to')) {
+               return "🎫 **Registration Process:**\n\n1️⃣ **Fill out the registration form** with your details\n2️⃣ **Select your preferred city** (Barcelona/Madrid/Valencia)\n3️⃣ **Choose your skill level** (Beginner/Intermediate/Professional)\n4️⃣ **Opt into Pro Challenge** for £310,000 competition\n\n✅ **Free spectator entry** for all stages\n💰 **Pro challenge registration** required for competition\n\n📧 **Confirmation** sent via email within 24 hours\n⏰ **Deadline:** March 10, 2026";
+           }
+
+           // Product Collection Queries
+           if (message.includes('collection') || message.includes('decks') || message.includes('boards')) {
+               return "🛹 **The Raptor Collection - 5 Apex Predators:**\n\n🐅 **The Eagle** - Sky Dominator (Vertical Mastery)\n🐆 **The Panther** - Shadow Hunter (Technical Precision)\n🐂 **The Bull** - Ground Breaker (Raw Power)\n🦈 **The Shark** - Flow Machine (Speed & Flow)\n🐍 **The Snake** - Flex Assassin (Adaptability)\n\n🎨 **Design Theme:** Old School Zoo Mascots representing core skate styles\n🏆 **Exclusive:** 'Predatory Hunt' edition only available at event\n💰 **Price Range:** €74.99 - €94.99";
+           }
+
+           // Pro Riders Queries
+           if (message.includes('riders') || message.includes('pros') || message.includes('athletes')) {
+               return "🏆 **Elite Pro Roster:**\n\n👤 **Danny Leon** - Bowl Master\n• Barcelona Stage Host\n• Specializes in deep bowls and transitions\n\n👤 **Jaime Mateu** - Street Tech\n• Madrid Stage Host\n• Technical street skating expert\n\n👤 **Adria Da Silva** - Neon Style\n• Valencia Stage Host\n• Creative and stylish riding\n\n🌟 All riders are sponsored by Scaters and will be performing live demonstrations at each stage!";
+           }
+
+           // Prize & Competition Queries
+           if (message.includes('prize') || message.includes('bounty') || message.includes('money') || message.includes('win')) {
+               return "💰 **£310,000 Championship Bounty:**\n\n🥇 **Grand Champion:** £2,000 + Full Raptor Collection\n🥈 **Runner Up:** £500 + Pro Deck Setup\n🥉 **Third Place:** Exclusive Tour Gear\n\n🎯 **Competition Format:**\n• 3 individual runs per rider\n• 45-second time limit per run\n• Best single run determines ranking\n\n🏆 **Qualification:** Top performers from each city advance to finals\n🎪 **Spectator Access:** 100% FREE for all stages";
+           }
+
+           // Safety & FAQ Queries
+           if (message.includes('safe') || message.includes('safety') || message.includes('helmet') || message.includes('gear')) {
+               return "🛡️ **Safety Protocols - Priority One:**\n\n⛑️ **Mandatory Equipment:**\n• Helmets required for all active riders\n• Knee/elbow pads recommended\n• Wrist guards for technical sections\n\n🏥 **Medical Support:**\n• On-site medical team at all venues\n• Emergency response coordination\n• First aid stations equipped\n\n🌤️ **Weather Contingency:**\n• Indoor alternatives available\n• Schedule adjustments for safety\n• Live updates via app/website\n\n🎯 **Our Commitment:** Zero-tolerance safety culture with professional medical oversight.";
+           }
+
+           // Default responses based on keywords
+           if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+               return "Greetings, fellow skater! I'm the Scaters AI Intelligence System. I can help you with event details, product specifications, schedules, registration, and much more about the Raptor Roadshow 2026. What would you like to know?";
+           }
+
+           if (message.includes('thank') || message.includes('thanks')) {
+               return "You're welcome! Remember: 'When you step onto a Scaters deck, you are taking command.' Stay radical and keep skating! 🏄‍♂️⚔️";
+           }
+
+           if (message.includes('bye') || message.includes('goodbye')) {
+               return "Catch you on the flip side! Don't forget to register for the Predatory Hunt. The streets are calling! 🛹👋";
+           }
+
+           // Fallback intelligent response
+           const keywords = ['skate', 'board', 'event', 'competition', 'challenge', 'professional', 'pro', 'rider', 'deck', 'gear', 'tour', 'roadshow'];
+           const matchedKeywords = keywords.filter(keyword => message.includes(keyword));
+
+           if (matchedKeywords.length > 0) {
+               return `I detected you're interested in: ${matchedKeywords.join(', ')}. I can provide detailed information about the Raptor Roadshow events, product specifications, competition formats, pro riders, safety protocols, and registration process. Try asking about "Predatory Hunt", "product specs", "schedule", or "registration"!`;
+           }
+
+           return "I'm the Scaters AI assistant specialized in the Raptor Roadshow 2026. I can help with:\n\n🏆 Event details & Predatory Hunt info\n🛹 Product specifications & collection\n📅 Schedules & timelines\n👥 Pro riders & athletes\n🎫 Registration & entry\n💰 Prizes & competition\n🛡️ Safety protocols\n\nWhat specific information are you looking for?";
+       }
+
+       // Rotate marquee content every 25 seconds
+       setInterval(() => {
+           marqueeIndex = (marqueeIndex + 1) % marqueeContent.length;
+           const marqueeElement = document.querySelector('.marquee-content');
+           if (marqueeElement) {
+               marqueeElement.textContent = marqueeContent[marqueeIndex];
+           }
+       }, 25000);
+
        window.onload = () => {
            renderGrid();
            renderCityCards();
@@ -896,6 +1124,7 @@
            renderFAQ();
            renderPrizes();
            initRevealAnimations();
+           initChatbox();
        };
    </script>
 </body>
