@@ -2089,7 +2089,7 @@
                         const typing = document.createElement('div');
                         typing.className = 'raptor-msg raptor-msg-ai';
                         typing.id = 'raptor-typing';
-                        typing.innerText = 'AI is typing...';
+                        typing.innerText = 'The Butler is typing...';
                         chatBody.appendChild(typing);
                         chatBody.scrollTop = chatBody.scrollHeight;
 
@@ -2101,8 +2101,8 @@
                         // Add placeholder auto-response
                         appendMsg("Thank you for your message. I'm here to assist you!", false);
                         
-                        // Small delay before showing the actual contextual response
-                        await new Promise(r => setTimeout(r, 300));
+                        // Brief delay before showing the actual contextual response
+                        await new Promise(r => setTimeout(r, 100));
                         
                         const reply = localResponder(text);
                         appendMsg(reply, false); // AI msg with contextual response
