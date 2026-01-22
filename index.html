@@ -1960,7 +1960,14 @@
                     
                     // Create message text element
                     const messageText = document.createElement('div');
-                    messageText.innerHTML = text.replace(/\n/g, '<br>');
+                    // For user messages, use textContent to prevent XSS
+                    // For AI messages, allow basic HTML formatting (already sanitized from API or local responder)
+                    if (isUser) {
+                        messageText.textContent = text;
+                        messageText.style.whiteSpace = 'pre-wrap';
+                    } else {
+                        messageText.innerHTML = text.replace(/\n/g, '<br>');
+                    }
                     
                     div.appendChild(timestamp);
                     div.appendChild(messageText);
@@ -1975,20 +1982,33 @@
                     typing.id = 'raptor-typing';
                     typing.style.fontStyle = 'italic';
                     typing.style.opacity = '0.7';
-                    typing.innerHTML = '<div style="font-size:9px;opacity:0.6;margin-bottom:4px;font-family:monospace;">' + getTimestamp() + '</div><div>The Butler is typing<span class="typing-dots"></span></div>';
+                    
+                    const timestamp = document.createElement('div');
+                    timestamp.style.fontSize = '9px';
+                    timestamp.style.opacity = '0.6';
+                    timestamp.style.marginBottom = '4px';
+                    timestamp.style.fontFamily = 'monospace';
+                    timestamp.textContent = getTimestamp();
+                    
+                    const messageDiv = document.createElement('div');
+                    messageDiv.textContent = 'The Butler is typing';
+                    
+                    const dotsSpan = document.createElement('span');
+                    dotsSpan.className = 'typing-dots';
+                    messageDiv.appendChild(dotsSpan);
+                    
+                    typing.appendChild(timestamp);
+                    typing.appendChild(messageDiv);
                     chatBody.appendChild(typing);
                     chatBody.scrollTop = chatBody.scrollHeight;
                     
                     // Animate typing dots
-                    const dots = typing.querySelector('.typing-dots');
-                    if (dots) {
-                        let dotCount = 0;
-                        const interval = setInterval(() => {
-                            dotCount = (dotCount + 1) % 4;
-                            dots.innerText = '.'.repeat(dotCount);
-                        }, 500);
-                        typing.dataset.intervalId = interval;
-                    }
+                    let dotCount = 0;
+                    const interval = setInterval(() => {
+                        dotCount = (dotCount + 1) % 4;
+                        dotsSpan.textContent = '.'.repeat(dotCount);
+                    }, 500);
+                    typing.dataset.intervalId = interval;
                 }
 
                 function hideTyping() {
@@ -2006,19 +2026,20 @@
                     const cmd = text.toLowerCase().trim();
                     
                     if (cmd === '/apikey' || cmd === '/getapikey') {
-                        const maskedKey = apiKey ? apiKey.substring(0, 10) + '...' + apiKey.substring(apiKey.length - 4) : 'Not set';
+                        const maskedKey = apiKey ? apiKey.substring(0, 6) + '...' + apiKey.substring(apiKey.length - 4) : 'Not set';
                         return `Current API Key: ${maskedKey}\n\nUse /setapikey [key] to update it.`;
                     }
                     
                     if (cmd.startsWith('/setapikey ')) {
                         const newKey = text.substring(11).trim();
-                        if (newKey.length > 20) {
+                        // Basic validation: check for AIza prefix and minimum length
+                        if (newKey.startsWith('AIza') && newKey.length > 30) {
                             apiKey = newKey;
                             localStorage.setItem('gemini_api_key', newKey);
                             initGemini();
                             return `API Key updated successfully! The Butler is now using the new key.`;
                         } else {
-                            return `Invalid API key format. Please provide a valid Google Generative AI API key.`;
+                            return `Invalid API key format. Please provide a valid Google Generative AI API key (should start with 'AIza').`;
                         }
                     }
                     
