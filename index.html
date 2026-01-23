@@ -3689,7 +3689,7 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
             const modalCloseBtn = document.getElementById('modal-close-btn');
             const registerBtn = document.getElementById('register-now-btn');
 
-            if (!skateboard || !modal) return;
+            if (!skateboard) return;
 
             // Check for reduced motion preference
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3713,6 +3713,12 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                 // Show event detail for London when skateboard is clicked
                 if (typeof showEventDetail === 'function') {
                     showEventDetail('ldn');
+                } else {
+                    // Fallback: scroll to events section if showEventDetail is not available
+                    const eventsSection = document.querySelector('#mission') || document.querySelector('[id*="event"]');
+                    if (eventsSection) {
+                        eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 }
             }
 
