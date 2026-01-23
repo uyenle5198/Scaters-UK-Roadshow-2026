@@ -127,24 +127,94 @@
         .deck-perfect-for strong{font-size:10px;text-transform:uppercase;color:#D4AF37;display:block;margin-bottom:6px;letter-spacing:.1em}
         .deck-perfect-for p{font-size:11px;color:#e2e8f0;line-height:1.5;margin:0}
         
-        /* Event Preview Styles - Similar to deck-showcase for consistency */
+        /* ===================================================================
+           EVENT PREVIEW STYLES - Chatbox Event Details Card
+           ===================================================================
+           
+           PURPOSE:
+           These styles create a visually rich event preview card displayed in
+           the chatbox when users select a city during the booking workflow.
+           The preview shows comprehensive event details before registration.
+           
+           DESIGN PHILOSOPHY:
+           - Consistent with existing deck-showcase component for unified UX
+           - Uses brand colors: Scater Royal Blue (#2563EB) and Gold (#D4AF37)
+           - Dark gradient background for sophisticated tactical aesthetic
+           - Subtle animations and hover effects for interactivity
+           - Fully responsive for mobile and desktop devices
+           
+           COMPONENT STRUCTURE:
+           .event-preview (container)
+             └─ .event-preview-header (title section)
+                  ├─ .event-preview-title (city + challenge name)
+                  └─ .event-preview-subtitle (mission name in gold)
+             └─ .event-preview-image (venue photo)
+             └─ .event-preview-details (venue + date info)
+             └─ .event-preview-host (pro skater card)
+                  ├─ .event-preview-host-img (circular profile photo)
+                  └─ .event-preview-host-info (name + title)
+           
+           ACCESSIBILITY:
+           - High contrast text colors for readability
+           - Adequate font sizes (minimum 9px, most 10px+)
+           - Clear visual hierarchy with spacing and borders
+           - Hover states for interactive feedback
+           
+           INTEGRATION:
+           Used by generateEventPreview() function in the chatbot code to
+           display event data from appData.cities array.
+           
+           ================================================================= */
+        
+        /* Main event preview container - dark gradient with blue accent border */
         .event-preview{background:linear-gradient(135deg,rgba(5,5,5,.98) 0%,rgba(15,23,42,.95) 100%);border:2px solid #2563EB;border-radius:12px;padding:14px;margin:12px 0;box-shadow:0 8px 32px rgba(37,99,235,.4),inset 0 0 20px rgba(37,99,235,.1);position:relative;overflow:hidden}
+        
+        /* Animated gold shimmer effect at top of card */
         .event-preview::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#D4AF37,transparent);animation:shimmer 3s infinite}
+        
+        /* Header section containing title and subtitle */
         .event-preview-header{margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(37,99,235,.3)}
+        
+        /* Event title - city and challenge name in uppercase */
         .event-preview-title{font-size:16px;font-weight:bold;color:#fff;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;text-shadow:0 0 10px rgba(37,99,235,.6)}
+        
+        /* Mission subtitle in gold accent color */
         .event-preview-subtitle{font-size:10px;color:#D4AF37;font-style:italic;text-shadow:0 0 8px rgba(212,175,55,.4)}
+        
+        /* Event venue image container */
         .event-preview-image{width:100%;height:140px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(0,0,0,.6) 0%,rgba(37,99,235,.1) 100%);border-radius:8px;margin:10px 0;border:1px solid rgba(37,99,235,.4);position:relative;overflow:hidden}
+        
+        /* Venue image with cover fit and brightness filter */
         .event-preview-image img{width:100%;height:100%;object-fit:cover;filter:brightness(0.9);transition:transform .3s ease}
+        
+        /* Image zoom effect on hover */
         .event-preview:hover .event-preview-image img{transform:scale(1.05)}
+        
+        /* Event details section - venue and date information */
         .event-preview-details{margin:10px 0;padding:8px;background:rgba(37,99,235,.08);border-radius:6px;border-left:3px solid #2563EB}
+        
+        /* Section header (e.g., "EVENT DETAILS") */
         .event-preview-details h4{font-size:10px;text-transform:uppercase;color:#2563EB;margin-bottom:6px;letter-spacing:.1em}
+        
+        /* Detail text - venue name, date, description */
         .event-preview-details p{font-size:10px;color:#cbd5e1;line-height:1.4;margin:4px 0}
+        
+        /* Pro skater host card with gold accent */
         .event-preview-host{margin-top:10px;padding:8px;background:linear-gradient(135deg,rgba(212,175,55,.15) 0%,rgba(212,175,55,.05) 100%);border-radius:6px;border:1px solid rgba(212,175,55,.3);display:flex;align-items:center;gap:8px}
+        
+        /* Circular host profile image with gold border */
         .event-preview-host-img{width:40px;height:40px;border-radius:50%;border:2px solid #D4AF37;object-fit:cover}
+        
+        /* Host information container */
         .event-preview-host-info{flex:1}
+        
+        /* Host name in bold gold */
         .event-preview-host-name{font-size:11px;font-weight:bold;color:#D4AF37;margin-bottom:2px}
+        
+        /* Host title and experience in italic */
         .event-preview-host-title{font-size:9px;color:#e2e8f0;font-style:italic}
         
+        /* Mobile responsive adjustments for screens under 640px */
         @media (max-width: 640px){
             .raptor-chat-window{bottom:90px;right:10px;left:10px;width:auto;max-width:none}
             .raptor-chat-body{height:300px;max-height:calc(100vh - 300px)}
@@ -2356,19 +2426,47 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
 
                 /**
                  * Generate Event Preview HTML
-                 * Creates a rich preview of event details including venue, mission, host, and description
+                 * 
+                 * PURPOSE:
+                 * This function creates a comprehensive preview of event details before users commit to registration.
+                 * It fetches structured data from appData.cities and renders it in a visually appealing card format
+                 * within the chatbox interface, helping users make informed decisions about which event to attend.
+                 * 
+                 * FEATURES:
+                 * - Displays event title with challenge name (e.g., "LONDON - THE CONCRETE HEART")
+                 * - Shows mission subtitle in gold accent color (e.g., "Operation: Silent Kill")
+                 * - Renders event venue image with hover effects
+                 * - Provides key event details: venue name, date, and full description
+                 * - Showcases pro skater host with profile image, name, title, and experience
+                 * - Styled consistently with existing deck-showcase components
+                 * - Fully responsive for mobile and desktop views
+                 * 
+                 * DATA SOURCE:
+                 * Retrieves data from the global appData.cities array, which contains comprehensive
+                 * information about each event location including venue details, pro skater hosts,
+                 * mission descriptions, and challenge phases.
+                 * 
+                 * STYLING:
+                 * Uses CSS classes defined in the <style> section:
+                 * - .event-preview: Main container with gradient background
+                 * - .event-preview-header: Title and subtitle section
+                 * - .event-preview-image: Event image container with effects
+                 * - .event-preview-details: Venue and date information section
+                 * - .event-preview-host: Pro skater host card with photo
+                 * 
                  * @param {string} cityName - Name of the city (e.g., 'London', 'Manchester', 'Glasgow')
-                 * @returns {string} HTML string for event preview display
+                 * @returns {string} HTML string for event preview display, or error message if city not found
                  */
                 function generateEventPreview(cityName) {
                     // Find the event details from appData.cities based on city name
                     const eventData = appData.cities.find(c => c.name === cityName);
                     
+                    // Handle case where city data is not found
                     if (!eventData) {
                         return `<div style="color: #ff6b6b; padding: 10px;">Event details not found for ${cityName}</div>`;
                     }
                     
-                    // Extract event information
+                    // Extract event information using destructuring for cleaner code
                     const { name, challenge, venue, date, img, mission, desc, host } = eventData;
                     
                     // Build the event preview HTML with all details
@@ -2419,22 +2517,66 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                 }
 
                 /**
-                 * STEP 2: Event Confirmation with Preview
-                 * Show selected city with rich event preview including venue, mission, host, and options to continue or change
+                 * STEP 2: Event Confirmation with Rich Preview
+                 * 
+                 * PURPOSE:
+                 * This function handles the second step of the booking workflow, displaying a comprehensive
+                 * event preview when a user selects a city. This gives users full transparency about what
+                 * they're signing up for before proceeding to registration.
+                 * 
+                 * WORKFLOW:
+                 * 1. User clicks a city button from the selection screen
+                 * 2. Function validates current booking step
+                 * 3. Updates booking state with selected city and date
+                 * 4. Displays user message confirming their selection
+                 * 5. Shows typing indicator (Butler is preparing the preview)
+                 * 6. Calls generateEventPreview() to create rich event card
+                 * 7. Displays preview with venue, mission, description, and host details
+                 * 8. Provides two action buttons:
+                 *    - Continue with Registration: Proceeds to step 3
+                 *    - Change City: Returns to city selection
+                 * 
+                 * CHANGES FROM ORIGINAL:
+                 * Previously only showed city name and date in a simple box. Now displays:
+                 * - Complete event title and mission name
+                 * - High-quality venue image
+                 * - Detailed venue information and date
+                 * - Full event description with tactical theme
+                 * - Pro skater host with photo and credentials
+                 * 
+                 * STATE MANAGEMENT:
+                 * Updates bookingState object:
+                 * - selectedCity: Store chosen city name
+                 * - selectedDate: Store event date
+                 * - step: Change to 'confirmation' stage
+                 * 
+                 * INTEGRATION:
+                 * - Called by city button onclick handlers in generateCityButtons()
+                 * - Calls generateEventPreview() for event details
+                 * - Connects to confirmBooking() for next step
+                 * - Connects to changeCity() for going back
+                 * 
+                 * @param {string} city - Name of the selected city (e.g., 'London', 'Manchester', 'Glasgow')
+                 * @param {string} date - Event date (e.g., 'March 12, 2026')
                  */
                 window.selectCity = function(city, date) {
+                    // Validate that we're in the correct booking workflow step
                     if (bookingState.step !== 'city-selection') return;
                     
+                    // Update booking state with user's selection
                     bookingState.selectedCity = city;
                     bookingState.selectedDate = date;
                     bookingState.step = 'confirmation';
                     
+                    // Show user's selection as a message in the chat
                     appendMsg(`${city} - ${date}`, true);
+                    
+                    // Display typing indicator while preparing the preview
                     showTyping();
                     setTimeout(() => {
                         hideTyping();
                         
-                        // Generate event preview with all details
+                        // Generate comprehensive event preview with all details from appData.cities
                         const eventPreview = generateEventPreview(city);
                         
                         const confirmationMessage = `
