@@ -22,6 +22,19 @@
     <meta property="og:title" content="Scaters Raptor Roadshow 2026: The Predatory Hunt">
     <meta property="og:description" content="Engineering British supremacy. Join the hunt in London, Manchester, and Glasgow. Win the £310,000 Bounty.">
     <meta property="og:image" content="https://i.postimg.cc/j23YXP7f/Modern-Scaters-Logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="en_GB">
+    
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scaters Raptor Roadshow 2026: The Predatory Hunt">
+    <meta name="twitter:description" content="Engineering British supremacy. Join the hunt in London, Manchester, and Glasgow. Win the £310,000 Bounty.">
+    <meta name="twitter:image" content="https://i.postimg.cc/j23YXP7f/Modern-Scaters-Logo.png">
+    
+    <!-- THEME COLOR -->
+    <meta name="theme-color" content="#050505">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="https://i.postimg.cc/5NqQgt7W/Isolated-Squirrel-Icon.png">
@@ -30,9 +43,6 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://i.postimg.cc">
-    <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin="">
 
@@ -42,12 +52,12 @@
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap&amp;subset=latin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
   
     <!-- Icons & Tailwind -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -2019,9 +2029,9 @@
                 </form>
             </div>
         </div>
-        <div class="raptor-chat-trigger" id="raptor-chat-trigger">
-            <i class="fa-solid fa-binoculars"></i>
-        </div>
+        <button class="raptor-chat-trigger" id="raptor-chat-trigger" aria-label="Open chat assistant" type="button">
+            <i class="fa-solid fa-binoculars" aria-hidden="true"></i>
+        </button>
     </div>
     
     <!-- Google Generative AI SDK -->
@@ -3672,12 +3682,12 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
     </div>
 
     <!-- Registration Modal -->
-    <div id="registration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="registration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
         <div class="modal-content">
-            <span class="modal-close" aria-label="Close modal">&times;</span>
+            <button class="modal-close" aria-label="Close modal" type="button">&times;</button>
             <h2 id="modal-title">Unlock Exclusive Access</h2>
             <p class="subtitle">Scaters Raptor Roadshow 2026</p>
-            <p>
+            <p id="modal-description">
                 Register now for exclusive access to the Raptor Roadshow 2026 tour! 
                 Join us in London, Manchester, and Glasgow for the ultimate skateboarding experience 
                 featuring pro skaters Lucien Clarke &amp; Geoff Rowley.
@@ -3686,8 +3696,8 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                 Early registrants get priority access to limited edition Raptor decks and VIP meet-and-greet opportunities.
             </p>
             <div class="cta-buttons">
-                <button class="primary" id="register-now-btn">Register Now</button>
-                <button class="secondary" id="modal-close-btn">Maybe Later</button>
+                <button class="primary" id="register-now-btn" type="button">Register Now</button>
+                <button class="secondary" id="modal-close-btn" type="button">Maybe Later</button>
             </div>
         </div>
     </div>
