@@ -470,6 +470,16 @@ class ScatersRoadshowChatbot:
         """Get basic pattern-matched response when AI is unavailable."""
         msg_lower = user_message.lower()
         
+        # February/deadline queries
+        if any(word in msg_lower for word in ['february', 'deadline', 'early bird', 'registration close']):
+            return """Important February 2026 Deadlines:
+• Registration closes: February 28, 2026
+• Early bird discount ends: February 15, 2026
+• VIP package sales close: February 20, 2026
+• Safety guidelines posted: Early February
+
+Don't miss out - register early to secure your spot!"""
+        
         # Location queries
         if any(word in msg_lower for word in ['location', 'where', 'city', 'cities']):
             return """The Raptor Roadshow visits 3 UK cities:
@@ -495,7 +505,9 @@ class ScatersRoadshowChatbot:
             return """Event dates:
 • London: March 12, 2026
 • Manchester: March 19, 2026
-• Glasgow: March 26, 2026"""
+• Glasgow: March 26, 2026
+
+IMPORTANT: Registration deadline is February 28, 2026"""
         
         # Activities queries
         if any(word in msg_lower for word in ['activity', 'activities', 'what', 'do']):
@@ -514,6 +526,7 @@ class ScatersRoadshowChatbot:
         return """I'm The Butler, here to help with information about:
 • The Raptor Roadshow 2026 (locations, dates, activities)
 • The Raptor skateboard collection (features, models)
+• February registration deadlines and policies
 
 What would you like to know?"""
     
