@@ -277,6 +277,12 @@
             z-index: 9998;
             animation: skateboard-fly 5s linear infinite;
             will-change: transform;
+            cursor: pointer;
+            transition: filter 0.3s ease;
+        }
+
+        #flying-skateboard:hover {
+            filter: brightness(1.2) drop-shadow(0 0 15px rgba(37, 99, 235, 0.6));
         }
 
         #flying-skateboard img {
@@ -3716,17 +3722,12 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                 }
             }
 
-            // Function to show event detail for London (the first event)
-            function showSkateboardEvent() {
-                // Show event detail for London when skateboard is clicked
-                if (typeof showEventDetail === 'function') {
-                    showEventDetail('ldn');
-                } else {
-                    // Fallback: scroll to events section if showEventDetail is not available
-                    const eventsSection = document.querySelector('#mission') || document.querySelector('[id*="event"]');
-                    if (eventsSection) {
-                        eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
+            // Function to show registration modal
+            function showRegistrationModal() {
+                if (modal) {
+                    modal.classList.add('active');
+                    pauseSkateboard();
+                    document.body.style.overflow = 'hidden';
                 }
             }
 
@@ -3734,8 +3735,8 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
             skateboard.addEventListener('mouseenter', pauseSkateboard);
             skateboard.addEventListener('mouseleave', resumeSkateboard);
 
-            // Skateboard click event - show event detail
-            skateboard.addEventListener('click', showSkateboardEvent);
+            // Skateboard click event - show registration modal
+            skateboard.addEventListener('click', showRegistrationModal);
 
             // Close modal events (kept for other modal triggers)
             if (modalClose) {
@@ -3755,22 +3756,26 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
             }
 
             // Close modal when clicking outside content
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    resumeSkateboard();
-                    document.body.style.overflow = '';
-                }
-            });
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                        resumeSkateboard();
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
 
             // Close modal with Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal.classList.contains('active')) {
-                    modal.classList.remove('active');
-                    resumeSkateboard();
-                    document.body.style.overflow = '';
-                }
-            });
+            if (modal) {
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && modal.classList.contains('active')) {
+                        modal.classList.remove('active');
+                        resumeSkateboard();
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
 
             // Register button - scroll to registration form or external link
             if (registerBtn) {
