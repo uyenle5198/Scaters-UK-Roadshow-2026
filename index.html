@@ -2483,11 +2483,8 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                             showTyping();
                             await new Promise(r => setTimeout(r, 800));
                             hideTyping();
-                            // Show an overview first
+                            // Show an overview of all decks
                             appendMsg(`🛹 The Raptor Collection - 5 Elite Decks:\n\n🦅 THE EAGLE - Sky Dominator\n🐆 THE PANTHER - Shadow Hunter\n🐂 THE BULL - Ground Breaker\n🦈 THE SHARK - Flow Machine\n🐍 THE SNAKE - Flex Assassin\n\nAsk about any specific deck for detailed showcase!`, false);
-                            // Show a featured deck (The Panther as example)
-                            await new Promise(r => setTimeout(r, 500));
-                            appendMsg(generateEnhancedDeckHTML(appData.products[1]), false);
                             break;
                         
                         case 'find-decks':
