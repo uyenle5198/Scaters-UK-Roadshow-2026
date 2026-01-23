@@ -150,23 +150,37 @@ class ScatersRoadshowChatbot:
         return f"[{timestamp}] {prefix}: {text}"
     
     def _get_ai_response(self, user_message: str) -> Optional[str]:
-        """Get AI response from configured provider."""
+        """Get AI response from configured provider with timeout handling."""
         if not self.model:
             return None
         
         try:
             if self.api_provider == 'gemini':
-                # Use Gemini API
-                prompt = f"{self.ROADSHOW_CONTEXT}\n\nUser: {user_message}\nButler:"
-                # Set timeout for API calls to prevent hanging
-                response = self.model.generate_content(
-                    prompt,
-                    generation_config={'max_output_tokens': 300, 'temperature': 0.7}
-                )
-                return response.text
+                # Use Gemini API with timeout protection
+                import signal
+                
+                def timeout_handler(signum, frame):
+                    raise TimeoutError("API request timed out")
+                
+                # Set 10 second timeout for API call
+                signal.signal(signal.SIGALRM, timeout_handler)
+                signal.alarm(10)
+                
+                try:
+                    prompt = f"{self.ROADSHOW_CONTEXT}\n\nUser: {user_message}\nButler:"
+                    response = self.model.generate_content(
+                        prompt,
+                        generation_config={'max_output_tokens': 300, 'temperature': 0.7}
+                    )
+                    signal.alarm(0)  # Cancel alarm
+                    return response.text
+                except TimeoutError:
+                    signal.alarm(0)
+                    print("\n⚠ API request timed out")
+                    return None
             
             elif self.api_provider == 'openai':
-                # Use OpenAI API
+                # Use OpenAI API with timeout
                 messages = [
                     {"role": "system", "content": self.ROADSHOW_CONTEXT},
                     {"role": "user", "content": user_message}
@@ -175,10 +189,14 @@ class ScatersRoadshowChatbot:
                     model="gpt-3.5-turbo",
                     messages=messages,
                     max_tokens=300,
-                    temperature=0.7
+                    temperature=0.7,
+                    timeout=10.0  # 10 second timeout
                 )
                 return response.choices[0].message.content
         
+        except TimeoutError:
+            print("\n⚠ API request timed out")
+            return None
         except Exception as e:
             print(f"\n⚠ AI API Error: {e}")
             return None
