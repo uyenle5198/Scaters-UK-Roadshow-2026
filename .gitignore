@@ -33,6 +33,9 @@ tmp/
 temp/
 *.tmp
 
+# Font files (loaded from CDN)
+fonts/
+
 # Python
 __pycache__/
 *.py[cod]
