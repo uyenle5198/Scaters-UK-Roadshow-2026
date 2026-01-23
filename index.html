@@ -2834,8 +2834,19 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                         return null;
                     }
                     
-                    // Check for error messages in response
-                    const errorPatterns = ['error', 'failed', 'unable to process'];
+                    // Check for error messages in response (configurable error patterns)
+                    const errorPatterns = [
+                        'error',
+                        'failed',
+                        'unable to process',
+                        'invalid request',
+                        'bad request',
+                        'unauthorized',
+                        'forbidden',
+                        'not found',
+                        'internal error',
+                        'service unavailable'
+                    ];
                     const lowerResponse = trimmed.toLowerCase();
                     if (errorPatterns.some(pattern => lowerResponse.startsWith(pattern))) {
                         console.warn('Response contains error pattern');
@@ -2855,6 +2866,7 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                  */
                 async function getAIResponse(userMessage, retryCount = 0) {
                     const MAX_RETRIES = 2;
+                    const RETRY_DELAY_MS = 1000; // Consistent 1 second delay between retries
                     
                     try {
                         if (!model) {
@@ -2885,7 +2897,7 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                             // Retry on validation failure
                             if (retryCount < MAX_RETRIES) {
                                 console.log(`Retrying AI request (attempt ${retryCount + 1}/${MAX_RETRIES})...`);
-                                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
+                                await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
                                 return getAIResponse(userMessage, retryCount + 1);
                             }
                             
@@ -2909,7 +2921,7 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                             if (retryCount === 0) {
                                 appendMsg('⚠️ Connection issue detected, retrying...', false);
                             }
-                            await new Promise(resolve => setTimeout(resolve, 1500)); // Wait 1.5 seconds
+                            await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
                             return getAIResponse(userMessage, retryCount + 1);
                         }
                         

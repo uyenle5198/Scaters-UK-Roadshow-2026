@@ -15,6 +15,8 @@ import os
 import sys
 import platform
 import logging
+import time
+import textwrap
 from datetime import datetime
 from typing import Optional
 
@@ -334,7 +336,6 @@ class ScatersRoadshowChatbot:
             if is_transient and retry_count < max_retries:
                 logger.info(f"Retrying API call for transient error (attempt {retry_count + 1}/{max_retries})")
                 print(f"↻ Retrying... (attempt {retry_count + 1}/{max_retries})")
-                import time
                 time.sleep(1)  # Brief delay before retry
                 return self._get_ai_response(user_message, retry_count + 1)
             
@@ -602,8 +603,6 @@ What would you like to know?"""
         Returns:
             Formatted response suitable for terminal display
         """
-        import textwrap
-        
         # Wrap long lines for better readability (70 characters per line)
         wrapper = textwrap.TextWrapper(width=70, break_long_words=False, 
                                       break_on_hyphens=False)
