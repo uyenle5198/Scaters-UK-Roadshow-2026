@@ -269,7 +269,7 @@
         .paint-drip-container{position:absolute;top:0;left:0;right:0;height:200px;pointer-events:none;overflow:hidden;z-index:5;opacity:0.7}
         
         /* Individual paint drip element */
-        .paint-drip{position:absolute;width:3px;background:linear-gradient(to bottom,transparent,#2563EB);opacity:0;animation:drip-fall 2s ease-in forwards;will-change:transform,opacity;transform:translateZ(0)}
+        .paint-drip{position:absolute;width:3px;background:linear-gradient(to bottom,transparent,#2563EB);opacity:0;will-change:transform,opacity;transform:translateZ(0)}
         
         /* Gold variant for accent sections */
         .paint-drip.gold{background:linear-gradient(to bottom,transparent,#D4AF37)}
@@ -280,11 +280,11 @@
         /* Thicker drip for emphasis */
         .paint-drip.thick{width:5px}
         
+        /* Animated class triggers the drip animation */
+        .paint-drip.animated{animation:drip-fall 2s ease-in forwards}
+        
         /* Keyframe animation for dripping effect */
         @keyframes drip-fall{0%{opacity:0;height:0;transform:translateY(0) scaleY(0)}20%{opacity:0.8}60%{opacity:0.9;height:100px}100%{opacity:0;height:150px;transform:translateY(50px) scaleY(1.2)}}
-        
-        /* Slower drip variation */
-        @keyframes drip-fall-slow{0%{opacity:0;height:0;transform:translateY(0)}30%{opacity:0.8}70%{opacity:0.9;height:120px}100%{opacity:0;height:180px;transform:translateY(60px)}}
         
         /* Paint streak effect for horizontal transitions */
         .paint-streak{position:absolute;height:2px;width:0;background:linear-gradient(to right,transparent,#2563EB,transparent);opacity:0;animation:streak-expand 1.5s ease-out forwards;will-change:width,opacity;transform:translateZ(0)}
@@ -320,12 +320,11 @@
         .hero-paint-accent{position:absolute;top:0;left:0;right:0;height:300px;pointer-events:none;overflow:hidden;z-index:1}
         
         /* Animated paint drops appear on scroll */
-        .paint-drip.animated{animation:drip-fall 2s ease-in forwards}
-        .paint-drip.animated.delay-1{animation-delay:0.2s}
-        .paint-drip.animated.delay-2{animation-delay:0.4s}
-        .paint-drip.animated.delay-3{animation-delay:0.6s}
-        .paint-drip.animated.delay-4{animation-delay:0.8s}
-        .paint-drip.animated.delay-5{animation-delay:1s}
+        .paint-drip.delay-1{animation-delay:0.2s}
+        .paint-drip.delay-2{animation-delay:0.4s}
+        .paint-drip.delay-3{animation-delay:0.6s}
+        .paint-drip.delay-4{animation-delay:0.8s}
+        .paint-drip.delay-5{animation-delay:1s}
         
         /* Lite mode compatibility - disable paint effects */
         body.lite-mode .paint-drip,body.lite-mode .paint-streak,body.lite-mode .paint-splash,body.lite-mode .section-divider-paint::before,body.lite-mode .hero-paint-accent{display:none!important}
@@ -3416,24 +3415,31 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
             function addPaintDrips(container, count = 3) {
                 if (isLiteMode() || prefersReducedMotion()) return;
                 
+                // Limit count to prevent infinite loop (max 6 positions with 15% spacing in 90% width)
+                const maxCount = Math.min(count, 6);
+                
                 // Remove existing drips
                 const existingDrips = container.querySelectorAll('.paint-drip.animated');
                 existingDrips.forEach(drip => drip.remove());
                 
                 // Create new drips
                 const positions = [];
-                for (let i = 0; i < count; i++) {
-                    let x;
-                    do {
-                        x = Math.random() * 90 + 5; // 5% to 95%
-                    } while (positions.some(pos => Math.abs(pos - x) < 15)); // Avoid overlap
+                let attempts = 0;
+                const maxAttempts = maxCount * 10; // Prevent infinite loop
+                
+                for (let i = 0; i < maxCount && attempts < maxAttempts; attempts++) {
+                    const x = Math.random() * 90 + 5; // 5% to 95%
                     
-                    positions.push(x);
-                    const colorClass = config.colors[Math.floor(Math.random() * config.colors.length)];
-                    const thick = Math.random() > 0.7;
-                    const drip = createPaintDrip(x, colorClass, thick);
-                    drip.style.animationDelay = `${i * 0.2}s`;
-                    container.appendChild(drip);
+                    // Check if position is far enough from existing positions
+                    if (positions.every(pos => Math.abs(pos - x) >= 15)) {
+                        positions.push(x);
+                        const colorClass = config.colors[Math.floor(Math.random() * config.colors.length)];
+                        const thick = Math.random() > 0.7;
+                        const drip = createPaintDrip(x, colorClass, thick);
+                        drip.style.animationDelay = `${i * 0.2}s`;
+                        container.appendChild(drip);
+                        i++;
+                    }
                 }
             }
             
@@ -3443,22 +3449,19 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                 
                 const sections = document.querySelectorAll('section[id]');
                 sections.forEach((section, index) => {
-                    // Skip hero section (already has drips)
-                    if (index === 0) return;
+                    // Skip hero section (already has drips) and apply to alternating sections
+                    if (index === 0 || index % 2 !== 0) return;
                     
                     // Check if section already has drip container
                     if (section.querySelector('.paint-drip-container')) return;
                     
-                    // Add drip container to every other section
-                    if (index % 2 === 0) {
-                        const container = document.createElement('div');
-                        container.className = 'paint-drip-container';
-                        section.style.position = 'relative';
-                        section.insertBefore(container, section.firstChild);
-                        
-                        // Initially hide drips
-                        container.style.opacity = '0';
-                    }
+                    const container = document.createElement('div');
+                    container.className = 'paint-drip-container';
+                    section.style.position = 'relative';
+                    section.insertBefore(container, section.firstChild);
+                    
+                    // Initially hide drips
+                    container.style.opacity = '0';
                 });
             }
             
@@ -3491,7 +3494,6 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         splash.style.left = '50%';
                         splash.style.top = '0';
                         splash.style.transform = 'translate(-50%, -50%)';
-                        button.style.position = 'relative';
                         button.appendChild(splash);
                         
                         setTimeout(() => splash.remove(), 800);
