@@ -275,6 +275,7 @@
         #flying-skateboard img {
             width: 100%;
             object-fit: contain;
+            position: relative;
         }
 
         @keyframes skateboard-fly {
@@ -289,9 +290,230 @@
             }
         }
 
+        /* Lock icon on skateboard */
+        #skateboard-lock {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            z-index: 1;
+            animation: lock-pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+        }
+
+        @keyframes lock-pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1));
+            }
+        }
+
+        /* Register CTA */
+        #register-unlock-cta {
+            position: fixed;
+            top: calc(20% + 170px);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9997;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(59, 130, 246, 0.9));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        #register-unlock-cta:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.6);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 1), rgba(37, 99, 235, 1));
+        }
+
+        #register-unlock-cta .lock-icon {
+            margin-right: 8px;
+        }
+
+        /* Modal for registration */
+        #registration-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        #registration-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.5);
+            border: 2px solid rgba(37, 99, 235, 0.3);
+            position: relative;
+            animation: modal-slide-in 0.3s ease-out;
+        }
+
+        @keyframes modal-slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content h2 {
+            color: #fff;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .modal-content .subtitle {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-content p {
+            color: #cbd5e1;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .modal-content .cta-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .modal-content button {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-content button.primary {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .modal-content button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.6);
+        }
+
+        .modal-content button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-content button.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        /* Paused state for skateboard */
+        #flying-skateboard.paused {
+            animation-play-state: paused;
+        }
+
+        /* Responsive design for mobile */
+        @media (max-width: 768px) {
+            #flying-skateboard {
+                width: 100px;
+                top: 15%;
+            }
+
+            #skateboard-lock {
+                font-size: 28px;
+            }
+
+            #register-unlock-cta {
+                top: calc(15% + 120px);
+                font-size: 12px;
+                padding: 10px 18px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+                max-width: 90%;
+            }
+
+            .modal-content h2 {
+                font-size: 22px;
+            }
+
+            .modal-content .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
         /* Respect user preference for reduced motion */
         @media (prefers-reduced-motion: reduce) {
             #flying-skateboard {
+                animation: none;
+            }
+            #skateboard-lock {
+                animation: none;
+            }
+            .modal-content {
                 animation: none;
             }
         }
@@ -3470,8 +3692,177 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
 
     <!-- HTML for Flying Skateboard -->
     <div id="flying-skateboard" aria-hidden="true">
+        <span id="skateboard-lock" aria-label="Locked">🔒</span>
         <img src="https://i.postimg.cc/MTG3LCmy/Raptor-Deck-White-Background.png" alt="Flying Skateboard">
     </div>
+
+    <!-- Register to Unlock CTA -->
+    <div id="register-unlock-cta" aria-label="Register to unlock">
+        <span class="lock-icon">🔒</span>
+        <span>Register to Unlock</span>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <span class="modal-close" aria-label="Close modal">&times;</span>
+            <h2 id="modal-title">Unlock Exclusive Access</h2>
+            <p class="subtitle">Scaters Raptor Roadshow 2026</p>
+            <p>
+                Register now for exclusive access to the Raptor Roadshow 2026 tour! 
+                Join us in London, Manchester, and Glasgow for the ultimate skateboarding experience 
+                featuring pro skaters Lucien Clarke &amp; Geoff Rowley.
+            </p>
+            <p>
+                Early registrants get priority access to limited edition Raptor decks and VIP meet-and-greet opportunities.
+            </p>
+            <div class="cta-buttons">
+                <button class="primary" id="register-now-btn">Register Now</button>
+                <button class="secondary" id="modal-close-btn">Maybe Later</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Skateboard Lock Animation Interaction Script -->
+    <script>
+        (function() {
+            // Get elements
+            const skateboard = document.getElementById('flying-skateboard');
+            const cta = document.getElementById('register-unlock-cta');
+            const modal = document.getElementById('registration-modal');
+            const modalClose = document.querySelector('.modal-close');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            const registerBtn = document.getElementById('register-now-btn');
+
+            if (!skateboard || !cta || !modal) return;
+
+            // Check for reduced motion preference
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // Function to pause skateboard animation
+            function pauseSkateboard() {
+                if (!prefersReducedMotion) {
+                    skateboard.classList.add('paused');
+                }
+            }
+
+            // Function to resume skateboard animation
+            function resumeSkateboard() {
+                if (!prefersReducedMotion) {
+                    skateboard.classList.remove('paused');
+                }
+            }
+
+            // Function to open modal
+            function openModal() {
+                modal.classList.add('active');
+                pauseSkateboard();
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+
+            // Function to close modal
+            function closeModal() {
+                modal.classList.remove('active');
+                resumeSkateboard();
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+
+            // CTA click event - open modal
+            cta.addEventListener('click', openModal);
+
+            // Skateboard hover event - pause animation
+            skateboard.addEventListener('mouseenter', pauseSkateboard);
+            skateboard.addEventListener('mouseleave', resumeSkateboard);
+
+            // Skateboard click event - open modal
+            skateboard.addEventListener('click', openModal);
+
+            // Close modal events
+            modalClose.addEventListener('click', closeModal);
+            modalCloseBtn.addEventListener('click', closeModal);
+
+            // Close modal when clicking outside content
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            // Register button - scroll to registration form or external link
+            registerBtn.addEventListener('click', function() {
+                // Try to find registration form on page
+                const registrationSection = document.querySelector('form') || 
+                                          document.querySelector('[id*="register"]') ||
+                                          document.querySelector('[class*="register"]');
+                
+                if (registrationSection) {
+                    closeModal();
+                    // Smooth scroll to registration section
+                    registrationSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                } else {
+                    // If no registration form found, show inline message in modal
+                    const messageEl = document.createElement('p');
+                    messageEl.style.cssText = 'color: #fbbf24; margin-top: 15px; text-align: center; font-size: 14px;';
+                    messageEl.textContent = 'Registration coming soon! Check back for updates on the Raptor Roadshow 2026.';
+                    registerBtn.parentElement.appendChild(messageEl);
+                    
+                    // Remove message after 3 seconds
+                    setTimeout(() => {
+                        messageEl.remove();
+                    }, 3000);
+                }
+            });
+
+            // Update CTA position to follow skateboard (optional enhancement)
+            // This makes the CTA appear to follow the skateboard more naturally
+            if (!prefersReducedMotion) {
+                let animationFrameId;
+                
+                function updateCtaPosition() {
+                    const skateboardRect = skateboard.getBoundingClientRect();
+                    const skateboardCenterX = skateboardRect.left + skateboardRect.width / 2;
+                    
+                    // Only update if skateboard is visible on screen
+                    if (skateboardCenterX > -200 && skateboardCenterX < window.innerWidth + 200) {
+                        cta.style.left = skateboardCenterX + 'px';
+                        cta.style.transform = 'translateX(-50%)';
+                    }
+                    
+                    animationFrameId = requestAnimationFrame(updateCtaPosition);
+                }
+                
+                // Start updating position
+                updateCtaPosition();
+                
+                // Clean up on page unload or visibility change
+                function cleanup() {
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                }
+                
+                window.addEventListener('beforeunload', cleanup);
+                document.addEventListener('visibilitychange', function() {
+                    if (document.hidden) {
+                        cleanup();
+                    } else if (!animationFrameId && !prefersReducedMotion) {
+                        updateCtaPosition();
+                    }
+                });
+            }
+        })();
+    </script>
 
      
 </body></html>
