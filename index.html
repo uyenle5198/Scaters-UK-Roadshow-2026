@@ -1611,6 +1611,7 @@
                         <button onclick="handleQuickAction('book-ticket')" class="quick-action-btn" style="font-size:10px;padding:4px 8px;background:rgba(37,99,235,0.2);border:1px solid #2563EB;border-radius:4px;color:#fff;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(37,99,235,0.4)'" onmouseout="this.style.background='rgba(37,99,235,0.2)'">🎫 Book Tickets</button>
                         <button onclick="handleQuickAction('faq')" class="quick-action-btn" style="font-size:10px;padding:4px 8px;background:rgba(37,99,235,0.2);border:1px solid #2563EB;border-radius:4px;color:#fff;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(37,99,235,0.4)'" onmouseout="this.style.background='rgba(37,99,235,0.2)'">❓ FAQs</button>
                         <button onclick="handleQuickAction('products')" class="quick-action-btn" style="font-size:10px;padding:4px 8px;background:rgba(37,99,235,0.2);border:1px solid #2563EB;border-radius:4px;color:#fff;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(37,99,235,0.4)'" onmouseout="this.style.background='rgba(37,99,235,0.2)'">🛹 Products</button>
+                        <button onclick="handleQuickAction('find-decks')" class="quick-action-btn" style="font-size:10px;padding:4px 8px;background:rgba(37,99,235,0.2);border:1px solid #2563EB;border-radius:4px;color:#fff;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(37,99,235,0.4)'" onmouseout="this.style.background='rgba(37,99,235,0.2)'">🔍 Find My Decks</button>
                     </div>
                     <div style="margin-top:8px;font-size:10px;opacity:0.8;">Ask me anything or click a quick action above!</div>
                 </div>
@@ -2455,7 +2456,7 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                 /**
                  * Handle Quick Action Buttons
                  * Processes clicks from quick action buttons in the chat interface
-                 * @param {string} action - The action to handle (book-ticket, faq, products)
+                 * @param {string} action - The action to handle (book-ticket, faq, products, find-decks)
                  */
                 window.handleQuickAction = async function(action) {
                     const chatInput = document.getElementById('chat-input');
@@ -2487,6 +2488,21 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                             // Show a featured deck (The Panther as example)
                             await new Promise(r => setTimeout(r, 500));
                             appendMsg(generateEnhancedDeckHTML(appData.products[1]), false);
+                            break;
+                        
+                        case 'find-decks':
+                            // Navigate to the Raptor Collection section
+                            appendMsg('Show me the deck collection', true);
+                            showTyping();
+                            await new Promise(r => setTimeout(r, 600));
+                            hideTyping();
+                            appendMsg(`🔍 Taking you to The Armory - our complete Raptor Collection showcase!\n\nScrolling to the collection section now...`, false);
+                            // Smooth scroll to collection section
+                            await new Promise(r => setTimeout(r, 500));
+                            const collectionSection = document.getElementById('collection');
+                            if (collectionSection) {
+                                collectionSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
                             break;
                     }
                 };
