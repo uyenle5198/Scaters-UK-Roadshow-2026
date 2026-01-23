@@ -246,10 +246,11 @@
         #animated-squirrel {
             position: fixed;
             bottom: 10px;
-            right: 10px;
+            left: 10px;
             width: 100px;
             z-index: 9999;
             animation: squirrel-bounce 2s ease-in-out infinite alternate;
+            will-change: transform;
         }
 
         #animated-squirrel img {
@@ -274,6 +275,7 @@
             width: 150px;
             z-index: 9998;
             animation: skateboard-fly 5s linear infinite;
+            will-change: transform, left;
         }
 
         #flying-skateboard img {
@@ -284,12 +286,23 @@
         @keyframes skateboard-fly {
             0% {
                 left: -200px;
+                transform: rotate(0deg);
             }
             50% {
+                left: calc(50% - 75px);
                 transform: rotate(15deg);
             }
             100% {
                 left: 110%;
+                transform: rotate(0deg);
+            }
+        }
+
+        /* Respect user preference for reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            #animated-squirrel,
+            #flying-skateboard {
+                animation: none;
             }
         }
     </style>
@@ -3440,12 +3453,12 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
     </script>
 
     <!-- HTML for Animated Squirrel -->
-    <div id="animated-squirrel">
+    <div id="animated-squirrel" aria-hidden="true">
         <img src="https://i.postimg.cc/5NqQgt7W/Isolated-Squirrel-Icon.png" alt="Squirrel Icon">
     </div>
 
     <!-- HTML for Flying Skateboard -->
-    <div id="flying-skateboard">
+    <div id="flying-skateboard" aria-hidden="true">
         <img src="https://i.postimg.cc/MTG3LCmy/Raptor-Deck-White-Background.png" alt="Flying Skateboard">
     </div>
 
