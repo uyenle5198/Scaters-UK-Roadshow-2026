@@ -109,6 +109,13 @@
             text-shadow:0 2px 4px rgba(0,0,0,0.8)
         }
 
+        /* Dark, Tactical, and Futuristic gradient background for hero section */
+        /* Gradient: Deep Indigo (#4B0082) to Dark Teal/Green (#006D5B) at 135deg angle */
+        /* This gradient enhances visual alignment with the design's bold and modern aesthetic */
+        .hero-gradient-tactical{
+            background: linear-gradient(135deg, #4B0082, #006D5B);
+        }
+
         .rain-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}@keyframes rainFall{0%{transform:translateY(0)}100%{transform:translateY(100vh)}}.rain-drop{will-change:transform;transform:translateZ(0)}.scrolly-item{opacity:1;transform:translate(0,0);transition:opacity .8s ease,transform .8s ease}.scrolly-item.waiting-reveal{opacity:0;transform:translateY(40px)}.scrolly-item.active{opacity:1;transform:translate(0,0)}.marquee-wrapper{background:#0F172A;padding:15px 0;overflow:hidden;white-space:nowrap;border-top:2px solid #2563EB;border-bottom:2px solid #2563EB;color:#fff}.marquee-content{display:inline-block;animation:marquee-scroll 25s linear infinite;font-family:'Anton',sans-serif;font-size:18px;text-transform:uppercase;font-weight:700;letter-spacing:.1em}@keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
         .paint-drip-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:hidden}@keyframes paintDrip{0%{transform:translateY(-100%) scaleY(0);opacity:0}15%{opacity:1}20%{transform:translateY(-100%) scaleY(1)}100%{transform:translateY(100vh) scaleY(1.5);opacity:0.7}}@keyframes paintStreak{0%{transform:translateY(-50px) scaleY(0);opacity:0}10%{opacity:0.8;transform:translateY(-50px) scaleY(0.5)}30%{transform:translateY(0) scaleY(1)}100%{transform:translateY(100vh) scaleY(2);opacity:0}}.paint-drip{will-change:transform,opacity;position:absolute;transform-origin:top center}.paint-streak{will-change:transform,opacity;position:absolute;transform-origin:top center}body.lite-mode .paint-drip-overlay{display:none}
@@ -1164,15 +1171,16 @@
     <main class="pt-0">
         <div id="home-view" class="fade-in">
             <!-- HERO -->
-            <!-- HERO SECTION: Street-Style Bold Gradient Background -->
-            <!-- Updated with vibrant, high-contrast gradient for urban/street aesthetic -->
-            <!-- Gradient colors: Electric Purple (scater-streetPurple) -> Neon Pink (scater-streetPink) -> Vibrant Orange (scater-streetOrange) -->
+            <!-- HERO SECTION: Dark, Tactical, and Futuristic Gradient Background -->
+            <!-- Updated with Deep Indigo to Dark Teal/Green gradient for bold, modern aesthetic -->
+            <!-- Gradient: linear-gradient(135deg, #4B0082, #006D5B) - Deep Indigo -> Dark Teal/Green -->
             <section class="min-h-[100vh] flex items-center relative overflow-hidden pt-20 group/hero">
-                <!-- Primary bold gradient background with street-style colors -->
-                <div class="absolute inset-0 bg-gradient-to-br from-scater-streetPurple via-scater-streetPink to-scater-streetOrange opacity-95"></div>
+                <!-- Primary tactical gradient background: Deep Indigo (#4B0082) to Dark Teal/Green (#006D5B) -->
+                <div class="absolute inset-0 hero-gradient-tactical opacity-95"></div>
                 
-                <!-- Secondary diagonal gradient overlay for depth and energy -->
-                <div class="absolute inset-0 bg-gradient-to-tr from-scater-streetBlue/40 via-transparent to-scater-streetDeepPurple/40"></div>
+                <!-- Secondary diagonal gradient overlay for depth and tactical aesthetic -->
+                <!-- Uses complementary shades of the tactical gradient colors for visual consistency -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-[#006D5B]/30 via-transparent to-[#4B0082]/30"></div>
                 
                 <!-- Urban texture overlay: subtle grid pattern for street aesthetic -->
                 <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] opacity-40"></div>
