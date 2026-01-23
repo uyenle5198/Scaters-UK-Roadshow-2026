@@ -3811,10 +3811,16 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         block: 'start' 
                     });
                 } else {
-                    // If no registration form found, could redirect to external link
-                    // For now, just close the modal
-                    alert('Registration coming soon! Check back for updates on the Raptor Roadshow 2026.');
-                    closeModal();
+                    // If no registration form found, show inline message in modal
+                    const messageEl = document.createElement('p');
+                    messageEl.style.cssText = 'color: #fbbf24; margin-top: 15px; text-align: center; font-size: 14px;';
+                    messageEl.textContent = 'Registration coming soon! Check back for updates on the Raptor Roadshow 2026.';
+                    registerBtn.parentElement.appendChild(messageEl);
+                    
+                    // Remove message after 3 seconds
+                    setTimeout(() => {
+                        messageEl.remove();
+                    }, 3000);
                 }
             });
 
@@ -3828,7 +3834,7 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                     const skateboardCenterX = skateboardRect.left + skateboardRect.width / 2;
                     
                     // Only update if skateboard is visible on screen
-                    if (skateboardCenterX > 0 && skateboardCenterX < window.innerWidth) {
+                    if (skateboardCenterX > -200 && skateboardCenterX < window.innerWidth + 200) {
                         cta.style.left = skateboardCenterX + 'px';
                         cta.style.transform = 'translateX(-50%)';
                     }
@@ -3839,9 +3845,20 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                 // Start updating position
                 updateCtaPosition();
                 
-                // Clean up on page unload
-                window.addEventListener('beforeunload', function() {
-                    cancelAnimationFrame(animationFrameId);
+                // Clean up on page unload or visibility change
+                function cleanup() {
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                }
+                
+                window.addEventListener('beforeunload', cleanup);
+                document.addEventListener('visibilitychange', function() {
+                    if (document.hidden) {
+                        cleanup();
+                    } else if (!animationFrameId && !prefersReducedMotion) {
+                        updateCtaPosition();
+                    }
                 });
             }
         })();
