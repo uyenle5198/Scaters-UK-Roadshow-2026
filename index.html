@@ -2613,7 +2613,7 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         }
 
                         // Check for commands first
-                        const commandResponse = handleCommand(text);
+                        const commandResponse = await handleCommand(text);
                         if (commandResponse) {
                             showTyping();
                             await new Promise(r => setTimeout(r, 800));
