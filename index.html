@@ -302,15 +302,112 @@
         /* Host title and experience in italic */
         .event-preview-host-title{font-size:9px;color:#e2e8f0;font-style:italic}
         
+        /* ===================================================================
+           RESPONSIVE BREAKPOINTS - Mobile, Tablet, Desktop
+           ===================================================================*/
+        
+        /* Tablet breakpoint improvements (768px - 1023px) */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            /* Ensure navigation displays properly on tablets */
+            .lg\:flex { display: flex !important; }
+            
+            /* Improve product grid on tablets - show horizontal layout */
+            #product-grid { 
+                flex-direction: row !important;
+                height: 500px;
+            }
+            
+            /* Better spacing for content containers */
+            .container { 
+                padding-left: 2rem; 
+                padding-right: 2rem; 
+            }
+            
+            /* Tablet-optimized hero text */
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
         /* Mobile responsive adjustments for screens under 640px */
         @media (max-width: 640px){
-            .raptor-chat-window{bottom:90px;right:10px;left:10px;width:auto;max-width:none}
+            /* Improved chatbot mobile layout */
+            .raptor-chat-window{
+                bottom:80px;
+                right:10px;
+                left:10px;
+                width:auto;
+                max-width:none;
+            }
             .raptor-chat-body{height:300px;max-height:calc(100vh - 300px)}
-            .raptor-chat-trigger{width:56px;height:56px;bottom:15px;right:15px;font-size:22px}
+            
+            /* Larger chat trigger for better touch target */
+            .raptor-chat-trigger{
+                width:60px;
+                height:60px;
+                bottom:15px;
+                right:15px;
+                font-size:24px;
+            }
+            
             .deck-image-container{height:150px}
             .deck-name{font-size:16px}
             .event-preview-image{height:120px}
             .event-preview-title{font-size:14px}
+            
+            /* Ensure all buttons and interactive elements meet minimum touch target size (44x44px) */
+            button, a.btn, .btn, .btn-royal, .btn-neon, .btn-blink-action {
+                min-height: 44px;
+                min-width: 44px;
+                padding: 0.75rem 1rem;
+            }
+            
+            /* Mobile button spacing improvements */
+            button {
+                margin: 0.25rem;
+            }
+            
+            /* Increase font sizes on mobile for better readability */
+            .text-\[9px\] {
+                font-size: 11px;
+            }
+            
+            .text-\[10px\] {
+                font-size: 12px;
+            }
+            
+            /* Ensure hamburger menu is large enough */
+            .mobile-menu-button {
+                min-width: 44px;
+                min-height: 44px;
+            }
+            
+            /* Improve navigation link spacing on mobile */
+            nav a {
+                padding: 0.75rem 1rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+        }
+        
+        /* Product grid mobile behavior (under 768px) */
+        @media (max-width: 768px) {
+            #product-grid {
+                flex-direction: column;
+                height: auto;
+                min-height: 600px;
+            }
+            
+            #product-grid .uk-card {
+                min-height: 120px;
+            }
+            
+            /* Enhance hover effect on mobile/tablet */
+            #product-grid .uk-card.group:hover,
+            #product-grid .uk-card.group:active {
+                flex: 3;
+            }
         }
         /* CSS for Flying Skateboard */
         #flying-skateboard {
