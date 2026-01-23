@@ -145,6 +145,58 @@
         .deck-perfect-for p{font-size:11px;color:#e2e8f0;line-height:1.5;margin:0}
         
         /* ===================================================================
+           SQUIRREL ILLUSTRATION STYLES - Apex Predators Series 5 Enhancement
+           ===================================================================*/
+        .squirrel-hunt-container{
+            position:relative;
+            padding:2rem 1rem;
+            background:linear-gradient(135deg,rgba(37,99,235,.05) 0%,rgba(5,5,5,.8) 50%,rgba(212,175,55,.05) 100%);
+            border-radius:12px;
+            border:1px solid rgba(37,99,235,.2);
+            backdrop-filter:blur(5px);
+        }
+        .squirrel-image-wrapper{
+            position:relative;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            min-width:200px;
+        }
+        .squirrel-glow-effect{
+            position:absolute;
+            width:100%;
+            height:100%;
+            background:radial-gradient(circle,rgba(37,99,235,.3) 0%,transparent 70%);
+            filter:blur(30px);
+            animation:pulse-glow 3s ease-in-out infinite;
+            z-index:0;
+        }
+        @keyframes pulse-glow{
+            0%,100%{opacity:0.5;transform:scale(1)}
+            50%{opacity:0.8;transform:scale(1.1)}
+        }
+        .squirrel-illustration{
+            filter:drop-shadow(0 10px 30px rgba(37,99,235,.6)) drop-shadow(0 0 15px rgba(255,255,255,.3));
+        }
+        .skateboard-icon{
+            animation:pulse-slow 3s cubic-bezier(0.4,0,0.6,1) infinite;
+            filter:drop-shadow(0 2px 10px rgba(212,175,55,.6));
+        }
+        .squirrel-text-content h3{
+            text-shadow:0 0 10px rgba(212,175,55,.4);
+        }
+        
+        @media (max-width:768px){
+            .squirrel-hunt-container{
+                text-align:center;
+            }
+            .squirrel-text-content{
+                max-width:100%;
+                text-align:center!important;
+            }
+        }
+        
+        /* ===================================================================
            EVENT PREVIEW STYLES - Chatbox Event Details Card
            ===================================================================
            
@@ -1011,6 +1063,35 @@
                         <span class="neon-title-intense block mb-2 drop-shadow-2xl">APEX PREDATORS</span> 
                         <span class="neon-sub-intense text-4xl md:text-6xl block mt-4 border-t-2 border-scater-gold/50 inline-block pt-2 px-10"> SERIES 5</span>
                     </h2>
+                    
+                    <!-- Squirrel Illustration Feature -->
+                    <div class="squirrel-hunt-container mb-16 flex flex-col md:flex-row items-center justify-center gap-8 px-4">
+                        <div class="squirrel-image-wrapper relative group">
+                            <div class="squirrel-glow-effect"></div>
+                            <img src="https://i.postimg.cc/5NqQgt7W/Isolated-Squirrel-Icon.png" 
+                                 alt="Squirrel Searching for Skateboard" 
+                                 class="squirrel-illustration w-48 h-48 md:w-64 md:h-64 object-contain drop-shadow-2xl transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 relative z-10"
+                                 loading="lazy" 
+                                 decoding="async">
+                            <div class="skateboard-icon absolute -bottom-4 -right-4 text-5xl md:text-6xl opacity-70 group-hover:opacity-100 transition-opacity animate-pulse-slow">
+                                🛹
+                            </div>
+                        </div>
+                        <div class="squirrel-text-content max-w-md text-left md:text-left">
+                            <h3 class="text-2xl md:text-3xl font-display uppercase text-scater-gold mb-4 tracking-wider">
+                                The Hunt Begins
+                            </h3>
+                            <p class="text-base md:text-lg text-gray-300 leading-relaxed mb-4">
+                                Like a predator stalking its prey, our mascot squirrel embodies the relentless pursuit of the perfect ride. 
+                                Each deck in the <span class="text-scater-royal font-bold">Apex Predators Series 5</span> is engineered for dominance.
+                            </p>
+                            <div class="flex items-center gap-2 text-sm text-scater-gold">
+                                <i class="fa-solid fa-bolt-lightning"></i>
+                                <span class="font-mono uppercase tracking-widest">Tactical Excellence</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div id="product-grid" class="flex flex-col md:flex-row gap-1 h-[600px] w-full justify-center">
                 <div class="group uk-card relative flex-1 hover:flex-[3] transition-[flex] duration-700 bg-[#0F172A] border-r border-white/10 overflow-hidden cursor-pointer" onclick="showProductDetail(0)">
                     <img src="https://i.postimg.cc/MTG3LCmy/Raptor-Deck-White-Background.png" class="uk-card-img w-full h-full object-cover opacity-100 transition-all duration-700 transform group-hover:scale-110" loading="lazy" decoding="async" alt="The Eagle">
