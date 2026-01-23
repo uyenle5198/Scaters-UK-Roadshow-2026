@@ -262,31 +262,6 @@
             .event-preview-title{font-size:14px}
         }
 
-        /* CSS for Animated Squirrel */
-        #animated-squirrel {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            width: 100px;
-            z-index: 9999;
-            animation: squirrel-bounce 2s ease-in-out infinite alternate;
-            will-change: transform;
-        }
-
-        #animated-squirrel img {
-            width: 100%;
-            object-fit: contain;
-        }
-
-        @keyframes squirrel-bounce {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-20px);
-            }
-        }
-
         /* CSS for Flying Skateboard */
         #flying-skateboard {
             position: fixed;
@@ -317,7 +292,6 @@
 
         /* Respect user preference for reduced motion */
         @media (prefers-reduced-motion: reduce) {
-            #animated-squirrel,
             #flying-skateboard {
                 animation: none;
             }
@@ -3494,11 +3468,6 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
         gtag('js', new Date());
         gtag('config', 'G-Z7B1VMCHQ1');
     </script>
-
-    <!-- HTML for Animated Squirrel -->
-    <div id="animated-squirrel" aria-hidden="true">
-        <img src="https://i.postimg.cc/5NqQgt7W/Isolated-Squirrel-Icon.png" alt="Squirrel Icon">
-    </div>
 
     <!-- HTML for Flying Skateboard -->
     <div id="flying-skateboard" aria-hidden="true">
