@@ -2318,6 +2318,14 @@ Event Details:
   * Manchester - March 19, 2026 at Projekt MCR ("The Industrial Abyss")
   * Glasgow - March 26, 2026 at Kelvingrove ("The Northern Peak")
 
+IMPORTANT POLICY UPDATES (February 2026):
+- Registration deadline: February 28, 2026
+- Early bird registration discount available until February 15, 2026
+- Competitor spots are limited and allocated on first-come, first-served basis
+- All participants must review safety guidelines posted in February
+- VIP package sales close February 20, 2026
+- Event schedule updates will be posted by February 1, 2026
+
 Pro Skaters Featured:
 - Lucien Clarke - Known as "The Shadow" - Technical street specialist
 - Geoff Rowley - Known as "The Titan" - Power and precision
@@ -2807,11 +2815,51 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                     `;
                 }
 
-                // Get AI response
-                async function getAIResponse(userMessage) {
+                /**
+                 * Validate and parse AI response
+                 * @param {string} response - Raw AI response
+                 * @returns {string|null} Validated response or null if invalid
+                 */
+                function validateAIResponse(response) {
+                    if (!response || typeof response !== 'string') {
+                        console.warn('Invalid response type:', typeof response);
+                        return null;
+                    }
+                    
+                    const trimmed = response.trim();
+                    
+                    // Check minimum length
+                    if (trimmed.length < 10) {
+                        console.warn('Response too short:', trimmed.length);
+                        return null;
+                    }
+                    
+                    // Check for error messages in response
+                    const errorPatterns = ['error', 'failed', 'unable to process'];
+                    const lowerResponse = trimmed.toLowerCase();
+                    if (errorPatterns.some(pattern => lowerResponse.startsWith(pattern))) {
+                        console.warn('Response contains error pattern');
+                        return null;
+                    }
+                    
+                    console.log('Response validated successfully:', trimmed.length, 'characters');
+                    return trimmed;
+                }
+
+                /**
+                 * Get AI response with retry logic and validation
+                 * Implements robust error handling and automatic fallback
+                 * @param {string} userMessage - User's input message
+                 * @param {number} retryCount - Current retry attempt
+                 * @returns {Promise<string>} AI response or fallback response
+                 */
+                async function getAIResponse(userMessage, retryCount = 0) {
+                    const MAX_RETRIES = 2;
+                    
                     try {
                         if (!model) {
-                            throw new Error('AI model not initialized');
+                            console.warn('AI model not initialized, using fallback');
+                            return localResponder(userMessage);
                         }
 
                         const prompt = `${getEventContext()}
@@ -2820,11 +2868,53 @@ User Question: ${userMessage}
 
 Provide a helpful, concise response (2-3 sentences max unless more detail is specifically requested). Maintain the Butler persona.`;
 
+                        console.log('Sending request to Gemini API...');
                         const result = await model.generateContent(prompt);
                         const response = await result.response;
-                        return response.text();
+                        const responseText = response.text();
+                        
+                        // Validate the response
+                        const validatedResponse = validateAIResponse(responseText);
+                        
+                        if (validatedResponse) {
+                            console.log('AI response successful');
+                            return validatedResponse;
+                        } else {
+                            console.warn('AI response validation failed');
+                            
+                            // Retry on validation failure
+                            if (retryCount < MAX_RETRIES) {
+                                console.log(`Retrying AI request (attempt ${retryCount + 1}/${MAX_RETRIES})...`);
+                                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
+                                return getAIResponse(userMessage, retryCount + 1);
+                            }
+                            
+                            // Fall back to local responder after retries exhausted
+                            console.log('Falling back to local responder');
+                            return localResponder(userMessage);
+                        }
                     } catch (error) {
                         console.error('AI Error:', error);
+                        
+                        // Check if error is transient (network, timeout, rate limit)
+                        const errorMessage = error.message?.toLowerCase() || '';
+                        const isTransient = ['timeout', 'network', 'rate limit', 'quota', 'connection'].some(
+                            keyword => errorMessage.includes(keyword)
+                        );
+                        
+                        // Retry for transient errors
+                        if (isTransient && retryCount < MAX_RETRIES) {
+                            console.log(`Transient error detected, retrying (attempt ${retryCount + 1}/${MAX_RETRIES})...`);
+                            // Show user-friendly message in chat
+                            if (retryCount === 0) {
+                                appendMsg('⚠️ Connection issue detected, retrying...', false);
+                            }
+                            await new Promise(resolve => setTimeout(resolve, 1500)); // Wait 1.5 seconds
+                            return getAIResponse(userMessage, retryCount + 1);
+                        }
+                        
+                        // Final fallback to local responder
+                        console.log('Using local fallback after error');
                         return localResponder(userMessage);
                     }
                 }
@@ -2909,12 +2999,12 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
 
                         // Dates / overview
                         if (/\b(schedule|date|dates|when|time)\b/.test(t)) {
-                            return `Event Schedule:\n• London: March 12, 2026\n• Manchester: March 19, 2026\n• Glasgow: March 26, 2026\n\nAll events are full-day experiences. Spectator access is free.`;
+                            return `Event Schedule:\n• London: March 12, 2026\n• Manchester: March 19, 2026\n• Glasgow: March 26, 2026\n\nAll events are full-day experiences. Spectator access is free.\n\n⚠️ Important Deadlines:\n• Registration closes: February 28, 2026\n• Early bird discount: Until February 15, 2026\n• VIP package sales end: February 20, 2026`;
                         }
 
                         // Registration
-                        if (/\b(register|sign up|join|entry|how to)\b/.test(t)) {
-                            return `Registration: Scroll to the "JOIN THE HUNT" section and complete the form with your name, email, phone, preferred city, and skill level. Limited spots remaining!`;
+                        if (/\b(register|sign up|join|entry|how to|deadline)\b/.test(t)) {
+                            return `Registration: Scroll to the "JOIN THE HUNT" section and complete the form with your name, email, phone, preferred city, and skill level.\n\n⚠️ Important Deadlines:\n• Registration deadline: February 28, 2026\n• Early bird discount: Until February 15, 2026\n• Limited spots remaining!\n\nDon't wait - secure your spot today!`;
                         }
 
                         // Products - Enhanced deck displays
