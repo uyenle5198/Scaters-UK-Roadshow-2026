@@ -3748,22 +3748,26 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
             }
 
             // Close modal when clicking outside content
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    resumeSkateboard();
-                    document.body.style.overflow = '';
-                }
-            });
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                        resumeSkateboard();
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
 
             // Close modal with Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal.classList.contains('active')) {
-                    modal.classList.remove('active');
-                    resumeSkateboard();
-                    document.body.style.overflow = '';
-                }
-            });
+            if (modal) {
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && modal.classList.contains('active')) {
+                        modal.classList.remove('active');
+                        resumeSkateboard();
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
 
             // Register button - scroll to registration form or external link
             if (registerBtn) {
