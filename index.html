@@ -163,6 +163,11 @@
         .raptor-msg-ai{background:linear-gradient(135deg,rgba(37,99,235,.15) 0%,rgba(37,99,235,.08) 100%);border-left:3px solid #D4AF37;text-align:left;color:#e2e8f0}
         .raptor-msg-user{background:linear-gradient(135deg,rgba(37,99,235,.25) 0%,rgba(37,99,235,.15) 100%);border-right:3px solid #2563EB;text-align:right;color:#fff}
         
+        /* Typing Hint Animation */
+        @keyframes typingHintFadeIn{from{opacity:0}to{opacity:1}}
+        #chat-input.typing-hint-active{animation:typingHintFadeIn .5s ease-in}
+        @media (prefers-reduced-motion: reduce){#chat-input.typing-hint-active{animation:none}}
+        
         /* Enhanced Deck Showcase Styles */
         .deck-showcase{background:linear-gradient(135deg,rgba(5,5,5,.98) 0%,rgba(15,23,42,.95) 100%);border:2px solid #2563EB;border-radius:12px;padding:16px;margin:8px 0;box-shadow:0 8px 32px rgba(37,99,235,.4),inset 0 0 20px rgba(37,99,235,.1);position:relative;overflow:hidden}
         .deck-showcase::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#D4AF37,transparent);animation:shimmer 3s infinite}
@@ -3759,6 +3764,76 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         hideTyping();
                         appendMsg(response, false);
                     });
+
+                    // Typing Hint Functionality - Cycle through FAQ questions
+                    const faqHints = [
+                        "Where is the event?",
+                        "What decks can I unlock?",
+                        "Is this event for beginners?"
+                    ];
+                    let currentHintIndex = 0;
+                    let typingHintInterval = null;
+                    let animationTimeout = null;
+                    let blurTimeout = null;
+
+                    function updateTypingHint() {
+                        // Only update if input is empty and not focused
+                        if (input.value === '' && document.activeElement !== input) {
+                            input.classList.add('typing-hint-active');
+                            input.setAttribute('placeholder', faqHints[currentHintIndex]);
+                            currentHintIndex = (currentHintIndex + 1) % faqHints.length;
+                            
+                            // Clear any existing animation timeout
+                            if (animationTimeout) {
+                                clearTimeout(animationTimeout);
+                            }
+                            
+                            // Remove animation class after animation completes
+                            animationTimeout = setTimeout(() => {
+                                input.classList.remove('typing-hint-active');
+                                animationTimeout = null;
+                            }, 500);
+                        }
+                    }
+
+                    // Start cycling hints every 3 seconds
+                    typingHintInterval = setInterval(updateTypingHint, 3000);
+
+                    // Reset to default placeholder when user focuses
+                    input.addEventListener('focus', function() {
+                        input.setAttribute('placeholder', 'Inquire...');
+                    });
+
+                    // Resume hints when user blurs and input is empty
+                    input.addEventListener('blur', function() {
+                        if (input.value === '') {
+                            // Clear any existing blur timeout
+                            if (blurTimeout) {
+                                clearTimeout(blurTimeout);
+                            }
+                            // Wait a moment before resuming hints
+                            blurTimeout = setTimeout(() => {
+                                updateTypingHint();
+                                blurTimeout = null;
+                            }, 500);
+                        }
+                    });
+
+                    // Cleanup on page unload to prevent memory leaks
+                    window.addEventListener('beforeunload', function() {
+                        if (typingHintInterval) {
+                            clearInterval(typingHintInterval);
+                        }
+                        if (animationTimeout) {
+                            clearTimeout(animationTimeout);
+                        }
+                        if (blurTimeout) {
+                            clearTimeout(blurTimeout);
+                        }
+                    });
+
+                    // Set initial hint
+                    updateTypingHint();
                 }
             })();
 
