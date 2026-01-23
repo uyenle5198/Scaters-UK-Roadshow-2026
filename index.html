@@ -271,11 +271,11 @@
         #flying-skateboard {
             position: fixed;
             top: 20%;
-            left: -200px;
+            left: 0;
             width: 150px;
             z-index: 9998;
             animation: skateboard-fly 5s linear infinite;
-            will-change: transform, left;
+            will-change: transform;
         }
 
         #flying-skateboard img {
@@ -285,16 +285,13 @@
 
         @keyframes skateboard-fly {
             0% {
-                left: -200px;
-                transform: rotate(0deg);
+                transform: translateX(-200px) rotate(0deg);
             }
             50% {
-                left: calc(50% - 75px);
-                transform: rotate(15deg);
+                transform: translateX(calc(50vw - 75px)) rotate(15deg);
             }
             100% {
-                left: 110%;
-                transform: rotate(0deg);
+                transform: translateX(calc(100vw + 200px)) rotate(0deg);
             }
         }
 
