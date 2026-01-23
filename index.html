@@ -289,10 +289,19 @@
             will-change: transform;
             cursor: pointer;
             transition: filter 0.3s ease;
+            /* Drop Shadow and Glow Effects */
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5))
+                    drop-shadow(0 0 20px rgba(37, 99, 235, 0.4))
+                    drop-shadow(0 0 40px rgba(37, 99, 235, 0.2));
         }
 
         #flying-skateboard:hover {
-            filter: brightness(1.2) drop-shadow(0 0 15px rgba(37, 99, 235, 0.6));
+            /* Enhanced Drop Shadow and Glow on Hover */
+            filter: brightness(1.2)
+                    drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6))
+                    drop-shadow(0 0 30px rgba(37, 99, 235, 0.8))
+                    drop-shadow(0 0 50px rgba(37, 99, 235, 0.5))
+                    drop-shadow(0 0 70px rgba(37, 99, 235, 0.3));
         }
 
         #flying-skateboard img {
