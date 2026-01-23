@@ -15,6 +15,8 @@ import os
 import sys
 import platform
 import logging
+import time
+import textwrap
 from datetime import datetime
 from typing import Optional
 
@@ -94,6 +96,14 @@ class ScatersRoadshowChatbot:
       * Glasgow - March 26, 2026 at Kelvingrove ("The Northern Peak")
     - Featured Pro Skaters: Lucien Clarke & Geoff Rowley
     - Mission: Engineering British Supremacy on the Pavement
+    
+    IMPORTANT POLICY UPDATES (February 2026):
+    - Registration deadline: February 28, 2026
+    - Early bird registration discount available until February 15, 2026
+    - Competitor spots are limited and allocated on first-come, first-served basis
+    - All participants must review safety guidelines posted in February
+    - VIP package sales close February 20, 2026
+    - Event schedule updates will be posted by February 1, 2026
     
     RAPTOR SKATEBOARD COLLECTION (5 Decks):
     1. The Eagle - Sky Dominator (Aerial dominance, for vert and air tricks)
@@ -269,21 +279,47 @@ class ScatersRoadshowChatbot:
         timestamp = self._get_timestamp()
         return f"[{timestamp}] {prefix}: {text}"
     
-    def _get_ai_response(self, user_message: str) -> Optional[str]:
-        """Get AI response from configured provider with timeout handling and automatic fallback."""
+    def _get_ai_response(self, user_message: str, retry_count: int = 0) -> Optional[str]:
+        """Get AI response from configured provider with timeout handling, automatic fallback, and retry logic.
+        
+        Args:
+            user_message: User's input message
+            retry_count: Current retry attempt (default: 0)
+            
+        Returns:
+            AI response text or None if all attempts fail
+        """
         if not self.model:
             return None
         
+        max_retries = 2  # Allow up to 2 retries on transient failures
+        
         try:
             if self.api_provider == 'gemini':
-                return self._get_gemini_response(user_message)
+                response = self._get_gemini_response(user_message)
+                if response and len(response.strip()) > 0:
+                    return response
+                else:
+                    logger.warning("Gemini returned empty response")
+                    return None
             elif self.api_provider == 'openai':
-                return self._get_openai_response(user_message)
+                response = self._get_openai_response(user_message)
+                if response and len(response.strip()) > 0:
+                    return response
+                else:
+                    logger.warning("OpenAI returned empty response")
+                    return None
         except (TimeoutError, TimeoutDecoratorError) as e:
             logger.warning(f"API request timed out for {self.api_provider}: {e}")
             print(f"\n⚠ {self.api_provider.title()} API request timed out")
             
-            # Try fallback to other API
+            # Retry logic for timeout errors
+            if retry_count < max_retries:
+                logger.info(f"Retrying API call (attempt {retry_count + 1}/{max_retries})")
+                print(f"↻ Retrying... (attempt {retry_count + 1}/{max_retries})")
+                return self._get_ai_response(user_message, retry_count + 1)
+            
+            # Try fallback to other API after exhausting retries
             if self.api_provider == 'gemini':
                 return self._try_openai_fallback(user_message)
             
@@ -291,6 +327,17 @@ class ScatersRoadshowChatbot:
         except Exception as e:
             logger.error(f"Error during {self.api_provider} API call: {e}", exc_info=True)
             print(f"\n⚠ {self.api_provider.title()} API Error: {e}")
+            
+            # Retry logic for transient errors (network issues, rate limits)
+            error_str = str(e).lower()
+            is_transient = any(keyword in error_str for keyword in 
+                             ['timeout', 'connection', 'network', 'rate limit', 'quota'])
+            
+            if is_transient and retry_count < max_retries:
+                logger.info(f"Retrying API call for transient error (attempt {retry_count + 1}/{max_retries})")
+                print(f"↻ Retrying... (attempt {retry_count + 1}/{max_retries})")
+                time.sleep(1)  # Brief delay before retry
+                return self._get_ai_response(user_message, retry_count + 1)
             
             # Try fallback to other API
             if self.api_provider == 'gemini':
@@ -424,6 +471,16 @@ class ScatersRoadshowChatbot:
         """Get basic pattern-matched response when AI is unavailable."""
         msg_lower = user_message.lower()
         
+        # February/deadline queries
+        if any(word in msg_lower for word in ['february', 'deadline', 'early bird', 'registration close']):
+            return """Important February 2026 Deadlines:
+• Registration closes: February 28, 2026
+• Early bird discount ends: February 15, 2026
+• VIP package sales close: February 20, 2026
+• Safety guidelines posted: Early February
+
+Don't miss out - register early to secure your spot!"""
+        
         # Location queries
         if any(word in msg_lower for word in ['location', 'where', 'city', 'cities']):
             return """The Raptor Roadshow visits 3 UK cities:
@@ -449,7 +506,9 @@ class ScatersRoadshowChatbot:
             return """Event dates:
 • London: March 12, 2026
 • Manchester: March 19, 2026
-• Glasgow: March 26, 2026"""
+• Glasgow: March 26, 2026
+
+IMPORTANT: Registration deadline is February 28, 2026"""
         
         # Activities queries
         if any(word in msg_lower for word in ['activity', 'activities', 'what', 'do']):
@@ -468,16 +527,65 @@ class ScatersRoadshowChatbot:
         return """I'm The Butler, here to help with information about:
 • The Raptor Roadshow 2026 (locations, dates, activities)
 • The Raptor skateboard collection (features, models)
+• February registration deadlines and policies
 
 What would you like to know?"""
     
-    def chat(self, user_message: str) -> str:
-        """Process user message and return response."""
-        # Try AI response first
-        response = self._get_ai_response(user_message)
+    def _validate_and_parse_response(self, response: str) -> str:
+        """Validate and parse AI response to ensure quality.
         
-        # Fall back to pattern matching if AI fails
-        if response is None:
+        Args:
+            response: Raw response from AI API
+            
+        Returns:
+            Validated and cleaned response text
+        """
+        if not response or not response.strip():
+            logger.warning("Received empty response from AI")
+            return None
+        
+        # Clean up the response
+        cleaned_response = response.strip()
+        
+        # Validate response is relevant to roadshow context
+        # Check for minimum length
+        if len(cleaned_response) < 10:
+            logger.warning(f"Response too short: {len(cleaned_response)} characters")
+            return None
+        
+        # Log successful validation
+        logger.info(f"Response validated successfully: {len(cleaned_response)} characters")
+        return cleaned_response
+    
+    def chat(self, user_message: str) -> str:
+        """Process user message and return response with enhanced validation.
+        
+        This method implements a robust workflow:
+        1. Pass message through AI model (Gemini or OpenAI)
+        2. Validate and parse the AI response
+        3. Fall back to pattern matching if AI fails
+        4. Store interaction in chat history
+        
+        Args:
+            user_message: User's input message
+            
+        Returns:
+            Validated response from AI or fallback system
+        """
+        # Try AI response first
+        raw_response = self._get_ai_response(user_message)
+        
+        # Validate and parse AI response
+        if raw_response:
+            response = self._validate_and_parse_response(raw_response)
+            if response:
+                logger.info("Using validated AI response")
+            else:
+                logger.info("AI response validation failed, using fallback")
+                response = self._get_fallback_response(user_message)
+        else:
+            # Fall back to pattern matching if AI fails
+            logger.info("AI response unavailable, using fallback")
             response = self._get_fallback_response(user_message)
         
         # Add to history
@@ -486,8 +594,34 @@ What would you like to know?"""
         
         return response
     
+    def _format_response_for_display(self, response: str) -> str:
+        """Format AI response for terminal display with proper line wrapping.
+        
+        Args:
+            response: Raw response text from AI
+            
+        Returns:
+            Formatted response suitable for terminal display
+        """
+        # Wrap long lines for better readability (70 characters per line)
+        wrapper = textwrap.TextWrapper(width=70, break_long_words=False, 
+                                      break_on_hyphens=False)
+        
+        # Split response into paragraphs and wrap each
+        paragraphs = response.split('\n')
+        formatted_paragraphs = []
+        
+        for para in paragraphs:
+            if para.strip():
+                wrapped = wrapper.fill(para.strip())
+                formatted_paragraphs.append(wrapped)
+            else:
+                formatted_paragraphs.append('')  # Preserve blank lines
+        
+        return '\n'.join(formatted_paragraphs)
+    
     def run(self):
-        """Run the interactive chatbot."""
+        """Run the interactive chatbot with enhanced response rendering."""
         print("=" * 70)
         print("  SCATERS RAPTOR ROADSHOW 2026 - THE PREDATORY HUNT")
         print("  AI-Powered Chatbot: The Butler")
@@ -522,20 +656,24 @@ What would you like to know?"""
                 
                 # Show typing indicator
                 print(f"{self._format_message('', is_user=False).split(':')[0]}: ", end='', flush=True)
-                print("Thinking...", end='', flush=True)
+                print("Processing your request...", end='', flush=True)
                 
-                # Get response
+                # Get response with enhanced processing
                 response = self.chat(user_input)
                 
-                # Clear typing indicator and show response
-                print("\r" + " " * 80 + "\r", end='')
-                print(self._format_message(response))
+                # Format response for better display
+                formatted_response = self._format_response_for_display(response)
+                
+                # Clear typing indicator and show formatted response
+                print("\r" + " " * 90 + "\r", end='')
+                print(self._format_message(formatted_response))
                 print()
                 
             except KeyboardInterrupt:
                 print(f"\n\n{self._format_message('Chat interrupted. Goodbye! 🛹')}")
                 break
             except Exception as e:
+                logger.error(f"Error in chat loop: {e}", exc_info=True)
                 print(f"\n⚠ Error: {e}")
                 print()
 
