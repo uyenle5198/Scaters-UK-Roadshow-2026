@@ -67,6 +67,7 @@
                             streetPink: '#EC4899',
                             streetOrange: '#F97316',
                             streetBlue: '#2563EB',
+                            streetDeepPurple: '#7C3AED',
                         }
                     },
                     fontFamily: {
@@ -95,7 +96,18 @@
         body{background-color:#050505;color:#E2E8F0;font-family:'Inter',sans-serif;overflow-x:hidden}h1,h2,h3,h4{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.04em}.view-hidden{display:none!important}.fade-in{animation:fadeIn .5s ease-out forwards}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}body.lite-mode *{animation:none!important;transition:none!important;backdrop-filter:none!important;box-shadow:none!important;text-shadow:none!important}body.lite-mode .rain-overlay{display:none}body.lite-mode .neon-title-intense{color:#fff;text-shadow:0 0 2px #fff!important}body.lite-mode .bg-black\/60,body.lite-mode .bg-black\/80{background:#111!important;opacity:1!important}
         
         /* Street-style text shadows for HERO section readability */
-        .text-shadow-hero-strong{text-shadow:0 4px 20px rgba(0,0,0,0.8),0 2px 8px rgba(0,0,0,0.9)}.text-shadow-hero-glow{text-shadow:0 4px 20px rgba(0,0,0,0.8),0 2px 8px rgba(0,0,0,0.9),0 0 40px rgba(255,255,255,0.3)}.text-shadow-hero-medium{text-shadow:0 2px 8px rgba(0,0,0,0.7)}.text-shadow-hero-light{text-shadow:0 2px 4px rgba(0,0,0,0.8)}
+        .text-shadow-hero-strong{
+            text-shadow:0 4px 20px rgba(0,0,0,0.8),0 2px 8px rgba(0,0,0,0.9)
+        }
+        .text-shadow-hero-glow{
+            text-shadow:0 4px 20px rgba(0,0,0,0.8),0 2px 8px rgba(0,0,0,0.9),0 0 40px rgba(255,255,255,0.3)
+        }
+        .text-shadow-hero-medium{
+            text-shadow:0 2px 8px rgba(0,0,0,0.7)
+        }
+        .text-shadow-hero-light{
+            text-shadow:0 2px 4px rgba(0,0,0,0.8)
+        }
 
         .rain-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}@keyframes rainFall{0%{transform:translateY(0)}100%{transform:translateY(100vh)}}.rain-drop{will-change:transform;transform:translateZ(0)}.scrolly-item{opacity:1;transform:translate(0,0);transition:opacity .8s ease,transform .8s ease}.scrolly-item.waiting-reveal{opacity:0;transform:translateY(40px)}.scrolly-item.active{opacity:1;transform:translate(0,0)}.marquee-wrapper{background:#0F172A;padding:15px 0;overflow:hidden;white-space:nowrap;border-top:2px solid #2563EB;border-bottom:2px solid #2563EB;color:#fff}.marquee-content{display:inline-block;animation:marquee-scroll 25s linear infinite;font-family:'Anton',sans-serif;font-size:18px;text-transform:uppercase;font-weight:700;letter-spacing:.1em}@keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
@@ -940,10 +952,10 @@
             <!-- Gradient colors: Electric Purple (scater-streetPurple) -> Neon Pink (scater-streetPink) -> Vibrant Orange (scater-streetOrange) -->
             <section class="min-h-[100vh] flex items-center relative overflow-hidden pt-20 group/hero">
                 <!-- Primary bold gradient background with street-style colors -->
-                <div class="absolute inset-0 bg-gradient-to-br from-[#8B5CF6] via-[#EC4899] to-[#F97316] opacity-95"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-scater-streetPurple via-scater-streetPink to-scater-streetOrange opacity-95"></div>
                 
                 <!-- Secondary diagonal gradient overlay for depth and energy -->
-                <div class="absolute inset-0 bg-gradient-to-tr from-[#2563EB]/40 via-transparent to-[#7C3AED]/40"></div>
+                <div class="absolute inset-0 bg-gradient-to-tr from-scater-streetBlue/40 via-transparent to-scater-streetDeepPurple/40"></div>
                 
                 <!-- Urban texture overlay: subtle grid pattern for street aesthetic -->
                 <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] opacity-40"></div>
