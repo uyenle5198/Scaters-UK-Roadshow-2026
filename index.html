@@ -22,6 +22,19 @@
     <meta property="og:title" content="Scaters Raptor Roadshow 2026: The Predatory Hunt">
     <meta property="og:description" content="Engineering British supremacy. Join the hunt in London, Manchester, and Glasgow. Win the £310,000 Bounty.">
     <meta property="og:image" content="https://i.postimg.cc/j23YXP7f/Modern-Scaters-Logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:locale" content="en_GB">
+    
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scaters Raptor Roadshow 2026: The Predatory Hunt">
+    <meta name="twitter:description" content="Engineering British supremacy. Join the hunt in London, Manchester, and Glasgow. Win the £310,000 Bounty.">
+    <meta name="twitter:image" content="https://i.postimg.cc/j23YXP7f/Modern-Scaters-Logo.png">
+    
+    <!-- THEME COLOR -->
+    <meta name="theme-color" content="#050505">
 
     <!-- FAVICON -->
     <link rel="icon" type="image/png" href="https://i.postimg.cc/5NqQgt7W/Isolated-Squirrel-Icon.png">
@@ -30,9 +43,6 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://i.postimg.cc">
-    <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin="">
 
@@ -42,12 +52,12 @@
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap&amp;subset=latin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
   
     <!-- Icons & Tailwind -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -1254,7 +1264,7 @@
             <div class="flex items-center gap-4 cursor-pointer group h-full py-2" onclick="switchView('home'); window.scrollTo(0,0);">
                 <div class="relative h-full flex items-center">
                     <div class="absolute -inset-4 bg-scater-gold/20 blur-xl opacity-0 group-hover:opacity-50 transition-all duration-500"></div>
-                    <img src="https://i.postimg.cc/j23YXP7f/Modern-Scaters-Logo.png" alt="Scaters Logo" class="h-16 w-auto object-contain relative z-10 transition-transform duration-300 group-hover:animate-spin drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]" loading="lazy" decoding="async">
+                    <img src="https://i.postimg.cc/j23YXP7f/Modern-Scaters-Logo.png" alt="Scaters Logo" class="h-16 w-auto object-contain relative z-10 transition-transform duration-300 group-hover:animate-spin drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]" loading="lazy" decoding="async" width="64" height="64">
                 </div>
                 <div class="flex flex-col text-left justify-center">
                     <span class="text-2xl font-display text-white leading-none tracking-wider group-hover:text-scater-gold transition-colors">SCATERS</span>
@@ -1262,24 +1272,24 @@
                 </div>
             </div>
             <div class="hidden lg:flex items-center space-x-8">
-                <button onclick="switchView('home'); window.scrollTo(0,0);" class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-colors relative group py-2">The Hunt <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-scater-gold transition-all duration-300 group-hover:w-full"></span></button>
+                <button onclick="switchView('home'); window.scrollTo(0,0);" class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-colors relative group py-2" type="button">The Hunt <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-scater-gold transition-all duration-300 group-hover:w-full"></span></button>
                 <a href="#collection" class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-colors relative group py-2">Collection <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-scater-gold transition-all duration-300 group-hover:w-full"></span></a>
                 <a href="#mission" class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-colors relative group py-2">Challenges <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-scater-gold transition-all duration-300 group-hover:w-full"></span></a>
                 <a href="#timeline" class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-colors relative group py-2">Timeline <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-scater-gold transition-all duration-300 group-hover:w-full"></span></a>
                 <a href="#faq" class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-colors relative group py-2">Intel <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-scater-gold transition-all duration-300 group-hover:w-full"></span></a>
             </div>
             <div class="flex items-center gap-6">
-                <button id="lite-mode-btn" class="text-white hover:text-scater-gold transition-colors text-lg" title="Lite Mode"><i class="fa-solid fa-bolt"></i></button>
+                <button id="lite-mode-btn" class="text-white hover:text-scater-gold transition-colors text-lg" title="Lite Mode" type="button" aria-label="Toggle lite mode"><i class="fa-solid fa-bolt" aria-hidden="true"></i></button>
                 <div class="hidden lg:block">
-                    <button onclick="goToRegistration()" class="px-8 py-3 bg-transparent border border-scater-royal text-scater-royal text-[10px] font-bold uppercase tracking-[0.25em] hover:bg-scater-royal hover:text-white hover:shadow-[0_0_20px_rgba(37,99,235,0.6)] transition-all skew-x-[-10deg] cursor-pointer group"><span class="inline-block skew-x-[10deg]">Join Now</span></button>
+                    <button onclick="goToRegistration()" class="px-8 py-3 bg-transparent border border-scater-royal text-scater-royal text-[10px] font-bold uppercase tracking-[0.25em] hover:bg-scater-royal hover:text-white hover:shadow-[0_0_20px_rgba(37,99,235,0.6)] transition-all skew-x-[-10deg] cursor-pointer group" type="button"><span class="inline-block skew-x-[10deg]">Join Now</span></button>
                 </div>
-                <div class="lg:hidden"><button id="mobile-menu-btn" class="text-white text-2xl w-12 h-12 flex items-center justify-center border border-white/20 rounded hover:bg-white/10 transition-colors focus:outline-none"><i class="fa-solid fa-bars"></i></button></div>
+                <div class="lg:hidden"><button id="mobile-menu-btn" class="text-white text-2xl w-12 h-12 flex items-center justify-center border border-white/20 rounded hover:bg-white/10 transition-colors focus:outline-none" type="button" aria-label="Open mobile menu" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button></div>
             </div>
         </div>
         <div id="mobile-menu" class="fixed inset-0 bg-[#020202] z-[9999] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col lg:hidden border-l border-white/10">
             <div class="h-24 px-6 flex items-center justify-between border-b border-white/10 bg-[#050505]">
                 <div class="flex items-center gap-3"><div class="w-8 h-8 bg-scater-gold flex items-center justify-center text-black font-display font-bold">S</div><span class="font-display text-xl text-white tracking-widest uppercase">Menu</span></div>
-                <button id="close-menu-btn" class="text-red-500 w-10 h-10 flex items-center justify-center border border-red-500/30 rounded hover:bg-red-500/10 transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <button id="close-menu-btn" class="text-red-500 w-10 h-10 flex items-center justify-center border border-red-500/30 rounded hover:bg-red-500/10 transition-colors" type="button" aria-label="Close mobile menu"><i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i></button>
             </div>
             <div class="flex-1 flex flex-col justify-center items-center space-y-8 p-8 overflow-y-auto bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
                 <a href="#" onclick="closeMenuAndGo('home')" class="text-3xl font-display text-white uppercase tracking-widest hover:text-scater-gold transition-colors">The Hunt</a>
@@ -1287,7 +1297,7 @@
                 <a href="#mission" onclick="closeMenuAndGo('mission')" class="text-3xl font-display text-white uppercase tracking-widest hover:text-scater-gold transition-colors">Challenges</a>
                 <a href="#timeline" onclick="closeMenuAndGo('timeline')" class="text-3xl font-display text-white uppercase tracking-widest hover:text-scater-gold transition-colors">Timeline</a>
                 <a href="#faq" onclick="closeMenuAndGo('faq')" class="text-3xl font-display text-white uppercase tracking-widest hover:text-scater-gold transition-colors">Intel</a>
-                <div class="pt-8 w-full max-w-xs"><button onclick="closeMenuAndGo('registration')" class="w-full py-4 bg-scater-royal text-white font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(37,99,235,0.4)]">Join The Roadshow</button></div>
+                <div class="pt-8 w-full max-w-xs"><button onclick="closeMenuAndGo('registration')" class="w-full py-4 bg-scater-royal text-white font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(37,99,235,0.4)]" type="button">Join The Roadshow</button></div>
             </div>
             <div class="p-6 border-t border-white/10 text-center bg-[#050505]"><p class="text-[9px] font-mono text-slate-500 uppercase tracking-widest">// SCATERS UK DIVISION // 2026</p></div>
         </div>
@@ -1393,7 +1403,7 @@
                                     <div class="absolute top-0 right-0 p-3 opacity-20 group-hover/file:opacity-100 transition-opacity"><i class="fa-solid fa-flag text-red-500"></i></div><h4 class="text-white font-bold uppercase text-sm tracking-widest mb-2 flex items-center gap-2 group-hover/file:text-red-500 transition-colors"><span class="text-slate-500 font-mono text-xs">03 //</span> The Statement</h4><p class="text-slate-400 text-sm font-light leading-relaxed group-hover/file:text-slate-200 transition-colors">Scaters is an Institution. We define British Supremacy not by a flag, but by physics. When you step onto a Scaters deck, you are taking command.</p>
                                 </div>
                             </div>
-                            <div class="mt-10"><button onclick="document.getElementById('collection').scrollIntoView({behavior: 'smooth'})" class="group flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-scater-gold transition-colors"><span>Inspect The Arsenal</span><i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-transform text-scater-gold"></i></button></div>
+                            <div class="mt-10"><button onclick="document.getElementById('collection').scrollIntoView({behavior: 'smooth'})" class="group flex items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-scater-gold transition-colors" type="button"><span>Inspect The Arsenal</span><i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-transform text-scater-gold" aria-hidden="true"></i></button></div>
                         </div>
                     </div>
                 </div>
@@ -1679,7 +1689,7 @@
                         <div class="inline-flex flex-col items-center gap-6 px-8 py-6 bg-white/5 border border-white/10 rounded-sm relative overflow-hidden group">
                             <div class="absolute inset-0 bg-red-900/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                             <div class="relative z-10"><i class="fa-solid fa-ticket text-red-500 text-3xl mb-2 animate-bounce"></i><div class="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-mono mb-1">System Status</div><div class="text-white text-xl font-display uppercase tracking-widest">Draw Algorithm: <span class="text-red-500">Cycling...</span></div></div>
-                            <button onclick="goToRegistration()" class="relative z-10 px-8 py-3 bg-red-600 text-black font-bold uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_20px_rgba(220,38,38,0.4)]">Submit Your Name to the Machine</button>
+                            <button onclick="goToRegistration()" class="relative z-10 px-8 py-3 bg-red-600 text-black font-bold uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_20px_rgba(220,38,38,0.4)]" type="button">Submit Your Name to the Machine</button>
                             <p class="text-[9px] text-slate-500 font-mono relative z-10 mt-2 max-w-md">*WARNING: Selection is final. Notification will be sent via secure comms (email) only to the chosen operatives.</p>
                         </div>
                     </div>
@@ -2138,9 +2148,9 @@
                 </form>
             </div>
         </div>
-        <div class="raptor-chat-trigger" id="raptor-chat-trigger">
-            <i class="fa-solid fa-binoculars"></i>
-        </div>
+        <button class="raptor-chat-trigger" id="raptor-chat-trigger" aria-label="Open chat assistant" type="button">
+            <i class="fa-solid fa-binoculars" aria-hidden="true"></i>
+        </button>
     </div>
     
     <!-- Google Generative AI SDK -->
@@ -3787,16 +3797,16 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
     <!-- HTML for Flying Skateboard -->
     <div id="flying-skateboard" aria-hidden="true">
         <span id="skateboard-lock" aria-label="Locked">🔒</span>
-        <img src="https://i.postimg.cc/MTG3LCmy/Raptor-Deck-White-Background.png" alt="Flying Skateboard">
+        <img src="https://i.postimg.cc/MTG3LCmy/Raptor-Deck-White-Background.png" alt="Flying Skateboard" width="400" height="120">
     </div>
 
     <!-- Registration Modal -->
-    <div id="registration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="registration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
         <div class="modal-content">
-            <span class="modal-close" aria-label="Close modal">&times;</span>
+            <button class="modal-close" aria-label="Close modal" type="button">×</button>
             <h2 id="modal-title">Unlock Exclusive Access</h2>
             <p class="subtitle">Scaters Raptor Roadshow 2026</p>
-            <p>
+            <p id="modal-description">
                 Register now for exclusive access to the Raptor Roadshow 2026 tour! 
                 Join us in London, Manchester, and Glasgow for the ultimate skateboarding experience 
                 featuring pro skaters Lucien Clarke &amp; Geoff Rowley.
@@ -3805,8 +3815,8 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                 Early registrants get priority access to limited edition Raptor decks and VIP meet-and-greet opportunities.
             </p>
             <div class="cta-buttons">
-                <button class="primary" id="register-now-btn">Register Now</button>
-                <button class="secondary" id="modal-close-btn">Maybe Later</button>
+                <button class="primary" id="register-now-btn" type="button">Register Now</button>
+                <button class="secondary" id="modal-close-btn" type="button">Maybe Later</button>
             </div>
         </div>
     </div>
