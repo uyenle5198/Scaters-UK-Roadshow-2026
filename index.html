@@ -1974,6 +1974,14 @@
                 const input = document.getElementById('chat-input');
                 const statusSpan = document.getElementById('butler-status');
 
+                // Booking workflow state management
+                let bookingState = {
+                    active: false,
+                    step: null, // 'city-selection', 'confirmation', or 'complete'
+                    selectedCity: null,
+                    selectedDate: null
+                };
+
                 // Set initial timestamp for first message
                 const initialTimestamp = document.getElementById('initial-timestamp');
                 if (initialTimestamp) {
@@ -2270,6 +2278,187 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                 }
 
                 /**
+                 * START BOOKING WORKFLOW - STEP 1: City Selection
+                 * Display available cities with dates as clickable buttons
+                 */
+                function startBookingWorkflow() {
+                    bookingState.active = true;
+                    bookingState.step = 'city-selection';
+                    
+                    appendMsg('I want to book tickets', true);
+                    showTyping();
+                    setTimeout(() => {
+                        hideTyping();
+                        const message = `Excellent! Please select your preferred event city:\n\n`;
+                        const cityButtons = `
+                            <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+                                <button onclick="selectCity('London', 'March 12, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 16px;">🔘</span>
+                                        <div>
+                                            <div style="font-weight: bold; margin-bottom: 2px;">London</div>
+                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 12, 2026</div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <button onclick="selectCity('Manchester', 'March 19, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 16px;">🔘</span>
+                                        <div>
+                                            <div style="font-weight: bold; margin-bottom: 2px;">Manchester</div>
+                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 19, 2026</div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <button onclick="selectCity('Glasgow', 'March 26, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 16px;">🔘</span>
+                                        <div>
+                                            <div style="font-weight: bold; margin-bottom: 2px;">Glasgow</div>
+                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 26, 2026</div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        `;
+                        appendMsg(message + cityButtons, false);
+                    }, 800);
+                }
+
+                /**
+                 * STEP 2: Event Confirmation
+                 * Show selected city/date and options to continue or change
+                 */
+                window.selectCity = function(city, date) {
+                    if (bookingState.step !== 'city-selection') return;
+                    
+                    bookingState.selectedCity = city;
+                    bookingState.selectedDate = date;
+                    bookingState.step = 'confirmation';
+                    
+                    appendMsg(`${city} - ${date}`, true);
+                    showTyping();
+                    setTimeout(() => {
+                        hideTyping();
+                        const confirmationMessage = `
+                            <div style="margin-bottom: 12px;">
+                                Perfect! You've selected:
+                            </div>
+                            <div style="padding: 12px; background: rgba(37, 99, 235, 0.1); border: 1px solid #2563EB; border-radius: 6px; margin-bottom: 12px;">
+                                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                                    <span>📍</span>
+                                    <span style="font-weight: bold;">${city}</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 6px; font-size: 10px; opacity: 0.9;">
+                                    <span>📅</span>
+                                    <span>${date}</span>
+                                </div>
+                            </div>
+                            <div>Would you like to proceed?</div>
+                            <div style="margin-top: 12px; display: flex; gap: 8px;">
+                                <button onclick="confirmBooking()" class="confirm-btn" style="flex: 1; padding: 10px 16px; background: rgba(37, 99, 235, 0.8); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; font-weight: bold; font-size: 11px; transition: all 0.2s;" onmouseover="this.style.background='rgba(37, 99, 235, 1)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.8)'">
+                                    🔘 Continue with Registration
+                                </button>
+                                <button onclick="changeCity()" class="change-btn" style="padding: 10px 16px; background: rgba(100, 100, 100, 0.3); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 6px; color: #fff; cursor: pointer; font-size: 11px; transition: all 0.2s;" onmouseover="this.style.background='rgba(100, 100, 100, 0.5)'" onmouseout="this.style.background='rgba(100, 100, 100, 0.3)'">
+                                    🔙 Change City
+                                </button>
+                            </div>
+                        `;
+                        appendMsg(confirmationMessage, false);
+                    }, 800);
+                };
+
+                /**
+                 * Handle city change - return to step 1
+                 */
+                window.changeCity = function() {
+                    if (bookingState.step !== 'confirmation') return;
+                    
+                    appendMsg('Let me choose a different city', true);
+                    showTyping();
+                    setTimeout(() => {
+                        hideTyping();
+                        bookingState.step = 'city-selection';
+                        bookingState.selectedCity = null;
+                        bookingState.selectedDate = null;
+                        
+                        const message = `No problem! Please select your preferred event city:\n\n`;
+                        const cityButtons = `
+                            <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+                                <button onclick="selectCity('London', 'March 12, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 16px;">🔘</span>
+                                        <div>
+                                            <div style="font-weight: bold; margin-bottom: 2px;">London</div>
+                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 12, 2026</div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <button onclick="selectCity('Manchester', 'March 19, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 16px;">🔘</span>
+                                        <div>
+                                            <div style="font-weight: bold; margin-bottom: 2px;">Manchester</div>
+                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 19, 2026</div>
+                                        </div>
+                                    </div>
+                                </button>
+                                <button onclick="selectCity('Glasgow', 'March 26, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 16px;">🔘</span>
+                                        <div>
+                                            <div style="font-weight: bold; margin-bottom: 2px;">Glasgow</div>
+                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 26, 2026</div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        `;
+                        appendMsg(message + cityButtons, false);
+                    }, 800);
+                };
+
+                /**
+                 * STEP 3: Final confirmation and redirect to form
+                 * Show final message and button to proceed to registration form
+                 */
+                window.confirmBooking = function() {
+                    if (bookingState.step !== 'confirmation') return;
+                    
+                    appendMsg('Continue with Registration', true);
+                    showTyping();
+                    setTimeout(() => {
+                        hideTyping();
+                        bookingState.step = 'complete';
+                        
+                        const finalMessage = `
+                            <div style="margin-bottom: 12px;">
+                                📝 <strong>Almost there!</strong>
+                            </div>
+                            <div style="margin-bottom: 12px;">
+                                Please complete the registration form to finalize your booking for <strong>${bookingState.selectedCity}</strong> on <strong>${bookingState.selectedDate}</strong>.
+                            </div>
+                            <div style="margin-top: 12px;">
+                                <button onclick="goToRegistration()" class="proceed-btn" style="width: 100%; padding: 12px 16px; background: linear-gradient(135deg, #2563EB 0%, #1e40af 100%); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 6px; color: #fff; cursor: pointer; font-weight: bold; font-size: 12px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(37, 99, 235, 0.6)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(37, 99, 235, 0.4)'">
+                                    Proceed to Registration Form →
+                                </button>
+                            </div>
+                        `;
+                        appendMsg(finalMessage, false);
+                        
+                        // Reset booking state after completion
+                        setTimeout(() => {
+                            bookingState = {
+                                active: false,
+                                step: null,
+                                selectedCity: null,
+                                selectedDate: null
+                            };
+                        }, 1000);
+                    }, 800);
+                };
+
+                /**
                  * Handle Quick Action Buttons
                  * Processes clicks from quick action buttons in the chat interface
                  * @param {string} action - The action to handle (book-ticket, faq, products)
@@ -2280,12 +2469,8 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                     
                     switch(action) {
                         case 'book-ticket':
-                            // Trigger ticket booking flow
-                            appendMsg('I want to book tickets', true);
-                            showTyping();
-                            await new Promise(r => setTimeout(r, 800));
-                            hideTyping();
-                            appendMsg('Excellent choice! I can help you book tickets for any of our three events:\n\n🏴󐁧󐁢󐁥󐁮󐁧󐁿 London - March 12, 2026\n🏴󐁧󐁢󐁥󐁮󐁧󐁿 Manchester - March 19, 2026\n🏴󐁧󐁢󐁳󐁣󐁴󐁿 Glasgow - March 26, 2026\n\nWhich city interests you? (Reply with: london, manchester, or glasgow)', false);
+                            // Trigger new 3-step ticket booking flow
+                            startBookingWorkflow();
                             break;
                         
                         case 'faq':
@@ -2448,6 +2633,21 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         
                         appendMsg(text, true);
                         input.value = '';
+
+                        // Handle booking workflow text input
+                        if (bookingState.active && bookingState.step === 'city-selection') {
+                            const normalizedText = text.toLowerCase();
+                            if (normalizedText.includes('london')) {
+                                selectCity('London', 'March 12, 2026');
+                                return;
+                            } else if (normalizedText.includes('manchester')) {
+                                selectCity('Manchester', 'March 19, 2026');
+                                return;
+                            } else if (normalizedText.includes('glasgow')) {
+                                selectCity('Glasgow', 'March 26, 2026');
+                                return;
+                            }
+                        }
 
                         // Check for commands first
                         const commandResponse = handleCommand(text);
