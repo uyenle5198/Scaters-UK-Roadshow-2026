@@ -13,8 +13,18 @@ Features:
 
 import os
 import sys
+import platform
+import logging
 from datetime import datetime
 from typing import Optional
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+logger = logging.getLogger('ScatersRoadshowChatbot')
 
 # Check for required dependencies
 try:
@@ -22,26 +32,43 @@ try:
     try:
         import google.genai as genai
         GENAI_VERSION = 'new'
+        logger.info("Loaded google.genai library (newer version)")
     except ImportError:
         import google.generativeai as genai
         GENAI_VERSION = 'legacy'
+        logger.info("Loaded google.generativeai library (legacy version)")
     GEMINI_AVAILABLE = True
 except ImportError:
     GEMINI_AVAILABLE = False
     GENAI_VERSION = None
+    logger.warning("Google Generative AI library not available")
     print("Warning: google-generativeai not installed. Run: pip install google-generativeai")
 
 try:
     from openai import OpenAI
     OPENAI_AVAILABLE = True
+    logger.info("OpenAI library loaded successfully")
 except ImportError:
     OPENAI_AVAILABLE = False
+    logger.warning("OpenAI library not available")
 
 try:
     from dotenv import load_dotenv
     load_dotenv()
+    logger.info("Environment variables loaded from .env")
 except ImportError:
+    logger.warning("python-dotenv not installed")
     print("Warning: python-dotenv not installed. Run: pip install python-dotenv")
+
+# Try to import timeout decorator for platform-independent timeout handling
+try:
+    from timeout_decorator import timeout, TimeoutError as TimeoutDecoratorError
+    TIMEOUT_AVAILABLE = True
+    logger.info("timeout-decorator library loaded successfully")
+except ImportError:
+    TIMEOUT_AVAILABLE = False
+    TimeoutDecoratorError = TimeoutError
+    logger.warning("timeout-decorator not available - timeout handling may not work on all platforms")
 
 
 class ScatersRoadshowChatbot:
@@ -106,38 +133,131 @@ class ScatersRoadshowChatbot:
         self.model = None
         self.chat_history = []
         
+        # Display platform compatibility information
+        self._check_platform_compatibility()
+        
         # Try to initialize API
         self._initialize_api()
         
+    def _check_platform_compatibility(self):
+        """Check and display platform compatibility warnings."""
+        current_platform = platform.system()
+        logger.info(f"Running on platform: {current_platform}")
+        
+        # Warn about timeout handling on Windows without timeout-decorator
+        if current_platform == "Windows" and not TIMEOUT_AVAILABLE:
+            warning_msg = ("⚠ Platform Warning: You are running on Windows without timeout-decorator library. "
+                          "Timeout handling may not work correctly. "
+                          "Install with: pip install timeout-decorator")
+            logger.warning(warning_msg)
+            print(f"\n{warning_msg}\n")
+        
+    def _validate_api_key(self, key: Optional[str], key_name: str) -> bool:
+        """Validate API key format and presence.
+        
+        Args:
+            key: The API key to validate
+            key_name: Name of the key for logging purposes
+            
+        Returns:
+            bool: True if key is valid, False otherwise
+        """
+        if not key:
+            logger.warning(f"{key_name} is not set")
+            return False
+        
+        if not key.strip():
+            logger.warning(f"{key_name} is empty or contains only whitespace")
+            return False
+        
+        # Basic validation - check for placeholder values
+        placeholder_values = ['your_gemini_api_key_here', 'your_openai_api_key_here', 
+                             'your_api_key_here', 'placeholder', 'changeme']
+        if key.lower() in placeholder_values:
+            logger.warning(f"{key_name} appears to be a placeholder value")
+            return False
+        
+        logger.info(f"{key_name} validation passed")
+        return True
+    
+    def _initialize_gemini_api(self, api_key: str) -> bool:
+        """Initialize Google Gemini API.
+        
+        Args:
+            api_key: The Gemini API key
+            
+        Returns:
+            bool: True if initialization successful, False otherwise
+        """
+        try:
+            genai.configure(api_key=api_key)
+            self.model = genai.GenerativeModel('gemini-pro')
+            self.api_provider = 'gemini'
+            logger.info(f"Successfully initialized Gemini API (using {GENAI_VERSION} version)")
+            print(f"✓ Connected to Google Gemini API (using {GENAI_VERSION} library)")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to initialize Gemini API: {e}", exc_info=True)
+            print(f"✗ Failed to initialize Gemini: {e}")
+            return False
+    
+    def _initialize_openai_api(self, api_key: str) -> bool:
+        """Initialize OpenAI API.
+        
+        Args:
+            api_key: The OpenAI API key
+            
+        Returns:
+            bool: True if initialization successful, False otherwise
+        """
+        try:
+            self.model = OpenAI(api_key=api_key)
+            self.api_provider = 'openai'
+            logger.info("Successfully initialized OpenAI API")
+            print("✓ Connected to OpenAI API")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to initialize OpenAI API: {e}", exc_info=True)
+            print(f"✗ Failed to initialize OpenAI: {e}")
+            return False
+        
     def _initialize_api(self):
-        """Initialize AI API (Gemini or OpenAI)."""
+        """Initialize AI API (Gemini or OpenAI) with validation and fallback."""
+        logger.info("Attempting to initialize AI API")
+        
         # Try Gemini first
         gemini_key = os.getenv('GEMINI_API_KEY')
-        if gemini_key and GEMINI_AVAILABLE:
-            try:
-                genai.configure(api_key=gemini_key)
-                self.model = genai.GenerativeModel('gemini-pro')
-                self.api_provider = 'gemini'
-                print("✓ Connected to Google Gemini API")
+        if GEMINI_AVAILABLE and self._validate_api_key(gemini_key, 'GEMINI_API_KEY'):
+            if self._initialize_gemini_api(gemini_key):
                 return
-            except Exception as e:
-                print(f"Failed to initialize Gemini: {e}")
+        elif not GEMINI_AVAILABLE:
+            logger.info("Gemini library not available, skipping Gemini initialization")
         
         # Try OpenAI as fallback
         openai_key = os.getenv('OPENAI_API_KEY')
-        if openai_key and OPENAI_AVAILABLE:
-            try:
-                self.model = OpenAI(api_key=openai_key)
-                self.api_provider = 'openai'
-                print("✓ Connected to OpenAI API")
+        if OPENAI_AVAILABLE and self._validate_api_key(openai_key, 'OPENAI_API_KEY'):
+            if self._initialize_openai_api(openai_key):
                 return
-            except Exception as e:
-                print(f"Failed to initialize OpenAI: {e}")
+        elif not OPENAI_AVAILABLE:
+            logger.info("OpenAI library not available, skipping OpenAI initialization")
         
-        # No API available
-        print("\n⚠ WARNING: No AI API configured!")
-        print("Please set GEMINI_API_KEY or OPENAI_API_KEY in .env file")
-        print("The chatbot will use basic pattern matching only.\n")
+        # No API available - provide detailed error message
+        logger.error("No AI API could be initialized")
+        print("\n" + "="*70)
+        print("⚠ WARNING: No AI API configured!")
+        print("="*70)
+        print("\nThe chatbot could not connect to any AI service.")
+        print("\nTo fix this, please do ONE of the following:")
+        print("\n1. For Google Gemini (Recommended):")
+        print("   - Get an API key from: https://makersuite.google.com/app/apikey")
+        print("   - Add to .env file: GEMINI_API_KEY=your_key_here")
+        print("   - Install library: pip install google-generativeai")
+        print("\n2. For OpenAI:")
+        print("   - Get an API key from: https://platform.openai.com/api-keys")
+        print("   - Add to .env file: OPENAI_API_KEY=your_key_here")
+        print("   - Install library: pip install openai")
+        print("\nThe chatbot will use basic pattern matching only.\n")
+        print("="*70 + "\n")
     
     def _get_timestamp(self) -> str:
         """Get formatted timestamp."""
@@ -150,55 +270,154 @@ class ScatersRoadshowChatbot:
         return f"[{timestamp}] {prefix}: {text}"
     
     def _get_ai_response(self, user_message: str) -> Optional[str]:
-        """Get AI response from configured provider with timeout handling."""
+        """Get AI response from configured provider with timeout handling and automatic fallback."""
         if not self.model:
             return None
         
         try:
             if self.api_provider == 'gemini':
-                # Use Gemini API with timeout protection
+                return self._get_gemini_response(user_message)
+            elif self.api_provider == 'openai':
+                return self._get_openai_response(user_message)
+        except (TimeoutError, TimeoutDecoratorError) as e:
+            logger.warning(f"API request timed out for {self.api_provider}: {e}")
+            print(f"\n⚠ {self.api_provider.title()} API request timed out")
+            
+            # Try fallback to other API
+            if self.api_provider == 'gemini':
+                return self._try_openai_fallback(user_message)
+            
+            return None
+        except Exception as e:
+            logger.error(f"Error during {self.api_provider} API call: {e}", exc_info=True)
+            print(f"\n⚠ {self.api_provider.title()} API Error: {e}")
+            
+            # Try fallback to other API
+            if self.api_provider == 'gemini':
+                return self._try_openai_fallback(user_message)
+            
+            return None
+    
+    def _get_gemini_response_with_timeout(self, prompt: str) -> str:
+        """Get response from Gemini API (to be wrapped with timeout)."""
+        response = self.model.generate_content(
+            prompt,
+            generation_config={'max_output_tokens': 300, 'temperature': 0.7}
+        )
+        return response.text
+    
+    def _get_gemini_response(self, user_message: str) -> Optional[str]:
+        """Get response from Gemini API with platform-appropriate timeout.
+        
+        Args:
+            user_message: User's input message
+            
+        Returns:
+            Response text or None if failed
+        """
+        prompt = f"{self.ROADSHOW_CONTEXT}\n\nUser: {user_message}\nButler:"
+        
+        if TIMEOUT_AVAILABLE:
+            # Use timeout-decorator for cross-platform timeout
+            @timeout(10, use_signals=False)
+            def get_response():
+                return self._get_gemini_response_with_timeout(prompt)
+            
+            return get_response()
+        else:
+            # Fallback for platforms where timeout-decorator is not available
+            # On Unix-like systems, we can still use signal
+            if platform.system() != "Windows":
                 import signal
                 
                 def timeout_handler(signum, frame):
                     raise TimeoutError("API request timed out")
                 
-                # Set 10 second timeout for API call
                 signal.signal(signal.SIGALRM, timeout_handler)
                 signal.alarm(10)
                 
                 try:
-                    prompt = f"{self.ROADSHOW_CONTEXT}\n\nUser: {user_message}\nButler:"
-                    response = self.model.generate_content(
-                        prompt,
-                        generation_config={'max_output_tokens': 300, 'temperature': 0.7}
-                    )
-                    signal.alarm(0)  # Cancel alarm
-                    return response.text
+                    response = self._get_gemini_response_with_timeout(prompt)
+                    signal.alarm(0)
+                    return response
                 except TimeoutError:
                     signal.alarm(0)
-                    print("\n⚠ API request timed out")
-                    return None
-            
-            elif self.api_provider == 'openai':
-                # Use OpenAI API with timeout
-                messages = [
-                    {"role": "system", "content": self.ROADSHOW_CONTEXT},
-                    {"role": "user", "content": user_message}
-                ]
-                response = self.model.chat.completions.create(
-                    model="gpt-3.5-turbo",
-                    messages=messages,
-                    max_tokens=300,
-                    temperature=0.7,
-                    timeout=10.0  # 10 second timeout
-                )
-                return response.choices[0].message.content
+                    raise
+            else:
+                # Windows without timeout-decorator - no timeout protection
+                logger.warning("No timeout protection available on Windows")
+                return self._get_gemini_response_with_timeout(prompt)
+    
+    def _get_openai_response(self, user_message: str) -> Optional[str]:
+        """Get response from OpenAI API with timeout.
         
-        except TimeoutError:
-            print("\n⚠ API request timed out")
+        Args:
+            user_message: User's input message
+            
+        Returns:
+            Response text or None if failed
+        """
+        messages = [
+            {"role": "system", "content": self.ROADSHOW_CONTEXT},
+            {"role": "user", "content": user_message}
+        ]
+        response = self.model.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            max_tokens=300,
+            temperature=0.7,
+            timeout=10.0
+        )
+        return response.choices[0].message.content
+    
+    def _try_openai_fallback(self, user_message: str) -> Optional[str]:
+        """Try to use OpenAI as fallback when Gemini fails.
+        
+        Args:
+            user_message: User's input message
+            
+        Returns:
+            Response text or None if fallback also failed
+        """
+        openai_key = os.getenv('OPENAI_API_KEY')
+        
+        if not OPENAI_AVAILABLE:
+            logger.info("OpenAI library not available for fallback")
             return None
+        
+        if not self._validate_api_key(openai_key, 'OPENAI_API_KEY'):
+            logger.info("No valid OpenAI API key for fallback")
+            return None
+        
+        try:
+            logger.info("Attempting fallback to OpenAI API")
+            print("↻ Trying OpenAI as fallback...")
+            
+            # Temporarily switch to OpenAI
+            temp_model = OpenAI(api_key=openai_key)
+            messages = [
+                {"role": "system", "content": self.ROADSHOW_CONTEXT},
+                {"role": "user", "content": user_message}
+            ]
+            response = temp_model.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=messages,
+                max_tokens=300,
+                temperature=0.7,
+                timeout=10.0
+            )
+            
+            logger.info("OpenAI fallback successful")
+            print("✓ Fallback to OpenAI successful")
+            return response.choices[0].message.content
         except Exception as e:
-            print(f"\n⚠ AI API Error: {e}")
+            logger.error(f"OpenAI fallback also failed: {e}", exc_info=True)
+            print(f"✗ OpenAI fallback failed: {e}")
+            print("\nNext steps:")
+            print("1. Check your API keys in the .env file")
+            print("2. Verify your internet connection")
+            print("3. Check API service status")
+            print("4. Ensure you have API credits/quota remaining\n")
             return None
     
     def _get_fallback_response(self, user_message: str) -> str:
