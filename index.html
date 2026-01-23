@@ -89,7 +89,7 @@
     <style>
         body{background-color:#050505;color:#E2E8F0;font-family:'Inter',sans-serif;overflow-x:hidden}h1,h2,h3,h4{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.04em}.view-hidden{display:none!important}.fade-in{animation:fadeIn .5s ease-out forwards}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}body.lite-mode *{animation:none!important;transition:none!important;backdrop-filter:none!important;box-shadow:none!important;text-shadow:none!important}body.lite-mode .rain-overlay{display:none}body.lite-mode .neon-title-intense{color:#fff;text-shadow:0 0 2px #fff!important}body.lite-mode .bg-black\/60,body.lite-mode .bg-black\/80{background:#111!important;opacity:1!important}
 
-        .rain-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}@keyframes rain{0%{background-position:0 0}100%{background-position:15% 100%}}.scrolly-item{opacity:1;transform:translate(0,0);transition:opacity .8s ease,transform .8s ease}.scrolly-item.waiting-reveal{opacity:0;transform:translateY(40px)}.scrolly-item.active{opacity:1;transform:translate(0,0)}.marquee-wrapper{background:#0F172A;padding:15px 0;overflow:hidden;white-space:nowrap;border-top:2px solid #2563EB;border-bottom:2px solid #2563EB;color:#fff}.marquee-content{display:inline-block;animation:marquee-scroll 25s linear infinite;font-family:'Anton',sans-serif;font-size:18px;text-transform:uppercase;font-weight:700;letter-spacing:.1em}@keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+        .rain-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}@keyframes rainFall{0%{transform:translateY(0)}100%{transform:translateY(100vh)}}.rain-drop{will-change:transform;transform:translateZ(0)}.scrolly-item{opacity:1;transform:translate(0,0);transition:opacity .8s ease,transform .8s ease}.scrolly-item.waiting-reveal{opacity:0;transform:translateY(40px)}.scrolly-item.active{opacity:1;transform:translate(0,0)}.marquee-wrapper{background:#0F172A;padding:15px 0;overflow:hidden;white-space:nowrap;border-top:2px solid #2563EB;border-bottom:2px solid #2563EB;color:#fff}.marquee-content{display:inline-block;animation:marquee-scroll 25s linear infinite;font-family:'Anton',sans-serif;font-size:18px;text-transform:uppercase;font-weight:700;letter-spacing:.1em}@keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
         .event-card-premium{position:relative;height:450px;border-radius:4px;overflow:hidden;background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:flex-end;padding:2.5rem 2rem;transition:all .3s ease;border:1px solid #2563EB;z-index:10;box-shadow:0 0 15px rgba(37,99,235,.2)}@keyframes card-neon-pulse{0%{box-shadow:0 0 10px rgba(37,99,235,.2),inset 0 0 5px rgba(37,99,235,.1);border-color:rgba(37,99,235,.6)}100%{box-shadow:0 0 25px rgba(37,99,235,.5),inset 0 0 15px rgba(37,99,235,.2);border-color:#2563EB}}.event-card-premium:hover{border-color:#D4AF37;z-index:20;box-shadow:0 0 40px rgba(37,99,235,.6),inset 0 0 30px rgba(37,99,235,.3);transform:translateY(-10px) scale(1.02)}.event-card-premium::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(5,5,5,1) 0%,rgba(5,5,5,.8) 50%,rgba(5,5,5,.2) 100%);pointer-events:none}.event-card-content{position:relative;z-index:10;pointer-events:none;width:100%}.event-card-content button{pointer-events:auto}
 
@@ -3208,24 +3208,6 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                 
                 return drop;
             }
-
-            // Add CSS animation for rain drops (using GPU acceleration)
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes rainFall {
-                    0% {
-                        transform: translateY(0);
-                    }
-                    100% {
-                        transform: translateY(100vh);
-                    }
-                }
-                .rain-drop {
-                    will-change: transform;
-                    transform: translateZ(0);
-                }
-            `;
-            document.head.appendChild(style);
 
             // Initialize rain drops
             function initRain() {
