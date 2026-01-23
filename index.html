@@ -1359,6 +1359,18 @@
                             <summary class="flex justify-between items-center cursor-pointer p-6 list-none"><h4 class="text-white font-bold uppercase tracking-widest text-sm group-hover:text-scater-royal transition-colors">What does "The Predatory Hunt" mean in skateboarding context?</h4><span class="text-scater-royal transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span></summary>
                             <div class="px-6 pb-6 text-slate-400 text-sm font-light leading-relaxed border-t border-white/5 pt-4">"The Predatory Hunt" refers to the skater's instinct to conquer. Each spot is considered "prey". Participants must use skill and creativity to successfully "hunt" (land tricks) on iconic urban architecture.</div>
                         </details>
+                        <details class="group bg-[#0A0A0A] border border-white/10 open:border-scater-royal transition-all duration-300">
+                            <summary class="flex justify-between items-center cursor-pointer p-6 list-none"><h4 class="text-white font-bold uppercase tracking-widest text-sm group-hover:text-scater-royal transition-colors">Which Raptor deck should I choose?</h4><span class="text-scater-royal transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span></summary>
+                            <div class="px-6 pb-6 text-slate-400 text-sm font-light leading-relaxed border-t border-white/5 pt-4">It depends on your skating style, terrain, and aggression level. Our Tactical Assistant can recommend the best Raptor deck for you.</div>
+                        </details>
+                        <details class="group bg-[#0A0A0A] border border-white/10 open:border-scater-royal transition-all duration-300">
+                            <summary class="flex justify-between items-center cursor-pointer p-6 list-none"><h4 class="text-white font-bold uppercase tracking-widest text-sm group-hover:text-scater-royal transition-colors">ARE SAFETY MEASURES IN PLACE DURING THE EVENT?</h4><span class="text-scater-royal transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span></summary>
+                            <div class="px-6 pb-6 text-slate-400 text-sm font-light leading-relaxed border-t border-white/5 pt-4">Yes. All Raptor Roadshow 2026 locations are equipped with on-site safety teams, first aid support, and clearly defined skate zones. Riders are required to wear appropriate protective gear, and obstacles are inspected before each session.</div>
+                        </details>
+                        <details class="group bg-[#0A0A0A] border border-white/10 open:border-scater-royal transition-all duration-300">
+                            <summary class="flex justify-between items-center cursor-pointer p-6 list-none"><h4 class="text-white font-bold uppercase tracking-widest text-sm group-hover:text-scater-royal transition-colors">ARE PARTICIPANTS UNDER 18 ALLOWED TO ATTEND THE EVENT?</h4><span class="text-scater-royal transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span></summary>
+                            <div class="px-6 pb-6 text-slate-400 text-sm font-light leading-relaxed border-t border-white/5 pt-4">Yes. Participants under the age of 18 are welcome to attend; however, they must be accompanied by a parent or legal guardian at all times. Guardians are responsible for supervision and consent during the event.</div>
+                        </details>
                     </div>
                 </div>
             </section>
@@ -2334,9 +2346,11 @@ FAQ Topics You Can Help With:
 - Ticket booking and registration
 - Product information (Raptor Collection)
 - Pro skater appearances
-- Safety requirements
+- Safety requirements and measures at events
 - Venue facilities and accessibility
 - Refund and cancellation policies
+- Deck selection recommendations based on skating style
+- Age requirements and under-18 participation rules
 
 Your role is to provide helpful, intelligent assistance in a professional yet engaging tone. Keep responses concise and informative. Always maintain the "Butler" persona - polite, sophisticated, and knowledgeable. When users ask about booking tickets, guide them through the process.`;
                 }
@@ -2828,6 +2842,21 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         // FAQ - Safety and requirements
                         if (/\b(bring|need|require|helmet|safety|gear)\b/.test(t)) {
                             return `What to Bring:\n✓ Safety helmet (MANDATORY for competitors)\n✓ Your skateboard (Raptor decks available on-site)\n✓ Comfortable skate shoes\n✓ Water bottle & snacks\n✓ ID for registration\n\nAll safety equipment must meet UK standards.`;
+                        }
+
+                        // FAQ - Safety measures at events
+                        if (/\b(safety measures|safety team|first aid|safe|skate zone)\b/i.test(t) && !/\b(bring|need|require|helmet|gear)\b/.test(t)) {
+                            return `Safety Measures at Raptor Roadshow 2026:\n\n✓ On-site safety teams at all locations\n✓ First aid support available\n✓ Clearly defined skate zones\n✓ Protective gear required for all riders\n✓ Obstacles inspected before each session\n\nYour safety is our priority!`;
+                        }
+
+                        // FAQ - Deck selection / recommendations
+                        if (/\b(which deck|choose deck|recommend|best deck|deck for me|raptor deck should)\b/i.test(t)) {
+                            return `Choosing Your Raptor Deck:\n\nYour ideal deck depends on:\n🎯 Skating style (street, vert, park)\n🌍 Terrain preference\n⚡ Aggression level\n\nOur Raptor Collection:\n• The Eagle - Aerial dominance\n• The Panther - Technical precision\n• The Bull - Raw power & durability\n• The Shark - Speed & flow\n• The Snake - Versatility\n\nAsk about specific models for detailed recommendations!`;
+                        }
+
+                        // FAQ - Under 18 / Age requirements
+                        if (/\b(under 18|under eighteen|minors?|kids?|children|age limit|parental|guardian|youth)\b/i.test(t)) {
+                            return `Under-18 Participation:\n\n✓ YES - Participants under 18 are welcome!\n⚠️ Requirements:\n  • Must be accompanied by parent/legal guardian\n  • Guardian must be present at all times\n  • Guardian responsible for supervision and consent\n\nAll ages can enjoy the excitement of The Predatory Hunt!`;
                         }
 
                         // FAQ - Skill level and eligibility
