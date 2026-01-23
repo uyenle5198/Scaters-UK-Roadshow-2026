@@ -2889,6 +2889,12 @@
                     selectedDate: null
                 };
 
+                // Phone number collection workflow state
+                let phoneCollectionState = {
+                    active: false,
+                    originalQuery: null
+                };
+
                 // Set initial timestamp for first message
                 const initialTimestamp = document.getElementById('initial-timestamp');
                 if (initialTimestamp) {
@@ -3463,6 +3469,116 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                 };
 
                 /**
+                 * Phone Number Collection Workflow Functions
+                 * Triggered when AI cannot answer a query after retries
+                 */
+                
+                /**
+                 * Start phone number collection workflow
+                 * @param {string} originalQuery - The original user query that couldn't be answered
+                 */
+                function startPhoneCollection(originalQuery) {
+                    phoneCollectionState.active = true;
+                    phoneCollectionState.originalQuery = originalQuery;
+                    
+                    showTyping();
+                    setTimeout(() => {
+                        hideTyping();
+                        const message = `Need direct assistance? Leave your phone number and our team will contact you shortly.`;
+                        
+                        // Create phone input form HTML
+                        const phoneInputHTML = `
+                            <div style="margin-top: 12px;">
+                                <form onsubmit="submitPhoneNumber(event)" id="phone-collection-form">
+                                    <input 
+                                        type="tel" 
+                                        id="phone-number-input" 
+                                        placeholder="Enter your phone number" 
+                                        pattern="[0-9+\\-\\s()]+"
+                                        required
+                                        style="width: 100%; padding: 10px; background: rgba(37, 99, 235, 0.1); border: 1px solid #2563EB; border-radius: 6px; color: #fff; font-size: 12px; outline: none; margin-bottom: 8px;"
+                                    />
+                                    <button 
+                                        type="submit" 
+                                        style="width: 100%; padding: 10px 16px; background: linear-gradient(135deg, #2563EB 0%, #1e40af 100%); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 6px; color: #fff; cursor: pointer; font-weight: bold; font-size: 12px; transition: all 0.3s;"
+                                        onmouseover="this.style.transform='scale(1.05)'"
+                                        onmouseout="this.style.transform='scale(1)'"
+                                    >
+                                        Submit Phone Number
+                                    </button>
+                                </form>
+                            </div>
+                        `;
+                        
+                        appendMsg(message + phoneInputHTML, false);
+                        
+                        // Focus on phone input
+                        setTimeout(() => {
+                            const phoneInput = document.getElementById('phone-number-input');
+                            if (phoneInput) phoneInput.focus();
+                        }, 100);
+                    }, 600);
+                }
+                
+                /**
+                 * Validate phone number format
+                 * @param {string} phone - Phone number to validate
+                 * @returns {boolean} True if valid
+                 */
+                function validatePhoneNumber(phone) {
+                    if (!phone || phone.trim().length < 10) return false;
+                    // Basic validation: should contain digits and common phone number characters
+                    const phoneRegex = /^[0-9+\-\s()]{10,}$/;
+                    return phoneRegex.test(phone.trim());
+                }
+                
+                /**
+                 * Submit phone number and show confirmation
+                 * @param {Event} event - Form submit event
+                 */
+                window.submitPhoneNumber = function(event) {
+                    event.preventDefault();
+                    
+                    const phoneInput = document.getElementById('phone-number-input');
+                    if (!phoneInput) return;
+                    
+                    const phoneNumber = phoneInput.value.trim();
+                    
+                    if (!validatePhoneNumber(phoneNumber)) {
+                        // Show error inline
+                        appendMsg('⚠️ Please enter a valid phone number (at least 10 digits).', false);
+                        return;
+                    }
+                    
+                    // Show user's phone number (masked for privacy)
+                    const maskedPhone = phoneNumber.substring(0, 3) + '****' + phoneNumber.substring(phoneNumber.length - 3);
+                    appendMsg(phoneNumber, true);
+                    
+                    // Simulate submission
+                    showTyping();
+                    setTimeout(() => {
+                        hideTyping();
+                        
+                        // Log for potential backend integration
+                        console.log('Phone number submitted:', {
+                            phone: phoneNumber,
+                            query: phoneCollectionState.originalQuery,
+                            timestamp: new Date().toISOString()
+                        });
+                        
+                        // Show confirmation message
+                        const confirmationMessage = `✅ Thank you. A Raptor team member will contact you shortly.`;
+                        appendMsg(confirmationMessage, false);
+                        
+                        // Reset phone collection state
+                        phoneCollectionState = {
+                            active: false,
+                            originalQuery: null
+                        };
+                    }, 800);
+                };
+
+                /**
                  * Handle Quick Action Buttons
                  * Processes clicks from quick action buttons in the chat interface
                  * @param {string} action - The action to handle (book-ticket, faq, products, find-decks)
@@ -3819,8 +3935,13 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                             return `The Raptor Collection features 5 specialized decks: The Eagle, Panther, Bull, Shark, and Snake. Each engineered for specific terrain and riding styles. Ask about any specific model for detailed specs and features!`;
                         }
 
-                        // Fallback
-                        return `I'm The Butler, here to assist with information about the Scaters Raptor Roadshow 2026. You can ask me about event dates, locations (London, Manchester, Glasgow), pro skaters (Lucien Clarke, Geoff Rowley, John Rattray), the Raptor collection, or registration.`;
+                        // Check for common greetings - should give a friendly response
+                        if (/^(hi|hello|hey|greetings|good morning|good afternoon|good evening)$/i.test(t)) {
+                            return `Hello! I'm The Butler, your AI assistant for the Scaters Raptor Roadshow 2026. How may I assist you today?`;
+                        }
+
+                        // Fallback - return special marker for unanswerable queries
+                        return '__UNANSWERABLE_QUERY__';
 
                     } catch (err) {
                         console.error('localResponder error', err);
@@ -3841,6 +3962,13 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         e.preventDefault();
                         const text = (input.value || '').trim();
                         if (!text) return;
+                        
+                        // Handle phone number input during collection workflow
+                        if (phoneCollectionState.active) {
+                            // Phone number will be submitted through the form in the message
+                            // Skip normal processing
+                            return;
+                        }
                         
                         appendMsg(text, true);
                         input.value = '';
@@ -3875,7 +4003,13 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         const response = await getAIResponse(text);
                         
                         hideTyping();
-                        appendMsg(response, false);
+                        
+                        // Check if query is unanswerable and trigger phone collection
+                        if (response === '__UNANSWERABLE_QUERY__') {
+                            startPhoneCollection(text);
+                        } else {
+                            appendMsg(response, false);
+                        }
                     });
 
                     // Typing Hint Functionality - Cycle through FAQ questions
