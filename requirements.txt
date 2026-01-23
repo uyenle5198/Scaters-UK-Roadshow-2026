@@ -1,0 +1,10 @@
+# Scaters Raptor Roadshow 2026 - Python Chatbot Dependencies
+
+# Google Generative AI (Gemini) - Primary AI provider
+google-generativeai>=0.3.0
+
+# OpenAI API - Alternative AI provider
+openai>=1.0.0
+
+# Environment variable management
+python-dotenv>=1.0.0

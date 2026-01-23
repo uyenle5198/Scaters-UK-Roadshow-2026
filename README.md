@@ -111,6 +111,62 @@ PORT=3000
 NODE_ENV=development
 ```
 
+## 🤖 AI-Powered Python Chatbot
+
+### Setup & Installation
+
+1. **Install Python dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Configure API Key**
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your API key
+   ```
+
+3. **Get an API Key**
+   - **Google Gemini** (Recommended): https://makersuite.google.com/app/apikey
+   - **OpenAI** (Alternative): https://platform.openai.com/api-keys
+
+4. **Run the chatbot**
+   ```bash
+   python chatbot.py
+   ```
+
+### Features
+
+- 🧠 **AI-Powered Responses** - Uses Google Gemini or OpenAI for intelligent conversations
+- 🎯 **Topic-Scoped** - Only answers questions about the roadshow and Raptor collection
+- 🔐 **Secure API Keys** - Keys stored in .env file (never committed)
+- 💬 **Interactive Console** - Terminal-based chat interface
+- 🔄 **Fallback Mode** - Works with pattern matching if no API key configured
+
+### Usage
+
+The chatbot answers questions about:
+- Roadshow locations, dates, and activities
+- The Raptor skateboard collection (features, models, target customers)
+- Pro skaters, prizes, and event details
+
+**Commands:**
+- Type your question and press Enter
+- `quit` or `exit` - End the chat
+- `clear` - Clear chat history
+
+**Example conversation:**
+```
+YOU: Where is the roadshow?
+BUTLER: The Raptor Roadshow visits 3 UK cities:
+• London - March 12, 2026 at Southbank Undercroft
+• Manchester - March 19, 2026 at Projekt MCR
+• Glasgow - March 26, 2026 at Kelvingrove
+
+YOU: Tell me about the Raptor collection
+BUTLER: The Raptor Collection features 5 premium decks designed for different skating styles...
+```
+
 ## 📊 SEO & Performance
 
 - **Meta Tags**: Optimized for social sharing
