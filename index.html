@@ -2535,12 +2535,16 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                     const perfectFor = perfectForStatements[deckId] || "Designed for serious riders.";
                     
                     // Build key points from specs and characteristics
+                    // Using indices 0 and 2 to show primary material and key technology/feature
                     const keyPoints = [
                         `<strong>Riding Style:</strong> ${ridingStyle}`,
                         `<strong>Best Terrain:</strong> ${terrainInfo}`,
                         deck.specs && deck.specs[0] ? deck.specs[0] : "Premium materials for ultimate performance",
                         deck.specs && deck.specs[2] ? deck.specs[2] : "Advanced technology for enhanced control"
                     ];
+                    
+                    // Safely get deck image with fallback
+                    const deckImage = (deck.imgs && deck.imgs.length > 0) ? deck.imgs[0] : 'https://via.placeholder.com/300x200?text=Deck+Image';
                     
                     return `
                         <div class="deck-showcase">
@@ -2550,7 +2554,8 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                             </div>
                             
                             <div class="deck-image-container">
-                                <img src="${deck.imgs[0]}" alt="${deck.name}" class="deck-image" />
+                                <img src="${deckImage}" alt="${deck.name}" class="deck-image" />
+                            </div>
                             </div>
                             
                             <div class="deck-key-points">
