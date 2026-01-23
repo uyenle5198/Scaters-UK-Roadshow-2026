@@ -645,7 +645,7 @@
         .hero-smoke {
             position: absolute;
             inset: 0;
-            z-index: 2;
+            z-index: 2; /* Layering: background (0) < smoke (2) < content (10) */
             pointer-events: none;
             overflow: hidden;
         }
@@ -824,8 +824,7 @@
         /* Performance optimization: Respect prefers-reduced-motion */
         @media (prefers-reduced-motion: reduce) {
             .smoke-particle {
-                animation: none;
-                opacity: 0.3;
+                display: none; /* Fully hide animations for accessibility */
             }
         }
 
