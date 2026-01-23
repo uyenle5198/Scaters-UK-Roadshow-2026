@@ -3773,6 +3773,8 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                     ];
                     let currentHintIndex = 0;
                     let typingHintInterval = null;
+                    let animationTimeout = null;
+                    let blurTimeout = null;
 
                     function updateTypingHint() {
                         // Only update if input is empty and not focused
@@ -3781,9 +3783,15 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                             input.setAttribute('placeholder', faqHints[currentHintIndex]);
                             currentHintIndex = (currentHintIndex + 1) % faqHints.length;
                             
+                            // Clear any existing animation timeout
+                            if (animationTimeout) {
+                                clearTimeout(animationTimeout);
+                            }
+                            
                             // Remove animation class after animation completes
-                            setTimeout(() => {
+                            animationTimeout = setTimeout(() => {
                                 input.classList.remove('typing-hint-active');
+                                animationTimeout = null;
                             }, 500);
                         }
                     }
@@ -3799,8 +3807,28 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                     // Resume hints when user blurs and input is empty
                     input.addEventListener('blur', function() {
                         if (input.value === '') {
+                            // Clear any existing blur timeout
+                            if (blurTimeout) {
+                                clearTimeout(blurTimeout);
+                            }
                             // Wait a moment before resuming hints
-                            setTimeout(updateTypingHint, 500);
+                            blurTimeout = setTimeout(() => {
+                                updateTypingHint();
+                                blurTimeout = null;
+                            }, 500);
+                        }
+                    });
+
+                    // Cleanup on page unload to prevent memory leaks
+                    window.addEventListener('beforeunload', function() {
+                        if (typingHintInterval) {
+                            clearInterval(typingHintInterval);
+                        }
+                        if (animationTimeout) {
+                            clearTimeout(animationTimeout);
+                        }
+                        if (blurTimeout) {
+                            clearTimeout(blurTimeout);
                         }
                     });
 
