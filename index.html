@@ -457,9 +457,10 @@
             width: 300px;
             height: 300px;
             z-index: 5;
-            animation: skater-float 6s ease-in-out infinite;
+            animation: skater-float 6s ease-in-out infinite, neon-glow-pulse 3s ease-in-out infinite;
             filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.6)) drop-shadow(0 0 40px rgba(139, 92, 246, 0.4));
             opacity: 0.9;
+            will-change: transform, filter;
         }
 
         @keyframes skater-float {
@@ -481,10 +482,6 @@
                 filter: drop-shadow(0 0 30px rgba(37, 99, 235, 0.9)) drop-shadow(0 0 60px rgba(139, 92, 246, 0.7)) drop-shadow(0 0 80px rgba(236, 72, 153, 0.3));
                 opacity: 1;
             }
-        }
-
-        #skater-neon-graphic {
-            animation: skater-float 6s ease-in-out infinite, neon-glow-pulse 3s ease-in-out infinite;
         }
 
         /* SVG neon stroke animations */
@@ -538,16 +535,16 @@
                 height: 180px;
                 bottom: 8%;
                 left: 50%;
-                transform: translateX(-50%);
+                margin-left: -90px; /* Half of width for centering */
                 animation: skater-float-mobile 6s ease-in-out infinite, neon-glow-pulse 3s ease-in-out infinite;
             }
 
             @keyframes skater-float-mobile {
                 0%, 100% {
-                    transform: translateX(-50%) translateY(0px) rotate(-5deg);
+                    transform: translateY(0px) rotate(-5deg);
                 }
                 50% {
-                    transform: translateX(-50%) translateY(-15px) rotate(5deg);
+                    transform: translateY(-15px) rotate(5deg);
                 }
             }
         }
