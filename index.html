@@ -313,39 +313,6 @@
             }
         }
 
-        /* Register CTA */
-        #register-unlock-cta {
-            position: fixed;
-            top: calc(20% + 170px);
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 9997;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(59, 130, 246, 0.9));
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        #register-unlock-cta:hover {
-            transform: translateX(-50%) scale(1.05);
-            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.6);
-            background: linear-gradient(135deg, rgba(59, 130, 246, 1), rgba(37, 99, 235, 1));
-        }
-
-        #register-unlock-cta .lock-icon {
-            margin-right: 8px;
-        }
-
         /* Modal for registration */
         #registration-modal {
             display: none;
@@ -483,12 +450,6 @@
 
             #skateboard-lock {
                 font-size: 28px;
-            }
-
-            #register-unlock-cta {
-                top: calc(15% + 120px);
-                font-size: 12px;
-                padding: 10px 18px;
             }
 
             .modal-content {
@@ -3696,12 +3657,6 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
         <img src="https://i.postimg.cc/MTG3LCmy/Raptor-Deck-White-Background.png" alt="Flying Skateboard">
     </div>
 
-    <!-- Register to Unlock CTA -->
-    <div id="register-unlock-cta" aria-label="Register to unlock">
-        <span class="lock-icon">🔒</span>
-        <span>Register to Unlock</span>
-    </div>
-
     <!-- Registration Modal -->
     <div id="registration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-content">
@@ -3729,13 +3684,12 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
         (function() {
             // Get elements
             const skateboard = document.getElementById('flying-skateboard');
-            const cta = document.getElementById('register-unlock-cta');
             const modal = document.getElementById('registration-modal');
             const modalClose = document.querySelector('.modal-close');
             const modalCloseBtn = document.getElementById('modal-close-btn');
             const registerBtn = document.getElementById('register-now-btn');
 
-            if (!skateboard || !cta || !modal) return;
+            if (!skateboard) return;
 
             // Check for reduced motion preference
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3754,110 +3708,90 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                 }
             }
 
-            // Function to open modal
-            function openModal() {
-                modal.classList.add('active');
-                pauseSkateboard();
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            // Function to show event detail for London (the first event)
+            function showSkateboardEvent() {
+                // Show event detail for London when skateboard is clicked
+                if (typeof showEventDetail === 'function') {
+                    showEventDetail('ldn');
+                } else {
+                    // Fallback: scroll to events section if showEventDetail is not available
+                    const eventsSection = document.querySelector('#mission') || document.querySelector('[id*="event"]');
+                    if (eventsSection) {
+                        eventsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
             }
-
-            // Function to close modal
-            function closeModal() {
-                modal.classList.remove('active');
-                resumeSkateboard();
-                document.body.style.overflow = ''; // Restore scrolling
-            }
-
-            // CTA click event - open modal
-            cta.addEventListener('click', openModal);
 
             // Skateboard hover event - pause animation
             skateboard.addEventListener('mouseenter', pauseSkateboard);
             skateboard.addEventListener('mouseleave', resumeSkateboard);
 
-            // Skateboard click event - open modal
-            skateboard.addEventListener('click', openModal);
+            // Skateboard click event - show event detail
+            skateboard.addEventListener('click', showSkateboardEvent);
 
-            // Close modal events
-            modalClose.addEventListener('click', closeModal);
-            modalCloseBtn.addEventListener('click', closeModal);
+            // Close modal events (kept for other modal triggers)
+            if (modalClose) {
+                modalClose.addEventListener('click', function() {
+                    modal.classList.remove('active');
+                    resumeSkateboard();
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            if (modalCloseBtn) {
+                modalCloseBtn.addEventListener('click', function() {
+                    modal.classList.remove('active');
+                    resumeSkateboard();
+                    document.body.style.overflow = '';
+                });
+            }
 
             // Close modal when clicking outside content
             modal.addEventListener('click', function(e) {
                 if (e.target === modal) {
-                    closeModal();
+                    modal.classList.remove('active');
+                    resumeSkateboard();
+                    document.body.style.overflow = '';
                 }
             });
 
             // Close modal with Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
-                    closeModal();
+                    modal.classList.remove('active');
+                    resumeSkateboard();
+                    document.body.style.overflow = '';
                 }
             });
 
             // Register button - scroll to registration form or external link
-            registerBtn.addEventListener('click', function() {
-                // Try to find registration form on page
-                const registrationSection = document.querySelector('form') || 
-                                          document.querySelector('[id*="register"]') ||
-                                          document.querySelector('[class*="register"]');
-                
-                if (registrationSection) {
-                    closeModal();
-                    // Smooth scroll to registration section
-                    registrationSection.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'start' 
-                    });
-                } else {
-                    // If no registration form found, show inline message in modal
-                    const messageEl = document.createElement('p');
-                    messageEl.style.cssText = 'color: #fbbf24; margin-top: 15px; text-align: center; font-size: 14px;';
-                    messageEl.textContent = 'Registration coming soon! Check back for updates on the Raptor Roadshow 2026.';
-                    registerBtn.parentElement.appendChild(messageEl);
+            if (registerBtn) {
+                registerBtn.addEventListener('click', function() {
+                    // Try to find registration form on page
+                    const registrationSection = document.querySelector('form') || 
+                                              document.querySelector('[id*="register"]') ||
+                                              document.querySelector('[class*="register"]');
                     
-                    // Remove message after 3 seconds
-                    setTimeout(() => {
-                        messageEl.remove();
-                    }, 3000);
-                }
-            });
-
-            // Update CTA position to follow skateboard (optional enhancement)
-            // This makes the CTA appear to follow the skateboard more naturally
-            if (!prefersReducedMotion) {
-                let animationFrameId;
-                
-                function updateCtaPosition() {
-                    const skateboardRect = skateboard.getBoundingClientRect();
-                    const skateboardCenterX = skateboardRect.left + skateboardRect.width / 2;
-                    
-                    // Only update if skateboard is visible on screen
-                    if (skateboardCenterX > -200 && skateboardCenterX < window.innerWidth + 200) {
-                        cta.style.left = skateboardCenterX + 'px';
-                        cta.style.transform = 'translateX(-50%)';
-                    }
-                    
-                    animationFrameId = requestAnimationFrame(updateCtaPosition);
-                }
-                
-                // Start updating position
-                updateCtaPosition();
-                
-                // Clean up on page unload or visibility change
-                function cleanup() {
-                    if (animationFrameId) {
-                        cancelAnimationFrame(animationFrameId);
-                    }
-                }
-                
-                window.addEventListener('beforeunload', cleanup);
-                document.addEventListener('visibilitychange', function() {
-                    if (document.hidden) {
-                        cleanup();
-                    } else if (!animationFrameId && !prefersReducedMotion) {
-                        updateCtaPosition();
+                    if (registrationSection) {
+                        modal.classList.remove('active');
+                        resumeSkateboard();
+                        document.body.style.overflow = '';
+                        // Smooth scroll to registration section
+                        registrationSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    } else {
+                        // If no registration form found, show inline message in modal
+                        const messageEl = document.createElement('p');
+                        messageEl.style.cssText = 'color: #fbbf24; margin-top: 15px; text-align: center; font-size: 14px;';
+                        messageEl.textContent = 'Registration coming soon! Check back for updates on the Raptor Roadshow 2026.';
+                        registerBtn.parentElement.appendChild(messageEl);
+                        
+                        // Remove message after 3 seconds
+                        setTimeout(() => {
+                            messageEl.remove();
+                        }, 3000);
                     }
                 });
             }
