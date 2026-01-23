@@ -1988,6 +1988,13 @@
                     initialTimestamp.innerText = getTimestamp();
                 }
 
+                // Event cities configuration for booking workflow
+                const EVENT_CITIES = [
+                    { name: 'London', date: 'March 12, 2026' },
+                    { name: 'Manchester', date: 'March 19, 2026' },
+                    { name: 'Glasgow', date: 'March 26, 2026' }
+                ];
+
                 // Google Gemini AI Configuration
                 // API key is stored in localStorage for persistence across sessions
                 // Users can update it via /setapikey command for custom API keys
@@ -2278,6 +2285,26 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                 }
 
                 /**
+                 * Generate HTML for city selection buttons
+                 * @returns {string} HTML string with city selection buttons
+                 */
+                function generateCityButtons() {
+                    const buttons = EVENT_CITIES.map(city => `
+                        <button onclick="selectCity('${city.name}', '${city.date}')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="font-size: 16px;">🔘</span>
+                                <div>
+                                    <div style="font-weight: bold; margin-bottom: 2px;">${city.name}</div>
+                                    <div style="font-size: 9px; opacity: 0.8;">📅 ${city.date}</div>
+                                </div>
+                            </div>
+                        </button>
+                    `).join('');
+                    
+                    return `<div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">${buttons}</div>`;
+                }
+
+                /**
                  * START BOOKING WORKFLOW - STEP 1: City Selection
                  * Display available cities with dates as clickable buttons
                  */
@@ -2290,38 +2317,7 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                     setTimeout(() => {
                         hideTyping();
                         const message = `Excellent! Please select your preferred event city:\n\n`;
-                        const cityButtons = `
-                            <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
-                                <button onclick="selectCity('London', 'March 12, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 16px;">🔘</span>
-                                        <div>
-                                            <div style="font-weight: bold; margin-bottom: 2px;">London</div>
-                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 12, 2026</div>
-                                        </div>
-                                    </div>
-                                </button>
-                                <button onclick="selectCity('Manchester', 'March 19, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 16px;">🔘</span>
-                                        <div>
-                                            <div style="font-weight: bold; margin-bottom: 2px;">Manchester</div>
-                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 19, 2026</div>
-                                        </div>
-                                    </div>
-                                </button>
-                                <button onclick="selectCity('Glasgow', 'March 26, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 16px;">🔘</span>
-                                        <div>
-                                            <div style="font-weight: bold; margin-bottom: 2px;">Glasgow</div>
-                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 26, 2026</div>
-                                        </div>
-                                    </div>
-                                </button>
-                            </div>
-                        `;
-                        appendMsg(message + cityButtons, false);
+                        appendMsg(message + generateCityButtons(), false);
                     }, 800);
                 }
 
@@ -2383,38 +2379,7 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                         bookingState.selectedDate = null;
                         
                         const message = `No problem! Please select your preferred event city:\n\n`;
-                        const cityButtons = `
-                            <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
-                                <button onclick="selectCity('London', 'March 12, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 16px;">🔘</span>
-                                        <div>
-                                            <div style="font-weight: bold; margin-bottom: 2px;">London</div>
-                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 12, 2026</div>
-                                        </div>
-                                    </div>
-                                </button>
-                                <button onclick="selectCity('Manchester', 'March 19, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 16px;">🔘</span>
-                                        <div>
-                                            <div style="font-weight: bold; margin-bottom: 2px;">Manchester</div>
-                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 19, 2026</div>
-                                        </div>
-                                    </div>
-                                </button>
-                                <button onclick="selectCity('Glasgow', 'March 26, 2026')" class="city-select-btn" style="padding: 12px 16px; background: rgba(37, 99, 235, 0.2); border: 1px solid #2563EB; border-radius: 6px; color: #fff; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 11px;" onmouseover="this.style.background='rgba(37, 99, 235, 0.4)'" onmouseout="this.style.background='rgba(37, 99, 235, 0.2)'">
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 16px;">🔘</span>
-                                        <div>
-                                            <div style="font-weight: bold; margin-bottom: 2px;">Glasgow</div>
-                                            <div style="font-size: 9px; opacity: 0.8;">📅 March 26, 2026</div>
-                                        </div>
-                                    </div>
-                                </button>
-                            </div>
-                        `;
-                        appendMsg(message + cityButtons, false);
+                        appendMsg(message + generateCityButtons(), false);
                     }, 800);
                 };
 
@@ -2637,14 +2602,12 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         // Handle booking workflow text input
                         if (bookingState.active && bookingState.step === 'city-selection') {
                             const normalizedText = text.toLowerCase();
-                            if (normalizedText.includes('london')) {
-                                selectCity('London', 'March 12, 2026');
-                                return;
-                            } else if (normalizedText.includes('manchester')) {
-                                selectCity('Manchester', 'March 19, 2026');
-                                return;
-                            } else if (normalizedText.includes('glasgow')) {
-                                selectCity('Glasgow', 'March 26, 2026');
+                            // Find matching city from EVENT_CITIES constant
+                            const matchedCity = EVENT_CITIES.find(city => 
+                                normalizedText.includes(city.name.toLowerCase())
+                            );
+                            if (matchedCity) {
+                                selectCity(matchedCity.name, matchedCity.date);
                                 return;
                             }
                         }
