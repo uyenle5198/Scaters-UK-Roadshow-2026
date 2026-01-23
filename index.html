@@ -62,6 +62,11 @@
                             royal: '#2563EB',
                             royalDark: '#1e40af',
                             alert: '#DC2626',
+                            // Street-style gradient colors for HERO section
+                            streetPurple: '#8B5CF6',
+                            streetPink: '#EC4899',
+                            streetOrange: '#F97316',
+                            streetBlue: '#2563EB',
                         }
                     },
                     fontFamily: {
@@ -88,6 +93,9 @@
     <!-- Critical CSS - Above the fold -->
     <style>
         body{background-color:#050505;color:#E2E8F0;font-family:'Inter',sans-serif;overflow-x:hidden}h1,h2,h3,h4{font-family:'Anton',sans-serif;text-transform:uppercase;letter-spacing:.04em}.view-hidden{display:none!important}.fade-in{animation:fadeIn .5s ease-out forwards}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}body.lite-mode *{animation:none!important;transition:none!important;backdrop-filter:none!important;box-shadow:none!important;text-shadow:none!important}body.lite-mode .rain-overlay{display:none}body.lite-mode .neon-title-intense{color:#fff;text-shadow:0 0 2px #fff!important}body.lite-mode .bg-black\/60,body.lite-mode .bg-black\/80{background:#111!important;opacity:1!important}
+        
+        /* Street-style text shadows for HERO section readability */
+        .text-shadow-hero-strong{text-shadow:0 4px 20px rgba(0,0,0,0.8),0 2px 8px rgba(0,0,0,0.9)}.text-shadow-hero-glow{text-shadow:0 4px 20px rgba(0,0,0,0.8),0 2px 8px rgba(0,0,0,0.9),0 0 40px rgba(255,255,255,0.3)}.text-shadow-hero-medium{text-shadow:0 2px 8px rgba(0,0,0,0.7)}.text-shadow-hero-light{text-shadow:0 2px 4px rgba(0,0,0,0.8)}
 
         .rain-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}@keyframes rainFall{0%{transform:translateY(0)}100%{transform:translateY(100vh)}}.rain-drop{will-change:transform;transform:translateZ(0)}.scrolly-item{opacity:1;transform:translate(0,0);transition:opacity .8s ease,transform .8s ease}.scrolly-item.waiting-reveal{opacity:0;transform:translateY(40px)}.scrolly-item.active{opacity:1;transform:translate(0,0)}.marquee-wrapper{background:#0F172A;padding:15px 0;overflow:hidden;white-space:nowrap;border-top:2px solid #2563EB;border-bottom:2px solid #2563EB;color:#fff}.marquee-content{display:inline-block;animation:marquee-scroll 25s linear infinite;font-family:'Anton',sans-serif;font-size:18px;text-transform:uppercase;font-weight:700;letter-spacing:.1em}@keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
@@ -929,13 +937,13 @@
             <!-- HERO -->
             <!-- HERO SECTION: Street-Style Bold Gradient Background -->
             <!-- Updated with vibrant, high-contrast gradient for urban/street aesthetic -->
-            <!-- Gradient colors: Electric Purple (#8B5CF6) -> Neon Pink (#EC4899) -> Vibrant Orange (#F97316) -->
+            <!-- Gradient colors: Electric Purple (scater-streetPurple) -> Neon Pink (scater-streetPink) -> Vibrant Orange (scater-streetOrange) -->
             <section class="min-h-[100vh] flex items-center relative overflow-hidden pt-20 group/hero">
                 <!-- Primary bold gradient background with street-style colors -->
-                <div class="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 opacity-95"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-[#8B5CF6] via-[#EC4899] to-[#F97316] opacity-95"></div>
                 
                 <!-- Secondary diagonal gradient overlay for depth and energy -->
-                <div class="absolute inset-0 bg-gradient-to-tr from-blue-600/40 via-transparent to-purple-700/40"></div>
+                <div class="absolute inset-0 bg-gradient-to-tr from-[#2563EB]/40 via-transparent to-[#7C3AED]/40"></div>
                 
                 <!-- Urban texture overlay: subtle grid pattern for street aesthetic -->
                 <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] opacity-40"></div>
@@ -953,15 +961,15 @@
                         <div class="inline-flex items-center gap-2 mb-8 border border-white/40 bg-black/30 px-4 py-1 rounded-sm backdrop-blur-md"><i class="fa-solid fa-crosshairs text-white text-xs animate-spin-slow"></i><span class="text-white font-mono text-[10px] uppercase tracking-[0.3em] font-bold">Campaign: The Predatory Hunt</span></div>
                         
                         <!-- Main title with enhanced text shadow for readability over vibrant gradient -->
-                        <h1 class="text-6xl md:text-9xl font-display mb-8 leading-[0.85] text-white tracking-tighter drop-shadow-2xl" style="text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.9);">THE PREDATORY<br><span class="relative inline-block"><span class="text-white relative z-10 glitch-uk" data-text="HUNT" style="text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.9), 0 0 40px rgba(255,255,255,0.3);">HUNT</span><span class="absolute -inset-1 bg-white/20 blur-xl z-0"></span></span></h1>
+                        <h1 class="text-6xl md:text-9xl font-display mb-8 leading-[0.85] text-white tracking-tighter drop-shadow-2xl text-shadow-hero-strong">THE PREDATORY<br><span class="relative inline-block"><span class="text-white relative z-10 glitch-uk text-shadow-hero-glow" data-text="HUNT">HUNT</span><span class="absolute -inset-1 bg-white/20 blur-xl z-0"></span></span></h1>
                         
                         <!-- Description with enhanced background and text contrast -->
-                        <p class="text-lg md:text-xl font-serif italic text-white mb-10 max-w-lg leading-relaxed border-l-2 border-white/30 pl-6 bg-black/40 backdrop-blur-sm py-2 px-2" style="text-shadow: 0 2px 8px rgba(0,0,0,0.7);">Scaters transforms the UK's iconic streets into tactical hunting grounds. Join the biggest skate campaign of 2026.</p>
+                        <p class="text-lg md:text-xl font-serif italic text-white mb-10 max-w-lg leading-relaxed border-l-2 border-white/30 pl-6 bg-black/40 backdrop-blur-sm py-2 px-2 text-shadow-hero-medium">Scaters transforms the UK's iconic streets into tactical hunting grounds. Join the biggest skate campaign of 2026.</p>
                         <!-- Countdown timer with enhanced contrast and readability -->
                         <div class="mb-12 inline-block relative group/timer">
                             <div class="absolute -inset-2 bg-gradient-to-r from-white/0 via-white/10 to-white/0 rounded-sm opacity-0 group-hover/timer:opacity-100 transition-opacity duration-500"></div>
-                            <span class="text-[9px] font-mono text-white uppercase tracking-widest block mb-4 flex items-center gap-2 font-bold" style="text-shadow: 0 2px 4px rgba(0,0,0,0.8);"><span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>Mission Launch: London</span>
-                            <div class="border-t border-b border-white/30 py-4 relative bg-black/40 backdrop-blur-md"><div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-white"></div><div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white"></div><div id="hero-countdown" class="flex gap-8 md:gap-12 text-center font-display text-white px-4" style="text-shadow: 0 2px 8px rgba(0,0,0,0.8);"><div class="flex flex-col"><span class="text-4xl md:text-6xl font-bold leading-none">48</span><span class="text-[9px] text-white/80 uppercase tracking-widest mt-1">Days</span></div><div class="text-2xl text-white/40 pt-2">:</div><div class="flex flex-col"><span class="text-4xl md:text-6xl font-bold leading-none">13</span><span class="text-[9px] text-white/80 uppercase tracking-widest mt-1">Hrs</span></div><div class="text-2xl text-white/40 pt-2">:</div><div class="flex flex-col"><span class="text-4xl md:text-6xl font-bold leading-none">30</span><span class="text-[9px] text-white/80 uppercase tracking-widest mt-1">Mins</span></div><div class="text-2xl text-white/40 pt-2">:</div><div class="flex flex-col"><span class="text-4xl md:text-6xl font-bold leading-none">01</span><span class="text-[9px] text-white/80 uppercase tracking-widest mt-1">Secs</span></div></div></div>
+                            <span class="text-[9px] font-mono text-white uppercase tracking-widest block mb-4 flex items-center gap-2 font-bold text-shadow-hero-light"><span class="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>Mission Launch: London</span>
+                            <div class="border-t border-b border-white/30 py-4 relative bg-black/40 backdrop-blur-md"><div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-white"></div><div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white"></div><div id="hero-countdown" class="flex gap-8 md:gap-12 text-center font-display text-white px-4 text-shadow-hero-medium"><div class="flex flex-col"><span class="text-4xl md:text-6xl font-bold leading-none">48</span><span class="text-[9px] text-white/80 uppercase tracking-widest mt-1">Days</span></div><div class="text-2xl text-white/40 pt-2">:</div><div class="flex flex-col"><span class="text-4xl md:text-6xl font-bold leading-none">13</span><span class="text-[9px] text-white/80 uppercase tracking-widest mt-1">Hrs</span></div><div class="text-2xl text-white/40 pt-2">:</div><div class="flex flex-col"><span class="text-4xl md:text-6xl font-bold leading-none">30</span><span class="text-[9px] text-white/80 uppercase tracking-widest mt-1">Mins</span></div><div class="text-2xl text-white/40 pt-2">:</div><div class="flex flex-col"><span class="text-4xl md:text-6xl font-bold leading-none">01</span><span class="text-[9px] text-white/80 uppercase tracking-widest mt-1">Secs</span></div></div></div>
                         </div>
                     </div>
                     <!-- Star Command panel with enhanced readability on gradient background -->
@@ -983,7 +991,7 @@
                     </div>
                 </div>
                 <!-- Marquee with enhanced contrast on gradient background -->
-                <div class="marquee-wrapper absolute bottom-0 left-0 w-full z-20 border-t border-white/40 border-b-0 bg-black/60 backdrop-blur-md"><div class="marquee-content text-white text-sm font-bold" style="text-shadow: 0 2px 4px rgba(0,0,0,0.8);">/// RAPTOR ROADSHOW UK 2026 /// LONDON '95 MANCHESTER '95 GLASGOW /// ENGINEERING PERFECTION /// STREET SOVEREIGNTY ///</div></div>
+                <div class="marquee-wrapper absolute bottom-0 left-0 w-full z-20 border-t border-white/40 border-b-0 bg-black/60 backdrop-blur-md"><div class="marquee-content text-white text-sm font-bold text-shadow-hero-light">/// RAPTOR ROADSHOW UK 2026 /// LONDON '95 MANCHESTER '95 GLASGOW /// ENGINEERING PERFECTION /// STREET SOVEREIGNTY ///</div></div>
             </section>
             <!-- END HERO SECTION -->
 
