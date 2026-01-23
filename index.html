@@ -101,8 +101,9 @@
         .raptor-chat-body::-webkit-scrollbar-thumb{background:#2563EB;border-radius:3px}
         .raptor-chat-body::-webkit-scrollbar-thumb:hover{background:#1e40af}
         .raptor-chat-footer{padding:12px;border-top:1px solid rgba(37,99,235,.3);border-radius:0 0 8px 8px}
-        .raptor-chat-trigger{position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:linear-gradient(135deg,#2563EB 0%,#1e40af 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100001;box-shadow:0 4px 20px rgba(37,99,235,.5);color:#fff;font-size:24px;transition:all .3s;border:2px solid rgba(255,255,255,.1)}
-        .raptor-chat-trigger:hover{transform:scale(1.1) rotate(5deg);box-shadow:0 6px 30px rgba(37,99,235,.7)}
+        .raptor-chat-trigger{position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:linear-gradient(135deg,#2563EB 0%,#1e40af 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100001;box-shadow:0 4px 20px rgba(37,99,235,.5);color:#fff;font-size:24px;transition:all .3s;border:2px solid rgba(255,255,255,.1);animation:attractAttention 3s ease-in-out 3s infinite}
+        .raptor-chat-trigger:hover{transform:scale(1.15) rotate(8deg);box-shadow:0 8px 40px rgba(37,99,235,.8);animation:none}
+        @keyframes attractAttention{0%,100%{transform:scale(1) rotate(0deg)}2%{transform:scale(1.05) rotate(-3deg)}4%{transform:scale(1.05) rotate(3deg)}6%{transform:scale(1.05) rotate(-3deg)}8%{transform:scale(1.05) rotate(3deg)}10%{transform:scale(1) rotate(0deg)}15%,85%{transform:scale(1) rotate(0deg)}90%{box-shadow:0 4px 20px rgba(37,99,235,.5)}95%{box-shadow:0 6px 30px rgba(37,99,235,.8)}}
         .raptor-msg{margin-bottom:12px;padding:10px 12px;border-radius:8px;font-size:12px;line-height:1.5;animation:fadeIn .3s ease}
         .raptor-msg-ai{background:linear-gradient(135deg,rgba(37,99,235,.15) 0%,rgba(37,99,235,.08) 100%);border-left:3px solid #D4AF37;text-align:left;color:#e2e8f0}
         .raptor-msg-user{background:linear-gradient(135deg,rgba(37,99,235,.25) 0%,rgba(37,99,235,.15) 100%);border-right:3px solid #2563EB;text-align:right;color:#fff}
