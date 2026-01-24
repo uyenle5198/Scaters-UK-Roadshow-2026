@@ -3211,13 +3211,16 @@
             document.querySelectorAll('input[name="board_types"]:checked').forEach(cb => {
                 boardTypes.push(cb.value);
             });
-            fieldMappings['board_types'] = boardTypes.join(', ');
+            if (boardTypes.length > 0) {
+                fieldMappings['board_types'] = boardTypes.join(', ');
+            }
 
             // Add each field to formData with its Google Form entry ID
             Object.keys(fieldMappings).forEach(fieldKey => {
                 const entryId = GOOGLE_FORM_CONFIG.fields[fieldKey];
                 const value = fieldMappings[fieldKey];
-                if (value) {
+                // Only append if value is not empty and entryId exists
+                if (value !== '' && entryId && !entryId.includes('XXXXXXXXX')) {
                     formData.append(entryId, value);
                 }
             });
