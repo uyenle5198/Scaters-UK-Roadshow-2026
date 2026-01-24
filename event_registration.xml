@@ -83,6 +83,7 @@
             <ticketType>Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
             <confirmationCode>LDN-HUNT-001-CONF</confirmationCode>
+            <additionalInfo>Do you want to participate in the Hunting Grounds challenge and win prizes?</additionalInfo>
         </registrationDetails>
     </registration>
     
@@ -190,6 +191,7 @@
             <ticketType>Youth Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
             <confirmationCode>MAN-HUNT-002-CONF</confirmationCode>
+            <additionalInfo>Do you want to participate in the Hunting Grounds challenge and win prizes?</additionalInfo>
         </registrationDetails>
     </registration>
     
@@ -273,6 +275,7 @@
             <ticketType>Pro Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
             <confirmationCode>GLA-HUNT-003-CONF</confirmationCode>
+            <additionalInfo>Do you want to participate in the Hunting Grounds challenge and win prizes?</additionalInfo>
         </registrationDetails>
     </registration>
     
@@ -346,6 +349,7 @@
             <ticketType>Spectator</ticketType>
             <paymentStatus>Pending</paymentStatus>
             <confirmationCode>LDN-SPEC-004-PEND</confirmationCode>
+            <additionalInfo>Do you want to participate in the Hunting Grounds challenge and win prizes?</additionalInfo>
         </registrationDetails>
     </registration>
     
@@ -446,6 +450,7 @@
             <ticketType>Youth Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
             <confirmationCode>GLA-HUNT-005-CONF</confirmationCode>
+            <additionalInfo>Do you want to participate in the Hunting Grounds challenge and win prizes?</additionalInfo>
         </registrationDetails>
     </registration>
     
