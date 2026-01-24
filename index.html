@@ -4536,22 +4536,23 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         if (isTransient && retryCount < MAX_RETRIES) {
                             console.log(`Transient error detected, retrying (attempt ${retryCount + 1}/${MAX_RETRIES})...`);
                             // Show user-friendly message in chat only on first retry
-                            if (retryCount === 0 && statusSpan) {
-                                statusSpan.innerText = 'RECONNECTING...';
+                            if (retryCount === 0) {
+                                const statusEl = document.getElementById('butler-status');
+                                if (statusEl) statusEl.innerText = 'RECONNECTING...';
                             }
                             await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
                             const response = await getAIResponse(userMessage, retryCount + 1);
                             // Restore status if successful
-                            if (statusSpan && retryCount === 0) {
-                                statusSpan.innerText = 'ONLINE';
+                            if (retryCount === 0) {
+                                const statusEl = document.getElementById('butler-status');
+                                if (statusEl) statusEl.innerText = 'ONLINE';
                             }
                             return response;
                         }
                         
                         // Update status to offline if all retries failed
-                        if (statusSpan) {
-                            statusSpan.innerText = 'OFFLINE';
-                        }
+                        const statusEl = document.getElementById('butler-status');
+                        if (statusEl) statusEl.innerText = 'OFFLINE';
                         
                         // Final fallback to local responder
                         console.log('Using local fallback after error');
