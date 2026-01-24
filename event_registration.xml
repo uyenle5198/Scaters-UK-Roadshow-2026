@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventRegistrations xmlns="https://scaters.com/roadshow-2026"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <!-- 
+        Event Registration Data for Scaters UK Roadshow 2026
+        This document contains registration information for participants
+        attending the Predatory Hunt events across the UK.
+    -->
+    
+    <!-- Registration 1: Adult Participant (London Event) -->
+    <registration registrationId="REG-2026-LDN-001" status="confirmed">
+        <event>
+            <eventName>The Predatory Hunt - London</eventName>
+            <eventDate>2026-03-12</eventDate>
+            <venue>
+                <venueName>Southbank Undercroft</venueName>
+                <city>London</city>
+                <nickname>The Concrete Heart</nickname>
+                <address>Belvedere Road, South Bank, London SE1 8XX, UK</address>
+            </venue>
+        </event>
+        
+        <mainParticipant>
+            <participantId>PART-001</participantId>
+            <personalInfo>
+                <firstName>James</firstName>
+                <lastName>Henderson</lastName>
+                <dateOfBirth>1998-05-14</dateOfBirth>
+                <age>27</age>
+                <gender>Male</gender>
+            </personalInfo>
+            <contactInfo>
+                <email>james.henderson@example.com</email>
+                <phone>+44-7700-900123</phone>
+                <address>
+                    <street>42 Camden High Street</street>
+                    <city>London</city>
+                    <postcode>NW1 0JH</postcode>
+                    <country>United Kingdom</country>
+                </address>
+            </contactInfo>
+            <emergencyContact>
+                <name>Sarah Henderson</name>
+                <relationship>Spouse</relationship>
+                <phone>+44-7700-900124</phone>
+            </emergencyContact>
+            <skateboarding>
+                <experienceLevel>Advanced</experienceLevel>
+                <preferredDeck>The Eagle</preferredDeck>
+                <specialRequirements>None</specialRequirements>
+            </skateboarding>
+        </mainParticipant>
+        
+        <guests>
+            <guest guestId="GUEST-001-A">
+                <firstName>Emily</firstName>
+                <lastName>Henderson</lastName>
+                <relationship>Sister</relationship>
+                <age>24</age>
+                <contactEmail>emily.h@example.com</contactEmail>
+            </guest>
+            <guest guestId="GUEST-001-B">
+                <firstName>Michael</firstName>
+                <lastName>Chen</lastName>
+                <relationship>Friend</relationship>
+                <age>28</age>
+                <contactEmail>m.chen@example.com</contactEmail>
+            </guest>
+        </guests>
+        
+        <additionalContacts>
+            <contact contactId="CONT-001-A">
+                <name>David Martinez</name>
+                <relationship>Coach</relationship>
+                <email>d.martinez@skateschool.com</email>
+                <phone>+44-7700-900456</phone>
+            </contact>
+        </additionalContacts>
+        
+        <registrationDetails>
+            <registrationDate>2026-01-15T10:30:00Z</registrationDate>
+            <ticketType>Competitor</ticketType>
+            <paymentStatus>Paid</paymentStatus>
+            <confirmationCode>LDN-HUNT-001-CONF</confirmationCode>
+        </registrationDetails>
+    </registration>
+    
+    <!-- Registration 2: Underage Participant with Guardian (Manchester Event) -->
+    <registration registrationId="REG-2026-MAN-002" status="confirmed">
+        <event>
+            <eventName>The Predatory Hunt - Manchester</eventName>
+            <eventDate>2026-03-19</eventDate>
+            <venue>
+                <venueName>Projekt MCR</venueName>
+                <city>Manchester</city>
+                <nickname>The Industrial Abyss</nickname>
+                <address>New Wakefield Street, Manchester M1 5NP, UK</address>
+            </venue>
+        </event>
+        
+        <mainParticipant>
+            <participantId>PART-002</participantId>
+            <personalInfo>
+                <firstName>Oliver</firstName>
+                <lastName>Thompson</lastName>
+                <dateOfBirth>2011-08-22</dateOfBirth>
+                <age>14</age>
+                <gender>Male</gender>
+            </personalInfo>
+            <contactInfo>
+                <email>oliver.thompson@example.com</email>
+                <phone>+44-7700-900234</phone>
+                <address>
+                    <street>18 Deansgate</street>
+                    <city>Manchester</city>
+                    <postcode>M3 2FE</postcode>
+                    <country>United Kingdom</country>
+                </address>
+            </contactInfo>
+            <parentGuardian required="true">
+                <guardianId>GUARD-002</guardianId>
+                <firstName>Catherine</firstName>
+                <lastName>Thompson</lastName>
+                <relationship>Mother</relationship>
+                <dateOfBirth>1982-03-10</dateOfBirth>
+                <contactInfo>
+                    <email>catherine.thompson@example.com</email>
+                    <phone>+44-7700-900235</phone>
+                </contactInfo>
+                <consent>
+                    <consentGiven>true</consentGiven>
+                    <consentDate>2026-01-18T14:20:00Z</consentDate>
+                    <signature>Catherine Thompson</signature>
+                </consent>
+            </parentGuardian>
+            <emergencyContact>
+                <name>Robert Thompson</name>
+                <relationship>Father</relationship>
+                <phone>+44-7700-900236</phone>
+            </emergencyContact>
+            <skateboarding>
+                <experienceLevel>Intermediate</experienceLevel>
+                <preferredDeck>The Panther</preferredDeck>
+                <specialRequirements>First major competition</specialRequirements>
+            </skateboarding>
+        </mainParticipant>
+        
+        <guests>
+            <guest guestId="GUEST-002-A">
+                <firstName>Catherine</firstName>
+                <lastName>Thompson</lastName>
+                <relationship>Mother (Guardian)</relationship>
+                <age>43</age>
+                <contactEmail>catherine.thompson@example.com</contactEmail>
+            </guest>
+            <guest guestId="GUEST-002-B">
+                <firstName>Sophie</firstName>
+                <lastName>Thompson</lastName>
+                <relationship>Sister</relationship>
+                <age>16</age>
+                <contactEmail>sophie.t@example.com</contactEmail>
+            </guest>
+            <guest guestId="GUEST-002-C">
+                <firstName>Jack</firstName>
+                <lastName>Wilson</lastName>
+                <relationship>Friend</relationship>
+                <age>15</age>
+                <contactEmail>jack.w@example.com</contactEmail>
+            </guest>
+        </guests>
+        
+        <additionalContacts>
+            <contact contactId="CONT-002-A">
+                <name>Robert Thompson</name>
+                <relationship>Father</relationship>
+                <email>robert.thompson@example.com</email>
+                <phone>+44-7700-900236</phone>
+            </contact>
+            <contact contactId="CONT-002-B">
+                <name>Emma Baker</name>
+                <relationship>Local Youth Coordinator</relationship>
+                <email>e.baker@manchesterskate.org</email>
+                <phone>+44-7700-900567</phone>
+            </contact>
+        </additionalContacts>
+        
+        <registrationDetails>
+            <registrationDate>2026-01-18T14:25:00Z</registrationDate>
+            <ticketType>Youth Competitor</ticketType>
+            <paymentStatus>Paid</paymentStatus>
+            <confirmationCode>MAN-HUNT-002-CONF</confirmationCode>
+        </registrationDetails>
+    </registration>
+    
+    <!-- Registration 3: Adult Female Participant (Glasgow Event) -->
+    <registration registrationId="REG-2026-GLA-003" status="confirmed">
+        <event>
+            <eventName>The Predatory Hunt - Glasgow</eventName>
+            <eventDate>2026-03-26</eventDate>
+            <venue>
+                <venueName>Kelvingrove</venueName>
+                <city>Glasgow</city>
+                <nickname>The Northern Peak</nickname>
+                <address>Kelvingrove Park, Glasgow G3 7TA, UK</address>
+            </venue>
+        </event>
+        
+        <mainParticipant>
+            <participantId>PART-003</participantId>
+            <personalInfo>
+                <firstName>Aisha</firstName>
+                <lastName>Patel</lastName>
+                <dateOfBirth>1995-11-30</dateOfBirth>
+                <age>30</age>
+                <gender>Female</gender>
+            </personalInfo>
+            <contactInfo>
+                <email>aisha.patel@example.com</email>
+                <phone>+44-7700-900345</phone>
+                <address>
+                    <street>25 Sauchiehall Street</street>
+                    <city>Glasgow</city>
+                    <postcode>G2 3AD</postcode>
+                    <country>United Kingdom</country>
+                </address>
+            </contactInfo>
+            <emergencyContact>
+                <name>Rajesh Patel</name>
+                <relationship>Brother</relationship>
+                <phone>+44-7700-900346</phone>
+            </emergencyContact>
+            <skateboarding>
+                <experienceLevel>Professional</experienceLevel>
+                <preferredDeck>The Shark</preferredDeck>
+                <specialRequirements>Competing for top prize</specialRequirements>
+            </skateboarding>
+        </mainParticipant>
+        
+        <guests>
+            <guest guestId="GUEST-003-A">
+                <firstName>Priya</firstName>
+                <lastName>Sharma</lastName>
+                <relationship>Friend</relationship>
+                <age>29</age>
+                <contactEmail>priya.s@example.com</contactEmail>
+            </guest>
+        </guests>
+        
+        <additionalContacts>
+            <contact contactId="CONT-003-A">
+                <name>Rajesh Patel</name>
+                <relationship>Brother</relationship>
+                <email>rajesh.patel@example.com</email>
+                <phone>+44-7700-900346</phone>
+            </contact>
+            <contact contactId="CONT-003-B">
+                <name>Marcus Reid</name>
+                <relationship>Sponsor Representative</relationship>
+                <email>m.reid@sponsorco.com</email>
+                <phone>+44-7700-900678</phone>
+            </contact>
+            <contact contactId="CONT-003-C">
+                <name>Lisa McGraw</name>
+                <relationship>Training Partner</relationship>
+                <email>lisa.mcgraw@example.com</email>
+                <phone>+44-7700-900789</phone>
+            </contact>
+        </additionalContacts>
+        
+        <registrationDetails>
+            <registrationDate>2026-01-20T09:15:00Z</registrationDate>
+            <ticketType>Pro Competitor</ticketType>
+            <paymentStatus>Paid</paymentStatus>
+            <confirmationCode>GLA-HUNT-003-CONF</confirmationCode>
+        </registrationDetails>
+    </registration>
+    
+    <!-- Registration 4: Spectator Registration (London Event) -->
+    <registration registrationId="REG-2026-LDN-004" status="pending">
+        <event>
+            <eventName>The Predatory Hunt - London</eventName>
+            <eventDate>2026-03-12</eventDate>
+            <venue>
+                <venueName>Southbank Undercroft</venueName>
+                <city>London</city>
+                <nickname>The Concrete Heart</nickname>
+                <address>Belvedere Road, South Bank, London SE1 8XX, UK</address>
+            </venue>
+        </event>
+        
+        <mainParticipant>
+            <participantId>PART-004</participantId>
+            <personalInfo>
+                <firstName>Sophie</firstName>
+                <lastName>Williams</lastName>
+                <dateOfBirth>2000-02-18</dateOfBirth>
+                <age>26</age>
+                <gender>Female</gender>
+            </personalInfo>
+            <contactInfo>
+                <email>sophie.williams@example.com</email>
+                <phone>+44-7700-900456</phone>
+                <address>
+                    <street>78 Oxford Street</street>
+                    <city>London</city>
+                    <postcode>W1D 1BS</postcode>
+                    <country>United Kingdom</country>
+                </address>
+            </contactInfo>
+            <emergencyContact>
+                <name>Hannah Williams</name>
+                <relationship>Sister</relationship>
+                <phone>+44-7700-900457</phone>
+            </emergencyContact>
+        </mainParticipant>
+        
+        <guests>
+            <guest guestId="GUEST-004-A">
+                <firstName>Daniel</firstName>
+                <lastName>Brown</lastName>
+                <relationship>Partner</relationship>
+                <age>27</age>
+                <contactEmail>daniel.brown@example.com</contactEmail>
+            </guest>
+            <guest guestId="GUEST-004-B">
+                <firstName>Hannah</firstName>
+                <lastName>Williams</lastName>
+                <relationship>Sister</relationship>
+                <age>23</age>
+                <contactEmail>hannah.w@example.com</contactEmail>
+            </guest>
+        </guests>
+        
+        <additionalContacts>
+            <contact contactId="CONT-004-A">
+                <name>Mark Johnson</name>
+                <relationship>Friend</relationship>
+                <email>mark.j@example.com</email>
+                <phone>+44-7700-900890</phone>
+            </contact>
+        </additionalContacts>
+        
+        <registrationDetails>
+            <registrationDate>2026-01-22T16:45:00Z</registrationDate>
+            <ticketType>Spectator</ticketType>
+            <paymentStatus>Pending</paymentStatus>
+            <confirmationCode>LDN-SPEC-004-PEND</confirmationCode>
+        </registrationDetails>
+    </registration>
+    
+    <!-- Registration 5: Underage Participant with Guardian (Glasgow Event) -->
+    <registration registrationId="REG-2026-GLA-005" status="confirmed">
+        <event>
+            <eventName>The Predatory Hunt - Glasgow</eventName>
+            <eventDate>2026-03-26</eventDate>
+            <venue>
+                <venueName>Kelvingrove</venueName>
+                <city>Glasgow</city>
+                <nickname>The Northern Peak</nickname>
+                <address>Kelvingrove Park, Glasgow G3 7TA, UK</address>
+            </venue>
+        </event>
+        
+        <mainParticipant>
+            <participantId>PART-005</participantId>
+            <personalInfo>
+                <firstName>Isla</firstName>
+                <lastName>MacLeod</lastName>
+                <dateOfBirth>2010-06-15</dateOfBirth>
+                <age>15</age>
+                <gender>Female</gender>
+            </personalInfo>
+            <contactInfo>
+                <email>isla.macleod@example.com</email>
+                <phone>+44-7700-900567</phone>
+                <address>
+                    <street>12 Argyle Street</street>
+                    <city>Glasgow</city>
+                    <postcode>G2 8BG</postcode>
+                    <country>United Kingdom</country>
+                </address>
+            </contactInfo>
+            <parentGuardian required="true">
+                <guardianId>GUARD-005</guardianId>
+                <firstName>Duncan</firstName>
+                <lastName>MacLeod</lastName>
+                <relationship>Father</relationship>
+                <dateOfBirth>1978-09-05</dateOfBirth>
+                <contactInfo>
+                    <email>duncan.macleod@example.com</email>
+                    <phone>+44-7700-900568</phone>
+                </contactInfo>
+                <consent>
+                    <consentGiven>true</consentGiven>
+                    <consentDate>2026-01-21T11:00:00Z</consentDate>
+                    <signature>Duncan MacLeod</signature>
+                </consent>
+            </parentGuardian>
+            <emergencyContact>
+                <name>Fiona MacLeod</name>
+                <relationship>Mother</relationship>
+                <phone>+44-7700-900569</phone>
+            </emergencyContact>
+            <skateboarding>
+                <experienceLevel>Advanced</experienceLevel>
+                <preferredDeck>The Bull</preferredDeck>
+                <specialRequirements>Requires vegetarian meal options</specialRequirements>
+            </skateboarding>
+        </mainParticipant>
+        
+        <guests>
+            <guest guestId="GUEST-005-A">
+                <firstName>Duncan</firstName>
+                <lastName>MacLeod</lastName>
+                <relationship>Father (Guardian)</relationship>
+                <age>47</age>
+                <contactEmail>duncan.macleod@example.com</contactEmail>
+            </guest>
+            <guest guestId="GUEST-005-B">
+                <firstName>Fiona</firstName>
+                <lastName>MacLeod</lastName>
+                <relationship>Mother</relationship>
+                <age>45</age>
+                <contactEmail>fiona.macleod@example.com</contactEmail>
+            </guest>
+        </guests>
+        
+        <additionalContacts>
+            <contact contactId="CONT-005-A">
+                <name>Fiona MacLeod</name>
+                <relationship>Mother</relationship>
+                <email>fiona.macleod@example.com</email>
+                <phone>+44-7700-900569</phone>
+            </contact>
+            <contact contactId="CONT-005-B">
+                <name>Sarah Campbell</name>
+                <relationship>Coach</relationship>
+                <email>s.campbell@glasgowskate.org</email>
+                <phone>+44-7700-900991</phone>
+            </contact>
+        </additionalContacts>
+        
+        <registrationDetails>
+            <registrationDate>2026-01-21T11:10:00Z</registrationDate>
+            <ticketType>Youth Competitor</ticketType>
+            <paymentStatus>Paid</paymentStatus>
+            <confirmationCode>GLA-HUNT-005-CONF</confirmationCode>
+        </registrationDetails>
+    </registration>
+    
+</eventRegistrations>
