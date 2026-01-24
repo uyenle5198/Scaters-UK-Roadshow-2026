@@ -151,14 +151,14 @@
         .neon-red-frame{border:2px solid #DC2626;box-shadow:0 0 15px rgba(220,38,38,.6),0 0 30px rgba(220,38,38,.4),inset 0 0 15px rgba(220,38,38,.2);animation:neon-red-frame-pulse 2s ease-in-out infinite alternate}@keyframes neon-red-frame-pulse{from{border-color:rgba(220,38,38,.7);box-shadow:0 0 10px rgba(220,38,38,.4),0 0 20px rgba(220,38,38,.3),inset 0 0 10px rgba(220,38,38,.1)}to{border-color:#DC2626;box-shadow:0 0 20px rgba(220,38,38,.8),0 0 40px rgba(220,38,38,.6),inset 0 0 20px rgba(220,38,38,.3)}}
         .neon-title-intense{color:#fff;text-shadow:0 0 5px rgba(255,255,255,.6),0 0 15px rgba(37,99,235,.6),0 0 30px rgba(37,99,235,.4);animation:neon-pulse-optimized 3s infinite alternate}.neon-sub-intense{color:#fff;text-shadow:0 0 5px rgba(255,255,255,.5),0 0 15px rgba(212,175,55,.5);animation:neon-pulse-gold-optimized 3s ease-in-out infinite alternate}@keyframes neon-pulse-optimized{from{opacity:.8;text-shadow:0 0 5px rgba(255,255,255,.4),0 0 10px rgba(37,99,235,.4)}to{opacity:1;text-shadow:0 0 10px rgba(255,255,255,.7),0 0 20px rgba(37,99,235,.7),0 0 40px rgba(37,99,235,.5)}}@keyframes neon-pulse-gold-optimized{from{opacity:.7;text-shadow:0 0 5px rgba(212,175,55,.3)}to{opacity:1;text-shadow:0 0 10px rgba(255,255,255,.5),0 0 20px rgba(212,175,55,.6)}}.raptor-nav{transition:all .3s ease;background:linear-gradient(to bottom,rgba(5,5,5,.9) 0%,rgba(5,5,5,0) 100%)}.raptor-nav.scrolled{background:rgba(5,5,5,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.1);box-shadow:0 4px 30px rgba(0,0,0,.5)}
 
-        .raptor-chat-window{position:fixed;bottom:80px;right:20px;width:360px;max-width:calc(100vw - 40px);background:rgba(5,5,5,.95);border:1px solid #2563EB;border-radius:8px;z-index:100000;box-shadow:0 10px 40px rgba(0,0,0,.9),0 0 20px rgba(37,99,235,.3);opacity:0;pointer-events:none;transform:translateY(20px);transition:all .3s ease;backdrop-filter:blur(10px)}
-        .raptor-chat-window.active{opacity:1;pointer-events:auto;transform:translateY(0)}
+        .raptor-chat-window{position:fixed;bottom:80px;right:20px;width:360px;max-width:calc(100vw - 40px);background:rgba(5,5,5,.95);border:1px solid #2563EB;border-radius:8px;z-index:100000;box-shadow:0 10px 40px rgba(0,0,0,.9),0 0 20px rgba(37,99,235,.3);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(30px) scale(0.95);transition:opacity .4s cubic-bezier(0.4, 0, 0.2, 1),transform .4s cubic-bezier(0.4, 0, 0.2, 1),visibility .4s;backdrop-filter:blur(10px)}
+        .raptor-chat-window.active{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}
         .raptor-chat-header{padding:12px 16px;background:linear-gradient(135deg,rgba(37,99,235,.15) 0%,rgba(37,99,235,.05) 100%);border-bottom:1px solid #2563EB;border-radius:8px 8px 0 0;display:flex;justify-content:space-between;align-items:center}
-        .raptor-chat-body{height:350px;max-height:calc(100vh - 250px);padding:12px;overflow-y:auto;font-size:12px;color:#ccc;scrollbar-width:thin;scrollbar-color:#2563EB rgba(255,255,255,.1)}
-        .raptor-chat-body::-webkit-scrollbar{width:6px}
-        .raptor-chat-body::-webkit-scrollbar-track{background:rgba(255,255,255,.05);border-radius:3px}
-        .raptor-chat-body::-webkit-scrollbar-thumb{background:#2563EB;border-radius:3px}
-        .raptor-chat-body::-webkit-scrollbar-thumb:hover{background:#1e40af}
+        .raptor-chat-body{height:350px;max-height:calc(100vh - 250px);padding:12px;overflow-y:auto;font-size:12px;color:#ccc;scrollbar-width:thin;scrollbar-color:#D4AF37 rgba(37,99,235,.15)}
+        .raptor-chat-body::-webkit-scrollbar{width:8px}
+        .raptor-chat-body::-webkit-scrollbar-track{background:rgba(37,99,235,.15);border-radius:4px;border:1px solid rgba(37,99,235,.3)}
+        .raptor-chat-body::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#D4AF37 0%,#B8941F 100%);border-radius:4px;border:1px solid rgba(212,175,55,.5);box-shadow:0 0 8px rgba(212,175,55,.4)}
+        .raptor-chat-body::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#FFD700 0%,#D4AF37 100%);box-shadow:0 0 12px rgba(212,175,55,.6)}
         .raptor-chat-footer{padding:12px;border-top:1px solid rgba(37,99,235,.3);border-radius:0 0 8px 8px}
         .raptor-chat-trigger{position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:linear-gradient(135deg,#2563EB 0%,#1e40af 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100001;box-shadow:0 4px 20px rgba(37,99,235,.5);color:#fff;font-size:24px;transition:all .3s;border:2px solid rgba(255,255,255,.1);animation:attractAttention 3s ease-in-out 3s infinite}
         .raptor-chat-trigger:hover{transform:scale(1.15) rotate(8deg);box-shadow:0 8px 40px rgba(37,99,235,.8);animation:none}
@@ -171,6 +171,19 @@
         @keyframes typingHintFadeIn{from{opacity:0}to{opacity:1}}
         #chat-input.typing-hint-active{animation:typingHintFadeIn .5s ease-in}
         @media (prefers-reduced-motion: reduce){#chat-input.typing-hint-active{animation:none}}
+        
+        /* Quick Reply Button Styles */
+        .quick-reply-btn{font-size:11px;padding:8px 14px;margin:4px;background:rgba(37,99,235,.2);border:1px solid #2563EB;border-radius:20px;color:#fff;cursor:pointer;transition:all .3s ease;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+        .quick-reply-btn:hover{background:rgba(37,99,235,.4);transform:translateY(-2px);box-shadow:0 4px 12px rgba(37,99,235,.4)}
+        .quick-reply-btn:active{transform:translateY(0);box-shadow:0 2px 6px rgba(37,99,235,.3)}
+        
+        /* Enhanced Typing Indicator */
+        .typing-indicator{display:flex;align-items:center;gap:4px;padding:8px 12px;background:rgba(37,99,235,.1);border-radius:20px;width:fit-content}
+        .typing-indicator .dot{width:6px;height:6px;border-radius:50%;background:#D4AF37;animation:typingDot 1.4s infinite;box-shadow:0 0 4px rgba(212,175,55,.5)}
+        .typing-indicator .dot:nth-child(1){animation-delay:0s}
+        .typing-indicator .dot:nth-child(2){animation-delay:.2s}
+        .typing-indicator .dot:nth-child(3){animation-delay:.4s}
+        @keyframes typingDot{0%,60%,100%{transform:translateY(0);opacity:.7}30%{transform:translateY(-8px);opacity:1}}
         
         /* Enhanced Deck Showcase Styles */
         .deck-showcase{background:linear-gradient(135deg,rgba(5,5,5,.98) 0%,rgba(15,23,42,.95) 100%);border:2px solid #2563EB;border-radius:12px;padding:16px;margin:8px 0;box-shadow:0 8px 32px rgba(37,99,235,.4),inset 0 0 20px rgba(37,99,235,.1);position:relative;overflow:hidden}
@@ -2845,6 +2858,16 @@
                     <div style="margin-top:8px;font-size:10px;opacity:0.8;">Ask me anything or click a quick action above!</div>
                 </div>
             </div>
+            <!-- Quick Replies Section -->
+            <div style="padding:8px 12px;border-top:1px solid rgba(37,99,235,.2);background:rgba(5,5,5,.5);" id="quick-replies-container">
+                <div style="font-size:9px;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Quick Replies:</div>
+                <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                    <button onclick="sendQuickReply('Hello')" class="quick-reply-btn">👋 Hello</button>
+                    <button onclick="sendQuickReply('I need support')" class="quick-reply-btn">🆘 I need support</button>
+                    <button onclick="sendQuickReply('Tell me about the event')" class="quick-reply-btn">ℹ️ About Event</button>
+                    <button onclick="sendQuickReply('What are the locations?')" class="quick-reply-btn">📍 Locations</button>
+                </div>
+            </div>
             <div class="raptor-chat-footer">
                 <form onsubmit="return false;" id="chat-form">
                     <input type="text" id="chat-input" placeholder="Inquire..." class="w-full bg-transparent border border-white/20 p-2 text-xs text-white outline-none focus:border-scater-royal" autocomplete="off">
@@ -3666,14 +3689,13 @@
 
                 /**
                  * Show typing indicator while AI is processing
-                 * Displays animated "..." to indicate Butler is thinking
+                 * Displays animated dots to indicate Butler is thinking
                  */
                 function showTyping() {
                     const typing = document.createElement('div');
                     typing.className = 'raptor-msg raptor-msg-ai';
                     typing.id = 'raptor-typing';
-                    typing.style.fontStyle = 'italic';
-                    typing.style.opacity = '0.7';
+                    typing.style.opacity = '0.9';
                     
                     const timestamp = document.createElement('div');
                     timestamp.style.fontSize = '9px';
@@ -3683,32 +3705,35 @@
                     timestamp.textContent = getTimestamp();
                     
                     const messageDiv = document.createElement('div');
-                    messageDiv.textContent = 'The Butler is typing';
+                    messageDiv.style.display = 'flex';
+                    messageDiv.style.alignItems = 'center';
+                    messageDiv.style.gap = '8px';
                     
-                    const dotsSpan = document.createElement('span');
-                    dotsSpan.className = 'typing-dots';
-                    messageDiv.appendChild(dotsSpan);
+                    const textSpan = document.createElement('span');
+                    textSpan.textContent = 'The Butler is typing';
+                    textSpan.style.fontStyle = 'italic';
+                    textSpan.style.fontSize = '11px';
+                    
+                    const indicatorDiv = document.createElement('div');
+                    indicatorDiv.className = 'typing-indicator';
+                    for (let i = 0; i < 3; i++) {
+                        const dot = document.createElement('div');
+                        dot.className = 'dot';
+                        indicatorDiv.appendChild(dot);
+                    }
+                    
+                    messageDiv.appendChild(textSpan);
+                    messageDiv.appendChild(indicatorDiv);
                     
                     typing.appendChild(timestamp);
                     typing.appendChild(messageDiv);
                     chatBody.appendChild(typing);
                     chatBody.scrollTop = chatBody.scrollHeight;
-                    
-                    // Animate typing dots
-                    let dotCount = 0;
-                    const interval = setInterval(() => {
-                        dotCount = (dotCount + 1) % 4;
-                        dotsSpan.textContent = '.'.repeat(dotCount);
-                    }, 500);
-                    typing.dataset.intervalId = interval;
                 }
 
                 function hideTyping() {
                     const typing = document.getElementById('raptor-typing');
                     if (typing) {
-                        if (typing.dataset.intervalId) {
-                            clearInterval(parseInt(typing.dataset.intervalId));
-                        }
                         typing.remove();
                     }
                 }
@@ -4295,6 +4320,22 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                 };
 
                 /**
+                 * Send a quick reply message
+                 * @param {string} message - The pre-defined message to send
+                 */
+                window.sendQuickReply = async function(message) {
+                    const chatInput = document.getElementById('chat-input');
+                    const chatForm = document.getElementById('chat-form');
+                    
+                    if (chatInput && chatForm) {
+                        // Set the input value
+                        chatInput.value = message;
+                        // Trigger the form submit event which handles all the logic
+                        chatForm.dispatchEvent(new Event('submit'));
+                    }
+                };
+
+                /**
                  * Generate Enhanced Deck Showcase HTML
                  * Creates a rich, visually striking deck card with all required features
                  * @param {Object} deck - Deck object from appData.products
@@ -4427,8 +4468,8 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                  * @returns {Promise<string>} AI response or fallback response
                  */
                 async function getAIResponse(userMessage, retryCount = 0) {
-                    const MAX_RETRIES = 2;
-                    const RETRY_DELAY_MS = 1000; // Consistent 1 second delay between retries
+                    const MAX_RETRIES = 3; // Increased from 2 to 3 retries
+                    const RETRY_DELAY_MS = 1500; // Increased from 1000ms to 1500ms for better stability
                     
                     // NEW: Check rule-based prompting first (before AI call)
                     const sentimentScores = analyzeSentiment(userMessage);
@@ -4451,7 +4492,14 @@ User Question: ${userMessage}
 Provide a helpful, concise response (2-3 sentences max unless more detail is specifically requested). Maintain the Butler persona.`;
 
                         console.log('Sending request to Gemini API...');
-                        const result = await model.generateContent(prompt);
+                        
+                        // Add timeout to API call
+                        const timeoutPromise = new Promise((_, reject) => 
+                            setTimeout(() => reject(new Error('Request timeout')), 15000)
+                        );
+                        
+                        const apiPromise = model.generateContent(prompt);
+                        const result = await Promise.race([apiPromise, timeoutPromise]);
                         const response = await result.response;
                         const responseText = response.text();
                         
@@ -4487,12 +4535,22 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                         // Retry for transient errors
                         if (isTransient && retryCount < MAX_RETRIES) {
                             console.log(`Transient error detected, retrying (attempt ${retryCount + 1}/${MAX_RETRIES})...`);
-                            // Show user-friendly message in chat
-                            if (retryCount === 0) {
-                                appendMsg('⚠️ Connection issue detected, retrying...', false);
+                            // Show user-friendly message in chat only on first retry
+                            if (retryCount === 0 && statusSpan) {
+                                statusSpan.innerText = 'RECONNECTING...';
                             }
                             await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
-                            return getAIResponse(userMessage, retryCount + 1);
+                            const response = await getAIResponse(userMessage, retryCount + 1);
+                            // Restore status if successful
+                            if (statusSpan && retryCount === 0) {
+                                statusSpan.innerText = 'ONLINE';
+                            }
+                            return response;
+                        }
+                        
+                        // Update status to offline if all retries failed
+                        if (statusSpan) {
+                            statusSpan.innerText = 'OFFLINE';
                         }
                         
                         // Final fallback to local responder
