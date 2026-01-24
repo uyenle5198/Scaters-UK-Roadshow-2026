@@ -2914,9 +2914,10 @@
             
             // Rule 1: Location queries → Mission Brief format
             const locationKeywords = ['where', 'location', 'next event', 'city', 'cities', 'venue'];
+            const locationExclusionTerms = ['hunting zone', 'hunting ground', 'prize location'];
             if (locationKeywords.some(keyword => msgLower.includes(keyword))) {
                 // Check if it's not a prize/hunting zone query
-                if (!msgLower.includes('hunting zone') && !msgLower.includes('hunting ground') && !msgLower.includes('prize location')) {
+                if (!locationExclusionTerms.some(term => msgLower.includes(term))) {
                     console.log('Rule-based: Location query detected');
                     return `<div style="background: linear-gradient(135deg, rgba(37,99,235,0.1) 0%, rgba(37,99,235,0.05) 100%); border-left: 3px solid #2563EB; padding: 12px; border-radius: 4px; margin: 8px 0;">
                         <div style="font-weight: bold; color: #2563EB; margin-bottom: 8px;">🎯 MISSION BRIEFING: Agent, your deployment coordinates are as follows.</div>

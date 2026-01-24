@@ -88,6 +88,10 @@ except ImportError:
 class ScatersRoadshowChatbot:
     """AI-powered chatbot for Scaters Raptor Roadshow 2026."""
     
+    # Constants
+    REGISTRATION_URL = "scaters.com/register"
+    SUPPORT_EMAIL = "support@scaters.com"
+    
     # Roadshow context for scope filtering
     ROADSHOW_CONTEXT = """
     You are The Butler, an AI assistant for Scaters Raptor Roadshow 2026 - "The Predatory Hunt".
@@ -131,7 +135,7 @@ class ScatersRoadshowChatbot:
     - All participants must review safety guidelines posted in February
     - VIP package sales close February 20, 2026
     - Event schedule updates will be posted by February 1, 2026
-    - Registration available at: scaters.com/register
+    - Registration available at: {REGISTRATION_URL}
     
     RAPTOR SKATEBOARD COLLECTION (5 Decks):
     1. The Eagle - Sky Dominator (Aerial dominance, for vert and air tricks)
@@ -649,7 +653,7 @@ What would you like to know?"""
                        "   Tactical Location: Kelvingrove (\"The Northern Peak\")\n"
                        "   Mission Objective: Achieve maximum altitude in Scotland's premier territory\n"
                        "   Intelligence Note: Final opportunity to claim your victory\n\n"
-                       "🔥 Agent, we encourage you to register promptly at scaters.com/register to secure your mission slot. Your adventure awaits!")
+                       f"🔥 Agent, we encourage you to register promptly at {self.REGISTRATION_URL} to secure your mission slot. Your adventure awaits!")
         
         # Rule 2: Safety/Fear queries → Reassurance (check keywords before sentiment)
         safety_keywords = ['safe', 'safety', 'scared', 'fear', 'afraid', 'dangerous', 
@@ -682,7 +686,7 @@ What would you like to know?"""
                    "Agent, we encourage you to secure your registration promptly. Operational slots "
                    "are limited and allocated on a first-come, first-served basis. This is a unique "
                    "opportunity to prove your skills on Britain's premier skateboarding stage. "
-                   "Don't delay - register today at scaters.com/register! 🔥")
+                   f"Don't delay - register today at {self.REGISTRATION_URL}! 🔥")
         
         # Rule 4: Technical support queries → Calm humor with troubleshooting
         tech_keywords = ['technical', 'problem', 'issue', 'error', 'bug', 'broken', 'not working',
@@ -692,21 +696,21 @@ What would you like to know?"""
             # Exclude if it's a safety concern (already handled)
             if not any(word in msg_lower for word in ['safe', 'safety', 'scared', 'fear', 'dangerous']):
                 logger.info("Technical support query detected - using calm humor response")
-                return ("🔧 TECHNICAL SUPPORT DISPATCH: Agent, encountering obstacles is part of every mission!\n\n"
-                       "Let's troubleshoot this together with tactical precision:\n\n"
-                       "**Quick Diagnostic Protocol:**\n"
-                       "1. Refresh your browser (Ctrl+F5 / Cmd+Shift+R) - sometimes systems need a clean slate\n"
-                       "2. Clear your browser cache - old intel can interfere with new operations\n"
-                       "3. Try a different browser (Chrome, Firefox, Safari) - diversify your approach\n"
-                       "4. Check your internet connection - ensure stable comms\n"
-                       "5. Disable browser extensions temporarily - they can be sneaky saboteurs\n\n"
-                       "**Still facing resistance?**\n"
-                       "No worries, Agent! Contact our technical support team at support@scaters.com "
-                       "and include:\n"
-                       "• What you were attempting (registration, form submission, etc.)\n"
-                       "• Any error messages you encountered\n"
-                       "• Your browser and device type\n\n"
-                       "We'll have you back on mission in no time. Stay calm and skate on! 🛹")
+                return (f"🔧 TECHNICAL SUPPORT DISPATCH: Agent, encountering obstacles is part of every mission!\n\n"
+                       f"Let's troubleshoot this together with tactical precision:\n\n"
+                       f"**Quick Diagnostic Protocol:**\n"
+                       f"1. Refresh your browser (Ctrl+F5 / Cmd+Shift+R) - sometimes systems need a clean slate\n"
+                       f"2. Clear your browser cache - old intel can interfere with new operations\n"
+                       f"3. Try a different browser (Chrome, Firefox, Safari) - diversify your approach\n"
+                       f"4. Check your internet connection - ensure stable comms\n"
+                       f"5. Disable browser extensions temporarily - they can be sneaky saboteurs\n\n"
+                       f"**Still facing resistance?**\n"
+                       f"No worries, Agent! Contact our technical support team at {self.SUPPORT_EMAIL} "
+                       f"and include:\n"
+                       f"• What you were attempting (registration, form submission, etc.)\n"
+                       f"• Any error messages you encountered\n"
+                       f"• Your browser and device type\n\n"
+                       f"We'll have you back on mission in no time. Stay calm and skate on! 🛹")
         
         # Rule 5: Frustration detection (negative sentiment with specific keywords)
         frustration_keywords = ['complicated', 'confus', 'difficult', 'hard', 'frustrat', 
