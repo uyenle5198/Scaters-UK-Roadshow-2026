@@ -373,7 +373,7 @@
         <mainParticipant>
             <participantId>PART-004</participantId>
             <personalInfo>
-                <firstName>Peter</firstName>
+                <firstName>Patricia</firstName>
                 <lastName>Jones</lastName>
                 <dateOfBirth>2000-02-18</dateOfBirth>
                 <age>26</age>
@@ -477,7 +477,7 @@
             </contactInfo>
             <parentGuardian required="true">
                 <guardianId>GUARD-005</guardianId>
-                <firstName>Ursula</firstName>
+                <firstName>Ulrich</firstName>
                 <lastName>Scott</lastName>
                 <relationship>Father</relationship>
                 <dateOfBirth>1978-09-05</dateOfBirth>
@@ -490,7 +490,7 @@
                 <consent>
                     <consentGiven>true</consentGiven>
                     <consentDate>2026-01-21T11:00:00Z</consentDate>
-                    <signature>Ursula Scott</signature>
+                    <signature>Ulrich Scott</signature>
                 </consent>
             </parentGuardian>
             <emergencyContact>
@@ -518,7 +518,7 @@
         <guests>
             <!-- Maps to Google Form fields: guest1, guest2 -->
             <guest guestId="GUEST-005-A">
-                <firstName>Ursula</firstName>
+                <firstName>Ulrich</firstName>
                 <lastName>Scott</lastName>
                 <relationship>Father (Guardian)</relationship>
                 <age>47</age>
