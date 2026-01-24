@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eventRegistrations xmlns="https://scaters.com/roadshow-2026"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="https://scaters.com/roadshow-2026 event_registration.xsd">
     
     <!-- 
         Event Registration Data for Scaters UK Roadshow 2026
@@ -33,6 +34,8 @@
             <contactInfo>
                 <email>james.henderson@example.com</email>
                 <phone>+44-7700-900123</phone>
+                <phoneHome>+44-20-7946-0958</phoneHome>
+                <preferredContactMethod>Mobile</preferredContactMethod>
                 <address>
                     <street>42 Camden High Street</street>
                     <city>London</city>
@@ -44,12 +47,21 @@
                 <name>Sarah Henderson</name>
                 <relationship>Spouse</relationship>
                 <phone>+44-7700-900124</phone>
+                <email>sarah.henderson@example.com</email>
             </emergencyContact>
             <skateboarding>
                 <experienceLevel>Advanced</experienceLevel>
                 <preferredDeck>The Eagle</preferredDeck>
+                <boardTypes>Street, Park/Vert</boardTypes>
+                <favoritePros>Geoff Rowley, Lucien Clarke</favoritePros>
                 <specialRequirements>None</specialRequirements>
             </skateboarding>
+            <preferences>
+                <dietaryRequirements>None</dietaryRequirements>
+                <tShirtSize>L</tShirtSize>
+                <waiverSigned>true</waiverSigned>
+                <waiverDate>2026-01-15T10:30:00Z</waiverDate>
+            </preferences>
         </mainParticipant>
         
         <guests>
@@ -80,9 +92,14 @@
         
         <registrationDetails>
             <registrationDate>2026-01-15T10:30:00Z</registrationDate>
+            <lastUpdated>2026-01-15T10:30:00Z</lastUpdated>
             <ticketType>Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
+            <paymentMethod>Credit Card</paymentMethod>
+            <amountPaid currency="GBP">75.00</amountPaid>
+            <paymentDate>2026-01-15T10:32:00Z</paymentDate>
             <confirmationCode>LDN-HUNT-001-CONF</confirmationCode>
+            <dataSource>Google Forms</dataSource>
         </registrationDetails>
     </registration>
     
@@ -111,6 +128,8 @@
             <contactInfo>
                 <email>oliver.thompson@example.com</email>
                 <phone>+44-7700-900234</phone>
+                <phoneHome>+44-161-496-0123</phoneHome>
+                <preferredContactMethod>Email</preferredContactMethod>
                 <address>
                     <street>18 Deansgate</street>
                     <city>Manchester</city>
@@ -138,12 +157,21 @@
                 <name>Robert Thompson</name>
                 <relationship>Father</relationship>
                 <phone>+44-7700-900236</phone>
+                <email>robert.thompson@example.com</email>
             </emergencyContact>
             <skateboarding>
                 <experienceLevel>Intermediate</experienceLevel>
                 <preferredDeck>The Panther</preferredDeck>
+                <boardTypes>Street, Cruiser</boardTypes>
+                <favoritePros>Lucien Clarke, Nyjah Huston</favoritePros>
                 <specialRequirements>First major competition</specialRequirements>
             </skateboarding>
+            <preferences>
+                <dietaryRequirements>None</dietaryRequirements>
+                <tShirtSize>M</tShirtSize>
+                <waiverSigned>true</waiverSigned>
+                <waiverDate>2026-01-18T14:20:00Z</waiverDate>
+            </preferences>
         </mainParticipant>
         
         <guests>
@@ -187,9 +215,14 @@
         
         <registrationDetails>
             <registrationDate>2026-01-18T14:25:00Z</registrationDate>
+            <lastUpdated>2026-01-18T14:25:00Z</lastUpdated>
             <ticketType>Youth Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
+            <paymentMethod>Bank Transfer</paymentMethod>
+            <amountPaid currency="GBP">50.00</amountPaid>
+            <paymentDate>2026-01-18T14:27:00Z</paymentDate>
             <confirmationCode>MAN-HUNT-002-CONF</confirmationCode>
+            <dataSource>Google Forms</dataSource>
         </registrationDetails>
     </registration>
     
@@ -218,6 +251,8 @@
             <contactInfo>
                 <email>aisha.patel@example.com</email>
                 <phone>+44-7700-900345</phone>
+                <phoneHome>+44-141-496-0234</phoneHome>
+                <preferredContactMethod>Mobile</preferredContactMethod>
                 <address>
                     <street>25 Sauchiehall Street</street>
                     <city>Glasgow</city>
@@ -229,12 +264,21 @@
                 <name>Rajesh Patel</name>
                 <relationship>Brother</relationship>
                 <phone>+44-7700-900346</phone>
+                <email>rajesh.patel@example.com</email>
             </emergencyContact>
             <skateboarding>
                 <experienceLevel>Professional</experienceLevel>
                 <preferredDeck>The Shark</preferredDeck>
+                <boardTypes>Street, Park/Vert, Longboard</boardTypes>
+                <favoritePros>Geoff Rowley, Jamie Foy</favoritePros>
                 <specialRequirements>Competing for top prize</specialRequirements>
             </skateboarding>
+            <preferences>
+                <dietaryRequirements>Vegan</dietaryRequirements>
+                <tShirtSize>S</tShirtSize>
+                <waiverSigned>true</waiverSigned>
+                <waiverDate>2026-01-20T09:15:00Z</waiverDate>
+            </preferences>
         </mainParticipant>
         
         <guests>
@@ -270,9 +314,14 @@
         
         <registrationDetails>
             <registrationDate>2026-01-20T09:15:00Z</registrationDate>
+            <lastUpdated>2026-01-20T09:15:00Z</lastUpdated>
             <ticketType>Pro Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
+            <paymentMethod>PayPal</paymentMethod>
+            <amountPaid currency="GBP">100.00</amountPaid>
+            <paymentDate>2026-01-20T09:17:00Z</paymentDate>
             <confirmationCode>GLA-HUNT-003-CONF</confirmationCode>
+            <dataSource>Google Forms</dataSource>
         </registrationDetails>
     </registration>
     
@@ -301,6 +350,8 @@
             <contactInfo>
                 <email>sophie.williams@example.com</email>
                 <phone>+44-7700-900456</phone>
+                <phoneHome>+44-20-7946-0456</phoneHome>
+                <preferredContactMethod>Email</preferredContactMethod>
                 <address>
                     <street>78 Oxford Street</street>
                     <city>London</city>
@@ -312,7 +363,14 @@
                 <name>Hannah Williams</name>
                 <relationship>Sister</relationship>
                 <phone>+44-7700-900457</phone>
+                <email>hannah.w@example.com</email>
             </emergencyContact>
+            <preferences>
+                <dietaryRequirements>None</dietaryRequirements>
+                <tShirtSize>M</tShirtSize>
+                <waiverSigned>true</waiverSigned>
+                <waiverDate>2026-01-22T16:45:00Z</waiverDate>
+            </preferences>
         </mainParticipant>
         
         <guests>
@@ -343,9 +401,11 @@
         
         <registrationDetails>
             <registrationDate>2026-01-22T16:45:00Z</registrationDate>
+            <lastUpdated>2026-01-22T16:45:00Z</lastUpdated>
             <ticketType>Spectator</ticketType>
             <paymentStatus>Pending</paymentStatus>
             <confirmationCode>LDN-SPEC-004-PEND</confirmationCode>
+            <dataSource>Website</dataSource>
         </registrationDetails>
     </registration>
     
@@ -374,6 +434,8 @@
             <contactInfo>
                 <email>isla.macleod@example.com</email>
                 <phone>+44-7700-900567</phone>
+                <phoneHome>+44-141-496-0567</phoneHome>
+                <preferredContactMethod>Mobile</preferredContactMethod>
                 <address>
                     <street>12 Argyle Street</street>
                     <city>Glasgow</city>
@@ -401,12 +463,21 @@
                 <name>Fiona MacLeod</name>
                 <relationship>Mother</relationship>
                 <phone>+44-7700-900569</phone>
+                <email>fiona.macleod@example.com</email>
             </emergencyContact>
             <skateboarding>
                 <experienceLevel>Advanced</experienceLevel>
                 <preferredDeck>The Bull</preferredDeck>
+                <boardTypes>Street, Cruiser</boardTypes>
+                <favoritePros>Leticia Bufoni, Lucien Clarke</favoritePros>
                 <specialRequirements>Requires vegetarian meal options</specialRequirements>
             </skateboarding>
+            <preferences>
+                <dietaryRequirements>Vegetarian</dietaryRequirements>
+                <tShirtSize>S</tShirtSize>
+                <waiverSigned>true</waiverSigned>
+                <waiverDate>2026-01-21T11:00:00Z</waiverDate>
+            </preferences>
         </mainParticipant>
         
         <guests>
@@ -443,9 +514,14 @@
         
         <registrationDetails>
             <registrationDate>2026-01-21T11:10:00Z</registrationDate>
+            <lastUpdated>2026-01-21T11:10:00Z</lastUpdated>
             <ticketType>Youth Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
+            <paymentMethod>Credit Card</paymentMethod>
+            <amountPaid currency="GBP">50.00</amountPaid>
+            <paymentDate>2026-01-21T11:12:00Z</paymentDate>
             <confirmationCode>GLA-HUNT-005-CONF</confirmationCode>
+            <dataSource>Google Forms</dataSource>
         </registrationDetails>
     </registration>
     

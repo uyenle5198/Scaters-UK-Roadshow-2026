@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://scaters.com/roadshow-2026"
+           xmlns="https://scaters.com/roadshow-2026"
+           elementFormDefault="qualified">
+
+    <!-- Root Element -->
+    <xs:element name="eventRegistrations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="registration" type="registrationType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Registration Type -->
+    <xs:complexType name="registrationType">
+        <xs:sequence>
+            <xs:element name="event" type="eventType"/>
+            <xs:element name="mainParticipant" type="participantType"/>
+            <xs:element name="guests" type="guestsType" minOccurs="0"/>
+            <xs:element name="additionalContacts" type="additionalContactsType" minOccurs="0"/>
+            <xs:element name="registrationDetails" type="registrationDetailsType"/>
+        </xs:sequence>
+        <xs:attribute name="registrationId" type="xs:string" use="required"/>
+        <xs:attribute name="status" type="registrationStatusType" use="required"/>
+    </xs:complexType>
+
+    <!-- Event Type -->
+    <xs:complexType name="eventType">
+        <xs:sequence>
+            <xs:element name="eventName" type="xs:string"/>
+            <xs:element name="eventDate" type="xs:date"/>
+            <xs:element name="venue" type="venueType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Venue Type -->
+    <xs:complexType name="venueType">
+        <xs:sequence>
+            <xs:element name="venueName" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="nickname" type="xs:string"/>
+            <xs:element name="address" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Participant Type -->
+    <xs:complexType name="participantType">
+        <xs:sequence>
+            <xs:element name="participantId" type="xs:string"/>
+            <xs:element name="personalInfo" type="personalInfoType"/>
+            <xs:element name="contactInfo" type="contactInfoType"/>
+            <xs:element name="parentGuardian" type="parentGuardianType" minOccurs="0"/>
+            <xs:element name="emergencyContact" type="emergencyContactType"/>
+            <xs:element name="skateboarding" type="skateboardingType" minOccurs="0"/>
+            <xs:element name="preferences" type="preferencesType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Personal Info Type -->
+    <xs:complexType name="personalInfoType">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="dateOfBirth" type="xs:date"/>
+            <xs:element name="age" type="xs:positiveInteger"/>
+            <xs:element name="gender" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Contact Info Type -->
+    <xs:complexType name="contactInfoType">
+        <xs:sequence>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="phone" type="xs:string"/>
+            <xs:element name="phoneHome" type="xs:string" minOccurs="0"/>
+            <xs:element name="preferredContactMethod" type="xs:string" minOccurs="0"/>
+            <xs:element name="address" type="addressType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Address Type -->
+    <xs:complexType name="addressType">
+        <xs:sequence>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="postcode" type="xs:string"/>
+            <xs:element name="country" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Parent Guardian Type -->
+    <xs:complexType name="parentGuardianType">
+        <xs:sequence>
+            <xs:element name="guardianId" type="xs:string"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="relationship" type="xs:string"/>
+            <xs:element name="dateOfBirth" type="xs:date"/>
+            <xs:element name="contactInfo" type="guardianContactInfoType"/>
+            <xs:element name="consent" type="consentType"/>
+        </xs:sequence>
+        <xs:attribute name="required" type="xs:boolean"/>
+    </xs:complexType>
+
+    <!-- Guardian Contact Info Type -->
+    <xs:complexType name="guardianContactInfoType">
+        <xs:sequence>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="phone" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Consent Type -->
+    <xs:complexType name="consentType">
+        <xs:sequence>
+            <xs:element name="consentGiven" type="xs:boolean"/>
+            <xs:element name="consentDate" type="xs:dateTime"/>
+            <xs:element name="signature" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Emergency Contact Type -->
+    <xs:complexType name="emergencyContactType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="relationship" type="xs:string"/>
+            <xs:element name="phone" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Skateboarding Type -->
+    <xs:complexType name="skateboardingType">
+        <xs:sequence>
+            <xs:element name="experienceLevel" type="xs:string"/>
+            <xs:element name="preferredDeck" type="xs:string"/>
+            <xs:element name="boardTypes" type="xs:string" minOccurs="0"/>
+            <xs:element name="favoritePros" type="xs:string" minOccurs="0"/>
+            <xs:element name="specialRequirements" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Preferences Type -->
+    <xs:complexType name="preferencesType">
+        <xs:sequence>
+            <xs:element name="dietaryRequirements" type="dietaryRequirementsType"/>
+            <xs:element name="tShirtSize" type="tShirtSizeType"/>
+            <xs:element name="waiverSigned" type="xs:boolean"/>
+            <xs:element name="waiverDate" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Dietary Requirements Type -->
+    <xs:simpleType name="dietaryRequirementsType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Vegetarian"/>
+            <xs:enumeration value="Vegan"/>
+            <xs:enumeration value="Gluten-Free"/>
+            <xs:enumeration value="Halal"/>
+            <xs:enumeration value="Kosher"/>
+            <xs:enumeration value="Dairy-Free"/>
+            <xs:enumeration value="Nut Allergy"/>
+            <xs:enumeration value="Other"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- T-Shirt Size Type -->
+    <xs:simpleType name="tShirtSizeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="XS"/>
+            <xs:enumeration value="S"/>
+            <xs:enumeration value="M"/>
+            <xs:enumeration value="L"/>
+            <xs:enumeration value="XL"/>
+            <xs:enumeration value="XXL"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Guests Type -->
+    <xs:complexType name="guestsType">
+        <xs:sequence>
+            <xs:element name="guest" type="guestType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Guest Type -->
+    <xs:complexType name="guestType">
+        <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="relationship" type="xs:string"/>
+            <xs:element name="age" type="xs:positiveInteger"/>
+            <xs:element name="contactEmail" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="guestId" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- Additional Contacts Type -->
+    <xs:complexType name="additionalContactsType">
+        <xs:sequence>
+            <xs:element name="contact" type="contactType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Contact Type -->
+    <xs:complexType name="contactType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="relationship" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="phone" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="contactId" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- Registration Details Type -->
+    <xs:complexType name="registrationDetailsType">
+        <xs:sequence>
+            <xs:element name="registrationDate" type="xs:dateTime"/>
+            <xs:element name="lastUpdated" type="xs:dateTime"/>
+            <xs:element name="ticketType" type="xs:string"/>
+            <xs:element name="paymentStatus" type="paymentStatusType"/>
+            <xs:element name="paymentMethod" type="xs:string" minOccurs="0"/>
+            <xs:element name="amountPaid" type="amountPaidType" minOccurs="0"/>
+            <xs:element name="paymentDate" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="confirmationCode" type="xs:string"/>
+            <xs:element name="dataSource" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Amount Paid Type -->
+    <xs:complexType name="amountPaidType">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="currency" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Payment Status Type -->
+    <xs:simpleType name="paymentStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Pending"/>
+            <xs:enumeration value="Paid"/>
+            <xs:enumeration value="Refunded"/>
+            <xs:enumeration value="Cancelled"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Registration Status Type -->
+    <xs:simpleType name="registrationStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="pending"/>
+            <xs:enumeration value="confirmed"/>
+            <xs:enumeration value="cancelled"/>
+            <xs:enumeration value="completed"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
