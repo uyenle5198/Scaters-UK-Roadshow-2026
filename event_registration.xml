@@ -32,7 +32,11 @@
             </personalInfo>
             <contactInfo>
                 <email>james.henderson@example.com</email>
-                <phone>+44-7700-900123</phone>
+                <phones>
+                    <phone type="mobile" preferred="true">+44-7700-900123</phone>
+                    <phone type="home">+44-7700-900124</phone>
+                    <phone type="work">+44-7700-900125</phone>
+                </phones>
                 <address>
                     <street>42 Camden High Street</street>
                     <city>London</city>
@@ -48,6 +52,18 @@
             <skateboarding>
                 <experienceLevel>Advanced</experienceLevel>
                 <preferredDeck>The Eagle</preferredDeck>
+                <typesOfSkateboardsOwned>
+                    <type>Street</type>
+                    <type>Cruiser</type>
+                    <type>Longboard</type>
+                    <type>Park/Vert</type>
+                    <type>Electric</type>
+                </typesOfSkateboardsOwned>
+                <favouriteProSkateboarders>
+                    <skater>Tony Hawk</skater>
+                    <skater>Rodney Mullen</skater>
+                    <skater>Nyjah Huston</skater>
+                </favouriteProSkateboarders>
                 <specialRequirements>None</specialRequirements>
             </skateboarding>
         </mainParticipant>
@@ -58,6 +74,7 @@
                 <lastName>Henderson</lastName>
                 <relationship>Sister</relationship>
                 <age>24</age>
+                <isAdult>true</isAdult>
                 <contactEmail>emily.h@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-001-B">
@@ -65,6 +82,7 @@
                 <lastName>Chen</lastName>
                 <relationship>Friend</relationship>
                 <age>28</age>
+                <isAdult>true</isAdult>
                 <contactEmail>m.chen@example.com</contactEmail>
             </guest>
         </guests>
@@ -80,6 +98,9 @@
         
         <registrationDetails>
             <registrationDate>2026-01-15T10:30:00Z</registrationDate>
+            <preferredEventDate>2026-03-12</preferredEventDate>
+            <preferredEventLocation>London</preferredEventLocation>
+            <doYouWantToParticipateInHuntingGrounds>Yes</doYouWantToParticipateInHuntingGrounds>
             <ticketType>Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
             <confirmationCode>LDN-HUNT-001-CONF</confirmationCode>
@@ -111,7 +132,9 @@
             </personalInfo>
             <contactInfo>
                 <email>oliver.thompson@example.com</email>
-                <phone>+44-7700-900234</phone>
+                <phones>
+                    <phone type="mobile" preferred="true">+44-7700-900234</phone>
+                </phones>
                 <address>
                     <street>18 Deansgate</street>
                     <city>Manchester</city>
@@ -127,7 +150,9 @@
                 <dateOfBirth>1982-03-10</dateOfBirth>
                 <contactInfo>
                     <email>catherine.thompson@example.com</email>
-                    <phone>+44-7700-900235</phone>
+                    <phones>
+                        <phone type="mobile" preferred="true">+44-7700-900235</phone>
+                    </phones>
                 </contactInfo>
                 <consent>
                     <consentGiven>true</consentGiven>
@@ -143,6 +168,15 @@
             <skateboarding>
                 <experienceLevel>Intermediate</experienceLevel>
                 <preferredDeck>The Panther</preferredDeck>
+                <typesOfSkateboardsOwned>
+                    <type>Street</type>
+                    <type>Park/Vert</type>
+                </typesOfSkateboardsOwned>
+                <favouriteProSkateboarders>
+                    <skater>Sky Brown</skater>
+                    <skater>Tom Schaar</skater>
+                    <skater></skater>
+                </favouriteProSkateboarders>
                 <specialRequirements>First major competition</specialRequirements>
             </skateboarding>
         </mainParticipant>
@@ -153,6 +187,7 @@
                 <lastName>Thompson</lastName>
                 <relationship>Mother (Guardian)</relationship>
                 <age>43</age>
+                <isAdult>true</isAdult>
                 <contactEmail>catherine.thompson@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-002-B">
@@ -160,6 +195,7 @@
                 <lastName>Thompson</lastName>
                 <relationship>Sister</relationship>
                 <age>16</age>
+                <isAdult>false</isAdult>
                 <contactEmail>sophie.t@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-002-C">
@@ -167,6 +203,7 @@
                 <lastName>Wilson</lastName>
                 <relationship>Friend</relationship>
                 <age>15</age>
+                <isAdult>false</isAdult>
                 <contactEmail>jack.w@example.com</contactEmail>
             </guest>
         </guests>
@@ -188,6 +225,9 @@
         
         <registrationDetails>
             <registrationDate>2026-01-18T14:25:00Z</registrationDate>
+            <preferredEventDate>2026-03-19</preferredEventDate>
+            <preferredEventLocation>Manchester</preferredEventLocation>
+            <doYouWantToParticipateInHuntingGrounds>Yes</doYouWantToParticipateInHuntingGrounds>
             <ticketType>Youth Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
             <confirmationCode>MAN-HUNT-002-CONF</confirmationCode>
@@ -219,7 +259,10 @@
             </personalInfo>
             <contactInfo>
                 <email>aisha.patel@example.com</email>
-                <phone>+44-7700-900345</phone>
+                <phones>
+                    <phone type="mobile" preferred="true">+44-7700-900345</phone>
+                    <phone type="work">+44-7700-900347</phone>
+                </phones>
                 <address>
                     <street>25 Sauchiehall Street</street>
                     <city>Glasgow</city>
@@ -235,6 +278,16 @@
             <skateboarding>
                 <experienceLevel>Professional</experienceLevel>
                 <preferredDeck>The Shark</preferredDeck>
+                <typesOfSkateboardsOwned>
+                    <type>Street</type>
+                    <type>Park/Vert</type>
+                    <type>Longboard</type>
+                </typesOfSkateboardsOwned>
+                <favouriteProSkateboarders>
+                    <skater>Leticia Bufoni</skater>
+                    <skater>Nyjah Huston</skater>
+                    <skater>Shane O'Neill</skater>
+                </favouriteProSkateboarders>
                 <specialRequirements>Competing for top prize</specialRequirements>
             </skateboarding>
         </mainParticipant>
@@ -245,7 +298,16 @@
                 <lastName>Sharma</lastName>
                 <relationship>Friend</relationship>
                 <age>29</age>
+                <isAdult>true</isAdult>
                 <contactEmail>priya.s@example.com</contactEmail>
+            </guest>
+            <guest guestId="GUEST-003-B">
+                <firstName>Rajesh</firstName>
+                <lastName>Patel</lastName>
+                <relationship>Brother</relationship>
+                <age>32</age>
+                <isAdult>true</isAdult>
+                <contactEmail>rajesh.patel@example.com</contactEmail>
             </guest>
         </guests>
         
@@ -272,6 +334,9 @@
         
         <registrationDetails>
             <registrationDate>2026-01-20T09:15:00Z</registrationDate>
+            <preferredEventDate>2026-03-26</preferredEventDate>
+            <preferredEventLocation>Glasgow</preferredEventLocation>
+            <doYouWantToParticipateInHuntingGrounds>Yes</doYouWantToParticipateInHuntingGrounds>
             <ticketType>Pro Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
             <confirmationCode>GLA-HUNT-003-CONF</confirmationCode>
@@ -303,7 +368,9 @@
             </personalInfo>
             <contactInfo>
                 <email>sophie.williams@example.com</email>
-                <phone>+44-7700-900456</phone>
+                <phones>
+                    <phone type="mobile" preferred="true">+44-7700-900456</phone>
+                </phones>
                 <address>
                     <street>78 Oxford Street</street>
                     <city>London</city>
@@ -324,6 +391,7 @@
                 <lastName>Brown</lastName>
                 <relationship>Partner</relationship>
                 <age>27</age>
+                <isAdult>true</isAdult>
                 <contactEmail>daniel.brown@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-004-B">
@@ -331,6 +399,7 @@
                 <lastName>Williams</lastName>
                 <relationship>Sister</relationship>
                 <age>23</age>
+                <isAdult>true</isAdult>
                 <contactEmail>hannah.w@example.com</contactEmail>
             </guest>
         </guests>
@@ -346,6 +415,9 @@
         
         <registrationDetails>
             <registrationDate>2026-01-22T16:45:00Z</registrationDate>
+            <preferredEventDate>2026-03-12</preferredEventDate>
+            <preferredEventLocation>London</preferredEventLocation>
+            <doYouWantToParticipateInHuntingGrounds>No</doYouWantToParticipateInHuntingGrounds>
             <ticketType>Spectator</ticketType>
             <paymentStatus>Pending</paymentStatus>
             <confirmationCode>LDN-SPEC-004-PEND</confirmationCode>
@@ -377,7 +449,9 @@
             </personalInfo>
             <contactInfo>
                 <email>isla.macleod@example.com</email>
-                <phone>+44-7700-900567</phone>
+                <phones>
+                    <phone type="mobile" preferred="true">+44-7700-900567</phone>
+                </phones>
                 <address>
                     <street>12 Argyle Street</street>
                     <city>Glasgow</city>
@@ -393,7 +467,9 @@
                 <dateOfBirth>1978-09-05</dateOfBirth>
                 <contactInfo>
                     <email>duncan.macleod@example.com</email>
-                    <phone>+44-7700-900568</phone>
+                    <phones>
+                        <phone type="mobile" preferred="true">+44-7700-900568</phone>
+                    </phones>
                 </contactInfo>
                 <consent>
                     <consentGiven>true</consentGiven>
@@ -409,6 +485,15 @@
             <skateboarding>
                 <experienceLevel>Advanced</experienceLevel>
                 <preferredDeck>The Bull</preferredDeck>
+                <typesOfSkateboardsOwned>
+                    <type>Street</type>
+                    <type>Cruiser</type>
+                </typesOfSkateboardsOwned>
+                <favouriteProSkateboarders>
+                    <skater>Sky Brown</skater>
+                    <skater>Leticia Bufoni</skater>
+                    <skater></skater>
+                </favouriteProSkateboarders>
                 <specialRequirements>Requires vegetarian meal options</specialRequirements>
             </skateboarding>
         </mainParticipant>
@@ -419,6 +504,7 @@
                 <lastName>MacLeod</lastName>
                 <relationship>Father (Guardian)</relationship>
                 <age>47</age>
+                <isAdult>true</isAdult>
                 <contactEmail>duncan.macleod@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-005-B">
@@ -426,6 +512,7 @@
                 <lastName>MacLeod</lastName>
                 <relationship>Mother</relationship>
                 <age>45</age>
+                <isAdult>true</isAdult>
                 <contactEmail>fiona.macleod@example.com</contactEmail>
             </guest>
         </guests>
@@ -447,6 +534,9 @@
         
         <registrationDetails>
             <registrationDate>2026-01-21T11:10:00Z</registrationDate>
+            <preferredEventDate>2026-03-26</preferredEventDate>
+            <preferredEventLocation>Glasgow</preferredEventLocation>
+            <doYouWantToParticipateInHuntingGrounds>Yes</doYouWantToParticipateInHuntingGrounds>
             <ticketType>Youth Competitor</ticketType>
             <paymentStatus>Paid</paymentStatus>
             <confirmationCode>GLA-HUNT-005-CONF</confirmationCode>
