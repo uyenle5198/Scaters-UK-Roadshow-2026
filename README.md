@@ -142,6 +142,12 @@ NODE_ENV=development
 - 🔐 **Secure API Keys** - Keys stored in .env file (never committed)
 - 💬 **Interactive Console** - Terminal-based chat interface
 - 🔄 **Fallback Mode** - Works with pattern matching if no API key configured
+- 🎭 **Rule-Based Prompting** - Smart responses for specific query types:
+  - 📍 **Location queries** → Mission Brief format
+  - 🛡️ **Safety/fear concerns** → Reassurance with safety details
+  - 💰 **Prize queries** → FOMO-inducing exclusive reveals
+  - 🛹 **Frustration detection** → Humor and light-hearted support
+- 😊 **Sentiment Analysis** - Detects user emotions using VADER sentiment analysis
 
 ### Usage
 
@@ -155,17 +161,103 @@ The chatbot answers questions about:
 - `quit` or `exit` - End the chat
 - `clear` - Clear chat history
 
-**Example conversation:**
-```
-YOU: Where is the roadshow?
-BUTLER: The Raptor Roadshow visits 3 UK cities:
-• London - March 12, 2026 at Southbank Undercroft
-• Manchester - March 19, 2026 at Projekt MCR
-• Glasgow - March 26, 2026 at Kelvingrove
+**Example conversations:**
 
-YOU: Tell me about the Raptor collection
-BUTLER: The Raptor Collection features 5 premium decks designed for different skating styles...
+**Location Query (Mission Brief Format):**
 ```
+YOU: Where is the next event?
+BUTLER: 🎯 YOUR MISSION: Join us at these tactical locations where the ultimate challenge awaits!
+
+📍 LONDON - March 12, 2026
+   Mission Site: Southbank Undercroft ("The Concrete Heart")
+   Your Mission: Execute precision techniques in the capital's most iconic spot
+...
+```
+
+**Safety Query (Reassurance):**
+```
+YOU: Is it safe to participate?
+BUTLER: We prioritize safety above all else. Rest assured, our events are supervised 
+by professionals and follow strict safety guidelines. All venues have:
+• On-site medical teams and first aid
+• Safety equipment checks
+...
+```
+
+**Prize Query (FOMO Response):**
+```
+YOU: What can I win?
+BUTLER: 💰 The bounty is worth the hunt! We're talking SERIOUS rewards...
+🏆 The prize pool is MASSIVE - but we're keeping some surprises under wraps!
+Join us to uncover what's waiting for YOU at the apex of the hunt.
+```
+
+**Frustration Detection (Humor):**
+```
+YOU: This is so confusing!
+BUTLER: Whoa! Let's take a kickflip back. We got this together. 🛹
+What's bugging you? I'm here to help make this super simple.
+```
+
+### Testing
+
+Run the test suite to verify chatbot functionality:
+```bash
+python test_chatbot.py
+```
+
+The tests verify:
+- ✓ Location queries trigger Mission Brief format
+- ✓ Safety/fear queries provide reassurance
+- ✓ Prize queries create FOMO responses
+- ✓ Frustration is detected and handled with humor
+- ✓ Sentiment analysis works correctly
+- ✓ Chat history is maintained
+
+## 🌐 Web Chatbot (JavaScript)
+
+The website includes an enhanced AI-powered chatbot with the same intelligent features:
+
+### Features
+
+- 🎨 **Styled Responses** - Beautiful gradient-styled responses matching Scaters branding
+- 🧠 **Rule-Based Prompting** - Same smart query detection as Python chatbot:
+  - 📍 Location queries → Mission Brief with blue/royal styling
+  - 🛡️ Safety queries → Reassurance with gold styling  
+  - 💰 Prize queries → FOMO response with purple gradient
+  - 🛹 Frustration → Humor with pink/orange styling
+- 😊 **Browser-Based Sentiment Analysis** - Lightweight sentiment detection in JavaScript
+- 🤖 **AI Integration** - Uses Google Gemini API when available
+- 🔄 **Smart Fallback** - Rule-based responses work without AI API
+
+### Usage
+
+1. Click the binoculars icon in the bottom-right corner
+2. Type your question or use quick action buttons
+3. Experience intelligent, context-aware responses
+
+### Training the Chatbot
+
+To extend or modify the chatbot behavior:
+
+**Python Chatbot (`chatbot.py`):**
+1. Add new keywords to the relevant lists in `_apply_rule_based_prompting()`
+2. Create response templates following the existing pattern
+3. Add tests in `test_chatbot.py` for new scenarios
+4. Run tests to verify: `python test_chatbot.py`
+
+**JavaScript Chatbot (`index.html`):**
+1. Modify `applyRuleBasedPrompting()` function
+2. Add keywords and response HTML with appropriate styling
+3. Test manually in the browser
+4. Use browser console to verify rule detection logs
+
+**Response Styling Guidelines:**
+- Location/Mission: Blue (#2563EB) gradient
+- Safety: Gold (#D4AF37) gradient
+- Prizes: Purple (#8B5CF6) gradient
+- Frustration: Pink/Orange (#EC4899/#F97316) gradient
+- Use emojis for visual appeal (🎯, 🛡️, 💰, 🛹)
 
 ## 📊 SEO & Performance
 
