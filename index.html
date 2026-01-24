@@ -2860,6 +2860,152 @@
     </script>
 
     <script>
+        /**
+         * Simple sentiment analysis for browser-based chatbot
+         * Analyzes user message for positive/negative/neutral sentiment
+         * @param {string} text - Text to analyze
+         * @returns {object} Sentiment scores {compound, neg, neu, pos}
+         */
+        function analyzeSentiment(text) {
+            const lowerText = text.toLowerCase();
+            
+            // Positive words
+            const positiveWords = ['good', 'great', 'awesome', 'amazing', 'love', 'excellent', 
+                                  'fantastic', 'wonderful', 'perfect', 'best', 'happy', 'excited'];
+            
+            // Negative words
+            const negativeWords = ['bad', 'terrible', 'awful', 'hate', 'horrible', 'worst',
+                                  'scared', 'fear', 'worried', 'concerned', 'frustrat', 'confus',
+                                  'difficult', 'hard', 'complicated', 'annoying', 'hurt', 'dangerous'];
+            
+            // Count positive and negative words
+            let posCount = 0;
+            let negCount = 0;
+            
+            positiveWords.forEach(word => {
+                if (lowerText.includes(word)) posCount++;
+            });
+            
+            negativeWords.forEach(word => {
+                if (lowerText.includes(word)) negCount++;
+            });
+            
+            // Calculate scores
+            const total = posCount + negCount;
+            const pos = total > 0 ? posCount / total : 0;
+            const neg = total > 0 ? negCount / total : 0;
+            const neu = total > 0 ? 0 : 1;
+            
+            // Calculate compound score (-1 to 1)
+            const compound = pos - neg;
+            
+            return { compound, neg, neu, pos };
+        }
+        
+        /**
+         * Apply rule-based prompting for specific query patterns
+         * Implements location, safety, prize, and frustration detection rules
+         * @param {string} userMessage - User's input message
+         * @param {object} sentimentScores - Sentiment analysis scores
+         * @returns {string|null} Specialized response or null if no rule matched
+         */
+        function applyRuleBasedPrompting(userMessage, sentimentScores) {
+            const msgLower = userMessage.toLowerCase();
+            
+            // Rule 1: Location queries → Mission Brief format
+            const locationKeywords = ['where', 'location', 'next event', 'city', 'cities', 'venue'];
+            if (locationKeywords.some(keyword => msgLower.includes(keyword))) {
+                // Check if it's not a prize/hunting zone query
+                if (!msgLower.includes('hunting zone') && !msgLower.includes('hunting ground')) {
+                    console.log('Rule-based: Location query detected');
+                    return `<div style="background: linear-gradient(135deg, rgba(37,99,235,0.1) 0%, rgba(37,99,235,0.05) 100%); border-left: 3px solid #2563EB; padding: 12px; border-radius: 4px; margin: 8px 0;">
+                        <div style="font-weight: bold; color: #2563EB; margin-bottom: 8px;">🎯 YOUR MISSION: Join us at these tactical locations where the ultimate challenge awaits!</div>
+                        <div style="margin-top: 10px; line-height: 1.6;">
+                            <div style="margin-bottom: 10px;">
+                                <div style="font-weight: bold; color: #D4AF37;">📍 LONDON - March 12, 2026</div>
+                                <div style="margin-left: 15px; font-size: 11px; color: #ccc;">Mission Site: Southbank Undercroft ("The Concrete Heart")<br>Your Mission: Execute precision techniques in the capital's most iconic spot</div>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="font-weight: bold; color: #D4AF37;">📍 MANCHESTER - March 19, 2026</div>
+                                <div style="margin-left: 15px; font-size: 11px; color: #ccc;">Mission Site: Projekt MCR ("The Industrial Abyss")<br>Your Mission: Dominate the rugged industrial battlefield</div>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <div style="font-weight: bold; color: #D4AF37;">📍 GLASGOW - March 26, 2026</div>
+                                <div style="margin-left: 15px; font-size: 11px; color: #ccc;">Mission Site: Kelvingrove ("The Northern Peak")<br>Your Mission: Reach new heights in Scotland's premier territory</div>
+                            </div>
+                            <div style="color: #2563EB; margin-top: 10px; font-weight: bold;">🔥 Choose your battlefield and claim your victory!</div>
+                        </div>
+                    </div>`;
+                }
+            }
+            
+            // Rule 2: Safety/Fear queries → Reassurance
+            const safetyKeywords = ['safe', 'safety', 'scared', 'fear', 'afraid', 'dangerous', 
+                                   'injury', 'hurt', 'risk', 'worried', 'concern'];
+            if (safetyKeywords.some(keyword => msgLower.includes(keyword))) {
+                console.log('Rule-based: Safety/fear query detected');
+                return `<div style="background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.05) 100%); border-left: 3px solid #D4AF37; padding: 12px; border-radius: 4px; margin: 8px 0;">
+                    <div style="font-weight: bold; color: #D4AF37; margin-bottom: 8px;">🛡️ Safety is Our Priority</div>
+                    <div style="line-height: 1.6; color: #ccc;">
+                        <p style="margin-bottom: 8px;">We prioritize safety above all else. Rest assured, our events are supervised by professionals and follow strict safety guidelines.</p>
+                        <div style="margin-top: 10px; font-size: 11px;">
+                            <div>✓ On-site medical teams and first aid</div>
+                            <div>✓ Safety equipment checks</div>
+                            <div>✓ Professional supervision</div>
+                            <div>✓ Age-appropriate challenges</div>
+                            <div>✓ Clear safety protocols</div>
+                        </div>
+                        <p style="margin-top: 10px; color: #D4AF37; font-weight: bold;">Your safety is our top priority. Feel confident joining The Predatory Hunt!</p>
+                    </div>
+                </div>`;
+            }
+            
+            // Rule 3: Prize/Hunting/Bounty queries → FOMO response
+            const prizeKeywords = ['prize', 'bounty', 'reward', 'money', 'win', 'winning',
+                                  'hunting ground', 'hunt', 'hunting zone', 'what do i get'];
+            if (prizeKeywords.some(keyword => msgLower.includes(keyword))) {
+                console.log('Rule-based: Prize/hunting query detected');
+                return `<div style="background: linear-gradient(135deg, rgba(37,99,235,0.15) 0%, rgba(139,92,246,0.1) 100%); border-left: 3px solid #8B5CF6; padding: 12px; border-radius: 4px; margin: 8px 0; animation: pulse-slow 3s infinite;">
+                    <div style="font-weight: bold; color: #8B5CF6; margin-bottom: 8px;">💰 The Bounty is Worth the Hunt!</div>
+                    <div style="line-height: 1.6; color: #ccc;">
+                        <p style="margin-bottom: 8px;">We're talking SERIOUS rewards...</p>
+                        <div style="margin-top: 10px; font-size: 11px;">
+                            <div style="color: #D4AF37;">🏆 The prize pool is MASSIVE - but we're keeping some surprises under wraps!</div>
+                            <div>🎁 Amazing prizes await those brave enough to join The Predatory Hunt</div>
+                            <div>⚡ Exclusive opportunities for top performers</div>
+                            <div>🎯 Special rewards you won't see anywhere else</div>
+                        </div>
+                        <p style="margin-top: 10px; font-weight: bold; color: #8B5CF6;">Join us to uncover what's waiting for YOU at the apex of the hunt. Don't miss out - this is a once-in-a-lifetime opportunity! Register now before spots run out! 🔥</p>
+                    </div>
+                </div>`;
+            }
+            
+            // Rule 4: Frustration detection
+            const frustrationKeywords = ['complicated', 'confus', 'difficult', 'hard', 'frustrat', 
+                                        'annoying', 'annoyed', 'ugh', 'wtf'];
+            const hasFrustrationKeyword = frustrationKeywords.some(keyword => msgLower.includes(keyword));
+            const hasUnderstandIssue = msgLower.includes("don't understand") || 
+                                      msgLower.includes("dont understand") || 
+                                      msgLower.includes("do not understand");
+            
+            if (hasFrustrationKeyword || hasUnderstandIssue || 
+                (msgLower.includes('why') && (msgLower.includes('hard') || 
+                                              msgLower.includes('difficult') || 
+                                              msgLower.includes('complicated')))) {
+                console.log('Rule-based: Frustration detected');
+                return `<div style="background: linear-gradient(135deg, rgba(236,72,153,0.1) 0%, rgba(251,146,60,0.1) 100%); border-left: 3px solid #EC4899; padding: 12px; border-radius: 4px; margin: 8px 0;">
+                    <div style="font-weight: bold; color: #EC4899; margin-bottom: 8px;">🛹 Whoa! Let's Take a Kickflip Back</div>
+                    <div style="line-height: 1.6; color: #ccc;">
+                        <p>We got this together! What's bugging you? I'm here to help make this super simple.</p>
+                        <p style="margin-top: 8px; color: #F97316; font-weight: bold;">Break it down for me - what specific thing can I clarify? 💬</p>
+                    </div>
+                </div>`;
+            }
+            
+            // No rule matched
+            return null;
+        }
+        
         const appData = {
             products: [
                 { id: 0, name: "The Eagle", nickname: "Sky Dominator", imgs: ["https://i.postimg.cc/MTG3LCmy/Raptor-Deck-White-Background.png"], desc: "Engineered for riders seeking aerial dominance. Optimized for flight stability and confident take-offs, this deck thrives in high-risk, high-reward environments. Eagle riders live for altitude, hang time, and controlled landings. A weapon for those who choose height over safety.", specs: ["Material: Aerospace Grade Canadian Maple", "Size: 8.0\" (Balanced Profile)", "Tech: Hollow Core (20% Weight Reduction)"], terrain: "Big Air, Mega Gaps, Steep Ramps" },
@@ -4230,6 +4376,7 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                 /**
                  * Get AI response with retry logic and validation
                  * Implements robust error handling and automatic fallback
+                 * Enhanced with rule-based prompting and sentiment awareness
                  * @param {string} userMessage - User's input message
                  * @param {number} retryCount - Current retry attempt
                  * @returns {Promise<string>} AI response or fallback response
@@ -4237,6 +4384,14 @@ Your role is to provide helpful, intelligent assistance in a professional yet en
                 async function getAIResponse(userMessage, retryCount = 0) {
                     const MAX_RETRIES = 2;
                     const RETRY_DELAY_MS = 1000; // Consistent 1 second delay between retries
+                    
+                    // NEW: Check rule-based prompting first (before AI call)
+                    const sentimentScores = analyzeSentiment(userMessage);
+                    const ruleResponse = applyRuleBasedPrompting(userMessage, sentimentScores);
+                    if (ruleResponse) {
+                        console.log('Using rule-based prompting response (skipping AI)');
+                        return ruleResponse;
+                    }
                     
                     try {
                         if (!model) {
@@ -4306,6 +4461,14 @@ Provide a helpful, concise response (2-3 sentences max unless more detail is spe
                     try {
                         const t = (msg || '').toString().trim().toLowerCase();
                         if (!t) return "How may I assist with the Roadshow? You may inquire about schedule, locations, registration, pro skaters, the Raptor collection, or ticket booking.";
+
+                        // NEW: Apply rule-based prompting first
+                        const sentimentScores = analyzeSentiment(msg);
+                        const ruleResponse = applyRuleBasedPrompting(msg, sentimentScores);
+                        if (ruleResponse) {
+                            console.log('Using rule-based prompting response');
+                            return ruleResponse;
+                        }
 
                         // Ticket booking queries
                         if (/\b(book|ticket|tickets|booking|reserve|buy)\b/.test(t)) {
