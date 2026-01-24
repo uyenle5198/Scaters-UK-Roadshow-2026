@@ -43,6 +43,7 @@ const GOOGLE_FORM_CONFIG = {
     fields: {
         pref_date: 'entry.123456789',        // Replace with actual entry ID
         pref_loc: 'entry.234567890',         // Replace with actual entry ID
+        hunting_grounds: 'entry.XXXXXXXXX',  // Replace with actual entry ID
         // ... update all other fields
     }
 };
@@ -56,6 +57,7 @@ Here's a complete list of form fields that need to be mapped:
 |--------------|-------------|---------------------|
 | `pref_date` | Preferred Event Date | `entry.XXXXXXXXX` |
 | `pref_loc` | Preferred Event Location | `entry.XXXXXXXXX` |
+| `hunting_grounds` | Participate in Hunting Grounds Challenge | `entry.XXXXXXXXX` |
 | `evening_type` | Evening Event Type | `entry.XXXXXXXXX` |
 | `fullname` | Full Name of Main Entrant | `entry.XXXXXXXXX` |
 | `dob` | Date of Birth | `entry.XXXXXXXXX` |
@@ -84,6 +86,21 @@ Make sure your Google Form has fields in a corresponding order or at least has f
 - **Dropdown fields**: Use "Multiple choice" or "Dropdown" question type
 - **Text fields**: Use "Short answer" question type
 - **Checkbox field** (board_types): Use "Checkboxes" question type
+- **Hunting Grounds Challenge** (hunting_grounds): Use "Multiple choice" question type with "Yes" and "No" options
+
+#### Hunting Grounds Challenge Question
+
+The form includes a question asking participants if they want to participate in the Hunting Grounds Challenge and win prizes. This question appears after the "Preferred Event Location" field.
+
+**Setup Instructions:**
+1. In your Google Form, add a **Multiple choice** question after the "Preferred Event Location" field
+2. Set the question text to: "Do you want to participate in the Hunting Grounds challenge and win prizes?"
+3. Add two options: "Yes" and "No"
+4. Mark this question as **Required**
+5. Inspect the form to find the entry ID (e.g., `entry.987654321`)
+6. Update the `hunting_grounds` field in the `GOOGLE_FORM_CONFIG` with the correct entry ID
+
+**Note:** The form uses custom checkboxes styled for the UI, but the value sent to Google Forms will be either "Yes" or "No" based on the user's selection.
 
 ### 6. Test the Integration
 
