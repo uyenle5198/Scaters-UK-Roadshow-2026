@@ -2493,7 +2493,7 @@
 
                             <div class="relative group/input floating-group">
                                 <input type="date" id="pref_date" required="" class="form-input text-white uppercase" style="color-scheme: dark;">
-                                <label for="pref_date" class="floating-label" style="top: -15px; font-size: 9px; color: #2563EB;">Preferred Event Date</label>
+                                <label for="pref_date" class="floating-label" style="top: -15px; font-size: 9px; color: #2563EB;">Preferred Event Date *</label>
                             </div>
 
                             <div class="relative group/input floating-group">
@@ -2503,8 +2503,22 @@
                                     <option class="bg-black text-white">Manchester (The Industrial Abyss)</option>
                                     <option class="bg-black text-white">Glasgow (The Northern Peak)</option>
                                 </select>
-                                <label for="pref_loc" class="floating-label">Preferred Event Location</label>
+                                <label for="pref_loc" class="floating-label">Preferred Event Location *</label>
                                 <div class="absolute right-0 top-[10px] pointer-events-none text-scater-royal text-xs"><i class="fa-solid fa-caret-down"></i></div>
+                            </div>
+
+                            <div class="relative group/input md:col-span-2 mt-4">
+                                <span class="text-[10px] uppercase font-bold text-scater-royal tracking-widest block mb-3">Do you want to participate in the Hunting Grounds challenge and win prizes? *</span>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center space-x-2 cursor-pointer group/chk">
+                                        <input type="checkbox" id="hunting_grounds_yes" name="hunting_grounds" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm" onchange="handleHuntingGroundsCheckbox('yes')">
+                                        <span class="text-sm text-slate-300 group-hover/chk:text-white transition-colors">Yes</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 cursor-pointer group/chk">
+                                        <input type="checkbox" id="hunting_grounds_no" name="hunting_grounds" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm" onchange="handleHuntingGroundsCheckbox('no')">
+                                        <span class="text-sm text-slate-300 group-hover/chk:text-white transition-colors">No</span>
+                                    </label>
+                                </div>
                             </div>
 
                             <div class="relative group/input floating-group md:col-span-2">
@@ -2525,17 +2539,17 @@
 
                             <div class="relative group/input floating-group">
                                 <input type="text" id="fullname" placeholder=" " required="" class="form-input">
-                                <label for="fullname" class="floating-label">Full Name of Main Entrant</label>
+                                <label for="fullname" class="floating-label">Full Name of Main Entrant *</label>
                             </div>
 
                             <div class="relative group/input floating-group">
                                 <input type="date" id="dob" required="" class="form-input text-white uppercase" style="color-scheme: dark;" onchange="checkAge()">
-                                <label for="dob" class="floating-label" style="top: -15px; font-size: 9px; color: #2563EB;">Date of Birth</label>
+                                <label for="dob" class="floating-label" style="top: -15px; font-size: 9px; color: #2563EB;">Date of Birth *</label>
                             </div>
 
                             <div class="relative group/input floating-group">
                                 <input type="number" id="age" placeholder=" " required="" class="form-input" min="5" max="100" oninput="checkAge()">
-                                <label for="age" class="floating-label">Age</label>
+                                <label for="age" class="floating-label">Age *</label>
                             </div>
 
                             <div class="relative group/input floating-group">
@@ -2546,18 +2560,18 @@
                                     <option class="bg-black text-white">Non-binary / Other</option>
                                     <option class="bg-black text-white">Prefer not to say</option>
                                 </select>
-                                <label for="gender" class="floating-label">Sex / Gender</label>
+                                <label for="gender" class="floating-label">Sex / Gender *</label>
                                 <div class="absolute right-0 top-[10px] pointer-events-none text-scater-royal text-xs"><i class="fa-solid fa-caret-down"></i></div>
                             </div>
 
                             <div class="relative group/input floating-group md:col-span-2">
                                 <input type="email" id="email" placeholder=" " required="" class="form-input">
-                                <label for="email" class="floating-label">Email Address</label>
+                                <label for="email" class="floating-label">Email Address *</label>
                             </div>
 
                             <div class="relative group/input floating-group md:col-span-2">
                                 <input type="text" id="address" placeholder=" " required="" class="form-input">
-                                <label for="address" class="floating-label">Home Address</label>
+                                <label for="address" class="floating-label">Home Address *</label>
                             </div>
 
                             <!-- SECTION 3 (Conditional) -->
@@ -2589,7 +2603,7 @@
 
                             <div class="relative group/input floating-group">
                                 <input type="tel" id="phone_mobile" placeholder=" " required="" class="form-input">
-                                <label for="phone_mobile" class="floating-label">Phone Number (Mobile)</label>
+                                <label for="phone_mobile" class="floating-label">Phone Number (Mobile) *</label>
                             </div>
                             <div class="relative group/input floating-group">
                                 <input type="tel" id="phone_home" placeholder=" " class="form-input">
@@ -2625,7 +2639,7 @@
                                     <option class="bg-black text-white">Advanced</option>
                                     <option class="bg-black text-white">Professional</option>
                                 </select>
-                                <label for="exp_level" class="floating-label">Skateboarding Experience Level</label>
+                                <label for="exp_level" class="floating-label">Skateboarding Experience Level *</label>
                                 <div class="absolute right-0 top-[10px] pointer-events-none text-scater-royal text-xs"><i class="fa-solid fa-caret-down"></i></div>
                             </div>
 
@@ -3106,6 +3120,17 @@
             switchView('events');
         }
 
+        function handleHuntingGroundsCheckbox(selected) {
+            const yesCheckbox = document.getElementById('hunting_grounds_yes');
+            const noCheckbox = document.getElementById('hunting_grounds_no');
+            
+            if (selected === 'yes') {
+                noCheckbox.checked = false;
+            } else if (selected === 'no') {
+                yesCheckbox.checked = false;
+            }
+        }
+
         function checkAge() {
             const ageInput = document.getElementById('age');
             const guardianSection = document.getElementById('guardian-section');
@@ -3126,6 +3151,16 @@
 
         function handleRegistration(e) {
             e.preventDefault(); 
+            
+            // Validate Hunting Grounds checkbox
+            const yesCheckbox = document.getElementById('hunting_grounds_yes');
+            const noCheckbox = document.getElementById('hunting_grounds_no');
+            
+            if (!yesCheckbox.checked && !noCheckbox.checked) {
+                alert('Please select Yes or No for the Hunting Grounds challenge participation.');
+                return false;
+            }
+            
             const btn = e.target.querySelector('button[type="submit"]'); 
             const orig = btn.innerHTML;
 
@@ -3142,6 +3177,9 @@
                     btn.classList.add('bg-scater-royal', 'text-white', 'border-scater-royal');
                     e.target.reset(); 
                     document.getElementById('guardian-section').classList.add('hidden');
+                    // Reset hunting grounds checkboxes
+                    document.getElementById('hunting_grounds_yes').checked = false;
+                    document.getElementById('hunting_grounds_no').checked = false;
                 }, 3000);
             }, 1500); 
 
