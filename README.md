@@ -74,9 +74,9 @@ scaters-raptor-roadshow-2026/
 ## 🎮 Features
 
 ### The Hunt
-- **London** (Mar 12): Southbank Undercroft - "The Concrete Heart"
-- **Manchester** (Mar 19): Projekt MCR - "The Industrial Abyss"
-- **Glasgow** (Mar 26): Kelvingrove - "The Northern Peak"
+- **London** (Apr 04): Southbank Undercroft - "The Concrete Heart"
+- **Manchester** (Apr 06): Projekt MCR - "The Industrial Abyss"
+- **Glasgow** (Apr 09): Kelvingrove - "The Northern Peak"
 
 ### Raptor Collection
 1. **The Eagle** - Sky Dominator (Aerial dominance)
@@ -168,7 +168,7 @@ The chatbot answers questions about:
 YOU: Where is the next event?
 BUTLER: 🎯 YOUR MISSION: Join us at these tactical locations where the ultimate challenge awaits!
 
-📍 LONDON - March 12, 2026
+📍 LONDON - April 04, 2026
    Mission Site: Southbank Undercroft ("The Concrete Heart")
    Your Mission: Execute precision techniques in the capital's most iconic spot
 ...
