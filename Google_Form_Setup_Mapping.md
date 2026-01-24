@@ -178,8 +178,8 @@ To provide the best user experience, organize the form into logical sections:
 
 #### **Section 5: Skateboarding Background**
 - Experience Level
-- Types of Skateboards Owned
-- Favorite Professional Skateboarder(s)
+- Types of Skateboards Owned (optional)
+- Favorite Professional Skateboarder(s) (optional)
 
 #### **Section 6: Guest Information** (Optional)
 - Guest 1 Full Name
