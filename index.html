@@ -2484,207 +2484,45 @@
                             <div class="text-scater-royal opacity-80">ENCRYPTION: <span class="animate-pulse">ACTIVE</span></div>
                         </div>
 
-                        <form class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8" onsubmit="return handleRegistration(event)">
-
-                            <!-- SECTION 1 -->
-                            <div class="md:col-span-2 mt-2">
-                                <h3 class="text-scater-gold font-display uppercase tracking-widest text-lg border-b border-white/10 pb-2 mb-4"><span class="text-white opacity-50 mr-2">01 //</span> Event Preferences</h3>
-                            </div>
-
-                            <div class="relative group/input floating-group">
-                                <input type="date" id="pref_date" required="" class="form-input text-white uppercase" style="color-scheme: dark;">
-                                <label for="pref_date" class="floating-label" style="top: -15px; font-size: 9px; color: #2563EB;">Preferred Event Date</label>
-                            </div>
-
-                            <div class="relative group/input floating-group">
-                                <select id="pref_loc" required="" class="form-input appearance-none cursor-pointer">
-                                    <option value="" disabled="" selected="" hidden=""></option>
-                                    <option class="bg-black text-white">London (The Concrete Heart)</option>
-                                    <option class="bg-black text-white">Manchester (The Industrial Abyss)</option>
-                                    <option class="bg-black text-white">Glasgow (The Northern Peak)</option>
-                                </select>
-                                <label for="pref_loc" class="floating-label">Preferred Event Location</label>
-                                <div class="absolute right-0 top-[10px] pointer-events-none text-scater-royal text-xs"><i class="fa-solid fa-caret-down"></i></div>
-                            </div>
-
-                            <div class="relative group/input floating-group md:col-span-2">
-                                <select id="evening_type" required="" class="form-input appearance-none cursor-pointer">
-                                    <option value="" disabled="" selected="" hidden=""></option>
-                                    <option class="bg-black text-white">Dinner with free drinks</option>
-                                    <option class="bg-black text-white">Talk with Skateboard England representative</option>
-                                    <option class="bg-black text-white">Meet an England Skateboarding Team rider</option>
-                                </select>
-                                <label for="evening_type" class="floating-label">Evening Event Type</label>
-                                <div class="absolute right-0 top-[10px] pointer-events-none text-scater-royal text-xs"><i class="fa-solid fa-caret-down"></i></div>
-                            </div>
-
-                            <!-- SECTION 2 -->
-                            <div class="md:col-span-2 mt-6">
-                                <h3 class="text-scater-gold font-display uppercase tracking-widest text-lg border-b border-white/10 pb-2 mb-4"><span class="text-white opacity-50 mr-2">02 //</span> Main Entrant Details</h3>
-                            </div>
-
-                            <div class="relative group/input floating-group">
-                                <input type="text" id="fullname" placeholder=" " required="" class="form-input">
-                                <label for="fullname" class="floating-label">Full Name of Main Entrant</label>
-                            </div>
-
-                            <div class="relative group/input floating-group">
-                                <input type="date" id="dob" required="" class="form-input text-white uppercase" style="color-scheme: dark;" onchange="checkAge()">
-                                <label for="dob" class="floating-label" style="top: -15px; font-size: 9px; color: #2563EB;">Date of Birth</label>
-                            </div>
-
-                            <div class="relative group/input floating-group">
-                                <input type="number" id="age" placeholder=" " required="" class="form-input" min="5" max="100" oninput="checkAge()">
-                                <label for="age" class="floating-label">Age</label>
-                            </div>
-
-                            <div class="relative group/input floating-group">
-                                <select id="gender" required="" class="form-input appearance-none cursor-pointer">
-                                    <option value="" disabled="" selected="" hidden=""></option>
-                                    <option class="bg-black text-white">Male</option>
-                                    <option class="bg-black text-white">Female</option>
-                                    <option class="bg-black text-white">Non-binary / Other</option>
-                                    <option class="bg-black text-white">Prefer not to say</option>
-                                </select>
-                                <label for="gender" class="floating-label">Sex / Gender</label>
-                                <div class="absolute right-0 top-[10px] pointer-events-none text-scater-royal text-xs"><i class="fa-solid fa-caret-down"></i></div>
-                            </div>
-
-                            <div class="relative group/input floating-group md:col-span-2">
-                                <input type="email" id="email" placeholder=" " required="" class="form-input">
-                                <label for="email" class="floating-label">Email Address</label>
-                            </div>
-
-                            <div class="relative group/input floating-group md:col-span-2">
-                                <input type="text" id="address" placeholder=" " required="" class="form-input">
-                                <label for="address" class="floating-label">Home Address</label>
-                            </div>
-
-                            <!-- SECTION 3 (Conditional) -->
-                            <div id="guardian-section" class="md:col-span-2 mt-6 hidden transition-all duration-500">
-                                <h3 class="text-scater-gold font-display uppercase tracking-widest text-lg border-b border-white/10 pb-2 mb-4 flex items-center gap-2">
-                                    <span class="text-white opacity-50 mr-2">03 //</span> Parent / Guardian Details
-                                    <span class="text-[9px] bg-red-900/50 text-red-300 px-2 py-1 rounded ml-auto font-mono border border-red-500/30">REQUIRED FOR UNDER 18</span>
-                                </h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 p-6 border border-white/10 bg-white/5 rounded-sm">
-                                    <div class="relative group/input floating-group md:col-span-2">
-                                        <input type="text" id="parent_name" placeholder=" " class="form-input border-red-500/50 focus:border-red-500">
-                                        <label for="parent_name" class="floating-label text-red-400">Full Name of Parent / Guardian</label>
-                                    </div>
-                                    <div class="relative group/input floating-group">
-                                        <input type="text" id="parent_rel" placeholder=" " class="form-input border-red-500/50 focus:border-red-500">
-                                        <label for="parent_rel" class="floating-label text-red-400">Relationship to Main Entrant</label>
-                                    </div>
-                                    <div class="relative group/input floating-group">
-                                        <input type="text" id="parent_contact" placeholder=" " class="form-input border-red-500/50 focus:border-red-500">
-                                        <label for="parent_contact" class="floating-label text-red-400">Guardian Contact Details</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- SECTION 4 -->
-                            <div class="md:col-span-2 mt-6">
-                                <h3 class="text-scater-gold font-display uppercase tracking-widest text-lg border-b border-white/10 pb-2 mb-4"><span class="text-white opacity-50 mr-2">04 //</span> Contact Information</h3>
-                            </div>
-
-                            <div class="relative group/input floating-group">
-                                <input type="tel" id="phone_mobile" placeholder=" " required="" class="form-input">
-                                <label for="phone_mobile" class="floating-label">Phone Number (Mobile)</label>
-                            </div>
-                            <div class="relative group/input floating-group">
-                                <input type="tel" id="phone_home" placeholder=" " class="form-input">
-                                <label for="phone_home" class="floating-label">Phone Number (Home)</label>
-                            </div>
-                            <div class="relative group/input floating-group">
-                                <input type="tel" id="phone_work" placeholder=" " class="form-input">
-                                <label for="phone_work" class="floating-label">Phone Number (Work)</label>
-                            </div>
-
-                            <div class="relative group/input floating-group">
-                                <select id="contact_method" required="" class="form-input appearance-none cursor-pointer">
-                                    <option value="" disabled="" selected="" hidden=""></option>
-                                    <option class="bg-black text-white">Mobile</option>
-                                    <option class="bg-black text-white">Home</option>
-                                    <option class="bg-black text-white">Work</option>
-                                    <option class="bg-black text-white">Email</option>
-                                </select>
-                                <label for="contact_method" class="floating-label">Preferred Contact Method</label>
-                                <div class="absolute right-0 top-[10px] pointer-events-none text-scater-royal text-xs"><i class="fa-solid fa-caret-down"></i></div>
-                            </div>
-
-                            <!-- SECTION 5 -->
-                            <div class="md:col-span-2 mt-6">
-                                <h3 class="text-scater-gold font-display uppercase tracking-widest text-lg border-b border-white/10 pb-2 mb-4"><span class="text-white opacity-50 mr-2">05 //</span> Skateboarding Profile</h3>
-                            </div>
-
-                            <div class="relative group/input floating-group md:col-span-2">
-                                <select id="exp_level" required="" class="form-input appearance-none cursor-pointer">
-                                    <option value="" disabled="" selected="" hidden=""></option>
-                                    <option class="bg-black text-white">Beginner</option>
-                                    <option class="bg-black text-white">Intermediate</option>
-                                    <option class="bg-black text-white">Advanced</option>
-                                    <option class="bg-black text-white">Professional</option>
-                                </select>
-                                <label for="exp_level" class="floating-label">Skateboarding Experience Level</label>
-                                <div class="absolute right-0 top-[10px] pointer-events-none text-scater-royal text-xs"><i class="fa-solid fa-caret-down"></i></div>
-                            </div>
-
-                            <div class="md:col-span-2 mt-4">
-                                <span class="text-[10px] uppercase font-bold text-slate-500 tracking-widest block mb-3">Types of Skateboards Owned (Select all that apply)</span>
-                                <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
-                                    <label class="flex items-center space-x-2 cursor-pointer group/chk">
-                                        <input type="checkbox" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
-                                        <span class="text-xs text-slate-300 group-hover/chk:text-white transition-colors">Street</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer group/chk">
-                                        <input type="checkbox" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
-                                        <span class="text-xs text-slate-300 group-hover/chk:text-white transition-colors">Cruiser</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer group/chk">
-                                        <input type="checkbox" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
-                                        <span class="text-xs text-slate-300 group-hover/chk:text-white transition-colors">Longboard</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer group/chk">
-                                        <input type="checkbox" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
-                                        <span class="text-xs text-slate-300 group-hover/chk:text-white transition-colors">Park/Vert</span>
-                                    </label>
-                                    <label class="flex items-center space-x-2 cursor-pointer group/chk">
-                                        <input type="checkbox" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
-                                        <span class="text-xs text-slate-300 group-hover/chk:text-white transition-colors">Electric</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="relative group/input floating-group md:col-span-2 mt-4">
-                                <input type="text" id="fav_pros" placeholder=" " class="form-input">
-                                <label for="fav_pros" class="floating-label">Favourite Professional Skateboarders</label>
-                            </div>
-
-                            <!-- SECTION 6 -->
-                            <div class="md:col-span-2 mt-6">
-                                <h3 class="text-scater-gold font-display uppercase tracking-widest text-lg border-b border-white/10 pb-2 mb-4"><span class="text-white opacity-50 mr-2">06 //</span> Guests (Optional)</h3>
-                                <p class="text-[9px] font-mono text-slate-500 mb-4 uppercase">Maximum Two Guests. Must Be Over 18.</p>
-                            </div>
-
-                            <div class="relative group/input floating-group">
-                                <input type="text" id="guest1" placeholder=" " class="form-input">
-                                <label for="guest1" class="floating-label">Guest 1 'Full Name (18+)</label>
-                            </div>
-                            <div class="relative group/input floating-group">
-                                <input type="text" id="guest2" placeholder=" " class="form-input">
-                                <label for="guest2" class="floating-label">Guest 2 'Full Name (18+)</label>
-                            </div>
-
-                            <!-- CONFIRMATION -->
-                            <div class="md:col-span-2 mt-10 relative">
-                                <button type="submit" class="w-full py-6 bg-scater-royal text-white font-display font-bold uppercase text-2xl tracking-[0.25em] hover:bg-white hover:text-black transition-all duration-300 transform hover:-translate-y-1 rounded-sm relative overflow-hidden group btn-neon">
-                                    <span class="relative z-10 flex items-center justify-center gap-4"><i class="fa-solid fa-crosshairs animate-spin"></i> CONFIRM REGISTRATION <i class="fa-solid fa-crosshairs animate-spin"></i></span>
-                                </button>
-                                <p class="text-[9px] text-slate-500 font-mono mt-4 uppercase tracking-widest opacity-60 text-center leading-relaxed max-w-2xl mx-auto">
-                                    <i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-1"></i> By proceeding, the main entrant confirms that all information provided is accurate and accepts the terms of the event draw and selection process.
+                        <!-- Google Forms iframe Integration -->
+                        <div class="relative w-full">
+                            <!-- 
+                                GOOGLE FORMS INTEGRATION INSTRUCTIONS:
+                                1. Create your Google Form at https://forms.google.com
+                                2. Click "Send" button in the form editor
+                                3. Select the "<>" (Embed HTML) tab
+                                4. Copy the iframe code provided by Google Forms
+                                5. Replace the src URL below with your actual Google Forms embed URL
+                                6. Adjust the height attribute (currently 2000px) based on your form length
+                                   - Short forms (5-10 questions): 1500px
+                                   - Medium forms (10-20 questions): 2000px
+                                   - Long forms (20+ questions): 2500px or more
+                                
+                                Example Google Forms embed URL format:
+                                https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform?embedded=true
+                            -->
+                            <iframe 
+                                src="https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform?embedded=true" 
+                                width="100%" 
+                                height="2000" 
+                                frameborder="0" 
+                                marginheight="0" 
+                                marginwidth="0"
+                                class="rounded-sm"
+                                style="border: 1px solid rgba(37, 99, 235, 0.2); background: transparent;"
+                                title="Scaters Raptor Roadshow 2026 Registration Form">
+                                Loading registration form...
+                            </iframe>
+                            
+                            <div class="mt-6 text-center">
+                                <p class="text-[9px] text-slate-500 font-mono uppercase tracking-widest opacity-60 leading-relaxed max-w-2xl mx-auto">
+                                    <i class="fa-solid fa-shield-halved text-scater-royal mr-1"></i> Your data is securely transmitted via Google Forms encryption
+                                </p>
+                                <p class="text-[9px] text-slate-500 font-mono mt-2 uppercase tracking-widest opacity-60 leading-relaxed max-w-2xl mx-auto">
+                                    <i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-1"></i> By proceeding, you confirm that all information provided is accurate and accept the terms of the event
                                 </p>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </section>
