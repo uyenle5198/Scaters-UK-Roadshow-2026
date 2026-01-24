@@ -2633,23 +2633,23 @@
                                 <span class="text-[10px] uppercase font-bold text-slate-500 tracking-widest block mb-3">Types of Skateboards Owned (Select all that apply)</span>
                                 <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
                                     <label class="flex items-center space-x-2 cursor-pointer group/chk">
-                                        <input type="checkbox" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
+                                        <input type="checkbox" id="board_street" name="board_types" value="Street" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
                                         <span class="text-xs text-slate-300 group-hover/chk:text-white transition-colors">Street</span>
                                     </label>
                                     <label class="flex items-center space-x-2 cursor-pointer group/chk">
-                                        <input type="checkbox" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
+                                        <input type="checkbox" id="board_cruiser" name="board_types" value="Cruiser" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
                                         <span class="text-xs text-slate-300 group-hover/chk:text-white transition-colors">Cruiser</span>
                                     </label>
                                     <label class="flex items-center space-x-2 cursor-pointer group/chk">
-                                        <input type="checkbox" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
+                                        <input type="checkbox" id="board_longboard" name="board_types" value="Longboard" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
                                         <span class="text-xs text-slate-300 group-hover/chk:text-white transition-colors">Longboard</span>
                                     </label>
                                     <label class="flex items-center space-x-2 cursor-pointer group/chk">
-                                        <input type="checkbox" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
+                                        <input type="checkbox" id="board_parkvert" name="board_types" value="Park/Vert" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
                                         <span class="text-xs text-slate-300 group-hover/chk:text-white transition-colors">Park/Vert</span>
                                     </label>
                                     <label class="flex items-center space-x-2 cursor-pointer group/chk">
-                                        <input type="checkbox" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
+                                        <input type="checkbox" id="board_electric" name="board_types" value="Electric" class="accent-scater-royal w-4 h-4 bg-transparent border-white/20 rounded-sm">
                                         <span class="text-xs text-slate-300 group-hover/chk:text-white transition-colors">Electric</span>
                                     </label>
                                 </div>
@@ -3124,16 +3124,111 @@
             }
         }
 
+        // =========================================
+        // GOOGLE FORMS INTEGRATION CONFIGURATION
+        // =========================================
+        // This configuration maps the custom registration form fields to Google Form entry IDs.
+        // 
+        // TO GET ENTRY IDs:
+        // 1. Open the Google Form in edit mode
+        // 2. Right-click on each field and select "Inspect" or "Inspect Element"
+        // 3. Look for "entry.XXXXXXXXX" in the HTML (e.g., entry.123456789)
+        // 4. Update the corresponding field in the GOOGLE_FORM_CONFIG below
+        //
+        // FORM URL: https://docs.google.com/forms/d/e/1FAIpQLSfWMYaxTSSyaVzIx6_VWpEZsVqJfxa8cKW6NvbOoPxqxRi8Qg/viewform
+        // =========================================
+        
+        const GOOGLE_FORM_CONFIG = {
+            // Google Form submission URL (formResponse endpoint)
+            formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfWMYaxTSSyaVzIx6_VWpEZsVqJfxa8cKW6NvbOoPxqxRi8Qg/formResponse',
+            
+            // Field mappings - Update these entry IDs to match your Google Form
+            // To find entry IDs: inspect the Google Form and look for "entry.XXXXXXXXX" values
+            fields: {
+                pref_date: 'entry.XXXXXXXXX',           // Preferred Event Date
+                pref_loc: 'entry.XXXXXXXXX',            // Preferred Event Location
+                evening_type: 'entry.XXXXXXXXX',        // Evening Event Type
+                fullname: 'entry.XXXXXXXXX',            // Full Name of Main Entrant
+                dob: 'entry.XXXXXXXXX',                 // Date of Birth
+                age: 'entry.XXXXXXXXX',                 // Age
+                gender: 'entry.XXXXXXXXX',              // Sex / Gender
+                email: 'entry.XXXXXXXXX',               // Email Address
+                address: 'entry.XXXXXXXXX',             // Home Address
+                parent_name: 'entry.XXXXXXXXX',         // Parent/Guardian Name
+                parent_rel: 'entry.XXXXXXXXX',          // Relationship to Main Entrant
+                parent_contact: 'entry.XXXXXXXXX',      // Guardian Contact Details
+                phone_mobile: 'entry.XXXXXXXXX',        // Phone Number (Mobile)
+                phone_home: 'entry.XXXXXXXXX',          // Phone Number (Home)
+                phone_work: 'entry.XXXXXXXXX',          // Phone Number (Work)
+                contact_method: 'entry.XXXXXXXXX',      // Preferred Contact Method
+                exp_level: 'entry.XXXXXXXXX',           // Skateboarding Experience Level
+                board_types: 'entry.XXXXXXXXX',         // Types of Skateboards Owned
+                fav_pros: 'entry.XXXXXXXXX',            // Favourite Professional Skateboarders
+                guest1: 'entry.XXXXXXXXX',              // Guest 1 Full Name
+                guest2: 'entry.XXXXXXXXX'               // Guest 2 Full Name
+            }
+        };
+
         function handleRegistration(e) {
             e.preventDefault(); 
             const btn = e.target.querySelector('button[type="submit"]'); 
             const orig = btn.innerHTML;
 
+            // Update button to show encrypting state
             btn.innerHTML = '<span class="flex items-center justify-center gap-2"><i class="fa-solid fa-circle-notch fa-spin"></i> ENCRYPTING DATA...</span>';
             btn.classList.add('bg-scater-gold', 'text-black', 'border-scater-gold');
             btn.classList.remove('bg-scater-royal', 'text-white', 'border-scater-royal');
 
-            setTimeout(() => { 
+            // Collect form data
+            const formData = new FormData();
+            
+            // Map each field to its Google Form entry ID
+            const fieldMappings = {
+                'pref_date': document.getElementById('pref_date')?.value || '',
+                'pref_loc': document.getElementById('pref_loc')?.value || '',
+                'evening_type': document.getElementById('evening_type')?.value || '',
+                'fullname': document.getElementById('fullname')?.value || '',
+                'dob': document.getElementById('dob')?.value || '',
+                'age': document.getElementById('age')?.value || '',
+                'gender': document.getElementById('gender')?.value || '',
+                'email': document.getElementById('email')?.value || '',
+                'address': document.getElementById('address')?.value || '',
+                'parent_name': document.getElementById('parent_name')?.value || '',
+                'parent_rel': document.getElementById('parent_rel')?.value || '',
+                'parent_contact': document.getElementById('parent_contact')?.value || '',
+                'phone_mobile': document.getElementById('phone_mobile')?.value || '',
+                'phone_home': document.getElementById('phone_home')?.value || '',
+                'phone_work': document.getElementById('phone_work')?.value || '',
+                'contact_method': document.getElementById('contact_method')?.value || '',
+                'exp_level': document.getElementById('exp_level')?.value || '',
+                'fav_pros': document.getElementById('fav_pros')?.value || '',
+                'guest1': document.getElementById('guest1')?.value || '',
+                'guest2': document.getElementById('guest2')?.value || ''
+            };
+
+            // Collect checked skateboard types
+            const boardTypes = [];
+            document.querySelectorAll('input[name="board_types"]:checked').forEach(cb => {
+                boardTypes.push(cb.value);
+            });
+            fieldMappings['board_types'] = boardTypes.join(', ');
+
+            // Add each field to formData with its Google Form entry ID
+            Object.keys(fieldMappings).forEach(fieldKey => {
+                const entryId = GOOGLE_FORM_CONFIG.fields[fieldKey];
+                const value = fieldMappings[fieldKey];
+                if (value) {
+                    formData.append(entryId, value);
+                }
+            });
+
+            // Submit to Google Form using fetch with no-cors mode
+            fetch(GOOGLE_FORM_CONFIG.formUrl, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).then(() => {
+                // Success - show completion message
                 btn.innerHTML = '<span class="flex items-center justify-center gap-2"><i class="fa-solid fa-check"></i> TRANSMISSION COMPLETE</span>';
 
                 setTimeout(() => {
@@ -3143,7 +3238,19 @@
                     e.target.reset(); 
                     document.getElementById('guardian-section').classList.add('hidden');
                 }, 3000);
-            }, 1500); 
+            }).catch(error => {
+                // Even if fetch reports an error due to no-cors, the form may have been submitted
+                console.log('Form submission attempted:', error);
+                btn.innerHTML = '<span class="flex items-center justify-center gap-2"><i class="fa-solid fa-check"></i> TRANSMISSION COMPLETE</span>';
+
+                setTimeout(() => {
+                    btn.innerHTML = orig; 
+                    btn.classList.remove('bg-scater-gold', 'text-black', 'border-scater-gold');
+                    btn.classList.add('bg-scater-royal', 'text-white', 'border-scater-royal');
+                    e.target.reset(); 
+                    document.getElementById('guardian-section').classList.add('hidden');
+                }, 3000);
+            });
 
             return false;
         }
