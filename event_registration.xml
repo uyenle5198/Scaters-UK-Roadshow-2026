@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RaptorEveningEventEntries xmlns="https://scaters.com/roadshow-2026"
-                          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<eventRegistrations xmlns="https://scaters.com/roadshow-2026"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <!-- Entry 1: London (Adult, 18+) -->
   <Entry id="REG-2026-LON-001">
@@ -17,31 +17,25 @@
     <email>james.henderson@example.com</email>
     <address>42 Camden High Street, London, NW1 0LT, United Kingdom</address>
 
-    <!-- Parent/Guardian (not required for adults) -->
     <parent_name></parent_name>
     <parent_rel></parent_rel>
     <parent_contact></parent_contact>
 
-    <!-- Contact details -->
     <phone_mobile>+44 7700 900123</phone_mobile>
     <phone_home>+44 20 7946 0123</phone_home>
     <phone_work>+44 20 7946 0456</phone_work>
     <contact_method>mobile</contact_method>
 
-    <!-- Skateboarding Experience Level -->
     <exp_level>Intermediate</exp_level>
 
-    <!-- Types of skateboards owned -->
     <board_types>
       <board>Street Deck</board>
       <board>Cruiser</board>
       <board>Longboard</board>
     </board_types>
 
-    <!-- Favourite professional skateboarder (Short Answer) -->
     <fav_pros>Lucien Clarke</fav_pros>
 
-    <!-- Guests -->
     <guest1>Emily Carter</guest1>
     <guest2>Daniel Brooks</guest2>
   </Entry>
@@ -135,7 +129,6 @@
     <email>charlie.evans@example.com</email>
     <address>7 King Street, London, WC2E 8HD, United Kingdom</address>
 
-    <!-- Parent/Guardian (required because under 18) -->
     <parent_name>Sarah Evans</parent_name>
     <parent_rel>Mother</parent_rel>
     <parent_contact>Mobile: +44 7700 902222; Email: sarah.evans@example.com</parent_contact>
@@ -158,4 +151,4 @@
     <guest2>Lewis Martin</guest2>
   </Entry>
 
-</RaptorEveningEventEntries>
+</eventRegistrations>
