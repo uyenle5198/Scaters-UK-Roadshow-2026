@@ -272,11 +272,15 @@ Each registration creates an `<Entry>` element with a unique ID:
 </Entry>
 ```
 
-The ID format: `REG-YYYY-LOC-NNN` where:
+The ID format: 
+- **For adults (18+)**: `REG-YYYY-LOC-NNN`
+- **For minors (<18)**: `REG-YYYY-LOC-U18-NNN`
+
+Where:
 - `YYYY` = Year (2026)
 - `LOC` = Location code (LON, MAN, GLA)
-- `NNN` = Sequential number
-- Additional suffix `-U18` for under-18 participants
+- `U18` = Marker for under-18 participants (only present for minors)
+- `NNN` = Sequential number (e.g., 001, 002, 003)
 
 ---
 
