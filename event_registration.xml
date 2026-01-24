@@ -1,566 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eventRegistrations xmlns="https://scaters.com/roadshow-2026"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    
-    <!-- 
-        Event Registration Data for Scaters UK Roadshow 2026
-        This document contains registration information for participants
-        attending the Predatory Hunt events across the UK.
-    -->
-    
-    <!-- Registration 1: Adult Participant (London Event) -->
-    <!-- Maps to Google Form fields: fullname, dob, age, gender, email, address, phone_mobile, phone_home, phone_work -->
-    <registration registrationId="REG-2026-LDN-001" status="confirmed">
-        <event>
-            <eventName>The Predatory Hunt - London</eventName>
-            <eventDate>2026-03-12</eventDate>
-            <venue>
-                <venueName>Southbank Undercroft</venueName>
-                <city>London</city>
-                <nickname>The Concrete Heart</nickname>
-                <address>Belvedere Road, South Bank, London SE1 8XX, UK</address>
-            </venue>
-        </event>
-        
-        <mainParticipant>
-            <participantId>PART-001</participantId>
-            <personalInfo>
-                <firstName>John</firstName>
-                <lastName>Doe</lastName>
-                <dateOfBirth>1998-05-14</dateOfBirth>
-                <age>27</age>
-                <gender>Male</gender>
-            </personalInfo>
-            <contactInfo>
-                <email>dummy.email1@example.com</email>
-                <phones>
-                    <phone type="mobile" preferred="true">+44-7000-000001</phone>
-                    <phone type="home">+44-2000-000001</phone>
-                    <phone type="work">+44-2000-000002</phone>
-                </phones>
-                <address>
-                    <street>123 Fake Street</street>
-                    <city>London</city>
-                    <postcode>SW1A 1AA</postcode>
-                    <country>United Kingdom</country>
-                </address>
-            </contactInfo>
-            <emergencyContact>
-                <name>Jane Doe</name>
-                <relationship>Spouse</relationship>
-                <phone>+44-7000-000002</phone>
-            </emergencyContact>
-            <skateboarding>
-                <!-- Maps to Google Form fields: exp_level, board_types, fav_pros -->
-                <experienceLevel>Advanced</experienceLevel>
-                <preferredDeck>The Eagle</preferredDeck>
-                <typesOfSkateboardsOwned>
-                    <type>Street</type>
-                    <type>Cruiser</type>
-                    <type>Longboard</type>
-                    <type>Park/Vert</type>
-                    <type>Electric</type>
-                </typesOfSkateboardsOwned>
-                <favouriteProSkateboarders>
-                    <skater>Tony Hawk</skater>
-                    <skater>Rodney Mullen</skater>
-                    <skater>Nyjah Huston</skater>
-                </favouriteProSkateboarders>
-                <specialRequirements>None</specialRequirements>
-            </skateboarding>
-        </mainParticipant>
-        
-        <guests>
-            <!-- Maps to Google Form fields: guest1, guest2 -->
-            <guest guestId="GUEST-001-A">
-                <firstName>Alice</firstName>
-                <lastName>Doe</lastName>
-                <relationship>Sister</relationship>
-                <age>24</age>
-                <isAdult>true</isAdult>
-                <contactEmail>dummy.email2@example.com</contactEmail>
-            </guest>
-            <guest guestId="GUEST-001-B">
-                <firstName>Bob</firstName>
-                <lastName>Smith</lastName>
-                <relationship>Friend</relationship>
-                <age>28</age>
-                <isAdult>true</isAdult>
-                <contactEmail>dummy.email3@example.com</contactEmail>
-            </guest>
-        </guests>
-        
-        <additionalContacts>
-            <contact contactId="CONT-001-A">
-                <name>Charlie Johnson</name>
-                <relationship>Coach</relationship>
-                <email>dummy.email4@example.com</email>
-                <phone>+44-7000-000003</phone>
-            </contact>
-        </additionalContacts>
-        
-        <registrationDetails>
-            <!-- Maps to Google Form fields: pref_date, pref_loc, hunting_grounds -->
-            <registrationDate>2026-01-15T10:30:00Z</registrationDate>
-            <preferredEventDate>2026-03-12</preferredEventDate>
-            <preferredEventLocation>London</preferredEventLocation>
-            <doYouWantToParticipateInHuntingGrounds>Yes</doYouWantToParticipateInHuntingGrounds>
-            <ticketType>Competitor</ticketType>
-            <paymentStatus>Paid</paymentStatus>
-            <confirmationCode>LDN-HUNT-001-CONF</confirmationCode>
-            <additionalInfo>Do you want to participate in the Hunting Grounds challenge and win prizes?</additionalInfo>
-        </registrationDetails>
-    </registration>
-    
-    <!-- Registration 2: Underage Participant with Guardian (Manchester Event) -->
-    <!-- Maps to Google Form fields: fullname, dob, age, gender, email, address, phone_mobile, parent_name, parent_rel, parent_contact -->
-    <registration registrationId="REG-2026-MAN-002" status="confirmed">
-        <event>
-            <eventName>The Predatory Hunt - Manchester</eventName>
-            <eventDate>2026-03-19</eventDate>
-            <venue>
-                <venueName>Projekt MCR</venueName>
-                <city>Manchester</city>
-                <nickname>The Industrial Abyss</nickname>
-                <address>New Wakefield Street, Manchester M1 5NP, UK</address>
-            </venue>
-        </event>
-        
-        <mainParticipant>
-            <participantId>PART-002</participantId>
-            <personalInfo>
-                <firstName>David</firstName>
-                <lastName>Miller</lastName>
-                <dateOfBirth>2011-08-22</dateOfBirth>
-                <age>14</age>
-                <gender>Male</gender>
-            </personalInfo>
-            <contactInfo>
-                <email>dummy.email5@example.com</email>
-                <phones>
-                    <phone type="mobile" preferred="true">+44-7000-000004</phone>
-                </phones>
-                <address>
-                    <street>456 Placeholder Road</street>
-                    <city>Manchester</city>
-                    <postcode>M1 1AA</postcode>
-                    <country>United Kingdom</country>
-                </address>
-            </contactInfo>
-            <parentGuardian required="true">
-                <guardianId>GUARD-002</guardianId>
-                <firstName>Emma</firstName>
-                <lastName>Miller</lastName>
-                <relationship>Mother</relationship>
-                <dateOfBirth>1982-03-10</dateOfBirth>
-                <contactInfo>
-                    <email>dummy.email6@example.com</email>
-                    <phones>
-                        <phone type="mobile" preferred="true">+44-7000-000005</phone>
-                    </phones>
-                </contactInfo>
-                <consent>
-                    <consentGiven>true</consentGiven>
-                    <consentDate>2026-01-18T14:20:00Z</consentDate>
-                    <signature>Emma Miller</signature>
-                </consent>
-            </parentGuardian>
-            <emergencyContact>
-                <name>Frank Miller</name>
-                <relationship>Father</relationship>
-                <phone>+44-7000-000006</phone>
-            </emergencyContact>
-            <skateboarding>
-                <!-- Maps to Google Form fields: exp_level, board_types, fav_pros -->
-                <experienceLevel>Intermediate</experienceLevel>
-                <preferredDeck>The Panther</preferredDeck>
-                <typesOfSkateboardsOwned>
-                    <type>Street</type>
-                    <type>Park/Vert</type>
-                </typesOfSkateboardsOwned>
-                <favouriteProSkateboarders>
-                    <skater>Sky Brown</skater>
-                    <skater>Tom Schaar</skater>
-                    <skater></skater>
-                </favouriteProSkateboarders>
-                <specialRequirements>First major competition</specialRequirements>
-            </skateboarding>
-        </mainParticipant>
-        
-        <guests>
-            <!-- Maps to Google Form fields: guest1, guest2 -->
-            <guest guestId="GUEST-002-A">
-                <firstName>Emma</firstName>
-                <lastName>Miller</lastName>
-                <relationship>Mother (Guardian)</relationship>
-                <age>43</age>
-                <isAdult>true</isAdult>
-                <contactEmail>dummy.email6@example.com</contactEmail>
-            </guest>
-            <guest guestId="GUEST-002-B">
-                <firstName>Grace</firstName>
-                <lastName>Miller</lastName>
-                <relationship>Sister</relationship>
-                <age>16</age>
-                <isAdult>false</isAdult>
-                <contactEmail>dummy.email7@example.com</contactEmail>
-            </guest>
-            <guest guestId="GUEST-002-C">
-                <firstName>Henry</firstName>
-                <lastName>Wilson</lastName>
-                <relationship>Friend</relationship>
-                <age>15</age>
-                <isAdult>false</isAdult>
-                <contactEmail>dummy.email8@example.com</contactEmail>
-            </guest>
-        </guests>
-        
-        <additionalContacts>
-            <contact contactId="CONT-002-A">
-                <name>Frank Miller</name>
-                <relationship>Father</relationship>
-                <email>dummy.email9@example.com</email>
-                <phone>+44-7000-000006</phone>
-            </contact>
-            <contact contactId="CONT-002-B">
-                <name>Ivy Brown</name>
-                <relationship>Local Youth Coordinator</relationship>
-                <email>dummy.email10@example.com</email>
-                <phone>+44-7000-000007</phone>
-            </contact>
-        </additionalContacts>
-        
-        <registrationDetails>
-            <!-- Maps to Google Form fields: pref_date, pref_loc, hunting_grounds -->
-            <registrationDate>2026-01-18T14:25:00Z</registrationDate>
-            <preferredEventDate>2026-03-19</preferredEventDate>
-            <preferredEventLocation>Manchester</preferredEventLocation>
-            <doYouWantToParticipateInHuntingGrounds>Yes</doYouWantToParticipateInHuntingGrounds>
-            <ticketType>Youth Competitor</ticketType>
-            <paymentStatus>Paid</paymentStatus>
-            <confirmationCode>MAN-HUNT-002-CONF</confirmationCode>
-            <additionalInfo>Do you want to participate in the Hunting Grounds challenge and win prizes?</additionalInfo>
-        </registrationDetails>
-    </registration>
-    
-    <!-- Registration 3: Adult Female Participant (Glasgow Event) -->
-    <!-- Maps to Google Form fields: fullname, dob, age, gender, email, address, phone_mobile, phone_work -->
-    <registration registrationId="REG-2026-GLA-003" status="confirmed">
-        <event>
-            <eventName>The Predatory Hunt - Glasgow</eventName>
-            <eventDate>2026-03-26</eventDate>
-            <venue>
-                <venueName>Kelvingrove</venueName>
-                <city>Glasgow</city>
-                <nickname>The Northern Peak</nickname>
-                <address>Kelvingrove Park, Glasgow G3 7TA, UK</address>
-            </venue>
-        </event>
-        
-        <mainParticipant>
-            <participantId>PART-003</participantId>
-            <personalInfo>
-                <firstName>Kate</firstName>
-                <lastName>Anderson</lastName>
-                <dateOfBirth>1995-11-30</dateOfBirth>
-                <age>30</age>
-                <gender>Female</gender>
-            </personalInfo>
-            <contactInfo>
-                <email>dummy.email11@example.com</email>
-                <phones>
-                    <phone type="mobile" preferred="true">+44-7000-000008</phone>
-                    <phone type="work">+44-2000-000003</phone>
-                </phones>
-                <address>
-                    <street>789 Sample Avenue</street>
-                    <city>Glasgow</city>
-                    <postcode>G1 1AA</postcode>
-                    <country>United Kingdom</country>
-                </address>
-            </contactInfo>
-            <emergencyContact>
-                <name>Luke Anderson</name>
-                <relationship>Brother</relationship>
-                <phone>+44-7000-000009</phone>
-            </emergencyContact>
-            <skateboarding>
-                <!-- Maps to Google Form fields: exp_level, board_types, fav_pros -->
-                <experienceLevel>Professional</experienceLevel>
-                <preferredDeck>The Shark</preferredDeck>
-                <typesOfSkateboardsOwned>
-                    <type>Street</type>
-                    <type>Park/Vert</type>
-                    <type>Longboard</type>
-                </typesOfSkateboardsOwned>
-                <favouriteProSkateboarders>
-                    <skater>Leticia Bufoni</skater>
-                    <skater>Nyjah Huston</skater>
-                    <skater>Shane O'Neill</skater>
-                </favouriteProSkateboarders>
-                <specialRequirements>Competing for top prize</specialRequirements>
-            </skateboarding>
-        </mainParticipant>
-        
-        <guests>
-            <!-- Maps to Google Form fields: guest1, guest2 -->
-            <guest guestId="GUEST-003-A">
-                <firstName>Mary</firstName>
-                <lastName>Taylor</lastName>
-                <relationship>Friend</relationship>
-                <age>29</age>
-                <isAdult>true</isAdult>
-                <contactEmail>dummy.email12@example.com</contactEmail>
-            </guest>
-            <guest guestId="GUEST-003-B">
-                <firstName>Luke</firstName>
-                <lastName>Anderson</lastName>
-                <relationship>Brother</relationship>
-                <age>32</age>
-                <isAdult>true</isAdult>
-                <contactEmail>dummy.email13@example.com</contactEmail>
-            </guest>
-        </guests>
-        
-        <additionalContacts>
-            <contact contactId="CONT-003-A">
-                <name>Luke Anderson</name>
-                <relationship>Brother</relationship>
-                <email>dummy.email13@example.com</email>
-                <phone>+44-7000-000009</phone>
-            </contact>
-            <contact contactId="CONT-003-B">
-                <name>Nathan Clark</name>
-                <relationship>Sponsor Representative</relationship>
-                <email>dummy.email14@example.com</email>
-                <phone>+44-7000-000010</phone>
-            </contact>
-            <contact contactId="CONT-003-C">
-                <name>Olivia White</name>
-                <relationship>Training Partner</relationship>
-                <email>dummy.email15@example.com</email>
-                <phone>+44-7000-000011</phone>
-            </contact>
-        </additionalContacts>
-        
-        <registrationDetails>
-            <!-- Maps to Google Form fields: pref_date, pref_loc, hunting_grounds -->
-            <registrationDate>2026-01-20T09:15:00Z</registrationDate>
-            <preferredEventDate>2026-03-26</preferredEventDate>
-            <preferredEventLocation>Glasgow</preferredEventLocation>
-            <doYouWantToParticipateInHuntingGrounds>Yes</doYouWantToParticipateInHuntingGrounds>
-            <ticketType>Pro Competitor</ticketType>
-            <paymentStatus>Paid</paymentStatus>
-            <confirmationCode>GLA-HUNT-003-CONF</confirmationCode>
-            <additionalInfo>Do you want to participate in the Hunting Grounds challenge and win prizes?</additionalInfo>
-        </registrationDetails>
-    </registration>
-    
-    <!-- Registration 4: Spectator Registration (London Event) -->
-    <!-- Maps to Google Form fields: fullname, dob, age, gender, email, address, phone_mobile -->
-    <registration registrationId="REG-2026-LDN-004" status="pending">
-        <event>
-            <eventName>The Predatory Hunt - London</eventName>
-            <eventDate>2026-03-12</eventDate>
-            <venue>
-                <venueName>Southbank Undercroft</venueName>
-                <city>London</city>
-                <nickname>The Concrete Heart</nickname>
-                <address>Belvedere Road, South Bank, London SE1 8XX, UK</address>
-            </venue>
-        </event>
-        
-        <mainParticipant>
-            <participantId>PART-004</participantId>
-            <personalInfo>
-                <firstName>Patricia</firstName>
-                <lastName>Jones</lastName>
-                <dateOfBirth>2000-02-18</dateOfBirth>
-                <age>26</age>
-                <gender>Female</gender>
-            </personalInfo>
-            <contactInfo>
-                <email>dummy.email16@example.com</email>
-                <phones>
-                    <phone type="mobile" preferred="true">+44-7000-000012</phone>
-                </phones>
-                <address>
-                    <street>321 Example Lane</street>
-                    <city>London</city>
-                    <postcode>SW1A 2AA</postcode>
-                    <country>United Kingdom</country>
-                </address>
-            </contactInfo>
-            <emergencyContact>
-                <name>Rachel Jones</name>
-                <relationship>Sister</relationship>
-                <phone>+44-7000-000013</phone>
-            </emergencyContact>
-        </mainParticipant>
-        
-        <guests>
-            <!-- Maps to Google Form fields: guest1, guest2 -->
-            <guest guestId="GUEST-004-A">
-                <firstName>Quinn</firstName>
-                <lastName>Davis</lastName>
-                <relationship>Partner</relationship>
-                <age>27</age>
-                <isAdult>true</isAdult>
-                <contactEmail>dummy.email17@example.com</contactEmail>
-            </guest>
-            <guest guestId="GUEST-004-B">
-                <firstName>Rachel</firstName>
-                <lastName>Jones</lastName>
-                <relationship>Sister</relationship>
-                <age>23</age>
-                <isAdult>true</isAdult>
-                <contactEmail>dummy.email18@example.com</contactEmail>
-            </guest>
-        </guests>
-        
-        <additionalContacts>
-            <contact contactId="CONT-004-A">
-                <name>Steven Moore</name>
-                <relationship>Friend</relationship>
-                <email>dummy.email19@example.com</email>
-                <phone>+44-7000-000014</phone>
-            </contact>
-        </additionalContacts>
-        
-        <registrationDetails>
-            <!-- Maps to Google Form fields: pref_date, pref_loc, hunting_grounds -->
-            <registrationDate>2026-01-22T16:45:00Z</registrationDate>
-            <preferredEventDate>2026-03-12</preferredEventDate>
-            <preferredEventLocation>London</preferredEventLocation>
-            <doYouWantToParticipateInHuntingGrounds>No</doYouWantToParticipateInHuntingGrounds>
-            <ticketType>Spectator</ticketType>
-            <paymentStatus>Pending</paymentStatus>
-            <confirmationCode>LDN-SPEC-004-PEND</confirmationCode>
-            <additionalInfo>Do you want to participate in the Hunting Grounds challenge and win prizes?</additionalInfo>
-        </registrationDetails>
-    </registration>
-    
-    <!-- Registration 5: Underage Participant with Guardian (Glasgow Event) -->
-    <!-- Maps to Google Form fields: fullname, dob, age, gender, email, address, phone_mobile, parent_name, parent_rel, parent_contact -->
-    <registration registrationId="REG-2026-GLA-005" status="confirmed">
-        <event>
-            <eventName>The Predatory Hunt - Glasgow</eventName>
-            <eventDate>2026-03-26</eventDate>
-            <venue>
-                <venueName>Kelvingrove</venueName>
-                <city>Glasgow</city>
-                <nickname>The Northern Peak</nickname>
-                <address>Kelvingrove Park, Glasgow G3 7TA, UK</address>
-            </venue>
-        </event>
-        
-        <mainParticipant>
-            <participantId>PART-005</participantId>
-            <personalInfo>
-                <firstName>Tara</firstName>
-                <lastName>Scott</lastName>
-                <dateOfBirth>2010-06-15</dateOfBirth>
-                <age>15</age>
-                <gender>Female</gender>
-            </personalInfo>
-            <contactInfo>
-                <email>dummy.email20@example.com</email>
-                <phones>
-                    <phone type="mobile" preferred="true">+44-7000-000015</phone>
-                </phones>
-                <address>
-                    <street>654 Test Boulevard</street>
-                    <city>Glasgow</city>
-                    <postcode>G2 2AA</postcode>
-                    <country>United Kingdom</country>
-                </address>
-            </contactInfo>
-            <parentGuardian required="true">
-                <guardianId>GUARD-005</guardianId>
-                <firstName>Ulrich</firstName>
-                <lastName>Scott</lastName>
-                <relationship>Father</relationship>
-                <dateOfBirth>1978-09-05</dateOfBirth>
-                <contactInfo>
-                    <email>dummy.email21@example.com</email>
-                    <phones>
-                        <phone type="mobile" preferred="true">+44-7000-000016</phone>
-                    </phones>
-                </contactInfo>
-                <consent>
-                    <consentGiven>true</consentGiven>
-                    <consentDate>2026-01-21T11:00:00Z</consentDate>
-                    <signature>Ulrich Scott</signature>
-                </consent>
-            </parentGuardian>
-            <emergencyContact>
-                <name>Victoria Scott</name>
-                <relationship>Mother</relationship>
-                <phone>+44-7000-000017</phone>
-            </emergencyContact>
-            <skateboarding>
-                <!-- Maps to Google Form fields: exp_level, board_types, fav_pros -->
-                <experienceLevel>Advanced</experienceLevel>
-                <preferredDeck>The Bull</preferredDeck>
-                <typesOfSkateboardsOwned>
-                    <type>Street</type>
-                    <type>Cruiser</type>
-                </typesOfSkateboardsOwned>
-                <favouriteProSkateboarders>
-                    <skater>Sky Brown</skater>
-                    <skater>Leticia Bufoni</skater>
-                    <skater></skater>
-                </favouriteProSkateboarders>
-                <specialRequirements>Requires vegetarian meal options</specialRequirements>
-            </skateboarding>
-        </mainParticipant>
-        
-        <guests>
-            <!-- Maps to Google Form fields: guest1, guest2 -->
-            <guest guestId="GUEST-005-A">
-                <firstName>Ulrich</firstName>
-                <lastName>Scott</lastName>
-                <relationship>Father (Guardian)</relationship>
-                <age>47</age>
-                <isAdult>true</isAdult>
-                <contactEmail>dummy.email21@example.com</contactEmail>
-            </guest>
-            <guest guestId="GUEST-005-B">
-                <firstName>Victoria</firstName>
-                <lastName>Scott</lastName>
-                <relationship>Mother</relationship>
-                <age>45</age>
-                <isAdult>true</isAdult>
-                <contactEmail>dummy.email22@example.com</contactEmail>
-            </guest>
-        </guests>
-        
-        <additionalContacts>
-            <contact contactId="CONT-005-A">
-                <name>Victoria Scott</name>
-                <relationship>Mother</relationship>
-                <email>dummy.email22@example.com</email>
-                <phone>+44-7000-000017</phone>
-            </contact>
-            <contact contactId="CONT-005-B">
-                <name>Wendy Harris</name>
-                <relationship>Coach</relationship>
-                <email>dummy.email23@example.com</email>
-                <phone>+44-7000-000018</phone>
-            </contact>
-        </additionalContacts>
-        
-        <registrationDetails>
-            <!-- Maps to Google Form fields: pref_date, pref_loc, hunting_grounds -->
-            <registrationDate>2026-01-21T11:10:00Z</registrationDate>
-            <preferredEventDate>2026-03-26</preferredEventDate>
-            <preferredEventLocation>Glasgow</preferredEventLocation>
-            <doYouWantToParticipateInHuntingGrounds>Yes</doYouWantToParticipateInHuntingGrounds>
-            <ticketType>Youth Competitor</ticketType>
-            <paymentStatus>Paid</paymentStatus>
-            <confirmationCode>GLA-HUNT-005-CONF</confirmationCode>
-            <additionalInfo>Do you want to participate in the Hunting Grounds challenge and win prizes?</additionalInfo>
-        </registrationDetails>
-    </registration>
-    
-</eventRegistrations>
+<RaptorEveningEventEntries xmlns="https://scaters.com/roadshow-2026"
+                          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <!-- Entry 1: London (Adult, 18+) -->
+  <Entry id="REG-2026-LON-001">
+    <pref_date>2026-03-12</pref_date>
+    <pref_loc>London</pref_loc>
+    <hunting_grounds>Yes</hunting_grounds>
+    <evening_type>Dinner with free drinks</evening_type>
+
+    <fullname>James Henderson</fullname>
+    <dob>1998-05-14</dob>
+    <age>27</age>
+    <gender>Male</gender>
+
+    <email>james.henderson@example.com</email>
+    <address>42 Camden High Street, London, NW1 0LT, United Kingdom</address>
+
+    <!-- Parent/Guardian (not required for adults) -->
+    <parent_name></parent_name>
+    <parent_rel></parent_rel>
+    <parent_contact></parent_contact>
+
+    <!-- Contact details -->
+    <phone_mobile>+44 7700 900123</phone_mobile>
+    <phone_home>+44 20 7946 0123</phone_home>
+    <phone_work>+44 20 7946 0456</phone_work>
+    <contact_method>mobile</contact_method>
+
+    <!-- Skateboarding Experience Level -->
+    <exp_level>Intermediate</exp_level>
+
+    <!-- Types of skateboards owned -->
+    <board_types>
+      <board>Street Deck</board>
+      <board>Cruiser</board>
+      <board>Longboard</board>
+    </board_types>
+
+    <!-- Favourite professional skateboarder (Short Answer) -->
+    <fav_pros>Lucien Clarke</fav_pros>
+
+    <!-- Guests -->
+    <guest1>Emily Carter</guest1>
+    <guest2>Daniel Brooks</guest2>
+  </Entry>
+
+  <!-- Entry 2: Manchester (Adult, 18+) -->
+  <Entry id="REG-2026-MAN-001">
+    <pref_date>2026-03-19</pref_date>
+    <pref_loc>Manchester</pref_loc>
+    <hunting_grounds>No</hunting_grounds>
+    <evening_type>Talk with Skateboard England representative</evening_type>
+
+    <fullname>Alex Turner</fullname>
+    <dob>2000-08-02</dob>
+    <age>25</age>
+    <gender>Male</gender>
+
+    <email>alex.turner@example.com</email>
+    <address>9 Deansgate, Manchester, M3 1AZ, United Kingdom</address>
+
+    <parent_name></parent_name>
+    <parent_rel></parent_rel>
+    <parent_contact></parent_contact>
+
+    <phone_mobile>+44 7700 900456</phone_mobile>
+    <phone_home></phone_home>
+    <phone_work>+44 161 555 0199</phone_work>
+    <contact_method>mobile</contact_method>
+
+    <exp_level>Beginner</exp_level>
+
+    <board_types>
+      <board>Street Deck</board>
+      <board>Mini Cruiser</board>
+    </board_types>
+
+    <fav_pros>Geoff Rowley</fav_pros>
+
+    <guest1>Chloe Bennett</guest1>
+    <guest2>Ryan Cooper</guest2>
+  </Entry>
+
+  <!-- Entry 3: Glasgow (Adult, 18+) -->
+  <Entry id="REG-2026-GLA-001">
+    <pref_date>2026-03-26</pref_date>
+    <pref_loc>Glasgow</pref_loc>
+    <hunting_grounds>Yes</hunting_grounds>
+    <evening_type>Meet an England Skateboarding Team rider</evening_type>
+
+    <fullname>Sophie Williams</fullname>
+    <dob>1999-11-21</dob>
+    <age>26</age>
+    <gender>Female</gender>
+
+    <email>sophie.williams@example.com</email>
+    <address>18 Argyle Street, Glasgow, G2 8BX, United Kingdom</address>
+
+    <parent_name></parent_name>
+    <parent_rel></parent_rel>
+    <parent_contact></parent_contact>
+
+    <phone_mobile>+44 7700 901111</phone_mobile>
+    <phone_home>+44 141 555 0101</phone_home>
+    <phone_work></phone_work>
+    <contact_method>email</contact_method>
+
+    <exp_level>Advanced</exp_level>
+
+    <board_types>
+      <board>Street Deck</board>
+      <board>Park Deck</board>
+    </board_types>
+
+    <fav_pros>John Rattray</fav_pros>
+
+    <guest1>Hannah Reid</guest1>
+    <guest2>Oliver Shaw</guest2>
+  </Entry>
+
+  <!-- Entry 4: Under 18 example (Parent/Guardian REQUIRED) -->
+  <Entry id="REG-2026-LON-U18-001">
+    <pref_date>2026-03-12</pref_date>
+    <pref_loc>London</pref_loc>
+    <hunting_grounds>Yes</hunting_grounds>
+    <evening_type>Dinner with free drinks</evening_type>
+
+    <fullname>Charlie Evans</fullname>
+    <dob>2010-04-09</dob>
+    <age>15</age>
+    <gender>Male</gender>
+
+    <email>charlie.evans@example.com</email>
+    <address>7 King Street, London, WC2E 8HD, United Kingdom</address>
+
+    <!-- Parent/Guardian (required because under 18) -->
+    <parent_name>Sarah Evans</parent_name>
+    <parent_rel>Mother</parent_rel>
+    <parent_contact>Mobile: +44 7700 902222; Email: sarah.evans@example.com</parent_contact>
+
+    <phone_mobile>+44 7700 902223</phone_mobile>
+    <phone_home>+44 20 7000 1122</phone_home>
+    <phone_work></phone_work>
+    <contact_method>mobile</contact_method>
+
+    <exp_level>Beginner</exp_level>
+
+    <board_types>
+      <board>Street Deck</board>
+      <board>Cruiser</board>
+    </board_types>
+
+    <fav_pros>Lucien Clarke</fav_pros>
+
+    <guest1>Oliver Grant</guest1>
+    <guest2>Lewis Martin</guest2>
+  </Entry>
+
+</RaptorEveningEventEntries>
