@@ -92,6 +92,13 @@ class ScatersRoadshowChatbot:
     ROADSHOW_CONTEXT = """
     You are The Butler, an AI assistant for Scaters Raptor Roadshow 2026 - "The Predatory Hunt".
     
+    TONE REQUIREMENTS:
+    - Maintain a polite yet immersive spy/mission style throughout all responses
+    - Address users as "Agent" to maintain narrative consistency
+    - Use tactical/mission terminology while remaining professional and welcoming
+    - Be reassuring and encouraging, especially regarding safety and registration
+    - Keep responses accurate - never invent details not provided in this context
+    
     IMPORTANT: You should ONLY answer questions about:
     1. The Scaters Raptor Roadshow 2026 events
     2. The new Raptor skateboard collection launch
@@ -101,13 +108,21 @@ class ScatersRoadshowChatbot:
     
     ROADSHOW INFORMATION:
     - Event Name: "The Predatory Hunt" - Scaters Raptor Roadshow 2026
-    - Prize Pool: £310,000 in total
+    - Prize Pool: £310,000 in total (distributed across all events)
     - Locations and Dates:
       * London - March 12, 2026 at Southbank Undercroft ("The Concrete Heart")
       * Manchester - March 19, 2026 at Projekt MCR ("The Industrial Abyss")
       * Glasgow - March 26, 2026 at Kelvingrove ("The Northern Peak")
     - Featured Pro Skaters: Lucien Clarke & Geoff Rowley
     - Mission: Engineering British Supremacy on the Pavement
+    
+    SAFETY INFORMATION:
+    - All events are supervised by professional staff
+    - On-site medical teams and first aid available
+    - Safety equipment checks are mandatory
+    - Age-appropriate challenges for all skill levels
+    - Clear safety protocols in place
+    - Controlled, supervised participation conditions
     
     IMPORTANT POLICY UPDATES (February 2026):
     - Registration deadline: February 28, 2026
@@ -116,6 +131,7 @@ class ScatersRoadshowChatbot:
     - All participants must review safety guidelines posted in February
     - VIP package sales close February 20, 2026
     - Event schedule updates will be posted by February 1, 2026
+    - Registration available at: scaters.com/register
     
     RAPTOR SKATEBOARD COLLECTION (5 Decks):
     1. The Eagle - Sky Dominator (Aerial dominance, for vert and air tricks)
@@ -146,7 +162,8 @@ class ScatersRoadshowChatbot:
     - Prize competitions
     - Registration for "The Predatory Hunt" challenge
     
-    Keep responses conversational, simple, and focused on these topics only.
+    Keep responses conversational, accurate, and focused on these topics only. 
+    Maintain the spy/mission narrative while being helpful and encouraging.
     """
     
     def __init__(self):
@@ -619,48 +636,79 @@ What would you like to know?"""
             # Check if it's not a prize/hunting zone query
             if not any(word in msg_lower for word in ['hunting zone', 'hunting ground', 'prize location']):
                 logger.info("Location query detected - using Mission Brief format")
-                return ("🎯 YOUR MISSION: Join us at these tactical locations where the ultimate challenge awaits!\n\n"
+                return ("🎯 MISSION BRIEFING: Agent, your deployment coordinates are as follows.\n\n"
                        "📍 LONDON - March 12, 2026\n"
-                       "   Mission Site: Southbank Undercroft (\"The Concrete Heart\")\n"
-                       "   Your Mission: Execute precision techniques in the capital's most iconic spot\n\n"
+                       "   Tactical Location: Southbank Undercroft (\"The Concrete Heart\")\n"
+                       "   Mission Objective: Execute precision techniques in the capital's most iconic arena\n"
+                       "   Intelligence Note: Limited spots available - secure your position early\n\n"
                        "📍 MANCHESTER - March 19, 2026\n"
-                       "   Mission Site: Projekt MCR (\"The Industrial Abyss\")\n"
-                       "   Your Mission: Dominate the rugged industrial battlefield\n\n"
+                       "   Tactical Location: Projekt MCR (\"The Industrial Abyss\")\n"
+                       "   Mission Objective: Navigate the rugged industrial battlefield with power and control\n"
+                       "   Intelligence Note: Supervised by professional operatives for optimal safety\n\n"
                        "📍 GLASGOW - March 26, 2026\n"
-                       "   Mission Site: Kelvingrove (\"The Northern Peak\")\n"
-                       "   Your Mission: Reach new heights in Scotland's premier territory\n\n"
-                       "🔥 Choose your battlefield and claim your victory!")
+                       "   Tactical Location: Kelvingrove (\"The Northern Peak\")\n"
+                       "   Mission Objective: Achieve maximum altitude in Scotland's premier territory\n"
+                       "   Intelligence Note: Final opportunity to claim your victory\n\n"
+                       "🔥 Agent, we encourage you to register promptly at scaters.com/register to secure your mission slot. Your adventure awaits!")
         
         # Rule 2: Safety/Fear queries → Reassurance (check keywords before sentiment)
         safety_keywords = ['safe', 'safety', 'scared', 'fear', 'afraid', 'dangerous', 
                           'injury', 'hurt', 'risk', 'worried', 'concern']
         if any(keyword in msg_lower for keyword in safety_keywords):
             logger.info("Safety/fear query detected - using reassurance response")
-            return ("We prioritize safety above all else. Rest assured, our events are "
-                   "supervised by professionals and follow strict safety guidelines. "
-                   "All venues have:\n"
-                   "• On-site medical teams and first aid\n"
-                   "• Safety equipment checks\n"
-                   "• Professional supervision\n"
-                   "• Age-appropriate challenges\n"
-                   "• Clear safety protocols\n\n"
-                   "Your safety is our top priority. Feel confident joining The Predatory Hunt!")
+            return ("🛡️ SAFETY PROTOCOL BRIEFING: Agent, your wellbeing is our highest priority.\n\n"
+                   "Rest assured, every mission site operates under strict safety protocols with "
+                   "experienced professionals supervising all activities. Our comprehensive safety infrastructure includes:\n\n"
+                   "• Elite medical support teams with first aid stations at every location\n"
+                   "• Pre-mission safety equipment verification and quality checks\n"
+                   "• Certified professional supervision throughout all activities\n"
+                   "• Age-appropriate challenge levels tailored to participant skill\n"
+                   "• Clearly defined safety protocols and emergency procedures\n"
+                   "• Controlled environment with supervised participation conditions\n\n"
+                   "We encourage you to join us with confidence, Agent. Your safety enables your success. "
+                   "All participants will receive detailed safety guidance upon registration. Welcome to The Predatory Hunt!")
         
         # Rule 3: Prize/Hunting/Bounty queries → FOMO response
         prize_keywords = ['prize', 'bounty', 'reward', 'money', 'win', 'winning',
                          'hunting ground', 'hunt', 'hunting zone', 'what do i get']
         if any(keyword in msg_lower for keyword in prize_keywords):
             logger.info("Prize/hunting query detected - using FOMO response")
-            return ("💰 The bounty is worth the hunt! We're talking SERIOUS rewards...\n\n"
-                   "🏆 The prize pool is MASSIVE - but we're keeping some surprises under wraps!\n"
-                   "🎁 Amazing prizes await those brave enough to join The Predatory Hunt\n"
-                   "⚡ Exclusive opportunities for top performers\n"
-                   "🎯 Special rewards you won't see anywhere else\n\n"
-                   "Join us to uncover what's waiting for YOU at the apex of the hunt. "
-                   "Don't miss out - this is a once-in-a-lifetime opportunity! "
-                   "Register now before spots run out! 🔥")
+            return ("💰 CLASSIFIED INTEL: The bounty intelligence is extraordinary, Agent.\n\n"
+                   "🏆 Total Prize Pool: £310,000 distributed across all mission sites\n"
+                   "🎁 Exclusive rewards await operatives who demonstrate exceptional skill\n"
+                   "⚡ Elite performance opportunities with special recognition for top agents\n"
+                   "🎯 Premium Raptor collection access for qualified participants\n"
+                   "🏅 Additional classified rewards to be revealed during mission briefings\n\n"
+                   "Agent, we encourage you to secure your registration promptly. Operational slots "
+                   "are limited and allocated on a first-come, first-served basis. This is a unique "
+                   "opportunity to prove your skills on Britain's premier skateboarding stage. "
+                   "Don't delay - register today at scaters.com/register! 🔥")
         
-        # Rule 4: Frustration detection (negative sentiment with specific keywords)
+        # Rule 4: Technical support queries → Calm humor with troubleshooting
+        tech_keywords = ['technical', 'problem', 'issue', 'error', 'bug', 'broken', 'not working',
+                        'cant register', "can't register", 'website', 'form', 'submit', 'loading',
+                        'doesnt work', "doesn't work", 'help', 'support']
+        if any(keyword in msg_lower for keyword in tech_keywords):
+            # Exclude if it's a safety concern (already handled)
+            if not any(word in msg_lower for word in ['safe', 'safety', 'scared', 'fear', 'dangerous']):
+                logger.info("Technical support query detected - using calm humor response")
+                return ("🔧 TECHNICAL SUPPORT DISPATCH: Agent, encountering obstacles is part of every mission!\n\n"
+                       "Let's troubleshoot this together with tactical precision:\n\n"
+                       "**Quick Diagnostic Protocol:**\n"
+                       "1. Refresh your browser (Ctrl+F5 / Cmd+Shift+R) - sometimes systems need a clean slate\n"
+                       "2. Clear your browser cache - old intel can interfere with new operations\n"
+                       "3. Try a different browser (Chrome, Firefox, Safari) - diversify your approach\n"
+                       "4. Check your internet connection - ensure stable comms\n"
+                       "5. Disable browser extensions temporarily - they can be sneaky saboteurs\n\n"
+                       "**Still facing resistance?**\n"
+                       "No worries, Agent! Contact our technical support team at support@scaters.com "
+                       "and include:\n"
+                       "• What you were attempting (registration, form submission, etc.)\n"
+                       "• Any error messages you encountered\n"
+                       "• Your browser and device type\n\n"
+                       "We'll have you back on mission in no time. Stay calm and skate on! 🛹")
+        
+        # Rule 5: Frustration detection (negative sentiment with specific keywords)
         frustration_keywords = ['complicated', 'confus', 'difficult', 'hard', 'frustrat', 
                                'annoying', 'annoyed', 'ugh', 'wtf']
         has_frustration_keyword = any(keyword in msg_lower for keyword in frustration_keywords)
@@ -674,9 +722,13 @@ What would you like to know?"""
             has_understand_issue or 
             ('why' in msg_lower and any(word in msg_lower for word in ['hard', 'difficult', 'complicated']))):
             logger.info("Frustration detected - using humor-based response")
-            return ("Whoa! Let's take a kickflip back. We got this together. 🛹 "
-                   "What's bugging you? I'm here to help make this super simple. "
-                   "Break it down for me - what specific thing can I clarify?")
+            return ("🛹 TACTICAL TIMEOUT: Agent, even the best operatives need a moment to recalibrate!\n\n"
+                   "No mission is too complex when we break it down together. Think of this as "
+                   "your personal mission support hotline - I'm here to make everything crystal clear.\n\n"
+                   "What specific aspect can I clarify for you? Whether it's registration procedures, "
+                   "event locations, safety protocols, or technical details - I've got your back. "
+                   "Let's troubleshoot this together and get you mission-ready! 💪\n\n"
+                   "Remember: Every pro started as a beginner. You've got this, Agent!")
         
         # No specific rule matched
         return None

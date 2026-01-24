@@ -2916,24 +2916,24 @@
             const locationKeywords = ['where', 'location', 'next event', 'city', 'cities', 'venue'];
             if (locationKeywords.some(keyword => msgLower.includes(keyword))) {
                 // Check if it's not a prize/hunting zone query
-                if (!msgLower.includes('hunting zone') && !msgLower.includes('hunting ground')) {
+                if (!msgLower.includes('hunting zone') && !msgLower.includes('hunting ground') && !msgLower.includes('prize location')) {
                     console.log('Rule-based: Location query detected');
                     return `<div style="background: linear-gradient(135deg, rgba(37,99,235,0.1) 0%, rgba(37,99,235,0.05) 100%); border-left: 3px solid #2563EB; padding: 12px; border-radius: 4px; margin: 8px 0;">
-                        <div style="font-weight: bold; color: #2563EB; margin-bottom: 8px;">🎯 YOUR MISSION: Join us at these tactical locations where the ultimate challenge awaits!</div>
+                        <div style="font-weight: bold; color: #2563EB; margin-bottom: 8px;">🎯 MISSION BRIEFING: Agent, your deployment coordinates are as follows.</div>
                         <div style="margin-top: 10px; line-height: 1.6;">
                             <div style="margin-bottom: 10px;">
                                 <div style="font-weight: bold; color: #D4AF37;">📍 LONDON - March 12, 2026</div>
-                                <div style="margin-left: 15px; font-size: 11px; color: #ccc;">Mission Site: Southbank Undercroft ("The Concrete Heart")<br>Your Mission: Execute precision techniques in the capital's most iconic spot</div>
+                                <div style="margin-left: 15px; font-size: 11px; color: #ccc;">Tactical Location: Southbank Undercroft ("The Concrete Heart")<br>Mission Objective: Execute precision techniques in the capital's most iconic arena<br><em style="color: #999;">Intelligence Note: Limited spots available - secure your position early</em></div>
                             </div>
                             <div style="margin-bottom: 10px;">
                                 <div style="font-weight: bold; color: #D4AF37;">📍 MANCHESTER - March 19, 2026</div>
-                                <div style="margin-left: 15px; font-size: 11px; color: #ccc;">Mission Site: Projekt MCR ("The Industrial Abyss")<br>Your Mission: Dominate the rugged industrial battlefield</div>
+                                <div style="margin-left: 15px; font-size: 11px; color: #ccc;">Tactical Location: Projekt MCR ("The Industrial Abyss")<br>Mission Objective: Navigate the rugged industrial battlefield with power and control<br><em style="color: #999;">Intelligence Note: Supervised by professional operatives for optimal safety</em></div>
                             </div>
                             <div style="margin-bottom: 10px;">
                                 <div style="font-weight: bold; color: #D4AF37;">📍 GLASGOW - March 26, 2026</div>
-                                <div style="margin-left: 15px; font-size: 11px; color: #ccc;">Mission Site: Kelvingrove ("The Northern Peak")<br>Your Mission: Reach new heights in Scotland's premier territory</div>
+                                <div style="margin-left: 15px; font-size: 11px; color: #ccc;">Tactical Location: Kelvingrove ("The Northern Peak")<br>Mission Objective: Achieve maximum altitude in Scotland's premier territory<br><em style="color: #999;">Intelligence Note: Final opportunity to claim your victory</em></div>
                             </div>
-                            <div style="color: #2563EB; margin-top: 10px; font-weight: bold;">🔥 Choose your battlefield and claim your victory!</div>
+                            <div style="color: #2563EB; margin-top: 10px; font-weight: bold;">🔥 Agent, we encourage you to register promptly at scaters.com/register to secure your mission slot. Your adventure awaits!</div>
                         </div>
                     </div>`;
                 }
@@ -2945,17 +2945,18 @@
             if (safetyKeywords.some(keyword => msgLower.includes(keyword))) {
                 console.log('Rule-based: Safety/fear query detected');
                 return `<div style="background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.05) 100%); border-left: 3px solid #D4AF37; padding: 12px; border-radius: 4px; margin: 8px 0;">
-                    <div style="font-weight: bold; color: #D4AF37; margin-bottom: 8px;">🛡️ Safety is Our Priority</div>
+                    <div style="font-weight: bold; color: #D4AF37; margin-bottom: 8px;">🛡️ SAFETY PROTOCOL BRIEFING</div>
                     <div style="line-height: 1.6; color: #ccc;">
-                        <p style="margin-bottom: 8px;">We prioritize safety above all else. Rest assured, our events are supervised by professionals and follow strict safety guidelines.</p>
+                        <p style="margin-bottom: 8px;">Agent, your wellbeing is our highest priority. Rest assured, every mission site operates under strict safety protocols with experienced professionals supervising all activities.</p>
                         <div style="margin-top: 10px; font-size: 11px;">
-                            <div>✓ On-site medical teams and first aid</div>
-                            <div>✓ Safety equipment checks</div>
-                            <div>✓ Professional supervision</div>
-                            <div>✓ Age-appropriate challenges</div>
-                            <div>✓ Clear safety protocols</div>
+                            <div>✓ Elite medical support teams with first aid stations at every location</div>
+                            <div>✓ Pre-mission safety equipment verification and quality checks</div>
+                            <div>✓ Certified professional supervision throughout all activities</div>
+                            <div>✓ Age-appropriate challenge levels tailored to participant skill</div>
+                            <div>✓ Clearly defined safety protocols and emergency procedures</div>
+                            <div>✓ Controlled environment with supervised participation conditions</div>
                         </div>
-                        <p style="margin-top: 10px; color: #D4AF37; font-weight: bold;">Your safety is our top priority. Feel confident joining The Predatory Hunt!</p>
+                        <p style="margin-top: 10px; color: #D4AF37; font-weight: bold;">We encourage you to join us with confidence, Agent. Your safety enables your success. All participants will receive detailed safety guidance upon registration. Welcome to The Predatory Hunt!</p>
                     </div>
                 </div>`;
             }
@@ -2966,21 +2967,56 @@
             if (prizeKeywords.some(keyword => msgLower.includes(keyword))) {
                 console.log('Rule-based: Prize/hunting query detected');
                 return `<div style="background: linear-gradient(135deg, rgba(37,99,235,0.15) 0%, rgba(139,92,246,0.1) 100%); border-left: 3px solid #8B5CF6; padding: 12px; border-radius: 4px; margin: 8px 0; animation: pulse-slow 3s infinite;">
-                    <div style="font-weight: bold; color: #8B5CF6; margin-bottom: 8px;">💰 The Bounty is Worth the Hunt!</div>
+                    <div style="font-weight: bold; color: #8B5CF6; margin-bottom: 8px;">💰 CLASSIFIED INTEL: The bounty intelligence is extraordinary, Agent.</div>
                     <div style="line-height: 1.6; color: #ccc;">
-                        <p style="margin-bottom: 8px;">We're talking SERIOUS rewards...</p>
                         <div style="margin-top: 10px; font-size: 11px;">
-                            <div style="color: #D4AF37;">🏆 The prize pool is MASSIVE - but we're keeping some surprises under wraps!</div>
-                            <div>🎁 Amazing prizes await those brave enough to join The Predatory Hunt</div>
-                            <div>⚡ Exclusive opportunities for top performers</div>
-                            <div>🎯 Special rewards you won't see anywhere else</div>
+                            <div style="color: #D4AF37;">🏆 Total Prize Pool: £310,000 distributed across all mission sites</div>
+                            <div>🎁 Exclusive rewards await operatives who demonstrate exceptional skill</div>
+                            <div>⚡ Elite performance opportunities with special recognition for top agents</div>
+                            <div>🎯 Premium Raptor collection access for qualified participants</div>
+                            <div>🏅 Additional classified rewards to be revealed during mission briefings</div>
                         </div>
-                        <p style="margin-top: 10px; font-weight: bold; color: #8B5CF6;">Join us to uncover what's waiting for YOU at the apex of the hunt. Don't miss out - this is a once-in-a-lifetime opportunity! Register now before spots run out! 🔥</p>
+                        <p style="margin-top: 10px; font-weight: bold; color: #8B5CF6;">Agent, we encourage you to secure your registration promptly. Operational slots are limited and allocated on a first-come, first-served basis. This is a unique opportunity to prove your skills on Britain's premier skateboarding stage. Don't delay - register today at scaters.com/register! 🔥</p>
                     </div>
                 </div>`;
             }
             
-            // Rule 4: Frustration detection
+            // Rule 4: Technical support queries → Calm humor with troubleshooting
+            const techKeywords = ['technical', 'problem', 'issue', 'error', 'bug', 'broken', 'not working',
+                                 'cant register', "can't register", 'website', 'form', 'submit', 'loading',
+                                 'doesnt work', "doesn't work", 'help', 'support'];
+            if (techKeywords.some(keyword => msgLower.includes(keyword))) {
+                // Exclude if it's a safety concern (already handled)
+                if (!safetyKeywords.some(keyword => msgLower.includes(keyword))) {
+                    console.log('Rule-based: Technical support query detected');
+                    return `<div style="background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(34,197,94,0.05) 100%); border-left: 3px solid #22C55E; padding: 12px; border-radius: 4px; margin: 8px 0;">
+                        <div style="font-weight: bold; color: #22C55E; margin-bottom: 8px;">🔧 TECHNICAL SUPPORT DISPATCH</div>
+                        <div style="line-height: 1.6; color: #ccc;">
+                            <p style="margin-bottom: 8px;">Agent, encountering obstacles is part of every mission! Let's troubleshoot this together with tactical precision:</p>
+                            <div style="margin-top: 10px; font-size: 11px;">
+                                <div style="font-weight: bold; color: #22C55E; margin-bottom: 5px;">Quick Diagnostic Protocol:</div>
+                                <div>1. Refresh your browser (Ctrl+F5 / Cmd+Shift+R) - sometimes systems need a clean slate</div>
+                                <div>2. Clear your browser cache - old intel can interfere with new operations</div>
+                                <div>3. Try a different browser (Chrome, Firefox, Safari) - diversify your approach</div>
+                                <div>4. Check your internet connection - ensure stable comms</div>
+                                <div>5. Disable browser extensions temporarily - they can be sneaky saboteurs</div>
+                            </div>
+                            <div style="margin-top: 10px; font-size: 11px; border-top: 1px solid rgba(34,197,94,0.2); padding-top: 8px;">
+                                <div style="font-weight: bold; color: #22C55E; margin-bottom: 5px;">Still facing resistance?</div>
+                                <div>No worries, Agent! Contact our technical support team at <strong>support@scaters.com</strong> and include:</div>
+                                <div style="margin-left: 10px; margin-top: 5px;">
+                                    <div>• What you were attempting (registration, form submission, etc.)</div>
+                                    <div>• Any error messages you encountered</div>
+                                    <div>• Your browser and device type</div>
+                                </div>
+                            </div>
+                            <p style="margin-top: 10px; color: #22C55E; font-weight: bold;">We'll have you back on mission in no time. Stay calm and skate on! 🛹</p>
+                        </div>
+                    </div>`;
+                }
+            }
+            
+            // Rule 5: Frustration detection
             const frustrationKeywords = ['complicated', 'confus', 'difficult', 'hard', 'frustrat', 
                                         'annoying', 'annoyed', 'ugh', 'wtf'];
             const hasFrustrationKeyword = frustrationKeywords.some(keyword => msgLower.includes(keyword));
@@ -2994,10 +3030,12 @@
                                               msgLower.includes('complicated')))) {
                 console.log('Rule-based: Frustration detected');
                 return `<div style="background: linear-gradient(135deg, rgba(236,72,153,0.1) 0%, rgba(251,146,60,0.1) 100%); border-left: 3px solid #EC4899; padding: 12px; border-radius: 4px; margin: 8px 0;">
-                    <div style="font-weight: bold; color: #EC4899; margin-bottom: 8px;">🛹 Whoa! Let's Take a Kickflip Back</div>
+                    <div style="font-weight: bold; color: #EC4899; margin-bottom: 8px;">🛹 TACTICAL TIMEOUT</div>
                     <div style="line-height: 1.6; color: #ccc;">
-                        <p>We got this together! What's bugging you? I'm here to help make this super simple.</p>
-                        <p style="margin-top: 8px; color: #F97316; font-weight: bold;">Break it down for me - what specific thing can I clarify? 💬</p>
+                        <p style="margin-bottom: 8px;">Agent, even the best operatives need a moment to recalibrate! No mission is too complex when we break it down together.</p>
+                        <p style="margin-bottom: 8px;">Think of this as your personal mission support hotline - I'm here to make everything crystal clear.</p>
+                        <p style="margin-top: 8px; color: #F97316; font-weight: bold;">What specific aspect can I clarify for you? Whether it's registration procedures, event locations, safety protocols, or technical details - I've got your back. Let's troubleshoot this together and get you mission-ready! 💪</p>
+                        <p style="margin-top: 8px; font-size: 11px; color: #999;">Remember: Every pro started as a beginner. You've got this, Agent!</p>
                     </div>
                 </div>`;
             }
