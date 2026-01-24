@@ -145,12 +145,27 @@
     <!-- Preferences Type -->
     <xs:complexType name="preferencesType">
         <xs:sequence>
-            <xs:element name="dietaryRequirements" type="xs:string"/>
+            <xs:element name="dietaryRequirements" type="dietaryRequirementsType"/>
             <xs:element name="tShirtSize" type="tShirtSizeType"/>
             <xs:element name="waiverSigned" type="xs:boolean"/>
             <xs:element name="waiverDate" type="xs:dateTime"/>
         </xs:sequence>
     </xs:complexType>
+
+    <!-- Dietary Requirements Type -->
+    <xs:simpleType name="dietaryRequirementsType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Vegetarian"/>
+            <xs:enumeration value="Vegan"/>
+            <xs:enumeration value="Gluten-Free"/>
+            <xs:enumeration value="Halal"/>
+            <xs:enumeration value="Kosher"/>
+            <xs:enumeration value="Dairy-Free"/>
+            <xs:enumeration value="Nut Allergy"/>
+            <xs:enumeration value="Other"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <!-- T-Shirt Size Type -->
     <xs:simpleType name="tShirtSizeType">

@@ -404,8 +404,6 @@
             <lastUpdated>2026-01-22T16:45:00Z</lastUpdated>
             <ticketType>Spectator</ticketType>
             <paymentStatus>Pending</paymentStatus>
-            <paymentMethod>Credit Card</paymentMethod>
-            <amountPaid currency="GBP">0.00</amountPaid>
             <confirmationCode>LDN-SPEC-004-PEND</confirmationCode>
             <dataSource>Website</dataSource>
         </registrationDetails>
