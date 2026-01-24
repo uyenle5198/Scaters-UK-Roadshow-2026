@@ -9,6 +9,7 @@
     -->
     
     <!-- Registration 1: Adult Participant (London Event) -->
+    <!-- Maps to Google Form fields: fullname, dob, age, gender, email, address, phone_mobile, phone_home, phone_work -->
     <registration registrationId="REG-2026-LDN-001" status="confirmed">
         <event>
             <eventName>The Predatory Hunt - London</eventName>
@@ -24,32 +25,33 @@
         <mainParticipant>
             <participantId>PART-001</participantId>
             <personalInfo>
-                <firstName>James</firstName>
-                <lastName>Henderson</lastName>
+                <firstName>John</firstName>
+                <lastName>Doe</lastName>
                 <dateOfBirth>1998-05-14</dateOfBirth>
                 <age>27</age>
                 <gender>Male</gender>
             </personalInfo>
             <contactInfo>
-                <email>james.henderson@example.com</email>
+                <email>dummy.email1@example.com</email>
                 <phones>
-                    <phone type="mobile" preferred="true">+44-7700-900123</phone>
-                    <phone type="home">+44-7700-900124</phone>
-                    <phone type="work">+44-7700-900125</phone>
+                    <phone type="mobile" preferred="true">+44-7000-000001</phone>
+                    <phone type="home">+44-2000-000001</phone>
+                    <phone type="work">+44-2000-000002</phone>
                 </phones>
                 <address>
-                    <street>42 Camden High Street</street>
+                    <street>123 Fake Street</street>
                     <city>London</city>
-                    <postcode>NW1 0JH</postcode>
+                    <postcode>SW1A 1AA</postcode>
                     <country>United Kingdom</country>
                 </address>
             </contactInfo>
             <emergencyContact>
-                <name>Sarah Henderson</name>
+                <name>Jane Doe</name>
                 <relationship>Spouse</relationship>
-                <phone>+44-7700-900124</phone>
+                <phone>+44-7000-000002</phone>
             </emergencyContact>
             <skateboarding>
+                <!-- Maps to Google Form fields: exp_level, board_types, fav_pros -->
                 <experienceLevel>Advanced</experienceLevel>
                 <preferredDeck>The Eagle</preferredDeck>
                 <typesOfSkateboardsOwned>
@@ -69,34 +71,36 @@
         </mainParticipant>
         
         <guests>
+            <!-- Maps to Google Form fields: guest1, guest2 -->
             <guest guestId="GUEST-001-A">
-                <firstName>Emily</firstName>
-                <lastName>Henderson</lastName>
+                <firstName>Alice</firstName>
+                <lastName>Doe</lastName>
                 <relationship>Sister</relationship>
                 <age>24</age>
                 <isAdult>true</isAdult>
-                <contactEmail>emily.h@example.com</contactEmail>
+                <contactEmail>dummy.email2@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-001-B">
-                <firstName>Michael</firstName>
-                <lastName>Chen</lastName>
+                <firstName>Bob</firstName>
+                <lastName>Smith</lastName>
                 <relationship>Friend</relationship>
                 <age>28</age>
                 <isAdult>true</isAdult>
-                <contactEmail>m.chen@example.com</contactEmail>
+                <contactEmail>dummy.email3@example.com</contactEmail>
             </guest>
         </guests>
         
         <additionalContacts>
             <contact contactId="CONT-001-A">
-                <name>David Martinez</name>
+                <name>Charlie Johnson</name>
                 <relationship>Coach</relationship>
-                <email>d.martinez@skateschool.com</email>
-                <phone>+44-7700-900456</phone>
+                <email>dummy.email4@example.com</email>
+                <phone>+44-7000-000003</phone>
             </contact>
         </additionalContacts>
         
         <registrationDetails>
+            <!-- Maps to Google Form fields: pref_date, pref_loc, hunting_grounds -->
             <registrationDate>2026-01-15T10:30:00Z</registrationDate>
             <preferredEventDate>2026-03-12</preferredEventDate>
             <preferredEventLocation>London</preferredEventLocation>
@@ -109,6 +113,7 @@
     </registration>
     
     <!-- Registration 2: Underage Participant with Guardian (Manchester Event) -->
+    <!-- Maps to Google Form fields: fullname, dob, age, gender, email, address, phone_mobile, parent_name, parent_rel, parent_contact -->
     <registration registrationId="REG-2026-MAN-002" status="confirmed">
         <event>
             <eventName>The Predatory Hunt - Manchester</eventName>
@@ -124,48 +129,49 @@
         <mainParticipant>
             <participantId>PART-002</participantId>
             <personalInfo>
-                <firstName>Oliver</firstName>
-                <lastName>Thompson</lastName>
+                <firstName>David</firstName>
+                <lastName>Miller</lastName>
                 <dateOfBirth>2011-08-22</dateOfBirth>
                 <age>14</age>
                 <gender>Male</gender>
             </personalInfo>
             <contactInfo>
-                <email>oliver.thompson@example.com</email>
+                <email>dummy.email5@example.com</email>
                 <phones>
-                    <phone type="mobile" preferred="true">+44-7700-900234</phone>
+                    <phone type="mobile" preferred="true">+44-7000-000004</phone>
                 </phones>
                 <address>
-                    <street>18 Deansgate</street>
+                    <street>456 Placeholder Road</street>
                     <city>Manchester</city>
-                    <postcode>M3 2FE</postcode>
+                    <postcode>M1 1AA</postcode>
                     <country>United Kingdom</country>
                 </address>
             </contactInfo>
             <parentGuardian required="true">
                 <guardianId>GUARD-002</guardianId>
-                <firstName>Catherine</firstName>
-                <lastName>Thompson</lastName>
+                <firstName>Emma</firstName>
+                <lastName>Miller</lastName>
                 <relationship>Mother</relationship>
                 <dateOfBirth>1982-03-10</dateOfBirth>
                 <contactInfo>
-                    <email>catherine.thompson@example.com</email>
+                    <email>dummy.email6@example.com</email>
                     <phones>
-                        <phone type="mobile" preferred="true">+44-7700-900235</phone>
+                        <phone type="mobile" preferred="true">+44-7000-000005</phone>
                     </phones>
                 </contactInfo>
                 <consent>
                     <consentGiven>true</consentGiven>
                     <consentDate>2026-01-18T14:20:00Z</consentDate>
-                    <signature>Catherine Thompson</signature>
+                    <signature>Emma Miller</signature>
                 </consent>
             </parentGuardian>
             <emergencyContact>
-                <name>Robert Thompson</name>
+                <name>Frank Miller</name>
                 <relationship>Father</relationship>
-                <phone>+44-7700-900236</phone>
+                <phone>+44-7000-000006</phone>
             </emergencyContact>
             <skateboarding>
+                <!-- Maps to Google Form fields: exp_level, board_types, fav_pros -->
                 <experienceLevel>Intermediate</experienceLevel>
                 <preferredDeck>The Panther</preferredDeck>
                 <typesOfSkateboardsOwned>
@@ -182,48 +188,50 @@
         </mainParticipant>
         
         <guests>
+            <!-- Maps to Google Form fields: guest1, guest2 -->
             <guest guestId="GUEST-002-A">
-                <firstName>Catherine</firstName>
-                <lastName>Thompson</lastName>
+                <firstName>Emma</firstName>
+                <lastName>Miller</lastName>
                 <relationship>Mother (Guardian)</relationship>
                 <age>43</age>
                 <isAdult>true</isAdult>
-                <contactEmail>catherine.thompson@example.com</contactEmail>
+                <contactEmail>dummy.email6@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-002-B">
-                <firstName>Sophie</firstName>
-                <lastName>Thompson</lastName>
+                <firstName>Grace</firstName>
+                <lastName>Miller</lastName>
                 <relationship>Sister</relationship>
                 <age>16</age>
                 <isAdult>false</isAdult>
-                <contactEmail>sophie.t@example.com</contactEmail>
+                <contactEmail>dummy.email7@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-002-C">
-                <firstName>Jack</firstName>
+                <firstName>Henry</firstName>
                 <lastName>Wilson</lastName>
                 <relationship>Friend</relationship>
                 <age>15</age>
                 <isAdult>false</isAdult>
-                <contactEmail>jack.w@example.com</contactEmail>
+                <contactEmail>dummy.email8@example.com</contactEmail>
             </guest>
         </guests>
         
         <additionalContacts>
             <contact contactId="CONT-002-A">
-                <name>Robert Thompson</name>
+                <name>Frank Miller</name>
                 <relationship>Father</relationship>
-                <email>robert.thompson@example.com</email>
-                <phone>+44-7700-900236</phone>
+                <email>dummy.email9@example.com</email>
+                <phone>+44-7000-000006</phone>
             </contact>
             <contact contactId="CONT-002-B">
-                <name>Emma Baker</name>
+                <name>Ivy Brown</name>
                 <relationship>Local Youth Coordinator</relationship>
-                <email>e.baker@manchesterskate.org</email>
-                <phone>+44-7700-900567</phone>
+                <email>dummy.email10@example.com</email>
+                <phone>+44-7000-000007</phone>
             </contact>
         </additionalContacts>
         
         <registrationDetails>
+            <!-- Maps to Google Form fields: pref_date, pref_loc, hunting_grounds -->
             <registrationDate>2026-01-18T14:25:00Z</registrationDate>
             <preferredEventDate>2026-03-19</preferredEventDate>
             <preferredEventLocation>Manchester</preferredEventLocation>
@@ -236,6 +244,7 @@
     </registration>
     
     <!-- Registration 3: Adult Female Participant (Glasgow Event) -->
+    <!-- Maps to Google Form fields: fullname, dob, age, gender, email, address, phone_mobile, phone_work -->
     <registration registrationId="REG-2026-GLA-003" status="confirmed">
         <event>
             <eventName>The Predatory Hunt - Glasgow</eventName>
@@ -251,31 +260,32 @@
         <mainParticipant>
             <participantId>PART-003</participantId>
             <personalInfo>
-                <firstName>Aisha</firstName>
-                <lastName>Patel</lastName>
+                <firstName>Kate</firstName>
+                <lastName>Anderson</lastName>
                 <dateOfBirth>1995-11-30</dateOfBirth>
                 <age>30</age>
                 <gender>Female</gender>
             </personalInfo>
             <contactInfo>
-                <email>aisha.patel@example.com</email>
+                <email>dummy.email11@example.com</email>
                 <phones>
-                    <phone type="mobile" preferred="true">+44-7700-900345</phone>
-                    <phone type="work">+44-7700-900347</phone>
+                    <phone type="mobile" preferred="true">+44-7000-000008</phone>
+                    <phone type="work">+44-2000-000003</phone>
                 </phones>
                 <address>
-                    <street>25 Sauchiehall Street</street>
+                    <street>789 Sample Avenue</street>
                     <city>Glasgow</city>
-                    <postcode>G2 3AD</postcode>
+                    <postcode>G1 1AA</postcode>
                     <country>United Kingdom</country>
                 </address>
             </contactInfo>
             <emergencyContact>
-                <name>Rajesh Patel</name>
+                <name>Laura Anderson</name>
                 <relationship>Brother</relationship>
-                <phone>+44-7700-900346</phone>
+                <phone>+44-7000-000009</phone>
             </emergencyContact>
             <skateboarding>
+                <!-- Maps to Google Form fields: exp_level, board_types, fav_pros -->
                 <experienceLevel>Professional</experienceLevel>
                 <preferredDeck>The Shark</preferredDeck>
                 <typesOfSkateboardsOwned>
@@ -293,46 +303,48 @@
         </mainParticipant>
         
         <guests>
+            <!-- Maps to Google Form fields: guest1, guest2 -->
             <guest guestId="GUEST-003-A">
-                <firstName>Priya</firstName>
-                <lastName>Sharma</lastName>
+                <firstName>Mary</firstName>
+                <lastName>Taylor</lastName>
                 <relationship>Friend</relationship>
                 <age>29</age>
                 <isAdult>true</isAdult>
-                <contactEmail>priya.s@example.com</contactEmail>
+                <contactEmail>dummy.email12@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-003-B">
-                <firstName>Rajesh</firstName>
-                <lastName>Patel</lastName>
+                <firstName>Laura</firstName>
+                <lastName>Anderson</lastName>
                 <relationship>Brother</relationship>
                 <age>32</age>
                 <isAdult>true</isAdult>
-                <contactEmail>rajesh.patel@example.com</contactEmail>
+                <contactEmail>dummy.email13@example.com</contactEmail>
             </guest>
         </guests>
         
         <additionalContacts>
             <contact contactId="CONT-003-A">
-                <name>Rajesh Patel</name>
+                <name>Laura Anderson</name>
                 <relationship>Brother</relationship>
-                <email>rajesh.patel@example.com</email>
-                <phone>+44-7700-900346</phone>
+                <email>dummy.email13@example.com</email>
+                <phone>+44-7000-000009</phone>
             </contact>
             <contact contactId="CONT-003-B">
-                <name>Marcus Reid</name>
+                <name>Nathan Clark</name>
                 <relationship>Sponsor Representative</relationship>
-                <email>m.reid@sponsorco.com</email>
-                <phone>+44-7700-900678</phone>
+                <email>dummy.email14@example.com</email>
+                <phone>+44-7000-000010</phone>
             </contact>
             <contact contactId="CONT-003-C">
-                <name>Lisa McGraw</name>
+                <name>Olivia White</name>
                 <relationship>Training Partner</relationship>
-                <email>lisa.mcgraw@example.com</email>
-                <phone>+44-7700-900789</phone>
+                <email>dummy.email15@example.com</email>
+                <phone>+44-7000-000011</phone>
             </contact>
         </additionalContacts>
         
         <registrationDetails>
+            <!-- Maps to Google Form fields: pref_date, pref_loc, hunting_grounds -->
             <registrationDate>2026-01-20T09:15:00Z</registrationDate>
             <preferredEventDate>2026-03-26</preferredEventDate>
             <preferredEventLocation>Glasgow</preferredEventLocation>
@@ -345,6 +357,7 @@
     </registration>
     
     <!-- Registration 4: Spectator Registration (London Event) -->
+    <!-- Maps to Google Form fields: fullname, dob, age, gender, email, address, phone_mobile -->
     <registration registrationId="REG-2026-LDN-004" status="pending">
         <event>
             <eventName>The Predatory Hunt - London</eventName>
@@ -360,60 +373,62 @@
         <mainParticipant>
             <participantId>PART-004</participantId>
             <personalInfo>
-                <firstName>Sophie</firstName>
-                <lastName>Williams</lastName>
+                <firstName>Peter</firstName>
+                <lastName>Jones</lastName>
                 <dateOfBirth>2000-02-18</dateOfBirth>
                 <age>26</age>
                 <gender>Female</gender>
             </personalInfo>
             <contactInfo>
-                <email>sophie.williams@example.com</email>
+                <email>dummy.email16@example.com</email>
                 <phones>
-                    <phone type="mobile" preferred="true">+44-7700-900456</phone>
+                    <phone type="mobile" preferred="true">+44-7000-000012</phone>
                 </phones>
                 <address>
-                    <street>78 Oxford Street</street>
+                    <street>321 Example Lane</street>
                     <city>London</city>
-                    <postcode>W1D 1BS</postcode>
+                    <postcode>SW1A 2AA</postcode>
                     <country>United Kingdom</country>
                 </address>
             </contactInfo>
             <emergencyContact>
-                <name>Hannah Williams</name>
+                <name>Rachel Jones</name>
                 <relationship>Sister</relationship>
-                <phone>+44-7700-900457</phone>
+                <phone>+44-7000-000013</phone>
             </emergencyContact>
         </mainParticipant>
         
         <guests>
+            <!-- Maps to Google Form fields: guest1, guest2 -->
             <guest guestId="GUEST-004-A">
-                <firstName>Daniel</firstName>
-                <lastName>Brown</lastName>
+                <firstName>Quinn</firstName>
+                <lastName>Davis</lastName>
                 <relationship>Partner</relationship>
                 <age>27</age>
                 <isAdult>true</isAdult>
-                <contactEmail>daniel.brown@example.com</contactEmail>
+                <contactEmail>dummy.email17@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-004-B">
-                <firstName>Hannah</firstName>
-                <lastName>Williams</lastName>
+                <firstName>Rachel</firstName>
+                <lastName>Jones</lastName>
                 <relationship>Sister</relationship>
                 <age>23</age>
                 <isAdult>true</isAdult>
-                <contactEmail>hannah.w@example.com</contactEmail>
+                <contactEmail>dummy.email18@example.com</contactEmail>
             </guest>
         </guests>
         
         <additionalContacts>
             <contact contactId="CONT-004-A">
-                <name>Mark Johnson</name>
+                <name>Steven Moore</name>
                 <relationship>Friend</relationship>
-                <email>mark.j@example.com</email>
-                <phone>+44-7700-900890</phone>
+                <email>dummy.email19@example.com</email>
+                <phone>+44-7000-000014</phone>
             </contact>
         </additionalContacts>
         
         <registrationDetails>
+            <!-- Maps to Google Form fields: pref_date, pref_loc, hunting_grounds -->
             <registrationDate>2026-01-22T16:45:00Z</registrationDate>
             <preferredEventDate>2026-03-12</preferredEventDate>
             <preferredEventLocation>London</preferredEventLocation>
@@ -426,6 +441,7 @@
     </registration>
     
     <!-- Registration 5: Underage Participant with Guardian (Glasgow Event) -->
+    <!-- Maps to Google Form fields: fullname, dob, age, gender, email, address, phone_mobile, parent_name, parent_rel, parent_contact -->
     <registration registrationId="REG-2026-GLA-005" status="confirmed">
         <event>
             <eventName>The Predatory Hunt - Glasgow</eventName>
@@ -441,48 +457,49 @@
         <mainParticipant>
             <participantId>PART-005</participantId>
             <personalInfo>
-                <firstName>Isla</firstName>
-                <lastName>MacLeod</lastName>
+                <firstName>Tara</firstName>
+                <lastName>Scott</lastName>
                 <dateOfBirth>2010-06-15</dateOfBirth>
                 <age>15</age>
                 <gender>Female</gender>
             </personalInfo>
             <contactInfo>
-                <email>isla.macleod@example.com</email>
+                <email>dummy.email20@example.com</email>
                 <phones>
-                    <phone type="mobile" preferred="true">+44-7700-900567</phone>
+                    <phone type="mobile" preferred="true">+44-7000-000015</phone>
                 </phones>
                 <address>
-                    <street>12 Argyle Street</street>
+                    <street>654 Test Boulevard</street>
                     <city>Glasgow</city>
-                    <postcode>G2 8BG</postcode>
+                    <postcode>G2 2AA</postcode>
                     <country>United Kingdom</country>
                 </address>
             </contactInfo>
             <parentGuardian required="true">
                 <guardianId>GUARD-005</guardianId>
-                <firstName>Duncan</firstName>
-                <lastName>MacLeod</lastName>
+                <firstName>Ursula</firstName>
+                <lastName>Scott</lastName>
                 <relationship>Father</relationship>
                 <dateOfBirth>1978-09-05</dateOfBirth>
                 <contactInfo>
-                    <email>duncan.macleod@example.com</email>
+                    <email>dummy.email21@example.com</email>
                     <phones>
-                        <phone type="mobile" preferred="true">+44-7700-900568</phone>
+                        <phone type="mobile" preferred="true">+44-7000-000016</phone>
                     </phones>
                 </contactInfo>
                 <consent>
                     <consentGiven>true</consentGiven>
                     <consentDate>2026-01-21T11:00:00Z</consentDate>
-                    <signature>Duncan MacLeod</signature>
+                    <signature>Ursula Scott</signature>
                 </consent>
             </parentGuardian>
             <emergencyContact>
-                <name>Fiona MacLeod</name>
+                <name>Victor Scott</name>
                 <relationship>Mother</relationship>
-                <phone>+44-7700-900569</phone>
+                <phone>+44-7000-000017</phone>
             </emergencyContact>
             <skateboarding>
+                <!-- Maps to Google Form fields: exp_level, board_types, fav_pros -->
                 <experienceLevel>Advanced</experienceLevel>
                 <preferredDeck>The Bull</preferredDeck>
                 <typesOfSkateboardsOwned>
@@ -499,40 +516,42 @@
         </mainParticipant>
         
         <guests>
+            <!-- Maps to Google Form fields: guest1, guest2 -->
             <guest guestId="GUEST-005-A">
-                <firstName>Duncan</firstName>
-                <lastName>MacLeod</lastName>
+                <firstName>Ursula</firstName>
+                <lastName>Scott</lastName>
                 <relationship>Father (Guardian)</relationship>
                 <age>47</age>
                 <isAdult>true</isAdult>
-                <contactEmail>duncan.macleod@example.com</contactEmail>
+                <contactEmail>dummy.email21@example.com</contactEmail>
             </guest>
             <guest guestId="GUEST-005-B">
-                <firstName>Fiona</firstName>
-                <lastName>MacLeod</lastName>
+                <firstName>Victor</firstName>
+                <lastName>Scott</lastName>
                 <relationship>Mother</relationship>
                 <age>45</age>
                 <isAdult>true</isAdult>
-                <contactEmail>fiona.macleod@example.com</contactEmail>
+                <contactEmail>dummy.email22@example.com</contactEmail>
             </guest>
         </guests>
         
         <additionalContacts>
             <contact contactId="CONT-005-A">
-                <name>Fiona MacLeod</name>
+                <name>Victor Scott</name>
                 <relationship>Mother</relationship>
-                <email>fiona.macleod@example.com</email>
-                <phone>+44-7700-900569</phone>
+                <email>dummy.email22@example.com</email>
+                <phone>+44-7000-000017</phone>
             </contact>
             <contact contactId="CONT-005-B">
-                <name>Sarah Campbell</name>
+                <name>Wendy Harris</name>
                 <relationship>Coach</relationship>
-                <email>s.campbell@glasgowskate.org</email>
-                <phone>+44-7700-900991</phone>
+                <email>dummy.email23@example.com</email>
+                <phone>+44-7000-000018</phone>
             </contact>
         </additionalContacts>
         
         <registrationDetails>
+            <!-- Maps to Google Form fields: pref_date, pref_loc, hunting_grounds -->
             <registrationDate>2026-01-21T11:10:00Z</registrationDate>
             <preferredEventDate>2026-03-26</preferredEventDate>
             <preferredEventLocation>Glasgow</preferredEventLocation>
