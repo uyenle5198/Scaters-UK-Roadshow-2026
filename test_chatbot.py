@@ -47,8 +47,13 @@ class TestChatbotRuleBasedPrompting(unittest.TestCase):
                 self.assertIn("GLASGOW", response_upper)
                 # Check for mission-style language
                 self.assertTrue(
-                    any(word in response.lower() for word in ['mission', 'tactical', 'battlefield']),
+                    any(word in response.lower() for word in ['mission', 'tactical', 'agent']),
                     f"Response should contain mission-style language: {response}"
+                )
+                # Check for registration encouragement
+                self.assertTrue(
+                    any(word in response.lower() for word in ['register', 'registration']),
+                    f"Response should encourage registration: {response}"
                 )
     
     def test_safety_fear_queries_reassurance(self):
@@ -74,6 +79,11 @@ class TestChatbotRuleBasedPrompting(unittest.TestCase):
                     any(phrase in response.lower() for phrase in ['first aid', 'medical', 'safety equipment', 'safety protocol']),
                     f"Response should mention specific safety measures: {response}"
                 )
+                # Check for polite mission-style tone with "Agent"
+                self.assertTrue(
+                    'agent' in response.lower() or 'wellbeing' in response.lower(),
+                    f"Response should use mission-style addressing: {response}"
+                )
     
     def test_prize_queries_fomo_response(self):
         """Test that prize queries create FOMO without disclosing all details."""
@@ -90,17 +100,17 @@ class TestChatbotRuleBasedPrompting(unittest.TestCase):
                 response = self.chatbot.chat(query)
                 # Check for FOMO language
                 self.assertTrue(
-                    any(word in response.lower() for word in ['exclusive', 'amazing', 'once-in-a-lifetime', 'don\'t miss']),
+                    any(word in response.lower() for word in ['exclusive', 'classified', 'intel', 'extraordinary']),
                     f"Response should create FOMO: {response}"
                 )
                 # Should mention prizes but keep some mystery
                 self.assertTrue(
-                    any(word in response.lower() for word in ['prize', 'reward', 'bounty', 'opportunity']),
+                    any(word in response.lower() for word in ['prize', 'reward', 'bounty', '310,000']),
                     f"Response should mention prizes: {response}"
                 )
                 # Should encourage action
                 self.assertTrue(
-                    any(phrase in response.lower() for phrase in ['join', 'register', 'don\'t miss out']),
+                    any(phrase in response.lower() for phrase in ['register', 'registration', 'secure']),
                     f"Response should encourage action: {response}"
                 )
     
@@ -119,13 +129,42 @@ class TestChatbotRuleBasedPrompting(unittest.TestCase):
                 response = self.chatbot.chat(query)
                 # Check for humor/light-hearted tone
                 self.assertTrue(
-                    any(word in response.lower() for word in ['kickflip', 'whoa', 'together', 'got this']),
+                    any(word in response.lower() for word in ['agent', 'tactical', 'mission', 'together', 'got this']),
                     f"Response should have humor/light-hearted tone: {response}"
                 )
                 # Should offer help
                 self.assertTrue(
-                    any(word in response.lower() for word in ['help', 'clarify', 'simple', 'bugging']),
+                    any(word in response.lower() for word in ['help', 'clarify', 'crystal clear', 'support']),
                     f"Response should offer help: {response}"
+                )
+    
+    def test_technical_support_queries(self):
+        """Test that technical support queries return helpful troubleshooting responses."""
+        test_queries = [
+            "I'm having technical problems",
+            "The website isn't working",
+            "I can't register",
+            "Form won't submit",
+            "Getting an error message"
+        ]
+        
+        for query in test_queries:
+            with self.subTest(query=query):
+                response = self.chatbot.chat(query)
+                # Check for technical support language
+                self.assertTrue(
+                    any(word in response.lower() for word in ['technical', 'troubleshoot', 'support', 'diagnostic']),
+                    f"Response should contain technical support language: {response}"
+                )
+                # Should provide practical troubleshooting steps
+                self.assertTrue(
+                    any(phrase in response.lower() for phrase in ['refresh', 'browser', 'cache', 'clear']),
+                    f"Response should provide troubleshooting steps: {response}"
+                )
+                # Should maintain calm humor tone
+                self.assertTrue(
+                    any(word in response.lower() for word in ['agent', 'mission', 'calm']),
+                    f"Response should maintain calm humor tone: {response}"
                 )
     
     def test_sentiment_detection(self):
