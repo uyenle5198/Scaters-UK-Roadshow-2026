@@ -2509,8 +2509,14 @@
                             </div>
 
                             <div class="relative group/input floating-group">
-                                <input type="date" id="pref_date" required="" class="form-input text-white uppercase" style="color-scheme: dark;">
-                                <label for="pref_date" class="floating-label" style="top: -15px; font-size: 9px; color: #2563EB;">Preferred Event Date *</label>
+                                <select id="pref_date" required="" class="form-input appearance-none cursor-pointer">
+                                    <option value="" disabled="" selected="" hidden=""></option>
+                                    <option class="bg-black text-white" value="2026-03-12">12/03/2026 (London)</option>
+                                    <option class="bg-black text-white" value="2026-03-19">19/03/2026 (Manchester)</option>
+                                    <option class="bg-black text-white" value="2026-03-26">26/03/2026 (Glasgow)</option>
+                                </select>
+                                <label for="pref_date" class="floating-label">Preferred Event Date *</label>
+                                <div class="absolute right-0 top-[10px] pointer-events-none text-scater-royal text-xs"><i class="fa-solid fa-caret-down"></i></div>
                             </div>
 
                             <div class="relative group/input floating-group">
