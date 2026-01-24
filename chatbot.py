@@ -114,9 +114,9 @@ class ScatersRoadshowChatbot:
     - Event Name: "The Predatory Hunt" - Scaters Raptor Roadshow 2026
     - Prize Pool: £310,000 in total (distributed across all events)
     - Locations and Dates:
-      * London - March 12, 2026 at Southbank Undercroft ("The Concrete Heart")
-      * Manchester - March 19, 2026 at Projekt MCR ("The Industrial Abyss")
-      * Glasgow - March 26, 2026 at Kelvingrove ("The Northern Peak")
+      * London - April 04, 2026 at Southbank Undercroft ("The Concrete Heart")
+      * Manchester - April 06, 2026 at Projekt MCR ("The Industrial Abyss")
+      * Glasgow - April 09, 2026 at Kelvingrove ("The Northern Peak")
     - Featured Pro Skaters: Lucien Clarke & Geoff Rowley
     - Mission: Engineering British Supremacy on the Pavement
     
@@ -525,9 +525,9 @@ Don't miss out - register early to secure your spot!"""
         # Location queries
         if any(word in msg_lower for word in ['location', 'where', 'city', 'cities']):
             return """The Raptor Roadshow visits 3 UK cities:
-• London - March 12, 2026 at Southbank Undercroft
-• Manchester - March 19, 2026 at Projekt MCR  
-• Glasgow - March 26, 2026 at Kelvingrove"""
+• London - April 04, 2026 at Southbank Undercroft
+• Manchester - April 06, 2026 at Projekt MCR  
+• Glasgow - April 09, 2026 at Kelvingrove"""
         
         # Skateboard queries
         if any(word in msg_lower for word in ['skateboard', 'deck', 'raptor', 'collection']):
@@ -545,9 +545,9 @@ Don't miss out - register early to secure your spot!"""
         # Date queries
         if any(word in msg_lower for word in ['when', 'date', 'time']):
             return """Event dates:
-• London: March 12, 2026
-• Manchester: March 19, 2026
-• Glasgow: March 26, 2026
+• London: April 04, 2026
+• Manchester: April 06, 2026
+• Glasgow: April 09, 2026
 
 IMPORTANT: Registration deadline is February 28, 2026"""
         
@@ -641,15 +641,15 @@ What would you like to know?"""
             if not any(word in msg_lower for word in ['hunting zone', 'hunting ground', 'prize location']):
                 logger.info("Location query detected - using Mission Brief format")
                 return ("🎯 MISSION BRIEFING: Agent, your deployment coordinates are as follows.\n\n"
-                       "📍 LONDON - March 12, 2026\n"
+                       "📍 LONDON - April 04, 2026\n"
                        "   Tactical Location: Southbank Undercroft (\"The Concrete Heart\")\n"
                        "   Mission Objective: Execute precision techniques in the capital's most iconic arena\n"
                        "   Intelligence Note: Limited spots available - secure your position early\n\n"
-                       "📍 MANCHESTER - March 19, 2026\n"
+                       "📍 MANCHESTER - April 06, 2026\n"
                        "   Tactical Location: Projekt MCR (\"The Industrial Abyss\")\n"
                        "   Mission Objective: Navigate the rugged industrial battlefield with power and control\n"
                        "   Intelligence Note: Supervised by professional operatives for optimal safety\n\n"
-                       "📍 GLASGOW - March 26, 2026\n"
+                       "📍 GLASGOW - April 09, 2026\n"
                        "   Tactical Location: Kelvingrove (\"The Northern Peak\")\n"
                        "   Mission Objective: Achieve maximum altitude in Scotland's premier territory\n"
                        "   Intelligence Note: Final opportunity to claim your victory\n\n"
