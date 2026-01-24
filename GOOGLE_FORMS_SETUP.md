@@ -94,7 +94,7 @@ The form includes a question asking participants if they want to participate in 
 
 **Setup Instructions:**
 1. In your Google Form, add a **Multiple choice** question after the "Preferred Event Location" field
-2. Set the question text to: "Do you want to participate in the Hunting Grounds challenge and win prizes?"
+2. Set the question text to: "Do you want to participate in the Hunting Grounds Challenge and win prizes?"
 3. Add two options: "Yes" and "No"
 4. Mark this question as **Required**
 5. Inspect the form to find the entry ID (e.g., `entry.987654321`)
