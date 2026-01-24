@@ -7,6 +7,9 @@ Features:
 - Google Gemini API integration for intelligent responses
 - OpenAI API support as alternative
 - Topic-scoped responses (roadshow and skateboard launch only)
+- Rule-based prompting for enhanced user interactions
+- Sentiment analysis for detecting user emotions (frustration, fear, etc.)
+- FOMO-based responses for prizes and exclusive content
 - Secure API key management via environment variables
 - Natural conversation interface
 """
@@ -71,6 +74,15 @@ except ImportError:
     TIMEOUT_AVAILABLE = False
     TimeoutDecoratorError = TimeoutError
     logger.warning("timeout-decorator not available - timeout handling may not work on all platforms")
+
+# Import sentiment analysis library for enhanced user interaction
+try:
+    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+    SENTIMENT_AVAILABLE = True
+    logger.info("VADER Sentiment analysis loaded successfully")
+except ImportError:
+    SENTIMENT_AVAILABLE = False
+    logger.warning("vaderSentiment not available - install with: pip install vaderSentiment")
 
 
 class ScatersRoadshowChatbot:
@@ -142,6 +154,14 @@ class ScatersRoadshowChatbot:
         self.api_provider = None
         self.model = None
         self.chat_history = []
+        
+        # Initialize sentiment analyzer if available
+        if SENTIMENT_AVAILABLE:
+            self.sentiment_analyzer = SentimentIntensityAnalyzer()
+            logger.info("Sentiment analyzer initialized")
+        else:
+            self.sentiment_analyzer = None
+            logger.warning("Sentiment analyzer not available")
         
         # Display platform compatibility information
         self._check_platform_compatibility()
@@ -557,14 +577,120 @@ What would you like to know?"""
         logger.info(f"Response validated successfully: {len(cleaned_response)} characters")
         return cleaned_response
     
+    def _detect_sentiment(self, user_message: str) -> dict:
+        """Detect sentiment in user message using VADER sentiment analysis.
+        
+        Args:
+            user_message: User's input message
+            
+        Returns:
+            Dictionary with sentiment scores (compound, neg, neu, pos)
+        """
+        if not self.sentiment_analyzer:
+            # Return neutral sentiment if analyzer not available
+            return {'compound': 0.0, 'neg': 0.0, 'neu': 1.0, 'pos': 0.0}
+        
+        scores = self.sentiment_analyzer.polarity_scores(user_message)
+        logger.info(f"Sentiment analysis - Compound: {scores['compound']}, "
+                   f"Neg: {scores['neg']}, Pos: {scores['pos']}")
+        return scores
+    
+    def _apply_rule_based_prompting(self, user_message: str, sentiment_scores: dict) -> Optional[str]:
+        """Apply rule-based prompting for specific query patterns and sentiments.
+        
+        This implements the following rules (in priority order):
+        1. Location queries → Mission Brief format
+        2. Safety/fear queries → Reassurance and safety information
+        3. Prize/hunting queries → FOMO response with exclusivity
+        4. Frustration detection → Humor and light-hearted tone
+        
+        Args:
+            user_message: User's input message
+            sentiment_scores: Sentiment analysis scores
+            
+        Returns:
+            Specialized response if rules match, None otherwise
+        """
+        msg_lower = user_message.lower()
+        
+        # Rule 1: Location queries → Mission Brief format (highest priority for keyword match)
+        location_keywords = ['where', 'location', 'next event', 'city', 'cities', 'venue']
+        if any(keyword in msg_lower for keyword in location_keywords):
+            # Check if it's not a prize/hunting zone query
+            if not any(word in msg_lower for word in ['hunting zone', 'hunting ground', 'prize location']):
+                logger.info("Location query detected - using Mission Brief format")
+                return ("🎯 YOUR MISSION: Join us at these tactical locations where the ultimate challenge awaits!\n\n"
+                       "📍 LONDON - March 12, 2026\n"
+                       "   Mission Site: Southbank Undercroft (\"The Concrete Heart\")\n"
+                       "   Your Mission: Execute precision techniques in the capital's most iconic spot\n\n"
+                       "📍 MANCHESTER - March 19, 2026\n"
+                       "   Mission Site: Projekt MCR (\"The Industrial Abyss\")\n"
+                       "   Your Mission: Dominate the rugged industrial battlefield\n\n"
+                       "📍 GLASGOW - March 26, 2026\n"
+                       "   Mission Site: Kelvingrove (\"The Northern Peak\")\n"
+                       "   Your Mission: Reach new heights in Scotland's premier territory\n\n"
+                       "🔥 Choose your battlefield and claim your victory!")
+        
+        # Rule 2: Safety/Fear queries → Reassurance (check keywords before sentiment)
+        safety_keywords = ['safe', 'safety', 'scared', 'fear', 'afraid', 'dangerous', 
+                          'injury', 'hurt', 'risk', 'worried', 'concern']
+        if any(keyword in msg_lower for keyword in safety_keywords):
+            logger.info("Safety/fear query detected - using reassurance response")
+            return ("We prioritize safety above all else. Rest assured, our events are "
+                   "supervised by professionals and follow strict safety guidelines. "
+                   "All venues have:\n"
+                   "• On-site medical teams and first aid\n"
+                   "• Safety equipment checks\n"
+                   "• Professional supervision\n"
+                   "• Age-appropriate challenges\n"
+                   "• Clear safety protocols\n\n"
+                   "Your safety is our top priority. Feel confident joining The Predatory Hunt!")
+        
+        # Rule 3: Prize/Hunting/Bounty queries → FOMO response
+        prize_keywords = ['prize', 'bounty', 'reward', 'money', 'win', 'winning',
+                         'hunting ground', 'hunt', 'hunting zone', 'what do i get']
+        if any(keyword in msg_lower for keyword in prize_keywords):
+            logger.info("Prize/hunting query detected - using FOMO response")
+            return ("💰 The bounty is worth the hunt! We're talking SERIOUS rewards...\n\n"
+                   "🏆 The prize pool is MASSIVE - but we're keeping some surprises under wraps!\n"
+                   "🎁 Amazing prizes await those brave enough to join The Predatory Hunt\n"
+                   "⚡ Exclusive opportunities for top performers\n"
+                   "🎯 Special rewards you won't see anywhere else\n\n"
+                   "Join us to uncover what's waiting for YOU at the apex of the hunt. "
+                   "Don't miss out - this is a once-in-a-lifetime opportunity! "
+                   "Register now before spots run out! 🔥")
+        
+        # Rule 4: Frustration detection (negative sentiment with specific keywords)
+        frustration_keywords = ['complicated', 'confus', 'difficult', 'hard', 'frustrat', 
+                               'annoying', 'annoyed', 'ugh', 'wtf']
+        has_frustration_keyword = any(keyword in msg_lower for keyword in frustration_keywords)
+        
+        # Also check for "I don't understand" pattern
+        dont_understand_patterns = ["don't understand", "dont understand", "do not understand"]
+        has_understand_issue = any(pattern in msg_lower for pattern in dont_understand_patterns)
+        
+        # Check for general negative sentiment patterns
+        if (has_frustration_keyword or 
+            has_understand_issue or 
+            ('why' in msg_lower and any(word in msg_lower for word in ['hard', 'difficult', 'complicated']))):
+            logger.info("Frustration detected - using humor-based response")
+            return ("Whoa! Let's take a kickflip back. We got this together. 🛹 "
+                   "What's bugging you? I'm here to help make this super simple. "
+                   "Break it down for me - what specific thing can I clarify?")
+        
+        # No specific rule matched
+        return None
+    
     def chat(self, user_message: str) -> str:
         """Process user message and return response with enhanced validation.
         
         This method implements a robust workflow:
-        1. Pass message through AI model (Gemini or OpenAI)
-        2. Validate and parse the AI response
-        3. Fall back to pattern matching if AI fails
-        4. Store interaction in chat history
+        1. Detect sentiment in user message
+        2. Apply rule-based prompting for specific patterns
+        3. Pass message through AI model (Gemini or OpenAI) if no rule matched
+        4. Validate and parse the AI response
+        5. Fall back to pattern matching if AI fails
+        6. Store interaction in chat history
         
         Args:
             user_message: User's input message
@@ -572,7 +698,18 @@ What would you like to know?"""
         Returns:
             Validated response from AI or fallback system
         """
-        # Try AI response first
+        # Step 1: Detect sentiment
+        sentiment_scores = self._detect_sentiment(user_message)
+        
+        # Step 2: Try rule-based prompting first
+        rule_response = self._apply_rule_based_prompting(user_message, sentiment_scores)
+        if rule_response:
+            # Add to history
+            self.chat_history.append(('user', user_message))
+            self.chat_history.append(('assistant', rule_response))
+            return rule_response
+        
+        # Step 3-5: Try AI response
         raw_response = self._get_ai_response(user_message)
         
         # Validate and parse AI response
