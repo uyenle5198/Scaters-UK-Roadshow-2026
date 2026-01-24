@@ -216,9 +216,9 @@ All fields marked as "Yes" in the Required column must be completed before form 
 
 1. **Age Verification**: If DOB indicates age < 18, parent/guardian section becomes mandatory
 2. **Event Dates**: Must be one of the three roadshow dates:
-   - March 12, 2026 (London)
-   - March 19, 2026 (Manchester)
-   - March 26, 2026 (Glasgow)
+   - April 04, 2026 (London)
+   - April 06, 2026 (Manchester)
+   - April 09, 2026 (Glasgow)
 3. **Contact Method**: Should correspond to a provided contact detail (e.g., can't select "mobile" if no mobile number provided)
 
 ---

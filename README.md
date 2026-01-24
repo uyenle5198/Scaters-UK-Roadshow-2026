@@ -168,7 +168,7 @@ The chatbot answers questions about:
 YOU: Where is the next event?
 BUTLER: 🎯 YOUR MISSION: Join us at these tactical locations where the ultimate challenge awaits!
 
-📍 LONDON - March 12, 2026
+📍 LONDON - April 04, 2026
    Mission Site: Southbank Undercroft ("The Concrete Heart")
    Your Mission: Execute precision techniques in the capital's most iconic spot
 ...
